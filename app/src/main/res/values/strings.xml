@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Gidline</string>
+    <string name="accordion_offer">Мы предлагаем:</string>
+    <string name="accordion_responsibility">В чем заключается работа:</string>
+    <string name="accordion_requirement">О вас:</string>
+    <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной активной\nвакансии.\nПопробуйте поменять запрос.</string>
+</resources>

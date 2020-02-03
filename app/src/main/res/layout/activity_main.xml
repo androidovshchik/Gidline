@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="matrix"
+        tools:src="@drawable/background" />
+
+    <include layout="@layout/include_toolbar" />
+
+    <FrameLayout
+        android:id="@id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height" />
+
+    <fragment
+        android:id="@+id/f_filter"
+        android:name="ru.gidline.app.screen.filter.FilterFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height"
+        tools:alpha="0.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_action"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:visibility="gone"
+        app:cornerRadius="24dp"
+        app:layout_behavior=".screen.main.ButtonBehavior"
+        tools:text="Применить"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

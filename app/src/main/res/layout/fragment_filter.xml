@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:scrollbars="none"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="64dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Фильтр поиска"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                tools:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:adjustViewBounds="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close_36dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#efecee" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="ЗАРПЛАТА"
+            android:textColor="#b02f77"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.ToggleView
+                android:id="@+id/tv_per_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="0"
+                android:text="ЗА МЕСЯЦ"
+                tools:background="@drawable/button_active"
+                tools:textColor="@android:color/white" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ru.gidline.app.screen.filter.ToggleView
+                android:id="@+id/tv_per_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="1"
+                android:text="ЗА ВЫХОД" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ru.gidline.app.screen.filter.ToggleView
+                android:id="@+id/tv_per_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="2"
+                android:text="ЗА ЧАС" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Зарплата не менее:"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                tools:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_payment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="true"
+                android:textColor="#b81c74"
+                android:textSize="16sp"
+                tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="#813678" />
+
+            <SeekBar
+                android:id="@+id/sb_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="8dp"
+                android:minHeight="8dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:progressDrawable="@drawable/seek_bar"
+                android:splitTrack="false"
+                android:thumb="@drawable/thumb"
+                tools:progress="25" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#f8e8f0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="МЕСТОПОЛОЖЕНИЕ"
+            android:textColor="#b02f77"
+            android:textSize="15sp" />
+
+        <Spinner
+            android:id="@+id/s_region"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_inactive"
+            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+
+        <Spinner
+            android:id="@+id/s_city"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_inactive"
+            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#f8e8f0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="ГРАФИК РАБОТЫ"
+            android:textColor="#b02f77"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:tag="0"
+                app:buttonTint="#8d2b8d"
+                tools:checked="true" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Постоянная работа, полный рабочий день"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:tag="1"
+                app:buttonTint="#8d2b8d" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Постоянная работа со сменным графиком"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:tag="2"
+                app:buttonTint="#8d2b8d" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Вахтовый метод не более 90 дней работа с проживанием на территории работодателя"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                android:tag="3"
+                app:buttonTint="#8d2b8d" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Подработка в свободное время"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#f8e8f0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="ДОПОЛНИТЕЛЬНО"
+            android:textColor="#b02f77"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.ImageBox
+                android:id="@+id/ib_checkbox1"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                tools:src="@drawable/daw" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Проживание на территории\nработодателя"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ru.gidline.app.screen.filter.ImageBox
+                android:id="@+id/ib_checkbox2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                tools:src="@drawable/daw" />
+
+            <TextView
+                fontPath="Arial-Bold.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Бесплатное питание"
+                android:textAllCaps="true"
+                android:textColor="#711d67"
+                android:textSize="13sp"
+                tools:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

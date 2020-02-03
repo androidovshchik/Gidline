@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="64dp">
+
+        <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorBackground"
+            app:cardCornerRadius="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tv_organization"
+                    fontPath="Arial-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:textColor="#813678"
+                    android:textSize="14sp"
+                    tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT "
+                    tools:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_vacancy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_organization"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:textColor="#ac226f"
+                    android:textSize="15sp"
+                    tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+                <TextView
+                    android:id="@+id/tv_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_vacancy"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:textColor="#843b7b"
+                    android:textSize="13sp"
+                    tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_payment"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:textColor="#813678"
+                    android:textSize="10sp"
+                    tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+                <TextView
+                    android:id="@+id/tv_form"
+                    fontPath="Arial-Bold.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_time"
+                    android:layout_marginTop="16dp"
+                    android:gravity="end"
+                    android:paddingStart="4dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    tools:background="@android:color/holo_purple"
+                    tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT "
+                    tools:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ru.gidline.app.screen.vacancy.AccordionLayout
+            android:id="@+id/al_offer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/accordion_offer" />
+
+        <ru.gidline.app.screen.vacancy.AccordionLayout
+            android:id="@+id/al_responsibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/accordion_responsibility" />
+
+        <ru.gidline.app.screen.vacancy.AccordionLayout
+            android:id="@+id/al_requirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/accordion_requirement" />
+
+        <TextView
+            fontPath="Arial-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:text="Место работы:"
+            android:textColor="#813678"
+            android:textSize="15sp"
+            tools:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#813678"
+            android:textSize="14sp"
+            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text" />
+
+    </LinearLayout>
+
+</ScrollView>

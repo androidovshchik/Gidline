@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="matrix"
+        tools:src="@drawable/background" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_chips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp"
+        app:chipSpacingVertical="8dp">
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Комплектовщик"
+            android:textAllCaps="true"
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="8dp"
+            app:chipEndPadding="8dp"
+            app:chipMinHeight="40dp"
+            app:chipStartPadding="8dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Горничная"
+            android:textAllCaps="true"
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="8dp"
+            app:chipEndPadding="8dp"
+            app:chipMinHeight="40dp"
+            app:chipStartPadding="8dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сборщик мебели"
+            android:textAllCaps="true"
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="8dp"
+            app:chipEndPadding="8dp"
+            app:chipMinHeight="40dp"
+            app:chipStartPadding="8dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Оператор"
+            android:textAllCaps="true"
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="8dp"
+            app:chipEndPadding="8dp"
+            app:chipMinHeight="40dp"
+            app:chipStartPadding="8dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Курьер"
+            android:textAllCaps="true"
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="8dp"
+            app:chipEndPadding="8dp"
+            app:chipMinHeight="40dp"
+            app:chipStartPadding="8dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+</FrameLayout>

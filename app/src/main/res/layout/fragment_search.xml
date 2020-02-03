@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@drawable/background">
+
+    <LinearLayout
+        android:id="@+id/rl_search"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
+        android:layout_toStartOf="@+id/ib_filter"
+        android:background="@drawable/search_background"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search" />
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:background="#f4d5f5" />
+
+        <ru.gidline.app.screen.search.SearchView
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            tools:text="Text Text Text Text Text Text Text Text Text " />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ib_filter"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        android:adjustViewBounds="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="7dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/filter" />
+
+    <fragment
+        android:id="@+id/f_vacancies"
+        android:name="ru.gidline.app.screen.search.vacancies.VacanciesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_search"
+        android:layout_alignParentBottom="true"
+        tools:alpha="0.5" />
+
+    <FrameLayout
+        android:id="@id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_search"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

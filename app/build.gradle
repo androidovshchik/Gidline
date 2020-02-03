@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "ru.gidline.app"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        certificate {
+            storeFile file("release.jks")
+            storePassword "gidline_app"
+            keyAlias "gidline_app"
+            keyPassword "gidline_app"
+            v1SigningEnabled true
+            v2SigningEnabled true
+            // countryCode 07
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.certificate
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.certificate
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def prefix = applicationId.substring(applicationId.lastIndexOf(".") + 1)
+            outputFileName = "$prefix${variant.versionCode}-${variant.buildType.name}.apk"
+        }
+    }
+    lintOptions {
+        //checkReleaseBuilds false
+        //abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    implementation "org.jetbrains.anko:anko-design:0.10.8"
+    implementation "org.jetbrains.anko:anko-sdk19:0.10.8"
+    implementation "org.jetbrains.anko:anko-sdk19-listeners:0.10.8"
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.5.0"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.5.0"
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'io.coil-kt:coil:0.8.0'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    debugImplementation "com.facebook.stetho:stetho:1.5.1"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:1.5.1"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
