@@ -154,7 +154,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     @SuppressLint("SetTextI18n")
     private fun updateProgress() {
-        tv_payment.text = if (calculator.perTime != null && calculator.payment > 0) {
+        tv_payment.text = if (calculator.perTime != null && calculator.progress > 0) {
             "${calculator.payment} РУБ."
         } else "не важно"
     }
