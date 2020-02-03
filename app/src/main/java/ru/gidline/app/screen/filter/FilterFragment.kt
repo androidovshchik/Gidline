@@ -145,16 +145,18 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
             val prevMax = max
             val prevProgress = progress
             max = (it.maxPayment - it.minPayment) / it.payStep
-            progress = round(prevProgress * max.toFloat() / prevMax).toInt()
+            progress = if (it.perTime != null) {
+                round(prevProgress * max.toFloat() / prevMax).toInt()
+            } else 0
         }
         updateProgress()
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateProgress() {
-        tv_payment.text = if (calculator.perTime != null) {
+        tv_payment.text = if (calculator.perTime != null && calculator.payment > 0) {
             "${calculator.payment} РУБ."
-        } else null
+        } else "не важно"
     }
 
     private fun updateCity(regionPosition: Int, city: String?) {
