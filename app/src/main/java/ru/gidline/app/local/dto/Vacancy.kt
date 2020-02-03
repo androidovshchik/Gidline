@@ -113,8 +113,10 @@ class Vacancy {
                 "ЗА ЧАС" -> if (t != 2) return false
                 else -> return false
             }
-            if (minPayment < searchFilter.calculator.payment) {
-                return false
+            if (searchFilter.calculator.progress > 0) {
+                if (minPayment < searchFilter.calculator.payment) {
+                    return false
+                }
             }
         }
         searchFilter.city?.let {
