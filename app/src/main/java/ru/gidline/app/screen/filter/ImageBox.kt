@@ -15,7 +15,7 @@ class ImageBox : ImageView {
             field = value
             setImageResource(
                 if (value) {
-                    R.drawable.daw
+                    R.drawable.daw_violet
                 } else 0
             )
         }
