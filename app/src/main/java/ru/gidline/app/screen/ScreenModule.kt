@@ -16,25 +16,33 @@ import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.f04.F04Presenter
 import ru.gidline.app.screen.search.vacancies.VacanciesFragment
 import ru.gidline.app.screen.search.vacancies.VacanciesPresenter
+import ru.gidline.app.screen.splash.SplashActivity
+import ru.gidline.app.screen.splash.SplashPresenter
 import ru.gidline.app.screen.vacancy.VacancyFragment
 import ru.gidline.app.screen.vacancy.VacancyPresenter
 
 val screenModule = Kodein.Module("screen") {
 
+    bind<SplashPresenter>() with contexted<SplashActivity>().provider {
+        SplashPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<MainPresenter>() with contexted<MainActivity>().provider {
-        MainPresenter(context).apply {
+        MainPresenter(instance()).apply {
             attachView(context)
         }
     }
 
     bind<F04Presenter>() with contexted<F04Fragment>().provider {
-        F04Presenter(context.requireContext()).apply {
+        F04Presenter(instance()).apply {
             attachView(context)
         }
     }
 
     bind<FilterPresenter>() with contexted<FilterFragment>().provider {
-        FilterPresenter(context.requireContext()).apply {
+        FilterPresenter(instance()).apply {
             attachView(context)
         }
     }
@@ -44,7 +52,7 @@ val screenModule = Kodein.Module("screen") {
     }
 
     bind<SearchPresenter>() with contexted<SearchFragment>().provider {
-        SearchPresenter(context.requireContext()).apply {
+        SearchPresenter(instance()).apply {
             attachView(context)
         }
     }
@@ -58,13 +66,13 @@ val screenModule = Kodein.Module("screen") {
     }
 
     bind<VacanciesPresenter>() with contexted<VacanciesFragment>().provider {
-        VacanciesPresenter(context.requireContext()).apply {
+        VacanciesPresenter(instance()).apply {
             attachView(context)
         }
     }
 
     bind<VacancyPresenter>() with contexted<VacancyFragment>().provider {
-        VacancyPresenter(context.requireContext()).apply {
+        VacancyPresenter(instance()).apply {
             attachView(context)
         }
     }

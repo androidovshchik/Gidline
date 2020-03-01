@@ -19,6 +19,7 @@
             android:name=".screen.splash.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.Splash"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
