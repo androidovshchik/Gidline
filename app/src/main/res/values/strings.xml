@@ -1,7 +1,19 @@
 <resources>
     <string name="app_name">Gidline</string>
+
+    <string name="menu_summary">Моё резюме</string>
+    <string name="menu_subscriptions">Мои подписки</string>
+    <string name="menu_documents">Мои документы</string>
+    <string name="menu_money">Деньги в долг</string>
+    <string name="menu_invite">Пригласить друга</string>
+    <string name="menu_questions">Вопросы о Gidline</string>
+    <string name="menu_exit">Выход</string>
+
     <string name="accordion_offer">Мы предлагаем:</string>
     <string name="accordion_responsibility">В чем заключается работа:</string>
     <string name="accordion_requirement">О вас:</string>
-    <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной активной\nвакансии.\nПопробуйте поменять запрос.</string>
+
+    <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной
+        активной\nвакансии.\nПопробуйте поменять запрос.
+    </string>
 </resources>
