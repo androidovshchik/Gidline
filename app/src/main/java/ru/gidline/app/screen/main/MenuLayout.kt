@@ -7,9 +7,11 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.merge_menu.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
+import ru.gidline.app.extension.use
 
 class MenuLayout : LinearLayout, KodeinAware {
 
@@ -38,6 +40,13 @@ class MenuLayout : LinearLayout, KodeinAware {
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.merge_menu, this)
+        attrs?.let { set ->
+            context.obtainStyledAttributes(set, R.styleable.MenuLayout).use {
+                getString(R.styleable.MenuLayout_text)?.let {
+                    tv_name.text = it
+                }
+            }
+        }
     }
 
     override fun hasOverlappingRendering() = false

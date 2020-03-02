@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -10,12 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_menu"
+    <ru.gidline.app.screen.main.MenuLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f2f2f2"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_menu"/>
+        app:text="@string/menu_summary"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_subscriptions"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_documents"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_money"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_invite"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_questions"/>
+
+    <ru.gidline.app.screen.main.MenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/menu_exit"/>
 
 </LinearLayout>
