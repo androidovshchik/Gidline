@@ -4,10 +4,14 @@ import android.widget.ArrayAdapter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.*
 import ru.gidline.app.R
+import ru.gidline.app.screen.categories.CategoriesFragment
+import ru.gidline.app.screen.categories.CategoriesPresenter
 import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.filter.FilterPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
+import ru.gidline.app.screen.notifications.NotificationsFragment
+import ru.gidline.app.screen.notifications.NotificationsPresenter
 import ru.gidline.app.screen.search.ChipsPopup
 import ru.gidline.app.screen.search.SearchFilter
 import ru.gidline.app.screen.search.SearchFragment
@@ -31,6 +35,18 @@ val screenModule = Kodein.Module("screen") {
 
     bind<MainPresenter>() with contexted<MainActivity>().provider {
         MainPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {
+        CategoriesPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<NotificationsPresenter>() with contexted<NotificationsFragment>().provider {
+        NotificationsPresenter(instance()).apply {
             attachView(context)
         }
     }
