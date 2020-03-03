@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:cardCornerRadius="5dp"
+    tools:cardElevation="0dp"
+    tools:cardMaxElevation="0dp"
+    tools:strokeColor="#f9d5e9"
+    tools:strokeWidth="1.5dp"
+    tools:ignore="MissingPrefix"
+    tools:parentTag="com.google.android.material.card.MaterialCardView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="6dp">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/airplane" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:minWidth="120dp"
+            android:textColor="#872687"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            tools:text="Text Text Text Text Text Text Text Text Text" />
+
+    </LinearLayout>
+
+</merge>
