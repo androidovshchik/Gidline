@@ -27,51 +27,71 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_notification"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:strokeColor="#f9d5e9"
+        app:strokeWidth="1.5dp"
+        tools:cardBackgroundColor="@android:color/transparent"
+        tools:ignore="MissingPrefix">
 
-        <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="#872687"
-            android:textSize="16sp"
-            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+        <RelativeLayout
+            android:id="@+id/rl_notification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_subtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_text"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/tv_date"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            tools:text="Text Text Text Text Text Text Text " />
+            <View
+                android:id="@+id/v_strip"
+                android:layout_width="11dp"
+                android:layout_height="match_parent"
+                tools:background="#d18bc9" />
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/tv_subtext"
-            android:layout_alignBottom="@+id/tv_subtext"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical"
-            android:textColor="#872687"
-            android:textSize="13sp"
-            tools:text="Text Text Text Text Text"
-            tools:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/v_strip"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="12dp"
+                android:textColor="#872687"
+                android:textSize="16sp"
+                tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_text"
+                android:layout_toEndOf="@+id/v_strip"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/tv_date"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                tools:text="Text Text Text Text Text Text Text " />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_subtext"
+                android:layout_alignBottom="@+id/tv_subtext"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:textColor="#872687"
+                android:textSize="13sp"
+                tools:text="Text Text Text Text Text"
+                tools:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </com.chauthai.swipereveallayout.SwipeRevealLayout>
