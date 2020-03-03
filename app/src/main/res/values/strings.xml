@@ -13,7 +13,14 @@
     <string name="accordion_responsibility">В чем заключается работа:</string>
     <string name="accordion_requirement">О вас:</string>
 
-    <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной
-        активной\nвакансии.\nПопробуйте поменять запрос.
-    </string>
+    <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной активной\nвакансии.\nПопробуйте поменять запрос.</string>
+
+    <plurals name="notifications">
+        <item quantity="zero">Нет уведомлений</item>
+        <item quantity="one">%1$d уведомление</item>
+        <item quantity="two">%1$d уведомления</item>
+        <item quantity="few">%1$d уведомления</item>
+        <item quantity="many">%1$d уведомлений</item>
+        <item quantity="other">%1$d уведомлений</item>
+    </plurals>
 </resources>
