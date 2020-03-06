@@ -7,23 +7,23 @@ import android.view.View
 import android.widget.PopupWindow
 import android.widget.TextView
 import ru.gidline.app.R
-import ru.gidline.app.extension.statusBarHeight
 
 class ToastPopup(text: String, context: Context) : PopupWindow(context) {
 
-    private val topOffset = context.statusBarHeight
-
     init {
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
+        setBackgroundDrawable(null)
         contentView = View.inflate(context, R.layout.popup_toast, null).also {
             (it as TextView).text = text
         }
     }
 
-    fun show(anchor: View) {
-        showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
-        Handler().postDelayed({
-            dismiss()
-        }, 1000)
+    fun show(anchor: View, top: Int, start: Int) {
+        if (!isShowing) {
+            showAtLocation(anchor, Gravity.NO_GRAVITY, start, top)
+            Handler().postDelayed({
+                dismiss()
+            }, 1000)
+        }
     }
 }

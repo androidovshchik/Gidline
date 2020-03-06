@@ -18,6 +18,7 @@ class MenuPopup(context: Context) : PopupWindow(context), View.OnClickListener {
         width = context.dip(280)
         isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
+        setBackgroundDrawable(null)
         contentView = View.inflate(context, R.layout.popup_menu, null).also {
             (it as ViewGroup).children.forEach { child ->
                 if (child is MenuLayout) {
