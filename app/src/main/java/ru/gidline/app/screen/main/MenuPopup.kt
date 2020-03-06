@@ -28,6 +28,11 @@ class MenuPopup(context: Context) : PopupWindow(context), View.OnClickListener {
     }
 
     fun show(anchor: View) {
+        (contentView as ViewGroup).children.forEach { child ->
+            if (child is MenuLayout) {
+                child.toggle(-1)
+            }
+        }
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }
 

@@ -9,13 +9,14 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/circle_white"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         tools:src="@drawable/avatar_man"/>
 
     <TextView
@@ -58,7 +59,9 @@
         android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        tools:text="Text Text Text Text Text Text Text"/>
+        android:text="до пересечения границы"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_border_days"
@@ -72,6 +75,8 @@
         android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="12sp"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:text="Text Text Text"/>
 
     <TextView
@@ -86,7 +91,9 @@
         android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        tools:text="Text Text Text Text Text Text Text"/>
+        android:text="до окончания патента"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_patent_days"
@@ -101,6 +108,8 @@
         android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="12sp"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:text="Text Text Text"/>
 
 </merge>
