@@ -85,6 +85,10 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
     }
 
+    override fun setTitle(text: String) {
+        tv_title.text = text
+    }
+
     override fun updateHome(drawable: Int) {
         ib_home.apply {
             tag = drawable

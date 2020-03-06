@@ -16,6 +16,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         context?.makeCallback<MainContract.View> {
+            setTitle(getString(R.string.app_name))
             toggleBottomNav(true)
         }
         return inflater.inflate(R.layout.fragment_categories, root, false)
