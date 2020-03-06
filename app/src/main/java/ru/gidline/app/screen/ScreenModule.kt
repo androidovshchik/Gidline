@@ -10,6 +10,7 @@ import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.filter.FilterPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
+import ru.gidline.app.screen.main.MenuPopup
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.notifications.NotificationsPresenter
 import ru.gidline.app.screen.search.ChipsPopup
@@ -37,6 +38,10 @@ val screenModule = Kodein.Module("screen") {
         MainPresenter(instance()).apply {
             attachView(context)
         }
+    }
+
+    bind<MenuPopup>() with contexted<MainActivity>().provider {
+        MenuPopup(context)
     }
 
     bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {

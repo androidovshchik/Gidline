@@ -16,6 +16,7 @@ import org.jetbrains.anko.windowManager
 import ru.gidline.app.R
 import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.extension.setTextSelection
+import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.listeners.IView
 
@@ -65,12 +66,4 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
             }
         }
     }
-
-    private val Context.statusBarHeight: Int
-        get() {
-            val id = resources.getIdentifier("status_bar_height", "dimen", "android")
-            return if (id > 0) {
-                resources.getDimensionPixelSize(id)
-            } else 0
-        }
 }

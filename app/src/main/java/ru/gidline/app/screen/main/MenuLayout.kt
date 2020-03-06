@@ -7,6 +7,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.merge_menu.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -44,6 +45,9 @@ class MenuLayout : LinearLayout, KodeinAware {
             context.obtainStyledAttributes(set, R.styleable.MenuLayout).use {
                 getString(R.styleable.MenuLayout_text)?.let {
                     tv_name.text = it
+                    if (it == resources.getString(R.string.menu_exit)) {
+                        iv_arrow.isVisible = true
+                    }
                 }
             }
         }
