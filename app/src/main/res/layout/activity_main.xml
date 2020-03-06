@@ -45,26 +45,30 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <ImageView
-            android:id="@+id/iv_settings"
+        <ImageButton
+            android:id="@+id/ib_settings"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:adjustViewBounds="true"
             android:padding="8dp"
-            android:src="@drawable/settings"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/settings"
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="2"/>
 
-        <ImageView
-            android:id="@+id/iv_map"
+        <ImageButton
+            android:id="@+id/ib_map"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:adjustViewBounds="true"
             android:padding="8dp"
-            android:src="@drawable/map"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/map"
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
             android:layout_width="0dp"

@@ -6,10 +6,14 @@ import androidx.core.view.isVisible
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
+import org.jetbrains.anko.dip
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.extension.statusBarHeight
+import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.categories.CategoriesFragment
+import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
@@ -20,6 +24,8 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     private val menuPopup: MenuPopup by instance()
 
+    private val toastPopup: ToastPopup by instance(arg = "уведомлений нет")
+
     private lateinit var filterFragment: FilterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +34,9 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         filterFragment = supportFragmentManager.findFragmentById(R.id.f_filter) as FilterFragment
         iv_background.load(R.drawable.background)
         ib_home.setOnClickListener(this)
+        ib_bell.setOnClickListener(this)
+        ib_settings.setOnClickListener(this)
+        ib_map.setOnClickListener(this)
         mb_action.setOnClickListener(this)
         hideFragment(R.id.f_filter)
         addFragment(CategoriesFragment.newInstance())
@@ -50,6 +59,15 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 } else {
                     menuPopup.show(v)
                 }
+            }
+            R.id.ib_bell -> {
+                val top = statusBarHeight + resources.getDimension(R.dimen.toolbar_height)
+                    .toInt() - dip(5)
+                val start = windowManager.windowSize.x - dip(180)
+                toastPopup.show(v, top, start)
+            }
+            R.id.ib_settings -> {
+
             }
             R.id.mb_action -> {
                 if (filterFragment.isVisible) {

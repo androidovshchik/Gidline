@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'AndResGuard'
 
 android {
     compileSdkVersion 29
@@ -48,6 +49,26 @@ android {
     lintOptions {
         //checkReleaseBuilds false
         //abortOnError false
+    }
+}
+
+// ./gradlew resguard[BuildType | Flavor]
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    // it will keep the origin path of your resources when it's true
+    keepRoot = false
+    whiteList = []
+    compressFilePattern = [
+        "*.png",
+        "*.jpg",
+        "*.jpeg",
+        "*.gif"
+    ]
+    sevenzip {
+        artifact = "com.tencent.mm:SevenZip:$andresguard_version"
+        //path = "/usr/local/bin/7za"
     }
 }
 
