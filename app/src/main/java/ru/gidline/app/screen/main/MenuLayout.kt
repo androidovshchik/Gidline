@@ -3,15 +3,18 @@ package ru.gidline.app.screen.main
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.merge_menu.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
+import ru.gidline.app.extension.activity
 import ru.gidline.app.extension.use
 
 class MenuLayout : LinearLayout, KodeinAware {
@@ -50,6 +53,20 @@ class MenuLayout : LinearLayout, KodeinAware {
                     }
                 }
             }
+        }
+    }
+
+    fun toggle(index: Int) {
+        val myIndex = (parent as ViewGroup).indexOfChild(this)
+        if (index == myIndex) {
+            setBackgroundColor(Color.parseColor("#c1c3c7"))
+            tv_name.setTextColor(Color.parseColor("#872687"))
+            if (iv_arrow.isVisible) {
+                context.activity()?.finishAffinity()
+            }
+        } else {
+            setBackgroundColor(Color.TRANSPARENT)
+            tv_name.setTextColor(Color.parseColor("#676a73"))
         }
     }
 

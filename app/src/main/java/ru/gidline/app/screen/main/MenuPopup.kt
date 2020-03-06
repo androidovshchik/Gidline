@@ -15,7 +15,7 @@ class MenuPopup(context: Context) : PopupWindow(context), View.OnClickListener {
     private val topOffset = context.statusBarHeight
 
     init {
-        width = context.dip(240)
+        width = context.dip(280)
         isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
         contentView = View.inflate(context, R.layout.popup_menu, null).also {
@@ -32,6 +32,12 @@ class MenuPopup(context: Context) : PopupWindow(context), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-
+        (contentView as ViewGroup).also {
+            it.children.forEach { child ->
+                if (child is MenuLayout) {
+                    child.toggle(it.indexOfChild(v))
+                }
+            }
+        }
     }
 }
