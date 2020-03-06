@@ -27,6 +27,9 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     val chipsPopup: ChipsPopup by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+        context?.makeCallback<MainContract.View> {
+            setTitle("ПОИСК РАБОТЫ")
+        }
         return inflater.inflate(R.layout.fragment_search, root, false)
     }
 

@@ -20,7 +20,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:icon="@drawable/people"
-            app:text="Поиск работы"/>
+            app:text="Поиск работы"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <ru.gidline.app.screen.categories.CategoryLayout
             android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:icon="@drawable/airplane"
-            app:text="Покупка билетов"/>
+            app:text="Покупка билетов"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <ru.gidline.app.screen.categories.CategoryLayout
             android:layout_width="match_parent"
@@ -38,7 +40,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:icon="@drawable/globe"
-            app:text="Проверка документов"/>
+            app:text="Проверка документов"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <ru.gidline.app.screen.categories.CategoryLayout
             android:layout_width="match_parent"
@@ -47,7 +50,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:icon="@drawable/certificate"
-            app:text="Сертификаты"/>
+            app:text="Сертификаты"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <ru.gidline.app.screen.categories.CategoryLayout
             android:layout_width="match_parent"
@@ -57,7 +61,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
             app:icon="@drawable/law"
-            app:text="Помощь юриста"/>
+            app:text="Помощь юриста"
+            android:foreground="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 

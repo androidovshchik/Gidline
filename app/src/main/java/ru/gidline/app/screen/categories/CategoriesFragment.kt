@@ -9,7 +9,9 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.screen.base.BaseFragment
+import ru.gidline.app.screen.base.listeners.IView
 import ru.gidline.app.screen.main.MainContract
+import ru.gidline.app.screen.search.SearchFragment
 
 class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), CategoriesContract.View {
 
@@ -30,7 +32,9 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cl_search -> {
-
+                context?.makeCallback<IView> {
+                    putFragment(SearchFragment.newInstance())
+                }
             }
         }
     }
