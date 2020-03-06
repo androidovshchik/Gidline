@@ -5,7 +5,7 @@ import ru.gidline.app.screen.base.listeners.IView
 
 interface CategoriesContract {
 
-    interface View : IView
+    interface View : IView, android.view.View.OnClickListener
 
     interface Presenter : IPresenter<View>
 }

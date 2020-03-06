@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.merge_category.view.*
 import org.jetbrains.anko.dip
@@ -30,9 +29,10 @@ class CategoryLayout @JvmOverloads constructor(
     private fun init(attrs: AttributeSet?) {
         strokeColor = Color.parseColor("#f9d5e9")
         strokeWidth = dip(1.5f)
+        radius = dip(10).toFloat()
         cardElevation = 0f
         maxCardElevation = 0f
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorCardNormal))
+        setCardBackgroundColor(Color.parseColor("#5cffffff"))
         View.inflate(context, R.layout.merge_category, this)
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.CategoryLayout).use {

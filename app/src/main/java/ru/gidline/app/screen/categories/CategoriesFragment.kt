@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_categories.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.makeCallback
@@ -23,7 +24,22 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        cl_search.setOnClickListener(this)
+    }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.cl_search -> {
+
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        context?.makeCallback<MainContract.View> {
+            toggleBottomNav(false)
+        }
+        super.onDestroyView()
     }
 
     companion object {
