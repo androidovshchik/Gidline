@@ -43,9 +43,11 @@ class HeaderLayout : RelativeLayout, KodeinAware {
     private fun init(attrs: AttributeSet?) {
         setBackgroundResource(R.drawable.header_background)
         View.inflate(context, R.layout.merge_header, this)
-        iv_avatar.drawable.mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
+        iv_avatar.setImageDrawable(resources.getDrawable(R.drawable.avatar_man).mutate().apply {
+            setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+        })
     }
 
     override fun hasOverlappingRendering() = false

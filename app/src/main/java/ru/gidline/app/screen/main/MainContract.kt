@@ -10,6 +10,8 @@ interface MainContract {
         fun updateHome(drawable: Int)
 
         fun updateAction(text: String?)
+
+        fun toggleBottomNav(show: Boolean)
     }
 
     interface Presenter : IPresenter<View>

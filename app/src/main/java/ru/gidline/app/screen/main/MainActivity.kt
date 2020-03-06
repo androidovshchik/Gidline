@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseActivity
+import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
@@ -16,6 +17,8 @@ import ru.gidline.app.screen.vacancy.VacancyFragment
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     override val presenter: MainPresenter by instance()
+
+    private val menuPopup: MenuPopup by instance()
 
     private lateinit var filterFragment: FilterFragment
 
@@ -27,13 +30,13 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         ib_home.setOnClickListener(this)
         mb_action.setOnClickListener(this)
         hideFragment(R.id.f_filter)
-        addFragment(SearchFragment.newInstance())
+        addFragment(CategoriesFragment.newInstance())
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ib_home -> when (v.tag) {
-                R.drawable.arrow_left -> {
+            R.id.ib_home -> {
+                if (v.tag == R.drawable.arrow_left) {
                     topFragment.also {
                         if (it is SearchFragment) {
                             if (it.chipsPopup.isShowing) {
@@ -44,18 +47,20 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                         }
                     }
                     onBackPressed()
+                } else {
+                    menuPopup.show(v)
                 }
             }
-            R.id.mb_action -> if (filterFragment.isVisible) {
-                filterFragment.saveFilter()
-                topFragment.also {
-                    if (it is SearchFragment) {
-                        it.refreshData()
+            R.id.mb_action -> {
+                if (filterFragment.isVisible) {
+                    filterFragment.saveFilter()
+                    topFragment.also {
+                        if (it is SearchFragment) {
+                            it.refreshData()
+                        }
                     }
-                }
-                hideFragment(R.id.f_filter)
-            } else when (topFragment) {
-                is VacancyFragment -> {
+                    hideFragment(R.id.f_filter)
+                } else if (topFragment is VacancyFragment) {
                     popFragment(null, false)
                 }
             }
@@ -78,11 +83,15 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
     }
 
+    override fun toggleBottomNav(show: Boolean) {
+        ll_bottom_nav.isVisible = show
+    }
+
     override fun onBackPressed() {
-        if (filterFragment.isVisible) {
-            hideFragment(R.id.f_filter)
-        } else {
-            super.onBackPressed()
+        when {
+            menuPopup.isShowing -> menuPopup.dismiss()
+            filterFragment.isVisible -> hideFragment(R.id.f_filter)
+            else -> super.onBackPressed()
         }
     }
 }
