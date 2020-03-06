@@ -16,7 +16,7 @@ import ru.gidline.app.extension.use
 class CategoryLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = R.attr.matCardStyle
 ) : MaterialCardView(context, attrs, defStyleAttr), KodeinAware {
 
     override val kodein by closestKodein()
@@ -27,11 +27,7 @@ class CategoryLayout @JvmOverloads constructor(
 
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
-        strokeColor = Color.parseColor("#f9d5e9")
-        strokeWidth = dip(1.5f)
         radius = dip(10).toFloat()
-        cardElevation = 0f
-        maxCardElevation = 0f
         setCardBackgroundColor(Color.parseColor("#5cffffff"))
         View.inflate(context, R.layout.merge_category, this)
         attrs?.let { set ->

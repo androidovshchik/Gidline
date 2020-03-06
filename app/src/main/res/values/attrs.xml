@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="matCardStyle" format="reference" />
     <declare-styleable name="AccordionLayout">
         <attr name="text" format="string|reference"/>
     </declare-styleable>

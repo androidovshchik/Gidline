@@ -23,6 +23,7 @@
         android:src="@drawable/hamburger" />
 
     <TextView
+        android:id="@+id/tv_title"
         fontPath="Arial-Bold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
