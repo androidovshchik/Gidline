@@ -1,11 +1,13 @@
 package ru.gidline.app.screen
 
+import android.app.Activity
 import android.widget.ArrayAdapter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.*
 import ru.gidline.app.R
 import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.categories.CategoriesPresenter
+import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.filter.FilterPresenter
 import ru.gidline.app.screen.main.MainActivity
@@ -27,6 +29,10 @@ import ru.gidline.app.screen.vacancy.VacancyFragment
 import ru.gidline.app.screen.vacancy.VacancyPresenter
 
 val screenModule = Kodein.Module("screen") {
+
+    bind<ToastPopup>() with contexted<Activity>().factory { text: String ->
+        ToastPopup(text, context)
+    }
 
     bind<SplashPresenter>() with contexted<SplashActivity>().provider {
         SplashPresenter(instance()).apply {
