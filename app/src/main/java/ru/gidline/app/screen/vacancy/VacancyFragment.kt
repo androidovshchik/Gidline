@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.fragment_vacancy.*
 import org.jetbrains.anko.backgroundColor
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.local.VacancyRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.main.MainContract
@@ -21,7 +20,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
     private val vacancyRepository: VacancyRepository by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        context?.makeCallback<MainContract.View> {
+        makeCallback<MainContract.View> {
             updateHome(R.drawable.arrow_left)
             updateAction("Откликнуться")
         }
@@ -46,7 +45,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
     }
 
     override fun onDestroyView() {
-        context?.makeCallback<MainContract.View> {
+        makeCallback<MainContract.View> {
             updateHome(R.drawable.hamburger)
             updateAction(null)
         }

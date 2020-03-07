@@ -1,5 +1,6 @@
 package ru.gidline.app.screen.filter
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import org.jetbrains.anko.backgroundResource
 import ru.gidline.app.R
 
+@SuppressLint("AppCompatCustomView")
 class ImageBox : ImageView {
 
     var isChecked = false

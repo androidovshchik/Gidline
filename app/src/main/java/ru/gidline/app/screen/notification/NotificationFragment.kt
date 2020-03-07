@@ -22,7 +22,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
 
     companion object {
 
-        fun newInstance(id: Int): NotificationFragment {
+        fun newInstance(): NotificationFragment {
             return NotificationFragment().apply {
                 arguments = Bundle().apply {
                 }

@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_filter.*
 import org.jetbrains.anko.sdk19.listeners.onSeekBarChangeListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listeners.IView
 import ru.gidline.app.screen.main.MainContract
@@ -68,11 +67,11 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     override fun onHiddenChanged(hidden: Boolean) {
         if (hidden) {
-            context?.makeCallback<MainContract.View> {
+            makeCallback<MainContract.View> {
                 updateAction(null)
             }
         } else {
-            context?.makeCallback<MainContract.View> {
+            makeCallback<MainContract.View> {
                 updateAction("Применить")
             }
             updateFilter()
@@ -107,8 +106,10 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ib_close -> context?.makeCallback<IView> {
-                hideFragment(R.id.f_filter)
+            R.id.ib_close -> {
+                makeCallback<IView> {
+                    hideFragment(R.id.f_filter)
+                }
             }
             R.id.tv_per_month, R.id.tv_per_item, R.id.tv_per_hour -> {
                 calculator.perTime =

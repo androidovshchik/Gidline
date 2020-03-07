@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.local.VacancyRepository
 import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseFragment
@@ -52,7 +51,7 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
     }
 
     override fun onItemSelected(position: Int, item: Vacancy) {
-        context?.makeCallback<IView> {
+        makeCallback<IView> {
             addFragment(VacancyFragment.newInstance(item.id))
         }
     }

@@ -10,7 +10,6 @@ import org.jetbrains.anko.inputMethodManager
 import org.jetbrains.anko.sdk19.listeners.textChangedListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.search.f04.F04Fragment
@@ -27,7 +26,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     val chipsPopup: ChipsPopup by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        context?.makeCallback<MainContract.View> {
+        makeCallback<MainContract.View> {
             setTitle("ПОИСК РАБОТЫ")
         }
         return inflater.inflate(R.layout.fragment_search, root, false)
@@ -37,7 +36,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         vacanciesFragment =
             childFragmentManager.findFragmentById(R.id.f_vacancies) as VacanciesFragment
         et_search.setOnTouchListener { v, _ ->
-            context?.makeCallback<MainContract.View> {
+            makeCallback<MainContract.View> {
                 updateHome(R.drawable.arrow_left)
             }
             chipsPopup.show(v)
@@ -53,7 +52,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         ib_filter.setOnClickListener {
             hideSuggestion()
             et_search.clearFocus()
-            context?.makeCallback<MainContract.View> {
+            makeCallback<MainContract.View> {
                 updateHome(R.drawable.hamburger)
                 showFragment(R.id.f_filter)
             }
@@ -61,7 +60,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         et_search.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSuggestion()
-                context?.makeCallback<MainContract.View> {
+                makeCallback<MainContract.View> {
                     updateHome(R.drawable.hamburger)
                 }
                 refreshData()
