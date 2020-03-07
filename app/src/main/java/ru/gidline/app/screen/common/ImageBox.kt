@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
-import org.jetbrains.anko.backgroundResource
 import ru.gidline.app.R
 import ru.gidline.app.extension.use
 
@@ -46,10 +45,10 @@ class ImageBox : ImageView {
     private fun init(attrs: AttributeSet?) {
         scaleType = ScaleType.FIT_CENTER
         adjustViewBounds = true
-        backgroundResource = R.drawable.checkbox
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.ImageBox).use {
                 icon = getDrawable(R.styleable.ImageBox_icon)
+                background = getDrawable(R.styleable.ImageBox_background)
             }
         }
     }

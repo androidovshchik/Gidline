@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.TextView
-import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.textColor
 import ru.gidline.app.R
 
@@ -18,10 +17,10 @@ class ToggleView : TextView {
         set(value) {
             field = value
             if (value) {
-                backgroundResource = R.drawable.button_active
+                setBackgroundResource(R.drawable.button_active)
                 textColor = Color.WHITE
             } else {
-                backgroundResource = R.drawable.button_inactive
+                setBackgroundResource(R.drawable.button_inactive)
                 textColor = Color.parseColor("#813678")
             }
         }

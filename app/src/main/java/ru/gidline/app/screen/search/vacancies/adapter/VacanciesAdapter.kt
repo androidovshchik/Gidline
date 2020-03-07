@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.item_card.view.*
-import org.jetbrains.anko.backgroundColor
 import ru.gidline.app.R
 import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
@@ -72,7 +71,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
             place.text = item.place
             patent.isVisible = item.hasPatent
             form.apply {
-                backgroundColor = item.color
+                setBackgroundColor(item.color)
                 text = item.form
             }
         }

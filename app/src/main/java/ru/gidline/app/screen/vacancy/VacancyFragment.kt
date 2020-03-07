@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_vacancy.*
-import org.jetbrains.anko.backgroundColor
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.VacancyRepository
@@ -35,7 +34,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
         tv_payment.text = vacancy.payment
         tv_time.text = vacancy.perTime
         tv_form.apply {
-            backgroundColor = vacancy.color
+            setBackgroundColor(vacancy.color)
             text = vacancy.form
         }
         al_offer.updateText(vacancy)

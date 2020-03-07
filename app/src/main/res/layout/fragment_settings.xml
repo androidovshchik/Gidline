@@ -26,14 +26,18 @@
                     android:layout_height="36dp"
                     android:padding="5dp"
                     app:icon="@drawable/daw_pink"
-                    tools:src="@drawable/daw_pink" />
+                    app:background="@drawable/checkbox_pink"
+                    tools:src="@drawable/daw_pink"
+                    tools:background="@drawable/checkbox_pink" />
 
                 <ru.gidline.app.screen.common.ImageBox
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:padding="5dp"
                     app:icon="@drawable/daw_pink"
-                    tools:src="@drawable/daw_pink" />
+                    app:background="@drawable/checkbox_pink"
+                    tools:src="@drawable/daw_pink"
+                    tools:background="@drawable/checkbox_pink" />
 
             </LinearLayout>
 
