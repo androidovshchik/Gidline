@@ -62,5 +62,7 @@ class BellRepository {
 
     fun getAll() = bells
 
+    fun getById(id: Int) = bells.first { it.id == id }
+
     fun deleteById(id: Int) = bells.removeAll { it.id == id }
 }

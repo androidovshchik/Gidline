@@ -14,7 +14,7 @@ import ru.gidline.app.screen.base.BaseHolder
 import ru.gidline.app.screen.base.listener.IRecycler
 
 @Suppress("MemberVisibilityCanBePrivate")
-class VacancyAdapter(listener: IRecycler<Vacancy>) : BaseAdapter<Vacancy>(listener) {
+class VacanciesAdapter(listener: IRecycler<Vacancy>) : BaseAdapter<Vacancy>(listener) {
 
     val filteredItems = mutableListOf<Vacancy>()
 
