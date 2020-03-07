@@ -55,6 +55,11 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
         } else {
             tv_new.isVisible = false
         }
+        if (bellRepository.allCount <= 0) {
+            makeCallback<IView> {
+                popFragment(null, false)
+            }
+        }
     }
 
     override fun onItemSelected(position: Int, item: Bell) {

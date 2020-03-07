@@ -1,11 +1,13 @@
 package ru.gidline.app.screen.notification
 
+import android.graphics.Matrix
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
+import coil.api.load
 import kotlinx.android.synthetic.main.fragment_notification.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
@@ -21,15 +23,20 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
     private val bellRepository: BellRepository by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        bellRepository.getById(args.getInt("id"))?.let {
-            makeCallback<MainContract.View> {
-                setTitle(it.type.caption)
-            }
+        val bell = bellRepository.getById(args.getInt("id"))
+        makeCallback<MainContract.View> {
+            setTitle(bell?.type?.caption.orEmpty())
         }
         return inflater.inflate(R.layout.fragment_notification, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        iv_background.apply {
+            load(R.drawable.background)
+            imageMatrix = Matrix().apply {
+                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+            }
+        }
         bellRepository.getById(args.getInt("id"))?.let {
             tv_title.text = it.title
             it.vacancy?.let { vacancy ->
@@ -42,6 +49,13 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
             tv_html.text = HtmlCompat.fromHtml(it.html, HtmlCompat.FROM_HTML_MODE_LEGACY)
             fab_phone.isVisible = it.type == BellType.INVITATION
         }
+    }
+
+    override fun onDestroyView() {
+        makeCallback<MainContract.View> {
+            setTitle("УВЕДОМЛЕНИЕ")
+        }
+        super.onDestroyView()
     }
 
     companion object {
