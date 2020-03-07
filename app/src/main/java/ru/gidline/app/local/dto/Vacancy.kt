@@ -7,6 +7,14 @@ import com.google.gson.annotations.SerializedName
 import ru.gidline.app.screen.search.SearchFilter
 import timber.log.Timber
 
+@Suppress("unused")
+enum class Schedule(val id: Int, val caption: String, val color: String) {
+    FULL_TIME(0, "ПОЛНЫЙ РАБОЧИЙ ДЕНЬ", "#e1619f"),
+    REPLACEABLE(1, "СМЕННЫЙ ГРАФИК РАБОТЫ", "#c032b4"),
+    SHIFT_METHOD(2, "ВАХТОВЫЙ МЕТОД", "#7b3172"),
+    WORK(3, "ПОДРАБОТКА", "#b4186e")
+}
+
 @Suppress("MemberVisibilityCanBePrivate")
 class Vacancy {
 
@@ -76,7 +84,7 @@ class Vacancy {
 
     val color: Int
         get() = try {
-            Color.parseColor(forms[forms.keys.first { it.equals(form, true) }])
+            Color.parseColor(Schedule.values().first { form.equals(it.caption, true) }.color)
         } catch (e: Throwable) {
             Timber.e(e)
             Color.RED
@@ -106,11 +114,11 @@ class Vacancy {
                 return false
             }
         }
-        searchFilter.calculator.perTime?.let { t ->
+        searchFilter.calculator.perTime?.let { calcPerTime ->
             when (perTime) {
-                "В МЕСЯЦ" -> if (t != 0) return false
-                "ЗА СМЕНУ" -> if (t != 1) return false
-                "ЗА ЧАС" -> if (t != 2) return false
+                "В МЕСЯЦ" -> if (calcPerTime != 0) return false
+                "ЗА СМЕНУ" -> if (calcPerTime != 1) return false
+                "ЗА ЧАС" -> if (calcPerTime != 2) return false
                 else -> return false
             }
             if (searchFilter.calculator.progress > 0) {
@@ -124,9 +132,11 @@ class Vacancy {
                 return false
             }
         }
-        searchFilter.form?.let { f ->
-            if (f != forms.keys.indexOfFirst { it.equals(form, true) }) {
-                return false
+        searchFilter.form?.let { searchForm ->
+            Schedule.values().firstOrNull { it.id == searchForm }?.let {
+                if (!form.equals(it.caption, true)) {
+                    return false
+                }
             }
         }
         if (searchFilter.residence) {
@@ -140,15 +150,5 @@ class Vacancy {
             }
         }
         return true
-    }
-
-    companion object {
-
-        val forms = mapOf(
-            "ПОЛНЫЙ РАБОЧИЙ ДЕНЬ" to "#e1619f",
-            "СМЕННЫЙ ГРАФИК РАБОТЫ" to "#c032b4",
-            "ВАХТОВЫЙ МЕТОД" to "#7b3172",
-            "ПОДРАБОТКА" to "#b4186e"
-        )
     }
 }
