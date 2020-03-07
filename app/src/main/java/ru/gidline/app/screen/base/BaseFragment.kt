@@ -57,6 +57,10 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
         context?.longToast(e.localizedMessage ?: e.toString())
     }
 
+    inline fun <reified T> makeCallback(action: T.() -> Unit) {
+        context?.makeCallback(action)
+    }
+
     override fun onDestroy() {
         presenter.detachView()
         super.onDestroy()

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_categories.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listeners.IView
@@ -21,7 +20,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     private val bellRepository: BellRepository by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        context?.makeCallback<MainContract.View> {
+        makeCallback<MainContract.View> {
             setTitle(getString(R.string.app_name))
             notifyBell(bellRepository.count)
             toggleBottomNav(true)
@@ -36,7 +35,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cl_search -> {
-                context?.makeCallback<IView> {
+                makeCallback<IView> {
                     putFragment(SearchFragment.newInstance())
                 }
             }
@@ -44,7 +43,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     }
 
     override fun onDestroyView() {
-        context?.makeCallback<MainContract.View> {
+        makeCallback<MainContract.View> {
             notifyBell(null)
             toggleBottomNav(false)
         }
