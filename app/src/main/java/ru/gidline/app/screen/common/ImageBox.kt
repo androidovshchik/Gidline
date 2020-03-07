@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.filter.view
+package ru.gidline.app.screen.common
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

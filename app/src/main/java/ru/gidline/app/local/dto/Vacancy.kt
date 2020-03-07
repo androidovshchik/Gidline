@@ -133,10 +133,9 @@ class Vacancy {
             }
         }
         searchFilter.form?.let { searchForm ->
-            Schedule.values().firstOrNull { it.id == searchForm }?.let {
-                if (!form.equals(it.caption, true)) {
-                    return false
-                }
+            val schedule = Schedule.values().firstOrNull { it.id == searchForm }
+            if (schedule == null || !form.equals(schedule.caption, true)) {
+                return false
             }
         }
         if (searchFilter.residence) {

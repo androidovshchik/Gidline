@@ -38,9 +38,9 @@ class SearchView : EditText {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             context.makeCallback<MainContract.View> {
                 updateHome(R.drawable.hamburger)
-                topFragment.let {
-                    if (it is SearchFragment) {
-                        it.chipsPopup.dismiss()
+                when (val topFragment = topFragment) {
+                    is SearchFragment -> {
+                        topFragment.chipsPopup.dismiss()
                     }
                 }
             }

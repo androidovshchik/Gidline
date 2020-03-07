@@ -59,9 +59,9 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
 
     override fun onClick(v: View) {
         v.context.makeCallback<IView> {
-            topFragment.let {
-                if (it is SearchFragment) {
-                    it.et_search?.setTextSelection((v as Chip).text)
+            when (val topFragment = topFragment) {
+                is SearchFragment -> {
+                    topFragment.et_search?.setTextSelection((v as Chip).text)
                 }
             }
         }

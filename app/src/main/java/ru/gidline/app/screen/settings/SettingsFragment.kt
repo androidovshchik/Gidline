@@ -22,7 +22,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     companion object {
 
-        fun newInstance(id: Int): SettingsFragment {
+        fun newInstance(): SettingsFragment {
             return SettingsFragment().apply {
                 arguments = Bundle().apply {
                 }

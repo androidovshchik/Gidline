@@ -11,4 +11,7 @@
     <declare-styleable name="MenuLayout">
         <attr name="text"/>
     </declare-styleable>
+    <declare-styleable name="ImageBox">
+        <attr name="icon" />
+    </declare-styleable>
 </resources>
