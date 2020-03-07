@@ -10,7 +10,7 @@
         style="@style/MatCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         tools:ignore="MissingPrefix">
 
         <LinearLayout
@@ -22,9 +22,9 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"
                 tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
@@ -34,9 +34,9 @@
                 fontPath="Arial-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="12dp"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
                 android:visibility="gone"
@@ -48,24 +48,26 @@
                 android:id="@+id/tv_subtext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
                 android:textColor="@android:color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1.5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:background="#f8e8f0" />
 
             <TextView
                 android:id="@+id/tv_html"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"
                 tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text " />
@@ -75,8 +77,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/phone"
-                app:backgroundTint="#ebecec" />
+                android:visibility="gone"
+                app:backgroundTint="#ebecec"
+                app:tint="#bb1264"
+                tools:visibility="visible" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="16dp" />
 
         </LinearLayout>
 
