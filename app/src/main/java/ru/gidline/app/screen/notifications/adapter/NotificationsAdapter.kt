@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import kotlinx.android.synthetic.main.item_notification.view.*
 import ru.gidline.app.R
 import ru.gidline.app.local.dto.Bell
@@ -15,15 +16,19 @@ import ru.gidline.app.screen.notifications.NotificationsContract
 class NotificationsAdapter(listener: NotificationsContract.Recycler) :
     BaseAdapter<NotificationsContract.Recycler, Bell>(listener) {
 
+    private val viewBinderHelper = ViewBinderHelper()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.item_notification))
     }
 
     inner class ViewHolder(itemView: View) : BaseHolder<Bell>(itemView) {
 
+        private val notification = itemView.srl_notification
+
         private val delete = itemView.ib_delete
 
-        private val notification = itemView.rl_notification
+        private val card = itemView.mcv_notification
 
         private val strip = itemView.v_strip
 
@@ -36,11 +41,11 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
         init {
             delete.setOnClickListener {
                 val position = adapterPosition
-                items.removeAt(position)
-                notifyItemRemoved(position)
-                reference?.get()?.onItemDeleted()
+                val item = items.removeAt(position)
+                notifyDataSetChanged()
+                reference?.get()?.onItemDeleted(item.id)
             }
-            notification.setOnClickListener {
+            card.setOnClickListener {
                 val position = adapterPosition
                 reference?.get()?.onItemSelected(position, items[position])
             }
@@ -48,7 +53,8 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
 
         @SuppressLint("SetTextI18n")
         override fun onBindItem(position: Int, item: Bell) {
-            strip.isVisible = !item.read
+            viewBinderHelper.bind(notification, item.id.toString())
+            strip.isVisible = item.unread
             text.text = item.title
             subtext.text = item.subtitle
             date.text = item.date

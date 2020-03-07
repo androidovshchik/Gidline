@@ -44,7 +44,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
         val count = bellRepository.unreadCount
         if (count > 0) {
             tv_new.apply {
-                text = resources.getQuantityText(R.plurals.notifications, count)
+                text = resources.getQuantityString(R.plurals.notifications, count, count)
                 isVisible = true
             }
         } else {
