@@ -15,6 +15,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.*
 import ru.gidline.app.screen.base.listeners.IPresenter
 import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.presenterModule
 import ru.gidline.app.screen.screenModule
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -25,6 +26,8 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     override val kodein: Kodein by Kodein.lazy {
 
         extend(parentKodein)
+
+        import(presenterModule)
 
         import(screenModule)
     }

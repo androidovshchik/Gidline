@@ -11,16 +11,20 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
+import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.filter.FilterFragment
+import ru.gidline.app.screen.notification.NotificationFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     override val presenter: MainPresenter by instance()
+
+    private val bellRepository: BellRepository by instance()
 
     private val menuPopup: MenuPopup by instance()
 
@@ -61,10 +65,14 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 }
             }
             R.id.ib_bell -> {
-                val top = statusBarHeight + resources.getDimension(R.dimen.toolbar_height)
-                    .toInt() - dip(5)
-                val start = windowManager.windowSize.x - dip(180)
-                toastPopup.show(v, top, start)
+                if (bellRepository.count > 0) {
+                    putFragment(NotificationFragment.newInstance())
+                } else {
+                    val top = statusBarHeight + resources.getDimension(R.dimen.toolbar_height)
+                        .toInt() - dip(5)
+                    val start = windowManager.windowSize.x - dip(180)
+                    toastPopup.show(v, top, start)
+                }
             }
             R.id.ib_settings -> {
 
