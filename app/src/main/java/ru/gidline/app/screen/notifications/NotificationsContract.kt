@@ -7,7 +7,12 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface NotificationsContract {
 
-    interface View : IView, IRecycler<Bell>
+    interface View : IView, Recycler
+
+    interface Recycler : IRecycler<Bell> {
+
+        fun onItemDeleted()
+    }
 
     interface Presenter : IPresenter<View>
 }

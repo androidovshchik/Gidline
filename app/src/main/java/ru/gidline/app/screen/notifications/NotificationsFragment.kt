@@ -28,11 +28,16 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        onItemDeleted()
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
             it.addItemDecoration(NotificationsDecoration(requireContext()))
             it.adapter = adapter
         }
+    }
+
+    override fun onItemDeleted() {
+
     }
 
     override fun onItemSelected(position: Int, item: Bell) {
