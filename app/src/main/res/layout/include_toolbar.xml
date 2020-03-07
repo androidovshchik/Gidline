@@ -63,7 +63,7 @@
         android:adjustViewBounds="true"
         android:background="@drawable/daw_bell"
         android:padding="6dp"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:src="@drawable/daw_light"
         android:visibility="gone"
         tools:visibility="visible" />

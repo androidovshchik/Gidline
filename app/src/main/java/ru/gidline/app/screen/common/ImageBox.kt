@@ -3,23 +3,23 @@ package ru.gidline.app.screen.common
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import org.jetbrains.anko.backgroundResource
 import ru.gidline.app.R
+import ru.gidline.app.extension.use
 
 @SuppressLint("AppCompatCustomView")
 class ImageBox : ImageView {
 
+    private var icon: Drawable? = null
+
     var isChecked = false
         set(value) {
             field = value
-            setImageResource(
-                if (value) {
-                    R.drawable.daw_violet
-                } else 0
-            )
+            setImageDrawable(if (value) icon else null)
         }
 
     @JvmOverloads
@@ -42,10 +42,16 @@ class ImageBox : ImageView {
         init(attrs)
     }
 
+    @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
-        scaleType = ScaleType.CENTER_CROP
+        scaleType = ScaleType.FIT_CENTER
         adjustViewBounds = true
         backgroundResource = R.drawable.checkbox
+        attrs?.let { set ->
+            context.obtainStyledAttributes(set, R.styleable.ImageBox).use {
+                icon = getDrawable(R.styleable.ImageBox_icon)
+            }
+        }
     }
 
     override fun hasOverlappingRendering() = false

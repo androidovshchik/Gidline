@@ -21,6 +21,8 @@ import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.f04.F04Presenter
 import ru.gidline.app.screen.search.vacancies.VacanciesFragment
 import ru.gidline.app.screen.search.vacancies.VacanciesPresenter
+import ru.gidline.app.screen.settings.SettingsFragment
+import ru.gidline.app.screen.settings.SettingsPresenter
 import ru.gidline.app.screen.splash.SplashActivity
 import ru.gidline.app.screen.splash.SplashPresenter
 import ru.gidline.app.screen.vacancy.VacancyFragment
@@ -36,6 +38,12 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<MainPresenter>() with contexted<MainActivity>().provider {
         MainPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
+        SettingsPresenter(instance()).apply {
             attachView(context)
         }
     }
