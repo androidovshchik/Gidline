@@ -13,7 +13,9 @@ import org.jetbrains.anko.sdk19.listeners.onSeekBarChangeListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.filter.view.RadioButton
+import ru.gidline.app.screen.filter.view.ToggleView
 import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.search.SearchFilter
 import kotlin.math.round

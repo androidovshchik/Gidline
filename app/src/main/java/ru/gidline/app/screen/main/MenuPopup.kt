@@ -9,6 +9,7 @@ import androidx.core.view.children
 import org.jetbrains.anko.dip
 import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
+import ru.gidline.app.screen.main.view.MenuLayout
 
 class MenuPopup(context: Context) : PopupWindow(context), View.OnClickListener {
 

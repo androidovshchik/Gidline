@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.base.listeners
+package ru.gidline.app.screen.base.listener
 
 import android.view.View
 import ru.gidline.app.screen.base.BaseFragment

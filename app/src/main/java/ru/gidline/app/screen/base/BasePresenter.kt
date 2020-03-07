@@ -4,8 +4,8 @@ import android.content.Context
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IView
 import timber.log.Timber
 import java.lang.ref.WeakReference
 

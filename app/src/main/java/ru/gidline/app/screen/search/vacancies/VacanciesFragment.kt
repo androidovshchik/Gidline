@@ -11,8 +11,10 @@ import ru.gidline.app.R
 import ru.gidline.app.local.VacancyRepository
 import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.SearchFilter
+import ru.gidline.app.screen.search.vacancies.adapter.VacanciesDecoration
+import ru.gidline.app.screen.search.vacancies.adapter.VacancyAdapter
 import ru.gidline.app.screen.vacancy.VacancyFragment
 
 @Suppress("MemberVisibilityCanBePrivate")

@@ -9,7 +9,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.search.SearchFragment
 

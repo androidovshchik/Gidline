@@ -9,8 +9,8 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.*
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IView
 
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware {

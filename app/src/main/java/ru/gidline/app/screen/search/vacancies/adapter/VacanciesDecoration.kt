@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.search.vacancies
+package ru.gidline.app.screen.search.vacancies.adapter
 
 import android.content.Context
 import android.graphics.Rect

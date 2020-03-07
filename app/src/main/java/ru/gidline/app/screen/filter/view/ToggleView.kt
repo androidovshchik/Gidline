@@ -1,5 +1,6 @@
-package ru.gidline.app.screen.filter
+package ru.gidline.app.screen.filter.view
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
@@ -10,6 +11,7 @@ import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.textColor
 import ru.gidline.app.R
 
+@SuppressLint("AppCompatCustomView")
 class ToggleView : TextView {
 
     var isChecked = false

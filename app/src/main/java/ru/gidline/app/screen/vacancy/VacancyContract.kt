@@ -1,7 +1,7 @@
 package ru.gidline.app.screen.vacancy
 
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IView
 
 interface VacancyContract {
 

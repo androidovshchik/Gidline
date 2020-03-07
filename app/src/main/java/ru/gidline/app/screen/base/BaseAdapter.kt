@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import org.jetbrains.anko.layoutInflater
-import ru.gidline.app.screen.base.listeners.IRecycler
+import ru.gidline.app.screen.base.listener.IRecycler
 import java.lang.ref.WeakReference
 
 abstract class BaseHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {

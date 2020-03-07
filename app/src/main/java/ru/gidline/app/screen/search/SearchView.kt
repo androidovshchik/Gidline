@@ -1,5 +1,6 @@
 package ru.gidline.app.screen.search
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
@@ -10,6 +11,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.screen.main.MainContract
 
+@SuppressLint("AppCompatCustomView")
 class SearchView : EditText {
 
     @JvmOverloads

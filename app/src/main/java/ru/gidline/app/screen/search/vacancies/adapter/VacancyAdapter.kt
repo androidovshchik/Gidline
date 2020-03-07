@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.search.vacancies
+package ru.gidline.app.screen.search.vacancies.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -11,7 +11,7 @@ import ru.gidline.app.R
 import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
 import ru.gidline.app.screen.base.BaseHolder
-import ru.gidline.app.screen.base.listeners.IRecycler
+import ru.gidline.app.screen.base.listener.IRecycler
 
 @Suppress("MemberVisibilityCanBePrivate")
 class VacancyAdapter(listener: IRecycler<Vacancy>) : BaseAdapter<Vacancy>(listener) {

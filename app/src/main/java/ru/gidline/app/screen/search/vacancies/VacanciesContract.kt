@@ -1,9 +1,9 @@
 package ru.gidline.app.screen.search.vacancies
 
 import ru.gidline.app.local.dto.Vacancy
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IRecycler
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IRecycler
+import ru.gidline.app.screen.base.listener.IView
 
 interface VacanciesContract {
 

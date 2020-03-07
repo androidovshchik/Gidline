@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.main
+package ru.gidline.app.screen.main.view
 
 import android.content.Context
 import android.util.AttributeSet

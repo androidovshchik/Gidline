@@ -18,7 +18,7 @@ import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IView
 
 class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener {
 
