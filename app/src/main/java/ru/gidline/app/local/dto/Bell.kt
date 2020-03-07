@@ -1,8 +1,16 @@
 package ru.gidline.app.local.dto
 
+enum class BellType(val caption: String) {
+    INVITATION("ПРИГЛАШЕНИЕ"),
+    REJECTION("ОТКАЗ"),
+    SUBSCRIPTION("ПОДПИСКА")
+}
+
 class Bell {
 
     var id = 0
+
+    lateinit var type: BellType
 
     lateinit var title: String
 

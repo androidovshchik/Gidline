@@ -9,7 +9,7 @@ interface MainContract {
 
         fun setTitle(text: String)
 
-        fun notifyBell(count: Int?)
+        fun notifyBell(all: Int, unread: Int = 0)
 
         fun updateHome(drawable: Int)
 

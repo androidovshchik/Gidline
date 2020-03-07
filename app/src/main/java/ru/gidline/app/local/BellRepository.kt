@@ -1,6 +1,7 @@
 package ru.gidline.app.local
 
 import ru.gidline.app.local.dto.Bell
+import ru.gidline.app.local.dto.BellType
 import java.util.concurrent.CopyOnWriteArrayList
 
 class BellRepository {
@@ -15,7 +16,7 @@ class BellRepository {
 
     fun getAll() = bells
 
-    fun getById(id: Int) = bells.first { it.id == id }
+    fun getById(id: Int) = bells.firstOrNull { it.id == id }
 
     fun deleteById(id: Int) = bells.removeAll { it.id == id }
 
@@ -24,6 +25,7 @@ class BellRepository {
         bells.addAll(listOf(
             Bell().apply {
                 id = 1
+                type = BellType.INVITATION
                 title = "ПРИГЛАШЕНИЕ НА СОБЕСЕДОВАНИЕ"
                 subtitle = "В ООО Колокольчик"
                 date = "14.08.2020"
@@ -41,6 +43,7 @@ class BellRepository {
             },
             Bell().apply {
                 id = 2
+                type = BellType.REJECTION
                 title = "ОТКАЗ НА ОТКЛИК ПО ВАКАНСИИ"
                 subtitle = "В ООО Колокольчик"
                 date = "12.08.2020"
@@ -57,6 +60,7 @@ class BellRepository {
             },
             Bell().apply {
                 id = 3
+                type = BellType.SUBSCRIPTION
                 title = "ПОДКЛЮЧЕНА ПОДПИСКА\n«МОЙ ПОМОЩНИК»"
                 subtitle = "ДО 24.08.2020"
                 date = "10.08.2020"

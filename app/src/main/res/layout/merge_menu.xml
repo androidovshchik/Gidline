@@ -21,7 +21,7 @@
         android:textColor="#676a73"
         android:textSize="15sp"
         tools:text="Text Text Text Text"
-        tools:textColor="#872687" />
+        tools:textColor="@color/colorPrimary" />
 
     <ImageView
         android:id="@+id/iv_arrow"

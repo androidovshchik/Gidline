@@ -16,7 +16,7 @@ import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.filter.FilterFragment
-import ru.gidline.app.screen.notification.NotificationFragment
+import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
 
@@ -65,8 +65,8 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 }
             }
             R.id.ib_bell -> {
-                if (bellRepository.count > 0) {
-                    putFragment(NotificationFragment.newInstance())
+                if (bellRepository.allCount > 0) {
+                    putFragment(NotificationsFragment.newInstance())
                 } else {
                     val top = statusBarHeight + resources.getDimension(R.dimen.toolbar_height)
                         .toInt() - dip(5)
@@ -97,9 +97,9 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         tv_title.text = text
     }
 
-    override fun notifyBell(count: Int?) {
-        iv_bell_daw.isVisible = count != null && count > 0
-        ib_bell.isVisible = count != null
+    override fun notifyBell(all: Int, unread: Int) {
+        iv_bell_daw.isVisible = unread > 0
+        ib_bell.isVisible = all >= 0
     }
 
     override fun updateHome(drawable: Int) {

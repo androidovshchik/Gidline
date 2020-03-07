@@ -22,7 +22,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         makeCallback<MainContract.View> {
             setTitle(getString(R.string.app_name))
-            notifyBell(bellRepository.count)
+            notifyBell(bellRepository.allCount, bellRepository.unreadCount)
             toggleBottomNav(true)
         }
         return inflater.inflate(R.layout.fragment_categories, root, false)
@@ -44,7 +44,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
 
     override fun onDestroyView() {
         makeCallback<MainContract.View> {
-            notifyBell(null)
+            notifyBell(-1)
             toggleBottomNav(false)
         }
         super.onDestroyView()
