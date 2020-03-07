@@ -89,6 +89,11 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         tv_title.text = text
     }
 
+    override fun notifyBell(count: Int?) {
+        iv_bell_daw.isVisible = count != null && count > 0
+        ib_bell.isVisible = count != null
+    }
+
     override fun updateHome(drawable: Int) {
         ib_home.apply {
             tag = drawable

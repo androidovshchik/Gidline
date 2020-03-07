@@ -6,6 +6,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
+import org.kodein.di.generic.singleton
 
 val localModule = Kodein.Module("local") {
 
@@ -16,7 +17,11 @@ val localModule = Kodein.Module("local") {
             .create()
     }
 
-    bind<VacancyRepository>() with provider {
+    bind<VacancyRepository>() with singleton {
         VacancyRepository(instance(), instance())
+    }
+
+    bind<BellRepository>() with singleton {
+        BellRepository()
     }
 }
