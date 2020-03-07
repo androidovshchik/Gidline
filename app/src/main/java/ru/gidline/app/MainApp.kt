@@ -60,7 +60,7 @@ class MainApp : Application(), KodeinAware {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("Arial.ttf")
+                            .setDefaultFontPath("font/Arial.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )

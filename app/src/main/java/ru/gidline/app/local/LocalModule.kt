@@ -17,6 +17,10 @@ val localModule = Kodein.Module("local") {
             .create()
     }
 
+    bind<Preferences>() with provider {
+        Preferences(instance())
+    }
+
     bind<VacancyRepository>() with singleton {
         VacancyRepository(instance(), instance())
     }

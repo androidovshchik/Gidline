@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/tv_organization"
-                    fontPath="Arial-Bold.ttf"
+                    fontPath="font/Arial-Bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -88,7 +88,7 @@
 
                 <TextView
                     android:id="@+id/tv_form"
-                    fontPath="Arial-Bold.ttf"
+                    fontPath="font/Arial-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_time"
@@ -127,7 +127,7 @@
             app:text="@string/accordion_requirement" />
 
         <TextView
-            fontPath="Arial-Bold.ttf"
+            fontPath="font/Arial-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"

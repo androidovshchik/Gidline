@@ -43,7 +43,7 @@
 
                 <TextView
                     android:id="@+id/tv_vacancy"
-                    fontPath="Arial-Bold.ttf"
+                    fontPath="font/Arial-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
