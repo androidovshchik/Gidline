@@ -17,16 +17,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp"
-            android:textSize="18sp"
-            android:textColor="#676a73"
             android:background="@drawable/notification_background"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="32dp"
+            android:paddingBottom="16dp"
+            android:textColor="#676a73"
+            android:textSize="18sp"
             android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="@string/notifications" />
+            tools:text="@string/notifications"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notifications"

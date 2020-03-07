@@ -2,9 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mcv_vacancy"
+    style="@style/MatCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/MatCard"
     tools:cardBackgroundColor="@color/colorCardFire"
     tools:ignore="MissingPrefix">
 

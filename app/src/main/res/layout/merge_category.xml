@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/MatCard"
     tools:ignore="MissingPrefix"
     tools:parentTag="com.google.android.material.card.MaterialCardView">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="6dp">
 
         <ImageView
@@ -29,9 +29,9 @@
             android:layout_marginStart="22dp"
             android:layout_marginEnd="4dp"
             android:minWidth="120dp"
+            android:textAllCaps="true"
             android:textColor="#872687"
             android:textSize="15sp"
-            android:textAllCaps="true"
             tools:text="Text Text Text Text Text Text Text Text Text" />
 
     </LinearLayout>

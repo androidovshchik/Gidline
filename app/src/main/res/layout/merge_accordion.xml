@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:ignore="MissingPrefix"
     tools:orientation="vertical"
+    tools:paddingEnd="10dp"
     tools:paddingStart="10dp"
     tools:paddingTop="12dp"
-    tools:paddingEnd="10dp"
-    tools:ignore="MissingPrefix"
     tools:parentTag="LinearLayout">
 
     <LinearLayout

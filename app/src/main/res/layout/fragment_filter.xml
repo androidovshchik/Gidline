@@ -71,7 +71,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.ToggleView
+            <ru.gidline.app.screen.filter.view.ToggleView
                 android:id="@+id/tv_per_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ru.gidline.app.screen.filter.ToggleView
+            <ru.gidline.app.screen.filter.view.ToggleView
                 android:id="@+id/tv_per_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ru.gidline.app.screen.filter.ToggleView
+            <ru.gidline.app.screen.filter.view.ToggleView
                 android:id="@+id/tv_per_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.RadioButton
+            <ru.gidline.app.screen.filter.view.RadioButton
                 android:id="@+id/rb1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -265,7 +265,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.RadioButton
+            <ru.gidline.app.screen.filter.view.RadioButton
                 android:id="@+id/rb2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -297,7 +297,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.RadioButton
+            <ru.gidline.app.screen.filter.view.RadioButton
                 android:id="@+id/rb3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -330,7 +330,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.RadioButton
+            <ru.gidline.app.screen.filter.view.RadioButton
                 android:id="@+id/rb4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -377,12 +377,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.ImageBox
-                    android:id="@+id/ib_checkbox1"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="5dp"
-                    tools:src="@drawable/daw_violet"/>
+            <ru.gidline.app.screen.filter.view.ImageBox
+                android:id="@+id/ib_checkbox1"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                tools:src="@drawable/daw_violet" />
 
             <TextView
                 fontPath="Arial-Bold.ttf"
@@ -409,12 +409,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ru.gidline.app.screen.filter.ImageBox
-                    android:id="@+id/ib_checkbox2"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="5dp"
-                    tools:src="@drawable/daw_violet"/>
+            <ru.gidline.app.screen.filter.view.ImageBox
+                android:id="@+id/ib_checkbox2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                tools:src="@drawable/daw_violet" />
 
             <TextView
                 fontPath="Arial-Bold.ttf"

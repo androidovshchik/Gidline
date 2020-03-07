@@ -19,7 +19,7 @@
         android:id="@id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/toolbar_height"/>
+        android:layout_marginTop="@dimen/toolbar_height" />
 
     <fragment
         android:id="@+id/f_filter"
@@ -27,53 +27,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/toolbar_height"
-        tools:alpha="0.5"/>
+        tools:alpha="0.5" />
 
     <LinearLayout
         android:id="@+id/ll_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@drawable/header_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:visibility="gone"
         tools:visibility="visible">
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/ib_settings"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/settings"
-            android:background="?android:attr/selectableItemBackground" />
+            android:src="@drawable/settings" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="2"/>
+            android:layout_weight="2" />
 
         <ImageButton
             android:id="@+id/ib_map"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/map"
-            android:background="?android:attr/selectableItemBackground" />
+            android:src="@drawable/map" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -87,7 +87,7 @@
         android:paddingEnd="28dp"
         android:visibility="gone"
         app:cornerRadius="24dp"
-        app:layout_behavior=".screen.main.ButtonBehavior"
+        app:layout_behavior=".screen.main.view.ButtonBehavior"
         tools:text="Применить"
         tools:visibility="visible" />
 
