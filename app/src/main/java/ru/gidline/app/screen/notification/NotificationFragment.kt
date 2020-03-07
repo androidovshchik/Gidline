@@ -23,7 +23,9 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
     private val bellRepository: BellRepository by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        val bell = bellRepository.getById(args.getInt("id"))
+        val bell = bellRepository.getById(args.getInt("id"))?.also {
+            it.unread = false
+        }
         makeCallback<MainContract.View> {
             setTitle(bell?.type?.caption.orEmpty())
         }

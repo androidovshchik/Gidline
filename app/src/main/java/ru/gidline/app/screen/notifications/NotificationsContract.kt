@@ -7,7 +7,10 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface NotificationsContract {
 
-    interface View : IView, Recycler
+    interface View : IView, Recycler {
+
+        fun refreshData()
+    }
 
     interface Recycler : IRecycler<Bell> {
 

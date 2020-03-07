@@ -34,18 +34,15 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onItemDeleted(-1)
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
             it.addItemDecoration(NotificationsDecoration(requireContext()))
             it.adapter = adapter
         }
+        refreshData()
     }
 
-    override fun onItemDeleted(id: Int) {
-        if (id > 0) {
-            bellRepository.deleteById(id)
-        }
+    override fun refreshData() {
         val count = bellRepository.unreadCount
         if (count > 0) {
             tv_new.apply {
@@ -55,6 +52,11 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
         } else {
             tv_new.isVisible = false
         }
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onItemDeleted(id: Int) {
+        bellRepository.deleteById(id)
         if (bellRepository.allCount <= 0) {
             makeCallback<IView> {
                 popFragment(null, false)
