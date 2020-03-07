@@ -11,10 +11,11 @@ import ru.gidline.app.R
 import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
 import ru.gidline.app.screen.base.BaseHolder
-import ru.gidline.app.screen.base.listener.IRecycler
+import ru.gidline.app.screen.search.vacancies.VacanciesContract
 
 @Suppress("MemberVisibilityCanBePrivate")
-class VacanciesAdapter(listener: IRecycler<Vacancy>) : BaseAdapter<Vacancy>(listener) {
+class VacanciesAdapter(listener: VacanciesContract.Recycler) :
+    BaseAdapter<VacanciesContract.Recycler, Vacancy>(listener) {
 
     val filteredItems = mutableListOf<Vacancy>()
 
@@ -50,7 +51,8 @@ class VacanciesAdapter(listener: IRecycler<Vacancy>) : BaseAdapter<Vacancy>(list
 
         init {
             card.setOnClickListener {
-                reference?.get()?.onItemSelected(adapterPosition, filteredItems[adapterPosition])
+                val position = adapterPosition
+                reference?.get()?.onItemSelected(position, filteredItems[position])
             }
         }
 

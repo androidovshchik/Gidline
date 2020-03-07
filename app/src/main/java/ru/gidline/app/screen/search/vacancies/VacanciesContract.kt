@@ -7,10 +7,12 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface VacanciesContract {
 
-    interface View : IView, IRecycler<Vacancy> {
+    interface View : IView, Recycler {
 
         fun refreshData(): Boolean
     }
+
+    interface Recycler : IRecycler<Vacancy>
 
     interface Presenter : IPresenter<View>
 }
