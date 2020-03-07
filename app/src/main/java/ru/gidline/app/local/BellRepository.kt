@@ -21,6 +21,7 @@ class BellRepository {
                 Никитина<br>
                 Марфа Петровна. 
             """.trimIndent()
+            unread = true
         },
         Bell().apply {
             id = 2
@@ -37,7 +38,6 @@ class BellRepository {
                 Никитина<br>
                 Марфа Петровна.  
             """.trimIndent()
-            read = true
         },
         Bell().apply {
             id = 3
@@ -53,12 +53,14 @@ class BellRepository {
                 <b>Спасибо за Ваше доверие!</b><br><br>
                 <b>Команда Gidline.</b>
             """.trimIndent()
-            read = true
         }
     ))
 
-    val count: Int
+    val allCount: Int
         get() = bells.size
+
+    val unreadCount: Int
+        get() = bells.count { it.unread }
 
     fun getAll() = bells
 

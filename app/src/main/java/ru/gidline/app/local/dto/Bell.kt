@@ -14,5 +14,5 @@ class Bell {
 
     lateinit var html: String
 
-    var read = false
+    var unread = false
 }

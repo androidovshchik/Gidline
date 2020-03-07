@@ -24,7 +24,7 @@ class VacanciesDecoration(context: Context) : RecyclerView.ItemDecoration() {
             left = hSpace
             right = hSpace
             bottom = vSpace
-            top = if (parent.getChildLayoutPosition(view) == 0) vMinSpace else 0
+            top = if (parent.getChildAdapterPosition(view) == 0) vMinSpace else 0
         }
     }
 }

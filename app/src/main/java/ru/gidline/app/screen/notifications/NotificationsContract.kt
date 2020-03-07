@@ -11,7 +11,7 @@ interface NotificationsContract {
 
     interface Recycler : IRecycler<Bell> {
 
-        fun onItemDeleted()
+        fun onItemDeleted(id: Int)
     }
 
     interface Presenter : IPresenter<View>

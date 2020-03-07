@@ -20,7 +20,7 @@ class NotificationsDecoration(context: Context) : RecyclerView.ItemDecoration() 
             left = 0
             right = 0
             bottom = vSpace
-            top = if (parent.getChildLayoutPosition(view) == 0) vSpace else 0
+            top = if (parent.getChildAdapterPosition(view) == 0) vSpace else 0
         }
     }
 }

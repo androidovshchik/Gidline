@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_notifications.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
@@ -28,7 +29,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onItemDeleted()
+        onItemDeleted(-1)
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
             it.addItemDecoration(NotificationsDecoration(requireContext()))
@@ -36,8 +37,19 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
         }
     }
 
-    override fun onItemDeleted() {
-
+    override fun onItemDeleted(id: Int) {
+        if (id > 0) {
+            bellRepository.deleteById(id)
+        }
+        val count = bellRepository.unreadCount
+        if (count > 0) {
+            tv_new.apply {
+                text = resources.getQuantityText(R.plurals.notifications, count)
+                isVisible = true
+            }
+        } else {
+            tv_new.isVisible = false
+        }
     }
 
     override fun onItemSelected(position: Int, item: Bell) {
