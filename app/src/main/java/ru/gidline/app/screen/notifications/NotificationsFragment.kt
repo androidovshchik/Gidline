@@ -12,6 +12,7 @@ import ru.gidline.app.local.BellRepository
 import ru.gidline.app.local.dto.Bell
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.notification.NotificationFragment
 import ru.gidline.app.screen.notifications.adapter.NotificationsAdapter
 import ru.gidline.app.screen.notifications.adapter.NotificationsDecoration
@@ -25,6 +26,10 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     private val adapter = NotificationsAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+        makeCallback<MainContract.View> {
+            setTitle("УВЕДОМЛЕНИЕ")
+            updateHome(R.drawable.arrow_left)
+        }
         return inflater.inflate(R.layout.fragment_notifications, root, false)
     }
 

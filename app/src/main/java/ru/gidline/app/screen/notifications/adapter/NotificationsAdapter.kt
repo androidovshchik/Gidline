@@ -1,9 +1,9 @@
 package ru.gidline.app.screen.notifications.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import kotlinx.android.synthetic.main.item_notification.view.*
 import ru.gidline.app.R
@@ -16,7 +16,7 @@ import ru.gidline.app.screen.notifications.NotificationsContract
 class NotificationsAdapter(listener: NotificationsContract.Recycler) :
     BaseAdapter<NotificationsContract.Recycler, Bell>(listener) {
 
-    private val viewBinderHelper = ViewBinderHelper()
+    private val binderHelper = ViewBinderHelper()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.item_notification))
@@ -53,8 +53,8 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
 
         @SuppressLint("SetTextI18n")
         override fun onBindItem(position: Int, item: Bell) {
-            viewBinderHelper.bind(notification, item.id.toString())
-            strip.isVisible = item.unread
+            binderHelper.bind(notification, item.id.toString())
+            strip.setBackgroundColor(if (item.unread) Color.parseColor("#d18bc9") else Color.TRANSPARENT)
             text.text = item.title
             subtext.text = item.subtitle
             date.text = item.date
