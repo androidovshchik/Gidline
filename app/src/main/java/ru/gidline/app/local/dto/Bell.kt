@@ -1,14 +1,8 @@
 package ru.gidline.app.local.dto
 
-enum class BellType(val caption: String) {
-    INVITE("ПРИГЛАШЕНИЕ"),
-    REJECT("ОТКАЗ"),
-    SUBSCRIBE("ПОДПИСКА")
-}
-
 class Bell {
 
-    lateinit var type: BellType
+    var id = 0
 
     lateinit var title: String
 
@@ -16,7 +10,9 @@ class Bell {
 
     lateinit var date: String
 
-    lateinit var vacancy: String
+    var vacancy: String? = null
 
     lateinit var html: String
+
+    var read = false
 }

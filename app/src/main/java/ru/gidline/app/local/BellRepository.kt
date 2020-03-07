@@ -1,16 +1,13 @@
 package ru.gidline.app.local
 
-import android.content.Context
-import com.google.gson.Gson
 import ru.gidline.app.local.dto.Bell
-import ru.gidline.app.local.dto.BellType
-import ru.gidline.app.local.dto.Vacancy
+import java.util.concurrent.CopyOnWriteArrayList
 
-class BellRepository(context: Context, gson: Gson) {
+class BellRepository {
 
-    private val bells = arrayListOf(
+    private val bells = CopyOnWriteArrayList(listOf(
         Bell().apply {
-            type = BellType.INVITE
+            id = 1
             title = "ПРИГЛАШЕНИЕ НА СОБЕСЕДОВАНИЕ"
             subtitle = "В ООО Колокольчик"
             date = "14.08.2020"
@@ -26,11 +23,11 @@ class BellRepository(context: Context, gson: Gson) {
             """.trimIndent()
         },
         Bell().apply {
-            type = BellType.REJECT
+            id = 2
             title = "ОТКАЗ НА ОТКЛИК ПО ВАКАНСИИ"
             subtitle = "В ООО Колокольчик"
-            date = "14.08.2020"
-            vacancy = "КЛАДОВЩИК"
+            date = "12.08.2020"
+            vacancy = "КОМПЛЕКТОВЩИК"
             html = """
                 Здравствуйте,<br>
                 Хуршед!<br><br>
@@ -40,13 +37,14 @@ class BellRepository(context: Context, gson: Gson) {
                 Никитина<br>
                 Марфа Петровна.  
             """.trimIndent()
+            read = true
         },
         Bell().apply {
-            type = BellType.SUBSCRIBE
+            id = 3
             title = "ПРИГЛАШЕНИЕ НА СОБЕСЕДОВАНИЕ"
-            subtitle = "В ООО Колокольчик"
-            date = "14.08.2020"
-            vacancy = "КЛАДОВЩИК"
+            subtitle = "ДО 24.08.2020"
+            date = "10.08.2020"
+            vacancy = null
             html = """
                 Вы подключили подписку автоматической рассылки Вашего резюме по базе вакансий Gidline.<br><br>
                 В течении срока действия подписки помощник за Вас отберёт вакансии в соответствии с Вашими анкетными данными и осуществит рассылку потенциальным работодателем.<br><br>
@@ -55,10 +53,14 @@ class BellRepository(context: Context, gson: Gson) {
                 <b>Спасибо за Ваше доверие!</b><br><br>
                 <b>Команда Gidline.</b>
             """.trimIndent()
+            read = true
         }
-    )
+    ))
 
-    fun getAll(): List<Vacancy> = vacancies
+    val count: Int
+        get() = bells.size
 
-    fun getById(id: Int) = vacancies.first { it.id == id }
+    fun getAll() = bells
+
+    fun deleteById(id: Int) = bells.removeAll { it.id == id }
 }
