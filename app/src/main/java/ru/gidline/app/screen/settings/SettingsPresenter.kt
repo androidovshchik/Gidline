@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.gidline.app.screen.base.BasePresenter
-import timber.log.Timber
 import java.lang.ref.WeakReference
 
 class SettingsPresenter(context: Context) : BasePresenter<SettingsContract.View>(context),
@@ -18,7 +17,6 @@ class SettingsPresenter(context: Context) : BasePresenter<SettingsContract.View>
             withContext(Dispatchers.IO) {
                 contextRef.get()?.apply {
                     val path = PathCompat.getFilePath(applicationContext, uri)
-                    Timber.d("Gallery path: $path")
                     reference.get()?.onPhotoPath(path)
                 }
             }

@@ -3,21 +3,28 @@ package ru.gidline.app.screen.settings
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
+import ru.gidline.app.local.Preferences
 import ru.gidline.app.screen.base.BaseFragment
+import timber.log.Timber
 
 class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsContract.View {
 
     override val presenter: SettingsPresenter by instance()
+
+    private val preferences: Preferences by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, root, false)
@@ -26,6 +33,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
+        onPhotoPath(preferences.avatarPath)
         iv_camera.setOnClickListener(this)
     }
 
@@ -42,23 +50,18 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 }
                 AlertDialog.Builder(context)
                     .setItems(arrayOf("Сделать снимок", "Открыть галерею")) { _, which ->
-                        startActivityForResult(
-                            Intent.createChooser(Intent().apply {
-                                if (which == 0) {
-                                    action = MediaStore.ACTION_IMAGE_CAPTURE
-                                    putExtra(
-                                        MediaStore.EXTRA_OUTPUT,
-                                        PathCompat.getPhotoUri(context)
-                                    )
-                                    putExtra("android.intent.extra.quickCapture", true)
-                                    addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                                } else {
-                                    action = Intent.ACTION_GET_CONTENT
+                        val requestCode = if (which == 0) REQUEST_CAMERA else REQUEST_GALLERY
+                        startActivityForResult(Intent.createChooser(Intent().apply {
+                            if (which == 0) {
+                                action = MediaStore.ACTION_IMAGE_CAPTURE
+                                putExtra(MediaStore.EXTRA_OUTPUT, PathCompat.getPhotoUri(context))
+                                putExtra("android.intent.extra.quickCapture", true)
+                                addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                            } else {
+                                action = Intent.ACTION_GET_CONTENT
                                 type = "image/*"
-                                }
-                            }, "Выберите приложение"),
-                            if (which == 0) REQUEST_CAMERA else REQUEST_GALLERY
-                        )
+                            }
+                        }, "Выберите приложение"), requestCode)
                     }
                     .create()
                     .show()
@@ -67,8 +70,13 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     }
 
     override fun onPhotoPath(path: String?) {
+        Timber.d("Photo path: $path")
         if (path != null) {
-
+            preferences.avatarPath = path
+            iv_avatar.load(Uri.parse("file://$path")) {
+                error(preferences.genderDrawable)
+                transformations(CircleCropTransformation())
+            }
         }
     }
 
@@ -78,9 +86,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         grantResults: IntArray
     ) {
         if (requestCode == REQUEST_PERMISSIONS) {
-            if (context?.areGranted(Manifest.permission.READ_EXTERNAL_STORAGE) == true) {
-                iv_camera.performClick()
-            }
+            iv_camera.performClick()
         }
     }
 
