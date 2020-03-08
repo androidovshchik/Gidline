@@ -78,30 +78,62 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/MatCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ru.gidline.app.screen.common.ImageBox
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:padding="5dp"
+                        android:id="@+id/ib_man"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
                         tools:background="@drawable/checkbox_pink"
                         tools:src="@drawable/daw_pink" />
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Мужчина"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
                     <ru.gidline.app.screen.common.ImageBox
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:padding="5dp"
+                        android:id="@+id/ib_woman"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
                         tools:background="@drawable/checkbox_pink"
                         tools:src="@drawable/daw_pink" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Женщина"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -110,7 +142,10 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/MatCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp">
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -118,18 +153,30 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/MatCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="Язык приложения"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
 
                     <Spinner
+                        android:id="@+id/s_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:entries="@array/languages" />
@@ -141,7 +188,11 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/MatCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -182,6 +233,6 @@
         android:padding="10dp"
         android:text="СОХРАНИТЬ"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>
