@@ -4,11 +4,11 @@ import android.content.Context
 import android.os.Handler
 import android.view.Gravity
 import android.view.View
-import android.widget.PopupWindow
 import android.widget.TextView
 import ru.gidline.app.R
+import ru.gidline.app.screen.base.BasePopup
 
-class ToastPopup(text: String, context: Context) : PopupWindow(context) {
+class ToastPopup(text: String, context: Context) : BasePopup(context) {
 
     init {
         inputMethodMode = INPUT_METHOD_NOT_NEEDED

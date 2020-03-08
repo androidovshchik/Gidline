@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Matrix
 import android.view.Gravity
 import android.view.View
-import android.widget.PopupWindow
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import coil.api.load
@@ -14,13 +13,13 @@ import kotlinx.android.synthetic.main.popup_chips.view.*
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.windowManager
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
+import ru.gidline.app.screen.base.BasePopup
 import ru.gidline.app.screen.base.listener.IView
 
-class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener {
+class ChipsPopup(context: Context) : BasePopup(context) {
 
     private val topOffset = context.statusBarHeight + context.resources.let {
         it.getDimension(R.dimen.toolbar_height) + it.getDimension(R.dimen.search_bar_height)
@@ -45,7 +44,7 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
         }
     }
 
-    fun show(anchor: View) {
+    override fun show(anchor: View) {
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }
 
@@ -58,7 +57,7 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-        v.context.makeCallback<IView> {
+        makeCallback<IView> {
             when (val topFragment = topFragment) {
                 is SearchFragment -> {
                     topFragment.et_search?.setTextSelection((v as Chip).text)
