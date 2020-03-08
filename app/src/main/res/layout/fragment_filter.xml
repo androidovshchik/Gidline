@@ -382,10 +382,10 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:padding="5dp"
-                app:icon="@drawable/daw_violet"
                 app:background="@drawable/checkbox_violet"
-                tools:src="@drawable/daw_violet"
-                tools:background="@drawable/checkbox_violet" />
+                app:icon="@drawable/daw_violet"
+                tools:background="@drawable/checkbox_violet"
+                tools:src="@drawable/daw_violet" />
 
             <TextView
                 fontPath="font/Arial-Bold.ttf"
@@ -417,10 +417,10 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:padding="5dp"
-                app:icon="@drawable/daw_violet"
                 app:background="@drawable/checkbox_violet"
-                tools:src="@drawable/daw_violet"
-                tools:background="@drawable/checkbox_violet" />
+                app:icon="@drawable/daw_violet"
+                tools:background="@drawable/checkbox_violet"
+                tools:src="@drawable/daw_violet" />
 
             <TextView
                 fontPath="font/Arial-Bold.ttf"
