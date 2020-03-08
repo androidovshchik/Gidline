@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <ru.gidline.app.screen.main.view.HeaderLayout
+        android:id="@+id/hl_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

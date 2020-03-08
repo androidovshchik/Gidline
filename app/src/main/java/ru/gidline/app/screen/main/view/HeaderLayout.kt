@@ -46,12 +46,16 @@ class HeaderLayout : RelativeLayout, KodeinAware {
     }
 
     @SuppressLint("Recycle")
-    @Suppress("DEPRECATION")
     private fun init(attrs: AttributeSet?) {
         setBackgroundResource(R.drawable.header_background)
         View.inflate(context, R.layout.merge_header, this)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
+        updateAvatar()
+    }
+
+    @Suppress("DEPRECATION")
+    fun updateAvatar() {
         iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
             error(resources.getDrawable(preferences.genderDrawable).mutate().apply {
                 setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
