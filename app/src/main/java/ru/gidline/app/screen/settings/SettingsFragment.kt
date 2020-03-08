@@ -1,5 +1,6 @@
 package ru.gidline.app.screen.settings
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.extension.areGranted
+import ru.gidline.app.extension.requestPermissions
 import ru.gidline.app.screen.base.BaseFragment
 import timber.log.Timber
 
@@ -32,19 +34,22 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onClick(v: View) {
         when (v.id) {
             R.id.iv_camera -> {
-                AlertDialog.Builder(requireContext())
+                val context = requireContext()
+                if (!context.areGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    activity?.requestPermissions(
+                        REQUEST_PERMISSIONS,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+                    return
+                }
+                AlertDialog.Builder(context)
                     .setItems(arrayOf("Сделать снимок", "Открыть галерею")) { _, which ->
                         if (which == 0) {
                             try {
-                                val context = requireContext()
                                 startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
                                     putExtra(
                                         MediaStore.EXTRA_OUTPUT,
-                                        FileProvider.getUriForFile(
-                                            context,
-                                            "${context.packageName}.fileprovider",
-                                            externalPhoto
-                                        )
+                                        PathCompat.getPhotoUri(context)
                                     )
                                     putExtra("android.intent.extra.quickCapture", true)
                                 }, REQUEST_CAMERA)
@@ -69,6 +74,18 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_PERMISSIONS) {
+            if (context?.areGranted(Manifest.permission.READ_EXTERNAL_STORAGE) == true) {
+                iv_camera.performClick()
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
@@ -82,6 +99,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     }
 
     companion object {
+
+        private const val REQUEST_PERMISSIONS = 99
 
         private const val REQUEST_CAMERA = 100
 

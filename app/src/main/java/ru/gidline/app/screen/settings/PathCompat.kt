@@ -10,11 +10,29 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.annotation.WorkerThread
+import androidx.core.content.FileProvider
 import ru.gidline.app.extension.isKitkatPlus
 import timber.log.Timber
+import java.io.File
 
 @Suppress("SpellCheckingInspection")
 object PathCompat {
+
+    fun getPhotoFile(context: Context): File? = context.run {
+        getExternalFilesDir(null)?.also {
+            it.mkdirs()
+            return File(it, "photo.jpg")
+        }
+        return null
+    }
+
+    fun getPhotoUri(context: Context): Uri? = context.run {
+        return FileProvider.getUriForFile(
+            applicationContext,
+            "$packageName.fileprovider",
+            getPhotoFile(context) ?: return null
+        )
+    }
 
     @WorkerThread
     fun getPath(context: Context, uri: Uri): String? = context.run {
