@@ -5,18 +5,25 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.merge_header.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.local.Preferences
 
 class HeaderLayout : RelativeLayout, KodeinAware {
 
     override val kodein by closestKodein()
+
+    private val preferences: Preferences by instance()
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
@@ -45,9 +52,12 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         View.inflate(context, R.layout.merge_header, this)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
-        iv_avatar.setImageDrawable(resources.getDrawable(R.drawable.avatar_man).mutate().apply {
-            setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
-        })
+        iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
+            error(resources.getDrawable(preferences.genderDrawable).mutate().apply {
+                setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+            })
+            transformations(CircleCropTransformation())
+        }
     }
 
     override fun hasOverlappingRendering() = false

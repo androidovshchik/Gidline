@@ -73,10 +73,10 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         Timber.d("Photo path: $path")
         if (path != null) {
             preferences.avatarPath = path
-            iv_avatar.load(Uri.parse("file://$path")) {
-                error(preferences.genderDrawable)
-                transformations(CircleCropTransformation())
-            }
+        }
+        iv_avatar.load(Uri.parse("file://$path")) {
+            error(preferences.genderDrawable)
+            transformations(CircleCropTransformation())
         }
     }
 
