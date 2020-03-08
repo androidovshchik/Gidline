@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
+import timber.log.Timber
 
 class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsContract.View {
 
@@ -23,6 +24,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        tv_name.text = "Хуршед"
+        tv_surname.text = "Хасанов"
         iv_camera.setOnClickListener(this)
     }
 
@@ -31,31 +34,27 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             R.id.iv_camera -> {
                 AlertDialog.Builder(requireContext())
                     .setItems(arrayOf("Сделать снимок", "Открыть галерею")) { _, which ->
-                        when (which) {
-                            0 -> {
-                                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                                if (intent.resolveActivity(packageManager) != null) {
-                                    startActivityForResult(intent.apply {
-                                        putExtra(
-                                            MediaStore.EXTRA_OUTPUT,
-                                            FileProvider.getUriForFile(
-                                                applicationContext,
-                                                "$packageName.fileprovider",
-                                                externalPhoto
-                                            )
+                        if (which == 0) {
+                            try {
+                                val context = requireContext()
+                                startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                                    putExtra(
+                                        MediaStore.EXTRA_OUTPUT,
+                                        FileProvider.getUriForFile(
+                                            context,
+                                            "${context.packageName}.fileprovider",
+                                            externalPhoto
                                         )
-                                        putExtra("android.intent.extra.quickCapture", true)
-                                    }, REQUEST_PHOTO)
-                                } else {
-                                    toast("Не найдено приложение для фото")
-                                    closePreview(RESULT_CANCELED)
-                                }
+                                    )
+                                    putExtra("android.intent.extra.quickCapture", true)
+                                }, REQUEST_CAMERA)
+                            } catch (e: Throwable) {
+                                Timber.e(e)
                             }
-                            else -> {
-                                startActivityForResult(Intent(Intent.ACTION_GET_CONTENT).apply {
-                                    type = "image/*"
-                                }.withChooser(applicationContext), REQUEST_GALLERY)
-                            }
+                        } else {
+                            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).apply {
+                                type = "image/*"
+                            }, "Выберите приложение"), REQUEST_GALLERY)
                         }
                     }
                     .create()
