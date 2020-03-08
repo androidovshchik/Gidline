@@ -170,40 +170,36 @@
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/tv_citizenship" />
 
-                    <TextView
-                        android:id="@+id/tv_phone"
-                        android:layout_width="wrap_content"
+                    <ru.gidline.app.screen.settings.PhoneLayout
+                        android:id="@+id/pl_phone"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_citizenship"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Телефон"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp" />
+                        android:layout_below="@+id/tv_citizenship" />
 
-                    <TextView
-                        android:id="@+id/tv_whatsapp"
-                        android:layout_width="wrap_content"
+                    <ru.gidline.app.screen.settings.PhoneLayout
+                        android:id="@+id/pl_whatsapp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_phone"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="WhatsApp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp" />
+                        android:layout_below="@+id/pl_phone" />
 
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_whatsapp"
+                        android:layout_below="@+id/pl_whatsapp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="e-mail"
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pl_whatsapp"
+                        android:layout_toEndOf="@+id/tv_email" />
 
                 </RelativeLayout>
 
