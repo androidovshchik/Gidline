@@ -1,6 +1,6 @@
 @file:Suppress("FunctionName")
 
-package ru.gidline.app
+package ru.gidline.app.screen.settings
 
 import android.annotation.SuppressLint
 import android.content.ContentUris

@@ -49,14 +49,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
                 chipsPopup.filter(text)
             }
         }
-        ib_filter.setOnClickListener {
-            hideSuggestion()
-            et_search.clearFocus()
-            makeCallback<MainContract.View> {
-                updateHome(R.drawable.hamburger)
-                showFragment(R.id.f_filter)
-            }
-        }
+        ib_filter.setOnClickListener(this)
         et_search.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSuggestion()
@@ -67,6 +60,19 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
                 true
             } else {
                 false
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.ib_filter -> {
+                hideSuggestion()
+                et_search.clearFocus()
+                makeCallback<MainContract.View> {
+                    updateHome(R.drawable.hamburger)
+                    showFragment(R.id.f_filter)
+                }
             }
         }
     }
