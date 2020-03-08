@@ -64,13 +64,19 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         }
     }
 
+    override fun onGalleryPath(path: String?) {
+        if (path != null) {
+
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_CAMERA -> {
                 }
                 REQUEST_GALLERY -> {
-                    PathCompat.getPath(requireContext(), data)
+                    presenter.getGalleryPath(requireContext(), data?.data ?: return)
                 }
             }
         }

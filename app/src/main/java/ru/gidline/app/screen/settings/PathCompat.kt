@@ -32,37 +32,45 @@ object PathCompat {
     @Suppress("DEPRECATION")
     @SuppressLint("NewApi", "DefaultLocale")
     private fun Context.getPathKitkatPlus(uri: Uri): String? {
-        if (DocumentsContract.isDocumentUri(applicationContext, uri)) {
-            val docId = DocumentsContract.getDocumentId(uri)
-            if (uri.isExternalStorageDocument) {
-                val parts = docId.split(":")
-                if ("primary".equals(parts[0], true)) {
-                    return "${Environment.getExternalStorageDirectory()}/${parts[1]}"
+        when {
+            DocumentsContract.isDocumentUri(applicationContext, uri) -> {
+                val docId = DocumentsContract.getDocumentId(uri)
+                when {
+                    uri.isExternalStorageDocument -> {
+                        val parts = docId.split(":")
+                        if ("primary".equals(parts[0], true)) {
+                            return "${Environment.getExternalStorageDirectory()}/${parts[1]}"
+                        }
+                    }
+                    uri.isDownloadsDocument -> {
+                        val contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"),
+                            docId.toLong()
+                        )
+                        return getDataColumn(contentUri, null, null)
+                    }
+                    uri.isMediaDocument -> {
+                        val parts = docId.split(":")
+                        val contentUri = when (parts[0].toLowerCase()) {
+                            "image" -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                            "video" -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                            "audio" -> MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                            else -> return null
+                        }
+                        return getDataColumn(contentUri, "_id=?", arrayOf(parts[1]))
+                    }
                 }
-            } else if (uri.isDownloadsDocument) {
-                val contentUri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"),
-                    docId.toLong()
-                )
-                return getDataColumn(contentUri, null, null)
-            } else if (uri.isMediaDocument) {
-                val parts = docId.split(":")
-                val contentUri = when (parts[0].toLowerCase()) {
-                    "image" -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    "video" -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                    "audio" -> MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                    else -> return null
+            }
+            "content".equals(uri.scheme, true) -> {
+                return if (uri.isGooglePhotosUri) {
+                    uri.lastPathSegment
+                } else {
+                    getDataColumn(uri, null, null)
                 }
-                return getDataColumn(contentUri, "_id=?", arrayOf(parts[1]))
             }
-        } else if ("content".equals(uri.scheme, true)) {
-            return if (uri.isGooglePhotosUri) {
-                uri.lastPathSegment
-            } else {
-                getDataColumn(uri, null, null)
+            "file".equals(uri.scheme, true) -> {
+                return uri.path
             }
-        } else if ("file".equals(uri.scheme, true)) {
-            return uri.path
         }
         return null
     }
