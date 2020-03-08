@@ -154,29 +154,56 @@
                     android:padding="8dp">
 
                     <TextView
-                        android:id="@+id/tv_date1_dsc"
+                        android:id="@+id/tv_citizenship"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="4dp"
-                        android:text="Дата вьезда в рф"
+                        android:text="Гражданство"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:id="@+id/s_citizenship"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/tv_citizenship" />
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_citizenship"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Телефон"
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_dat"
+                        android:id="@+id/tv_whatsapp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_toEndOf="@+id/tv_date1_desc"
-                        android:gravity="end"
+                        android:layout_below="@+id/tv_phone"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="WhatsApp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_whatsapp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="e-mail"
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
-                        tools:text="Text Text Text Text" />
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
 
@@ -252,7 +279,7 @@
                         android:layout_toEndOf="@+id/tv_date1_desc"
                         android:gravity="end"
                         android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#676a73"
                         android:textSize="15sp"
                         tools:text="Text Text Text Text" />
 
@@ -279,7 +306,7 @@
                         android:layout_toEndOf="@+id/tv_date2_desc"
                         android:gravity="end"
                         android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#676a73"
                         android:textSize="15sp"
                         tools:text="Text Text Text Text" />
 
