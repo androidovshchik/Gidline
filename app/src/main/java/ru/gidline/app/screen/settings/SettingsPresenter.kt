@@ -17,9 +17,9 @@ class SettingsPresenter(context: Context) : BasePresenter<SettingsContract.View>
         launch {
             withContext(Dispatchers.IO) {
                 contextRef.get()?.apply {
-                    val path = PathCompat.getPath(applicationContext, uri)
+                    val path = PathCompat.getFilePath(applicationContext, uri)
                     Timber.d("Gallery path: $path")
-                    reference.get()?.onGalleryPath(path)
+                    reference.get()?.onPhotoPath(path)
                 }
             }
         }

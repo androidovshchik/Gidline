@@ -35,7 +35,7 @@ object PathCompat {
     }
 
     @WorkerThread
-    fun getPath(context: Context, uri: Uri): String? = context.run {
+    fun getFilePath(context: Context, uri: Uri): String? = context.run {
         return try {
             when {
                 !isKitkatPlus() -> getDataColumn(uri, null, null)

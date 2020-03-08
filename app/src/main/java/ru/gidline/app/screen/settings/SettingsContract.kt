@@ -9,7 +9,7 @@ interface SettingsContract {
 
     interface View : IView {
 
-        fun onGalleryPath(path: String?)
+        fun onPhotoPath(path: String?)
     }
 
     interface Presenter : IPresenter<View> {
