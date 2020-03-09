@@ -3,6 +3,8 @@ package ru.gidline.app.screen.main
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -19,7 +21,6 @@ import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.settings.SettingsFragment
-import ru.gidline.app.screen.vacancy.VacancyFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
@@ -33,6 +34,35 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     private lateinit var filterFragment: FilterFragment
 
+    private val lifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
+
+        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, b: Bundle?) {
+            when (f) {
+                is CategoriesFragment -> {
+                    updateHome(R.drawable.hamburger)
+                    setTitle(getString(R.string.app_name))
+                }
+                is NotificationsFragment -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("УВЕДОМЛЕНИЕ")
+                }
+                is SearchFragment -> {
+
+                }
+                is SettingsFragment -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("НАСТРОЙКА")
+                }
+            }
+        }
+
+        override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
+            when (f) {
+
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,12 +70,13 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         iv_background.load(R.drawable.background)
         ib_home.setOnClickListener(this)
         ib_bell.setOnClickListener(this)
-        ib_settings.setOnClickListener(this)
-        ib_map.setOnClickListener(this)
-        mb_action.setOnClickListener(this)
+        supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
         supportFragmentManager.addOnBackStackChangedListener {
             when (val topFragment = topFragment) {
-                is NotificationsFragment -> topFragment.refreshData()
+                is NotificationsFragment -> {
+                    setTitle("УВЕДОМЛЕНИЕ")
+                    topFragment.refreshData()
+                }
             }
         }
         hideFragment(R.id.f_filter)
@@ -80,32 +111,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                     toastPopup.show(v, top, start)
                 }
             }
-            R.id.ib_settings -> {
-                putFragment(SettingsFragment.newInstance())
-            }
-            R.id.mb_action -> {
-                if (filterFragment.isVisible) {
-                    filterFragment.saveFilter()
-                    topFragment.also {
-                        if (it is SearchFragment) {
-                            it.refreshData()
-                        }
-                    }
-                    hideFragment(R.id.f_filter)
-                } else if (topFragment is VacancyFragment) {
-                    popFragment(null, false)
-                }
-            }
         }
-    }
-
-    override fun setTitle(text: String) {
-        tv_title.text = text
-    }
-
-    override fun notifyBell(all: Int, unread: Int) {
-        iv_bell_daw.isVisible = unread > 0
-        ib_bell.isVisible = all >= 0
     }
 
     override fun updateHome(drawable: Int) {
@@ -115,17 +121,13 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
     }
 
-    override fun updateAction(text: String?) {
-        mb_action.also {
-            if (text != null) {
-                it.text = text
-            }
-            it.isVisible = text != null
-        }
+    override fun setTitle(text: String) {
+        tv_title.text = text
     }
 
-    override fun toggleBottomNav(show: Boolean) {
-        ll_bottom_nav.isVisible = show
+    private fun notifyBell(all: Int, unread: Int) {
+        iv_bell_daw.isVisible = unread > 0
+        ib_bell.isVisible = all >= 0
     }
 
     override fun onBackPressed() {
@@ -134,5 +136,10 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
             filterFragment.isVisible -> hideFragment(R.id.f_filter)
             else -> super.onBackPressed()
         }
+    }
+
+    override fun onDestroy() {
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(lifecycleCallbacks)
+        super.onDestroy()
     }
 }

@@ -61,38 +61,43 @@ class HeaderLayout : RelativeLayout, KodeinAware {
 
     @Suppress("DEPRECATION")
     fun updateData() {
-        val now = LocalDate.now()
-        val formatter = DateTimeFormatterBuilder()
-            .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-            .toFormatter()
-        val entryRussia = preferences.dateEntryRussia
-        if (entryRussia != null) {
-            try {
-                val date = LocalDate.parse(entryRussia, formatter)
-                    .plusDays(364)
-                val days = ChronoUnit.DAYS.between(now, date).toInt()
-                tv_border_days.text = resources.getQuantityString(R.plurals.days, days, days)
-                toggleViews(true, tv_before_border, tv_border_days)
-            } catch (e: Throwable) {
-                Timber.e(e)
+        if (preferences.hasMigrationData) {
+            val now = LocalDate.now()
+            val formatter = DateTimeFormatterBuilder()
+                .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                .toFormatter()
+            val entryRussia = preferences.dateEntryRussia
+            if (entryRussia != null) {
+                try {
+                    val date = LocalDate.parse(entryRussia, formatter)
+                        .plusDays(364)
+                    val days = ChronoUnit.DAYS.between(now, date).toInt()
+                    tv_border_days.text = resources.getQuantityString(R.plurals.days, days, days)
+                    toggleViews(true, tv_before_border, tv_border_days)
+                } catch (e: Throwable) {
+                    Timber.e(e)
+                    toggleViews(false, tv_before_border, tv_border_days)
+                }
+            } else {
                 toggleViews(false, tv_before_border, tv_border_days)
             }
-        } else {
-            toggleViews(false, tv_before_border, tv_border_days)
-        }
-        val firstPatent = preferences.dateFirstPatent
-        if (firstPatent != null) {
-            try {
-                val date = LocalDate.parse(firstPatent, formatter)
-                    .plusDays(364)
-                val days = ChronoUnit.DAYS.between(now, date).toInt()
-                tv_patent_days.text = resources.getQuantityString(R.plurals.days, days, days)
-                toggleViews(true, tv_before_patent, tv_patent_days)
-            } catch (e: Throwable) {
-                Timber.e(e)
+            val firstPatent = preferences.dateFirstPatent
+            if (firstPatent != null) {
+                try {
+                    val date = LocalDate.parse(firstPatent, formatter)
+                        .plusDays(364)
+                    val days = ChronoUnit.DAYS.between(now, date).toInt()
+                    tv_patent_days.text = resources.getQuantityString(R.plurals.days, days, days)
+                    toggleViews(true, tv_before_patent, tv_patent_days)
+                } catch (e: Throwable) {
+                    Timber.e(e)
+                    toggleViews(false, tv_before_patent, tv_patent_days)
+                }
+            } else {
                 toggleViews(false, tv_before_patent, tv_patent_days)
             }
         } else {
+            toggleViews(false, tv_before_border, tv_border_days)
             toggleViews(false, tv_before_patent, tv_patent_days)
         }
         iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
