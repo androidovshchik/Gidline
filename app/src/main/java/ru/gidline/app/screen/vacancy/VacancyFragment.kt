@@ -37,6 +37,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
         al_responsibility.updateText(vacancy)
         al_requirement.updateText(vacancy)
         tv_place.text = vacancy.location
+        mb_respond.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {

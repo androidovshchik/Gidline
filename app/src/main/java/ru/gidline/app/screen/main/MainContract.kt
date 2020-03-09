@@ -7,15 +7,9 @@ interface MainContract {
 
     interface View : IView {
 
-        fun setTitle(text: String)
-
-        fun notifyBell(all: Int, unread: Int = 0)
-
         fun updateHome(drawable: Int)
 
-        fun updateAction(text: String?)
-
-        fun toggleBottomNav(show: Boolean)
+        fun setTitle(text: String)
     }
 
     interface Presenter : IPresenter<View>

@@ -7,29 +7,23 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_categories.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
-import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.search.SearchFragment
+import ru.gidline.app.screen.settings.SettingsFragment
 
 class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), CategoriesContract.View {
 
     override val presenter: CategoriesPresenter by instance()
 
-    private val bellRepository: BellRepository by instance()
-
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        makeCallback<MainContract.View> {
-            setTitle(getString(R.string.app_name))
-            notifyBell(bellRepository.allCount, bellRepository.unreadCount)
-            toggleBottomNav(true)
-        }
         return inflater.inflate(R.layout.fragment_categories, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         cl_search.setOnClickListener(this)
+        ib_settings.setOnClickListener(this)
+        ib_map.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -39,15 +33,12 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
                     putFragment(SearchFragment.newInstance())
                 }
             }
+            R.id.ib_settings -> {
+                makeCallback<IView> {
+                    putFragment(SettingsFragment.newInstance())
+                }
+            }
         }
-    }
-
-    override fun onDestroyView() {
-        makeCallback<MainContract.View> {
-            notifyBell(-1)
-            toggleBottomNav(false)
-        }
-        super.onDestroyView()
     }
 
     companion object {
