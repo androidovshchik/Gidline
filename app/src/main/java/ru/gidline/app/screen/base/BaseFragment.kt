@@ -22,8 +22,8 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
-    protected val parent: BaseFragment<*>?
-        get() = parentFragment as? BaseFragment<*>
+    protected val parentFragment: BaseFragment<*>?
+        get() = getParentFragment() as? BaseFragment<*>
 
     override val topFragment: BaseFragment<*>?
         get() = childFragmentManager.topFragment as? BaseFragment<*>

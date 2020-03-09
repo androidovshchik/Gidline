@@ -28,7 +28,7 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
     private val adapter = VacanciesAdapter(this)
 
     private val searchFilter: SearchFilter?
-        get() = (parent as? SearchFragment)?.searchFilter
+        get() = (parentFragment as? SearchFragment)?.searchFilter
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_list, root, false)

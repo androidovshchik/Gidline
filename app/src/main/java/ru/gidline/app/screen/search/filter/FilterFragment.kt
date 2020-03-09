@@ -30,7 +30,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
     private val calculator = Calculator()
 
     private val searchFilter: SearchFilter?
-        get() = (parent as? SearchFragment)?.searchFilter
+        get() = (parentFragment as? SearchFragment)?.searchFilter
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_filter, root, false)
@@ -84,11 +84,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ib_close -> {
-                makeCallback<IView> {
-                    hideFragment(R.id.f_filter)
-                }
-            }
+            R.id.ib_close -> parentFragment?.hideFragment(R.id.f_filter)
             R.id.tv_per_month, R.id.tv_per_item, R.id.tv_per_hour -> {
                 calculator.perTime =
                     if ((v as ToggleButton).isChecked) null else v.tag.toString().toInt()
@@ -124,8 +120,8 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
                             topFragment.refreshData()
                         }
                     }
-                    hideFragment(R.id.f_filter)
                 }
+                parentFragment?.hideFragment(R.id.f_filter)
             }
         }
     }
@@ -170,7 +166,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
             }
             notifyDataSetChanged()
         }
-        s_city.setSelection(cityAdapter.getPosition(city), false)
+        s_city.setSelection(cityAdapter.getPosition(city.orEmpty()), false)
     }
 
     private fun updateForm(form: Int?) {
