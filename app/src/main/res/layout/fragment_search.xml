@@ -79,4 +79,11 @@
         android:layout_below="@+id/rl_search"
         android:layout_alignParentBottom="true" />
 
+    <fragment
+        android:id="@+id/f_filter"
+        android:name="ru.gidline.app.screen.search.filter.FilterFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:alpha="0.5" />
+
 </RelativeLayout>

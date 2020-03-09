@@ -24,12 +24,7 @@
         <item>Узбекистан</item>
         <item>Кыргызстан</item>
     </string-array>
-    <string-array name="phone_codes">
-        <item>+7 RUS</item>
-        <item>+992 TAJ</item>
-        <item>+998 UZB</item>
-        <item>+996 KRG</item>
-    </string-array>
+
     <string-array name="languages">
         <item>Русский</item>
     </string-array>

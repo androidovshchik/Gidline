@@ -20,12 +20,4 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/toolbar_height" />
 
-    <fragment
-        android:id="@+id/f_filter"
-        android:name="ru.gidline.app.screen.filter.FilterFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/toolbar_height"
-        tools:alpha="0.5" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

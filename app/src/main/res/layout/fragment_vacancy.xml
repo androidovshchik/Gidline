@@ -112,19 +112,19 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <ru.gidline.app.screen.vacancy.AccordionLayout
+            <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_offer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/accordion_offer" />
 
-            <ru.gidline.app.screen.vacancy.AccordionLayout
+            <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_responsibility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/accordion_responsibility" />
 
-            <ru.gidline.app.screen.vacancy.AccordionLayout
+            <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_requirement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
