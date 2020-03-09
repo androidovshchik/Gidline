@@ -27,9 +27,10 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     private val cityAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner)
 
-    private val searchFilter: SearchFilter by instance()
-
     private val calculator = Calculator()
+
+    private val searchFilter: SearchFilter?
+        get() = (parent as? SearchFragment)?.searchFilter
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_filter, root, false)
@@ -69,13 +70,15 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
     override fun onHiddenChanged(hidden: Boolean) {
         if (!hidden) {
             sv_filter.scrollY = 0
-            calculator.setFrom(searchFilter.calculator)
+            searchFilter?.let {
+                calculator.setFrom(it.calculator)
+                val region = regionAdapter.getPosition(it.region.orEmpty())
+                s_region.setSelection(region, false)
+                updateCity(region, it.city)
+                updateForm(it.form)
+                updateCheckboxes(it.residence, it.freeFeed)
+            }
             updatePayment()
-            val region = regionAdapter.getPosition(searchFilter.region.orEmpty())
-            s_region.setSelection(region, false)
-            updateCity(region, searchFilter.city)
-            updateForm(searchFilter.form)
-            updateCheckboxes(searchFilter.residence, searchFilter.freeFeed)
         }
     }
 
@@ -101,7 +104,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
                 updateCheckboxes(ib_checkbox1.isChecked, !ib_checkbox2.isChecked)
             }
             R.id.mb_apply -> {
-                searchFilter.also {
+                searchFilter?.also {
                     it.calculator.setFrom(calculator)
                     it.region = s_region.selectedItem?.toString()?.ifEmpty { null }
                     it.city = s_city.selectedItem?.toString()?.ifEmpty { null }

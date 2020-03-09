@@ -15,13 +15,12 @@ import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseActivity
-import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.common.ToastPopup
-import ru.gidline.app.screen.filter.FilterFragment
+import ru.gidline.app.screen.main.categories.CategoriesFragment
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
+import ru.gidline.app.screen.search.vacancies.vacancy.VacancyFragment
 import ru.gidline.app.screen.settings.SettingsFragment
-import ru.gidline.app.screen.vacancy.VacancyFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
@@ -32,8 +31,6 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     private val menuPopup: MenuPopup by instance()
 
     private val toastPopup: ToastPopup by instance(arg = "уведомлений нет")
-
-    private lateinit var filterFragment: FilterFragment
 
     private val lifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
 
@@ -70,7 +67,6 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        filterFragment = supportFragmentManager.findFragmentById(R.id.f_filter) as FilterFragment
         iv_background.load(R.drawable.background)
         ib_home.setOnClickListener(this)
         ib_bell.setOnClickListener(this)
@@ -83,7 +79,6 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 }
             }
         }
-        hideFragment(R.id.f_filter)
         addFragment(CategoriesFragment.newInstance())
     }
 
@@ -136,7 +131,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     override fun onBackPressed() {
         when {
             menuPopup.isShowing -> menuPopup.dismiss()
-            filterFragment.isVisible -> hideFragment(R.id.f_filter)
+            // todo filterFragment.isVisible -> hideFragment(R.id.f_filter)
             else -> super.onBackPressed()
         }
     }

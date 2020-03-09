@@ -13,9 +13,10 @@ import ru.gidline.app.local.dto.Vacancy
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.SearchFilter
+import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.search.vacancies.adapter.VacanciesAdapter
 import ru.gidline.app.screen.search.vacancies.adapter.VacanciesDecoration
-import ru.gidline.app.screen.vacancy.VacancyFragment
+import ru.gidline.app.screen.search.vacancies.vacancy.VacancyFragment
 
 @Suppress("MemberVisibilityCanBePrivate")
 class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), VacanciesContract.View {
@@ -24,9 +25,10 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
 
     private val vacancyRepository: VacancyRepository by instance()
 
-    private val searchFilter: SearchFilter by instance()
-
     private val adapter = VacanciesAdapter(this)
+
+    private val searchFilter: SearchFilter?
+        get() = (parent as? SearchFragment)?.searchFilter
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_list, root, false)
@@ -46,7 +48,9 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
         (rv_list.layoutManager as LinearLayoutManager).scrollToPosition(0)
         return adapter.run {
             filteredItems.clear()
-            filteredItems.addAll(items.filter { it.match(searchFilter) })
+            searchFilter?.let { filter ->
+                filteredItems.addAll(items.filter { it.match(filter) })
+            }
             notifyDataSetChanged()
             filteredItems.isNotEmpty()
         }
