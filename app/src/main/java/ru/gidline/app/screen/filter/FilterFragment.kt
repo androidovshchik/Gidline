@@ -24,9 +24,9 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     override val presenter: FilterPresenter by instance()
 
-    private val regionAdapter: ArrayAdapter<String> by instance()
+    private val regionAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner)
 
-    private val cityAdapter: ArrayAdapter<String> by instance()
+    private val cityAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner)
 
     private val searchFilter: SearchFilter by instance()
 

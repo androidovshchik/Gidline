@@ -18,6 +18,7 @@ import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
+import ru.gidline.app.screen.settings.SettingsFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
@@ -42,6 +43,11 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         ib_settings.setOnClickListener(this)
         ib_map.setOnClickListener(this)
         mb_action.setOnClickListener(this)
+        supportFragmentManager.addOnBackStackChangedListener {
+            when (val topFragment = topFragment) {
+                is NotificationsFragment -> topFragment.refreshData()
+            }
+        }
         hideFragment(R.id.f_filter)
         addFragment(CategoriesFragment.newInstance())
     }
@@ -75,7 +81,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 }
             }
             R.id.ib_settings -> {
-
+                putFragment(SettingsFragment.newInstance())
             }
             R.id.mb_action -> {
                 if (filterFragment.isVisible) {
