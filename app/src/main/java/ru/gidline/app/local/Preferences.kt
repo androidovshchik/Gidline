@@ -12,9 +12,11 @@ class Preferences(context: Context) : KotprefModel(context) {
 
     var isMan by booleanPref(true, "is_man")
 
-    var dateEntryRussia by nullableStringPref(null, "date_entry_russia")
+    var hasMigrationData by booleanPref(false, "hasMigrationData")
 
-    var dateFirstPatent by nullableStringPref(null, "date_first_patent")
+    var dateEntryRussia by nullableStringPref("10.10.2019", "date_entry_russia")
+
+    var dateFirstPatent by nullableStringPref("01.12.2019", "date_first_patent")
 
     val genderDrawable: Int
         get() = if (isMan) R.drawable.avatar_man else R.drawable.avatar_woman
