@@ -9,6 +9,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import coil.api.load
 import coil.transform.CircleCropTransformation
@@ -26,15 +28,31 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     private val preferences: Preferences by instance()
 
+    private val countryAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner_caps)
+
+    private val languageAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner_caps)
+
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        onPhotoPath(preferences.avatarPath)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
-        onPhotoPath(preferences.avatarPath)
         iv_camera.setOnClickListener(this)
+        s_citizenship.also {
+            it.adapter = countryAdapter.apply {
+                addAll(*resources.getStringArray(R.array.countries))
+            }
+            it.onItemSelectedListener = this
+        }
+        s_language.also {
+            it.adapter = languageAdapter.apply {
+                addAll(*resources.getStringArray(R.array.languages))
+            }
+            it.onItemSelectedListener = this
+        }
     }
 
     override fun onClick(v: View) {
@@ -65,6 +83,16 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     }
                     .create()
                     .show()
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (parent?.id) {
+            R.id.s_citizenship -> {
+
             }
         }
     }

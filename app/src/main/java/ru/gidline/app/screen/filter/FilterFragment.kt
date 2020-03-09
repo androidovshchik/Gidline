@@ -50,7 +50,6 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
         }
         s_region.also {
             it.adapter = regionAdapter.apply {
-                clear()
                 add("")
                 add("Москва и Московская обл.")
             }
