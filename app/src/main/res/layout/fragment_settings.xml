@@ -156,14 +156,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_citizenship"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp"
                             android:text="Гражданство"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary"
@@ -181,30 +182,26 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_email"
+                            android:id="@+id/tv_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="e-mail"
+                            android:text="телефон"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp" />
 
                         <EditText
-                            android:id="@+id/et_email"
+                            android:id="@+id/et_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_toEndOf="@+id/tv_email"
-                            android:background="@null"
-                            android:imeOptions="actionDone"
-                            android:inputType="textEmailAddress"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
                             android:maxLines="1" />
 
                     </LinearLayout>
@@ -212,30 +209,25 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_email"
+                            android:id="@+id/tv_whatsapp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="e-mail"
-                            android:textAllCaps="true"
+                            android:text="WhatsApp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp" />
 
                         <EditText
-                            android:id="@+id/et_email"
+                            android:id="@+id/et_whatsapp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_toEndOf="@+id/tv_email"
-                            android:background="@null"
-                            android:imeOptions="actionDone"
-                            android:inputType="textEmailAddress"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
                             android:maxLines="1" />
 
                     </LinearLayout>
@@ -243,15 +235,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
                             android:text="e-mail"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary"
@@ -261,10 +253,6 @@
                             android:id="@+id/et_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pl_whatsapp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_toEndOf="@+id/tv_email"
-                            android:background="@null"
                             android:imeOptions="actionDone"
                             android:inputType="textEmailAddress"
                             android:maxLines="1" />

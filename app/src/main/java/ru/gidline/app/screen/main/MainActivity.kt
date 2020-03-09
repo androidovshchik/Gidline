@@ -1,5 +1,6 @@
 package ru.gidline.app.screen.main
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import org.jetbrains.anko.dip
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.extension.requestPermissions
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.local.BellRepository
@@ -85,6 +87,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
         hideFragment(R.id.f_filter)
         addFragment(CategoriesFragment.newInstance())
+        requestPermissions(REQUEST_PERMISSIONS, Manifest.permission.READ_PHONE_STATE)
     }
 
     override fun onClick(v: View) {
@@ -144,5 +147,10 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     override fun onDestroy() {
         supportFragmentManager.unregisterFragmentLifecycleCallbacks(lifecycleCallbacks)
         super.onDestroy()
+    }
+
+    companion object {
+
+        private const val REQUEST_PERMISSIONS = 10
     }
 }
