@@ -18,8 +18,9 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDate
-import org.threeten.bp.Period
 import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeFormatterBuilder
+import org.threeten.bp.temporal.ChronoUnit
 import ru.gidline.app.R
 import ru.gidline.app.local.Preferences
 import timber.log.Timber
@@ -56,18 +57,21 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         View.inflate(context, R.layout.merge_header, this)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
-        updateData()
     }
 
     @Suppress("DEPRECATION")
     fun updateData() {
         val now = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("d.M.yyyy")
+        val formatter = DateTimeFormatterBuilder()
+            .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            .toFormatter()
         val entryRussia = preferences.dateEntryRussia
         if (entryRussia != null) {
             try {
                 val date = LocalDate.parse(entryRussia, formatter)
-                Period.between(now, date).days
+                    .plusDays(364)
+                val days = ChronoUnit.DAYS.between(now, date).toInt()
+                tv_border_days.text = resources.getQuantityString(R.plurals.days, days, days)
                 toggleViews(true, tv_before_border, tv_border_days)
             } catch (e: Throwable) {
                 Timber.e(e)
@@ -80,7 +84,9 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         if (firstPatent != null) {
             try {
                 val date = LocalDate.parse(firstPatent, formatter)
-                Period.between(now, date).days
+                    .plusDays(364)
+                val days = ChronoUnit.DAYS.between(now, date).toInt()
+                tv_patent_days.text = resources.getQuantityString(R.plurals.days, days, days)
                 toggleViews(true, tv_before_patent, tv_patent_days)
             } catch (e: Throwable) {
                 Timber.e(e)
@@ -104,12 +110,4 @@ class HeaderLayout : RelativeLayout, KodeinAware {
     }
 
     override fun hasOverlappingRendering() = false
-}Формула расчёта данных:
-Y= (X+364 дня)-H, где
-Y- Количество дней до пересечения границы
-X- Дата въезда в РФ
-H- Текущая дата;
-Z= (W+364 дня)- H, где
-Z- Количество дней до окончания патента
-W- Дата первой оплаты патента
-H- Текущая дата.
+}
