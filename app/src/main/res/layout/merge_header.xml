@@ -73,11 +73,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="12dp"
         android:maxLines="1"
-        android:minWidth="120dp"
+        android:minWidth="80dp"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:visibility="gone"
-        tools:text="Text Text Text"
+        tools:text="Text Text"
         tools:visibility="visible" />
 
     <TextView
@@ -106,11 +106,11 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:maxLines="1"
-        android:minWidth="120dp"
+        android:minWidth="80dp"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:visibility="gone"
-        tools:text="Text Text Text"
+        tools:text="Text Text"
         tools:visibility="visible" />
 
 </merge>

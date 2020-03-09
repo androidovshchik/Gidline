@@ -94,9 +94,9 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="10dp"
                         android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
@@ -117,9 +117,9 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="10dp"
                         android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
@@ -226,7 +226,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:paddingStart="4dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="4dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -249,13 +252,16 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_migration"
                 style="@style/MatCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

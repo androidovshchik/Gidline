@@ -20,6 +20,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
 import ru.gidline.app.local.Preferences
 import ru.gidline.app.screen.base.BaseFragment
+import ru.gidline.app.screen.base.listener.IView
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsContract.View {
@@ -41,6 +42,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
         iv_camera.setOnClickListener(this)
+        ib_man.setOnClickListener(this)
+        ib_woman.setOnClickListener(this)
         s_citizenship.also {
             it.adapter = countryAdapter.apply {
                 addAll(*resources.getStringArray(R.array.countries))
@@ -53,6 +56,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             }
             it.onItemSelectedListener = this
         }
+        tv_save.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -84,6 +88,14 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     .create()
                     .show()
             }
+            R.id.ib_man, R.id.ib_woman -> {
+                updateGender(!ib_man.isChecked)
+            }
+            R.id.tv_save -> {
+                makeCallback<IView> {
+                    popFragment(null, false)
+                }
+            }
         }
     }
 
@@ -99,13 +111,20 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     override fun onPhotoPath(path: String?) {
         Timber.d("Photo path: $path")
-        if (path != null) {
+        if (!path.isNullOrBlank()) {
             preferences.avatarPath = path
         }
         iv_avatar.load(Uri.parse("file://$path")) {
             error(preferences.genderDrawable)
             transformations(CircleCropTransformation())
         }
+    }
+
+    private fun updateGender(isMan: Boolean) {
+        ib_man.isChecked = isMan
+        ib_woman.isChecked = !isMan
+        preferences.isMan = isMan
+        onPhotoPath("")
     }
 
     override fun onRequestPermissionsResult(
