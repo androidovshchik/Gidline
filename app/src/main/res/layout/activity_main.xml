@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -28,67 +27,5 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/toolbar_height"
         tools:alpha="0.5" />
-
-    <LinearLayout
-        android:id="@+id/ll_bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/header_background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/ib_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:adjustViewBounds="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/settings" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="2" />
-
-        <ImageButton
-            android:id="@+id/ib_map"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:adjustViewBounds="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/map" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mb_action"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:paddingStart="28dp"
-        android:paddingEnd="28dp"
-        android:visibility="gone"
-        app:cornerRadius="24dp"
-        app:layout_behavior=".screen.main.view.ButtonBehavior"
-        tools:text="Применить"
-        tools:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
