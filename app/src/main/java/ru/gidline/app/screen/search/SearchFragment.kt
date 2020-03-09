@@ -11,7 +11,7 @@ import org.jetbrains.anko.sdk19.listeners.textChangedListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.main.MainContract
+import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.vacancies.VacanciesFragment
 
@@ -26,9 +26,6 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     val chipsPopup: ChipsPopup by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        makeCallback<MainContract.View> {
-            setTitle("ПОИСК РАБОТЫ")
-        }
         return inflater.inflate(R.layout.fragment_search, root, false)
     }
 
@@ -36,9 +33,6 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         vacanciesFragment =
             childFragmentManager.findFragmentById(R.id.f_vacancies) as VacanciesFragment
         et_search.setOnTouchListener { v, _ ->
-            makeCallback<MainContract.View> {
-                updateHome(R.drawable.arrow_left)
-            }
             chipsPopup.show(v)
             false
         }
@@ -50,12 +44,9 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
             }
         }
         ib_filter.setOnClickListener(this)
-        et_search.setOnEditorActionListener { v, actionId, _ ->
+        et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSuggestion()
-                makeCallback<MainContract.View> {
-                    updateHome(R.drawable.hamburger)
-                }
                 refreshData()
                 true
             } else {
@@ -68,9 +59,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         when (v.id) {
             R.id.ib_filter -> {
                 hideSuggestion()
-                et_search.clearFocus()
-                makeCallback<MainContract.View> {
-                    updateHome(R.drawable.hamburger)
+                makeCallback<IView> {
                     showFragment(R.id.f_filter)
                 }
             }
