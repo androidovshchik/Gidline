@@ -3,8 +3,8 @@ package ru.gidline.app.screen.base
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import ru.gidline.app.R
@@ -50,7 +50,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     override fun onClick(v: View) {}
 
     override fun showMessage(text: String) {
-        view?.snackbar(text)
+        context?.toast(text)
     }
 
     override fun showError(e: Throwable) {

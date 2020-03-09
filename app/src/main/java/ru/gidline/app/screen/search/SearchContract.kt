@@ -10,6 +10,8 @@ interface SearchContract {
         fun refreshData()
 
         fun hideSuggestion()
+
+        fun closeFilter(): Boolean
     }
 
     interface Presenter : IPresenter<View>

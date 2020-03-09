@@ -5,9 +5,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -59,7 +58,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     override fun onClick(v: View) {}
 
     override fun showMessage(text: String) {
-        contentView?.snackbar(text)
+        toast(text)
     }
 
     override fun showError(e: Throwable) {

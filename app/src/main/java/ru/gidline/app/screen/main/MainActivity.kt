@@ -120,11 +120,9 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     }
 
     override fun onBackPressed() {
-        val topFragment = topFragment
         when {
             menuPopup.isShowing -> menuPopup.dismiss()
-            (topFragment as? SearchFragment)?.filterFragment?.isVisible == true ->
-                topFragment.hideFragment(R.id.f_filter)
+            (topFragment as? SearchFragment)?.closeFilter() == true -> return
             else -> super.onBackPressed()
         }
     }
