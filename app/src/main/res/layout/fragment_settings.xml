@@ -147,69 +147,131 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
-                    <TextView
-                        android:id="@+id/tv_citizenship"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        android:text="Гражданство"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp" />
-
-                    <Spinner
-                        android:id="@+id/s_citizenship"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/tv_citizenship"
-                        tools:entries="@array/countries" />
-
-                    <ru.gidline.app.screen.settings.PhoneLayout
-                        android:id="@+id/pl_phone"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_citizenship"
-                        app:text="@string/settings_phone" />
+                        android:orientation="horizontal">
 
-                    <ru.gidline.app.screen.settings.PhoneLayout
-                        android:id="@+id/pl_whatsapp"
+                        <TextView
+                            android:id="@+id/tv_citizenship"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Гражданство"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <Spinner
+                            android:id="@+id/s_citizenship"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/tv_citizenship"
+                            tools:entries="@array/countries" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pl_phone"
-                        app:text="@string/settings_whatsapp" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_email"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="e-mail"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/tv_email"
+                            android:background="@null"
+                            android:imeOptions="actionDone"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pl_whatsapp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="e-mail"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp" />
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/et_email"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="e-mail"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/tv_email"
+                            android:background="@null"
+                            android:imeOptions="actionDone"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pl_whatsapp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_toEndOf="@+id/tv_email"
-                        android:background="@null"
-                        android:imeOptions="actionDone"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1" />
+                        android:orientation="horizontal">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="e-mail"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pl_whatsapp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/tv_email"
+                            android:background="@null"
+                            android:imeOptions="actionDone"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
