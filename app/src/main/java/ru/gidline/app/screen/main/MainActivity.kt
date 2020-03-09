@@ -1,6 +1,7 @@
 package ru.gidline.app.screen.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,12 +11,15 @@ import coil.api.load
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.telephonyManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.extension.areGranted
 import ru.gidline.app.extension.requestPermissions
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.local.BellRepository
+import ru.gidline.app.local.Preferences
 import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.categories.CategoriesFragment
 import ru.gidline.app.screen.common.ToastPopup
@@ -24,10 +28,13 @@ import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.settings.SettingsFragment
 import ru.gidline.app.screen.vacancy.VacancyFragment
+import timber.log.Timber
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     override val presenter: MainPresenter by instance()
+
+    private val preferences: Preferences by instance()
 
     private val bellRepository: BellRepository by instance()
 
@@ -87,7 +94,9 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
         hideFragment(R.id.f_filter)
         addFragment(CategoriesFragment.newInstance())
-        requestPermissions(REQUEST_PERMISSIONS, Manifest.permission.READ_PHONE_STATE)
+        if (preferences.phone == null) {
+            requestPermissions(REQUEST_PHONE, Manifest.permission.READ_PHONE_STATE)
+        }
     }
 
     override fun onClick(v: View) {
@@ -144,6 +153,22 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
     }
 
+    @SuppressLint("MissingPermission", "HardwareIds")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PHONE) {
+            if (areGranted(Manifest.permission.READ_PHONE_STATE)) {
+                val phone = telephonyManager.line1Number
+                Timber.d("User phone: $phone")
+                preferences.phone = phone
+            }
+        }
+    }
+
     override fun onDestroy() {
         supportFragmentManager.unregisterFragmentLifecycleCallbacks(lifecycleCallbacks)
         super.onDestroy()
@@ -151,6 +176,6 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     companion object {
 
-        private const val REQUEST_PERMISSIONS = 10
+        private const val REQUEST_PHONE = 10
     }
 }
