@@ -27,7 +27,11 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
             it.unread = false
         }
         makeCallback<MainContract.View> {
-            setTitle(bell?.type?.caption.orEmpty())
+            if (bell != null) {
+                setTitle(bell.type.caption)
+            } else {
+                popFragment(null, false)
+            }
         }
         return inflater.inflate(R.layout.fragment_notification, root, false)
     }

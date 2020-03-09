@@ -30,7 +30,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
         when (v.id) {
             R.id.cl_search -> {
                 makeCallback<IView> {
-                    putFragment(SearchFragment.newInstance())
+                    addFragment(SearchFragment.newInstance())
                 }
             }
             R.id.ib_settings -> {
