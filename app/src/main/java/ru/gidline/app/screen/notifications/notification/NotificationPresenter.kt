@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.notification
+package ru.gidline.app.screen.notifications.notification
 
 import android.content.Context
 import ru.gidline.app.screen.base.BasePresenter

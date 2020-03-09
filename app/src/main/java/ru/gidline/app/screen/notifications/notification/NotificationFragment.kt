@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.notification
+package ru.gidline.app.screen.notifications.notification
 
 import android.graphics.Matrix
 import android.os.Bundle

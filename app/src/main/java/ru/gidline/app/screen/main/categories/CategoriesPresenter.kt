@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.categories
+package ru.gidline.app.screen.main.categories
 
 import android.content.Context
 import ru.gidline.app.screen.base.BasePresenter

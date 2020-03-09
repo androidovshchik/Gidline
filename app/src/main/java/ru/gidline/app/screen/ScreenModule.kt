@@ -13,6 +13,14 @@ import ru.gidline.app.screen.search.SearchFragment
 
 val screenModule = Kodein.Module("screen") {
 
+    bind<ArrayAdapter<String>>() with factory { layout: Int ->
+        ArrayAdapter(instance(), layout, mutableListOf<String>())
+    }
+
+    bind<ToastPopup>() with contexted<Activity>().factory { text: String ->
+        ToastPopup(text, context)
+    }
+
     bind<MenuPopup>() with contexted<MainActivity>().provider {
         MenuPopup(context)
     }
@@ -21,15 +29,7 @@ val screenModule = Kodein.Module("screen") {
         ChipsPopup(context.requireContext())
     }
 
-    bind<ToastPopup>() with contexted<Activity>().factory { text: String ->
-        ToastPopup(text, context)
-    }
-
-    bind<ArrayAdapter<String>>() with factory { layout: Int ->
-        ArrayAdapter(instance(), layout, mutableListOf<String>())
-    }
-
-    bind<SearchFilter>() with singleton {
+    bind<SearchFilter>() with provider {
         SearchFilter()
     }
 }

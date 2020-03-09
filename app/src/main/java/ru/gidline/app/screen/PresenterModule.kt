@@ -5,28 +5,28 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.contexted
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
-import ru.gidline.app.screen.categories.CategoriesFragment
-import ru.gidline.app.screen.categories.CategoriesPresenter
-import ru.gidline.app.screen.filter.FilterFragment
-import ru.gidline.app.screen.filter.FilterPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
-import ru.gidline.app.screen.notification.NotificationFragment
-import ru.gidline.app.screen.notification.NotificationPresenter
+import ru.gidline.app.screen.main.categories.CategoriesFragment
+import ru.gidline.app.screen.main.categories.CategoriesPresenter
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.notifications.NotificationsPresenter
+import ru.gidline.app.screen.notifications.notification.NotificationFragment
+import ru.gidline.app.screen.notifications.notification.NotificationPresenter
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.search.SearchPresenter
 import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.f04.F04Presenter
+import ru.gidline.app.screen.search.filter.FilterFragment
+import ru.gidline.app.screen.search.filter.FilterPresenter
 import ru.gidline.app.screen.search.vacancies.VacanciesFragment
 import ru.gidline.app.screen.search.vacancies.VacanciesPresenter
+import ru.gidline.app.screen.search.vacancies.vacancy.VacancyFragment
+import ru.gidline.app.screen.search.vacancies.vacancy.VacancyPresenter
 import ru.gidline.app.screen.settings.SettingsFragment
 import ru.gidline.app.screen.settings.SettingsPresenter
 import ru.gidline.app.screen.splash.SplashActivity
 import ru.gidline.app.screen.splash.SplashPresenter
-import ru.gidline.app.screen.vacancy.VacancyFragment
-import ru.gidline.app.screen.vacancy.VacancyPresenter
 
 val presenterModule = Kodein.Module("presenter") {
 

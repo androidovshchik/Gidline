@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.categories
+package ru.gidline.app.screen.main.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
