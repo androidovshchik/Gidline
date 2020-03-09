@@ -27,7 +27,7 @@
         android:imeOptions="actionNext"
         android:inputType="phone"
         android:maxLines="1"
-        android:textColor="#676a73"
+        android:textColor="@color/colorGrayText"
         android:textSize="15sp"
         tools:text="Text Text Text Text Text Text " />
 
@@ -39,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:visibility="gone"
+        tools:entries="@array/phone_codes"
         tools:visibility="visible" />
 
     <EditText
@@ -53,7 +54,7 @@
         android:imeOptions="actionNext"
         android:inputType="phone"
         android:maxLines="1"
-        android:textColor="#676a73"
+        android:textColor="@color/colorGrayText"
         android:textSize="15sp"
         android:visibility="gone"
         tools:text="Text Text Text Text Text Text "

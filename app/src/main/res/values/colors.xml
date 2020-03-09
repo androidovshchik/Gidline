@@ -7,4 +7,6 @@
     <color name="colorGrayBackground">#f2f2f2</color>
     <color name="colorCardFire">#5cf9d5ff</color>
     <color name="colorCardNormal">#89ffffff</color>
+    <color name="colorSeekBar">#813678</color>
+    <color name="colorGrayText">#676a73</color>
 </resources>

@@ -284,7 +284,7 @@
                         android:layout_toEndOf="@+id/tv_date1_desc"
                         android:gravity="end"
                         android:textAllCaps="true"
-                        android:textColor="#676a73"
+                        android:textColor="@color/colorGrayText"
                         android:textSize="15sp"
                         tools:text="Text Text Text Text" />
 
@@ -311,7 +311,7 @@
                         android:layout_toEndOf="@+id/tv_date2_desc"
                         android:gravity="end"
                         android:textAllCaps="true"
-                        android:textColor="#676a73"
+                        android:textColor="@color/colorGrayText"
                         android:textSize="15sp"
                         tools:text="Text Text Text Text" />
 

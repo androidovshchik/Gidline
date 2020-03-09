@@ -26,7 +26,7 @@
             android:paddingEnd="32dp"
             android:paddingBottom="16dp"
             android:textAllCaps="true"
-            android:textColor="#676a73"
+            android:textColor="@color/colorGrayText"
             android:textSize="16sp"
             android:visibility="gone"
             tools:text="@string/notifications"
