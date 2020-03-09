@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ScrollView
 import kotlinx.android.synthetic.main.fragment_filter.*
 import org.jetbrains.anko.sdk19.listeners.onSeekBarChangeListener
 import org.kodein.di.generic.instance
@@ -15,9 +14,9 @@ import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.filter.view.RadioButton
-import ru.gidline.app.screen.filter.view.ToggleView
-import ru.gidline.app.screen.main.MainContract
+import ru.gidline.app.screen.filter.view.ToggleButton
 import ru.gidline.app.screen.search.SearchFilter
+import ru.gidline.app.screen.search.SearchFragment
 import kotlin.math.round
 
 class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.View {
@@ -64,45 +63,20 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
         rb4.setOnClickListener(this)
         ib_checkbox1.setOnClickListener(this)
         ib_checkbox2.setOnClickListener(this)
+        mb_apply.setOnClickListener(this)
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
-        if (hidden) {
-            makeCallback<MainContract.View> {
-                updateAction(null)
-            }
-        } else {
-            makeCallback<MainContract.View> {
-                updateAction("Применить")
-            }
-            updateFilter()
-            (view as ScrollView).scrollY = 0
+        if (!hidden) {
+            sv_filter.scrollY = 0
+            calculator.setFrom(searchFilter.calculator)
+            updatePayment()
+            val region = regionAdapter.getPosition(searchFilter.region.orEmpty())
+            s_region.setSelection(region, false)
+            updateCity(region, searchFilter.city)
+            updateForm(searchFilter.form)
+            updateCheckboxes(searchFilter.residence, searchFilter.freeFeed)
         }
-    }
-
-    private fun updateFilter() {
-        calculator.setFrom(searchFilter.calculator)
-        updatePayment()
-        val region = regionAdapter.getPosition(searchFilter.region.orEmpty())
-        s_region.setSelection(region, false)
-        updateCity(region, searchFilter.city)
-        updateForm(searchFilter.form)
-        updateCheckboxes(searchFilter.residence, searchFilter.freeFeed)
-    }
-
-    override fun saveFilter() {
-        searchFilter.calculator.setFrom(calculator)
-        searchFilter.region = s_region.selectedItem?.toString()?.ifEmpty { null }
-        searchFilter.city = s_city.selectedItem?.toString()?.ifEmpty { null }
-        searchFilter.form = when {
-            rb1.isChecked -> rb1.tag.toString().toInt()
-            rb2.isChecked -> rb2.tag.toString().toInt()
-            rb3.isChecked -> rb3.tag.toString().toInt()
-            rb4.isChecked -> rb4.tag.toString().toInt()
-            else -> null
-        }
-        searchFilter.residence = ib_checkbox1.isChecked
-        searchFilter.freeFeed = ib_checkbox2.isChecked
     }
 
     override fun onClick(v: View) {
@@ -114,7 +88,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
             }
             R.id.tv_per_month, R.id.tv_per_item, R.id.tv_per_hour -> {
                 calculator.perTime =
-                    if ((v as ToggleView).isChecked) null else v.tag.toString().toInt()
+                    if ((v as ToggleButton).isChecked) null else v.tag.toString().toInt()
                 updatePayment()
             }
             R.id.rb1, R.id.rb2, R.id.rb3, R.id.rb4 -> {
@@ -125,6 +99,30 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
             }
             R.id.ib_checkbox2 -> {
                 updateCheckboxes(ib_checkbox1.isChecked, !ib_checkbox2.isChecked)
+            }
+            R.id.mb_apply -> {
+                searchFilter.also {
+                    it.calculator.setFrom(calculator)
+                    it.region = s_region.selectedItem?.toString()?.ifEmpty { null }
+                    it.city = s_city.selectedItem?.toString()?.ifEmpty { null }
+                    it.form = when {
+                        rb1.isChecked -> rb1.tag.toString().toInt()
+                        rb2.isChecked -> rb2.tag.toString().toInt()
+                        rb3.isChecked -> rb3.tag.toString().toInt()
+                        rb4.isChecked -> rb4.tag.toString().toInt()
+                        else -> null
+                    }
+                    it.residence = ib_checkbox1.isChecked
+                    it.freeFeed = ib_checkbox2.isChecked
+                }
+                makeCallback<IView> {
+                    when (val topFragment = topFragment) {
+                        is SearchFragment -> {
+                            topFragment.refreshData()
+                        }
+                    }
+                    hideFragment(R.id.f_filter)
+                }
             }
         }
     }

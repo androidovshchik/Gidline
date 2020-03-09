@@ -11,7 +11,7 @@ import org.jetbrains.anko.textColor
 import ru.gidline.app.R
 
 @SuppressLint("AppCompatCustomView")
-class ToggleView : TextView {
+class ToggleButton : TextView {
 
     var isChecked = false
         set(value) {
