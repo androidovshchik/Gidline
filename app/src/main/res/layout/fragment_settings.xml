@@ -22,7 +22,7 @@
             android:layout_marginBottom="26dp"
             android:adjustViewBounds="true"
             android:background="@drawable/avatar_background"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             tools:src="@drawable/avatar_man" />
 
         <ImageView
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:layout_toEndOf="@+id/iv_avatar"
@@ -168,19 +168,22 @@
                         android:id="@+id/s_citizenship"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/tv_citizenship" />
+                        android:layout_toEndOf="@+id/tv_citizenship"
+                        tools:entries="@array/countries" />
 
                     <ru.gidline.app.screen.settings.PhoneLayout
                         android:id="@+id/pl_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_citizenship" />
+                        android:layout_below="@+id/tv_citizenship"
+                        app:text="@string/settings_phone" />
 
                     <ru.gidline.app.screen.settings.PhoneLayout
                         android:id="@+id/pl_whatsapp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pl_phone" />
+                        android:layout_below="@+id/pl_phone"
+                        app:text="@string/settings_whatsapp" />
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -199,7 +202,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/pl_whatsapp"
-                        android:layout_toEndOf="@+id/tv_email" />
+                        android:layout_alignParentEnd="true"
+                        android:layout_toEndOf="@+id/tv_email"
+                        android:background="@null"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
 
                 </RelativeLayout>
 
@@ -233,7 +241,8 @@
                     <Spinner
                         android:id="@+id/s_language"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:entries="@array/languages" />
 
                 </LinearLayout>
 

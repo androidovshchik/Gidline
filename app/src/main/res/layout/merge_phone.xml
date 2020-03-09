@@ -24,6 +24,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
+        android:imeOptions="actionNext"
+        android:inputType="phone"
+        android:maxLines="1"
         android:textColor="#676a73"
         android:textSize="15sp"
         tools:text="Text Text Text Text Text Text " />
@@ -34,7 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_phone"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/et_numbers"
@@ -45,8 +50,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
+        android:imeOptions="actionNext"
+        android:inputType="phone"
+        android:maxLines="1"
         android:textColor="#676a73"
         android:textSize="15sp"
-        tools:text="Text Text Text Text Text Text " />
+        android:visibility="gone"
+        tools:text="Text Text Text Text Text Text "
+        tools:visibility="visible" />
 
 </merge>

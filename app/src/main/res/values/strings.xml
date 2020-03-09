@@ -18,6 +18,23 @@
 
     <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной активной\nвакансии.\nПопробуйте поменять запрос.</string>
 
+    <string-array name="countries">
+        <item>Россия</item>
+        <item>Таджикистан</item>
+        <item>Узбекистан</item>
+        <item>Кыргызстан</item>
+    </string-array>
+    <string-array name="phone_codes">
+        <item></item>
+        <item>+7 RUS</item>
+        <item>+992 TAJ</item>
+        <item>+998 UZB</item>
+        <item>+996 KRG</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Русский</item>
+    </string-array>
+
     <plurals name="days">
         <item quantity="zero">%1$d дней</item>
         <item quantity="one">%1$d день</item>
