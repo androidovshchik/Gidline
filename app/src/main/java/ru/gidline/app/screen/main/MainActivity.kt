@@ -91,11 +91,10 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         when (v.id) {
             R.id.ib_home -> {
                 if (v.tag == R.drawable.arrow_left) {
-                    topFragment.also {
-                        if (it is SearchFragment) {
-                            if (it.chipsPopup.isShowing) {
-                                updateHome(R.drawable.hamburger)
-                                it.hideSuggestion()
+                    when (val topFragment = topFragment) {
+                        is SearchFragment -> {
+                            if (topFragment.chipsPopup.isShowing) {
+                                topFragment.hideSuggestion()
                                 return
                             }
                         }
@@ -118,7 +117,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         }
     }
 
-    override fun updateHome(drawable: Int) {
+    private fun updateHome(drawable: Int) {
         ib_home.apply {
             tag = drawable
             setImageResource(drawable)

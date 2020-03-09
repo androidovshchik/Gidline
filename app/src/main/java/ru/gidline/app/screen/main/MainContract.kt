@@ -7,8 +7,6 @@ interface MainContract {
 
     interface View : IView {
 
-        fun updateHome(drawable: Int)
-
         fun setTitle(text: String)
     }
 

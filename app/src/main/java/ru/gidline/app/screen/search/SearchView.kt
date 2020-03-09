@@ -7,7 +7,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.widget.EditText
-import ru.gidline.app.R
 import ru.gidline.app.extension.makeCallback
 import ru.gidline.app.screen.main.MainContract
 
@@ -37,7 +36,6 @@ class SearchView : EditText {
     override fun onKeyPreIme(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             context.makeCallback<MainContract.View> {
-                updateHome(R.drawable.hamburger)
                 when (val topFragment = topFragment) {
                     is SearchFragment -> {
                         topFragment.chipsPopup.dismiss()
