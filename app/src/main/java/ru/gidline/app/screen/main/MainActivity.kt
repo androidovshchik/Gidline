@@ -21,6 +21,7 @@ import ru.gidline.app.screen.filter.FilterFragment
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.settings.SettingsFragment
+import ru.gidline.app.screen.vacancy.VacancyFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
@@ -41,14 +42,17 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 is CategoriesFragment -> {
                     updateHome(R.drawable.hamburger)
                     setTitle(getString(R.string.app_name))
+                    notifyBell(bellRepository.allCount, bellRepository.unreadCount)
                 }
                 is NotificationsFragment -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("УВЕДОМЛЕНИЕ")
                 }
                 is SearchFragment -> {
-
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("ПОИСК РАБОТЫ")
                 }
+                is VacancyFragment -> updateHome(R.drawable.arrow_left)
                 is SettingsFragment -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("НАСТРОЙКА")
@@ -58,7 +62,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
         override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
             when (f) {
-
+                is CategoriesFragment -> notifyBell(-1)
             }
         }
     }
@@ -125,9 +129,9 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         tv_title.text = text
     }
 
-    private fun notifyBell(all: Int, unread: Int) {
-        iv_bell_daw.isVisible = unread > 0
+    private fun notifyBell(all: Int, unread: Int = 0) {
         ib_bell.isVisible = all >= 0
+        iv_bell_daw.isVisible = unread > 0
     }
 
     override fun onBackPressed() {

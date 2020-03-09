@@ -53,13 +53,6 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
         }
     }
 
-    override fun onDestroyView() {
-        makeCallback<MainContract.View> {
-            setTitle("УВЕДОМЛЕНИЕ")
-        }
-        super.onDestroyView()
-    }
-
     companion object {
 
         fun newInstance(id: Int): NotificationFragment {
