@@ -1,6 +1,7 @@
 package ru.gidline.app.screen.settings
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.fragment_settings.*
+import org.jetbrains.anko.telephonyManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
@@ -57,6 +59,9 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             it.onItemSelectedListener = this
         }
         tv_save.setOnClickListener(this)
+        if (preferences.phone == null) {
+            requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
+        }
     }
 
     override fun onClick(v: View) {
@@ -65,8 +70,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 val context = requireContext()
                 if (!context.areGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     requestPermissions(
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        REQUEST_PERMISSIONS
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_STORAGE
                     )
                     return
                 }
@@ -127,13 +131,21 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         onPhotoPath("")
     }
 
+    @SuppressLint("MissingPermission", "HardwareIds")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == REQUEST_PERMISSIONS) {
-            iv_camera.performClick()
+        when (requestCode) {
+            REQUEST_PHONE -> context?.run {
+                if (areGranted(Manifest.permission.READ_PHONE_STATE)) {
+                    val phone = telephonyManager.line1Number
+                    Timber.d("User phone: $phone")
+                    preferences.phone = phone
+                }
+            }
+            REQUEST_STORAGE -> iv_camera?.performClick()
         }
     }
 
@@ -152,7 +164,9 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     companion object {
 
-        private const val REQUEST_PERMISSIONS = 99
+        private const val REQUEST_PHONE = 98
+
+        private const val REQUEST_STORAGE = 99
 
         private const val REQUEST_CAMERA = 100
 
