@@ -19,7 +19,6 @@ import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.main.categories.CategoriesFragment
 import ru.gidline.app.screen.notifications.NotificationsFragment
 import ru.gidline.app.screen.search.SearchFragment
-import ru.gidline.app.screen.search.vacancies.vacancy.VacancyFragment
 import ru.gidline.app.screen.settings.SettingsFragment
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
@@ -33,29 +32,6 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     private val toastPopup: ToastPopup by instance(arg = "уведомлений нет")
 
     private val lifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
-
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, b: Bundle?) {
-            when (f) {
-                is CategoriesFragment -> {
-                    updateHome(R.drawable.hamburger)
-                    setTitle(getString(R.string.app_name))
-                    notifyBell(bellRepository.allCount, bellRepository.unreadCount)
-                }
-                is NotificationsFragment -> {
-                    updateHome(R.drawable.arrow_left)
-                    setTitle("УВЕДОМЛЕНИЕ")
-                }
-                is SearchFragment -> {
-                    updateHome(R.drawable.arrow_left)
-                    setTitle("ПОИСК РАБОТЫ")
-                }
-                is VacancyFragment -> updateHome(R.drawable.arrow_left)
-                is SettingsFragment -> {
-                    updateHome(R.drawable.arrow_left)
-                    setTitle("НАСТРОЙКА")
-                }
-            }
-        }
 
         override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
             when (f) {
@@ -73,9 +49,24 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
         supportFragmentManager.addOnBackStackChangedListener {
             when (val topFragment = topFragment) {
+                is CategoriesFragment -> {
+                    updateHome(R.drawable.hamburger)
+                    setTitle(getString(R.string.app_name))
+                    notifyBell(bellRepository.allCount, bellRepository.unreadCount)
+                }
                 is NotificationsFragment -> {
+                    updateHome(R.drawable.arrow_left)
                     setTitle("УВЕДОМЛЕНИЕ")
                     topFragment.refreshData()
+                }
+                is SearchFragment -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("ПОИСК РАБОТЫ")
+                    notifyBell(-1)
+                }
+                is SettingsFragment -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("НАСТРОЙКА")
                 }
             }
         }
