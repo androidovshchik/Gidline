@@ -35,7 +35,7 @@ class MenuPopup(context: Context) : BasePopup(context) {
     }
 
     override fun show(anchor: View) {
-        headerLayout.updateAvatar()
+        headerLayout.updateData()
         (contentView as ViewGroup).children.forEach { child ->
             if (child is MenuLayout) {
                 child.toggle(-1)

@@ -10,14 +10,19 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.merge_header.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Period
+import org.threeten.bp.format.DateTimeFormatter
 import ru.gidline.app.R
 import ru.gidline.app.local.Preferences
+import timber.log.Timber
 
 class HeaderLayout : RelativeLayout, KodeinAware {
 
@@ -51,11 +56,39 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         View.inflate(context, R.layout.merge_header, this)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
-        updateAvatar()
+        updateData()
     }
 
     @Suppress("DEPRECATION")
-    fun updateAvatar() {
+    fun updateData() {
+        val now = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("d.M.yyyy")
+        val entryRussia = preferences.dateEntryRussia
+        if (entryRussia != null) {
+            try {
+                val date = LocalDate.parse(entryRussia, formatter)
+                Period.between(now, date).days
+                toggleViews(true, tv_before_border, tv_border_days)
+            } catch (e: Throwable) {
+                Timber.e(e)
+                toggleViews(false, tv_before_border, tv_border_days)
+            }
+        } else {
+            toggleViews(false, tv_before_border, tv_border_days)
+        }
+        val firstPatent = preferences.dateFirstPatent
+        if (firstPatent != null) {
+            try {
+                val date = LocalDate.parse(firstPatent, formatter)
+                Period.between(now, date).days
+                toggleViews(true, tv_before_patent, tv_patent_days)
+            } catch (e: Throwable) {
+                Timber.e(e)
+                toggleViews(false, tv_before_patent, tv_patent_days)
+            }
+        } else {
+            toggleViews(false, tv_before_patent, tv_patent_days)
+        }
         iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
             error(resources.getDrawable(preferences.genderDrawable).mutate().apply {
                 setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
@@ -64,5 +97,19 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         }
     }
 
+    private fun toggleViews(show: Boolean, vararg views: View) {
+        views.forEach {
+            it.isVisible = show
+        }
+    }
+
     override fun hasOverlappingRendering() = false
-}
+}Формула расчёта данных:
+Y= (X+364 дня)-H, где
+Y- Количество дней до пересечения границы
+X- Дата въезда в РФ
+H- Текущая дата;
+Z= (W+364 дня)- H, где
+Z- Количество дней до окончания патента
+W- Дата первой оплаты патента
+H- Текущая дата.
