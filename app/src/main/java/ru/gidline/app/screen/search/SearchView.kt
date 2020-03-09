@@ -38,7 +38,7 @@ class SearchView : EditText {
             context.makeCallback<IView> {
                 when (val topFragment = topFragment) {
                     is SearchFragment -> {
-                        topFragment.chipsPopup.dismiss()
+                        topFragment.closePopup()
                     }
                 }
             }

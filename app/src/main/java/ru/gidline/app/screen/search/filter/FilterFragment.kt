@@ -12,7 +12,6 @@ import org.jetbrains.anko.sdk19.listeners.onSeekBarChangeListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.SearchFilter
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.search.filter.view.RadioButton
@@ -114,14 +113,10 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
                     it.residence = ib_checkbox1.isChecked
                     it.freeFeed = ib_checkbox2.isChecked
                 }
-                makeCallback<IView> {
-                    when (val topFragment = topFragment) {
-                        is SearchFragment -> {
-                            topFragment.refreshData()
-                        }
-                    }
+                (parentFragment as? SearchFragment)?.apply {
+                    refreshData()
+                    hideFragment(R.id.f_filter)
                 }
-                parentFragment?.hideFragment(R.id.f_filter)
             }
         }
     }

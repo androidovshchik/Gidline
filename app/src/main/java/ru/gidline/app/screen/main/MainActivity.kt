@@ -79,7 +79,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 if (v.tag == R.drawable.arrow_left) {
                     when (val topFragment = topFragment) {
                         is SearchFragment -> {
-                            if (topFragment.chipsPopup.isShowing) {
+                            if (topFragment.hasPopup) {
                                 topFragment.hideSuggestion()
                                 return
                             }

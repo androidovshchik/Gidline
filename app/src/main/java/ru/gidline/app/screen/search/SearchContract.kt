@@ -7,11 +7,15 @@ interface SearchContract {
 
     interface View : IView {
 
+        val hasPopup: Boolean
+
         fun refreshData()
 
         fun hideSuggestion()
 
         fun closeFilter(): Boolean
+
+        fun closePopup()
     }
 
     interface Presenter : IPresenter<View>
