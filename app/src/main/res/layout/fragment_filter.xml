@@ -8,6 +8,7 @@
     tools:ignore="MissingPrefix">
 
     <ScrollView
+        android:id="@+id/sv_filter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -446,7 +447,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/mb_action"
+        android:id="@+id/mb_apply"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_gravity="bottom|center_horizontal"
