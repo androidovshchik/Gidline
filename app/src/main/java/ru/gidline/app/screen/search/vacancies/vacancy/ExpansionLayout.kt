@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.vacancy
+package ru.gidline.app.screen.search.vacancies.vacancy
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
@@ -16,7 +16,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.use
 import ru.gidline.app.local.dto.Vacancy
 
-class AccordionLayout : LinearLayout, KodeinAware {
+class ExpansionLayout : LinearLayout, KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -46,8 +46,8 @@ class AccordionLayout : LinearLayout, KodeinAware {
         setPadding(dip(10), dip(10), dip(10), 0)
         View.inflate(context, R.layout.merge_accordion, this)
         attrs?.let { set ->
-            context.obtainStyledAttributes(set, R.styleable.AccordionLayout).use {
-                getString(R.styleable.AccordionLayout_text)?.let {
+            context.obtainStyledAttributes(set, R.styleable.ExpansionLayout).use {
+                getString(R.styleable.ExpansionLayout_text)?.let {
                     tv_name.text = it
                 }
             }

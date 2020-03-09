@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.filter
+package ru.gidline.app.screen.search.filter
 
 import android.content.Context
 import ru.gidline.app.screen.base.BasePresenter

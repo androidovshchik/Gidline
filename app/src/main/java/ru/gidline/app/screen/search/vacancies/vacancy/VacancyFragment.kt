@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.vacancy
+package ru.gidline.app.screen.search.vacancies.vacancy
 
 import android.os.Bundle
 import android.view.LayoutInflater

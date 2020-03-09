@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.filter.view
+package ru.gidline.app.screen.search.filter.view
 
 import android.content.Context
 import android.util.AttributeSet
