@@ -10,7 +10,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.VacancyRepository
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.main.MainContract
+import ru.gidline.app.screen.base.listener.IView
 
 class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContract.View {
 
@@ -19,10 +19,6 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
     private val vacancyRepository: VacancyRepository by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        makeCallback<MainContract.View> {
-            updateHome(R.drawable.arrow_left)
-            updateAction("Откликнуться")
-        }
         return inflater.inflate(R.layout.fragment_vacancy, root, false)
     }
 
@@ -43,12 +39,14 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
         tv_place.text = vacancy.location
     }
 
-    override fun onDestroyView() {
-        makeCallback<MainContract.View> {
-            updateHome(R.drawable.hamburger)
-            updateAction(null)
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.mb_respond -> {
+                makeCallback<IView> {
+                    popFragment(null, false)
+                }
+            }
         }
-        super.onDestroyView()
     }
 
     companion object {
