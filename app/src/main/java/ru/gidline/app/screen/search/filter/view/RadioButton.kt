@@ -12,5 +12,12 @@ class RadioButton @JvmOverloads constructor(
 
     override fun toggle() {}
 
+    fun setChecked(checked: Boolean, animate: Boolean) {
+        super.setChecked(checked)
+        if (!animate) {
+            jumpDrawablesToCurrentState()
+        }
+    }
+
     override fun hasOverlappingRendering() = false
 }

@@ -74,7 +74,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
                 val region = regionAdapter.getPosition(it.region.orEmpty())
                 s_region.setSelection(region, false)
                 updateCity(region, it.city)
-                updateForm(it.form)
+                updateForm(it.form, false)
                 updateCheckboxes(it.residence, it.freeFeed)
             }
             updatePayment()
@@ -164,11 +164,11 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
         s_city.setSelection(cityAdapter.getPosition(city.orEmpty()), false)
     }
 
-    private fun updateForm(form: Int?) {
-        rb1.isChecked = form == 0
-        rb2.isChecked = form == 1
-        rb3.isChecked = form == 2
-        rb4.isChecked = form == 3
+    private fun updateForm(form: Int?, animate: Boolean = true) {
+        rb1.setChecked(form == 0, animate)
+        rb2.setChecked(form == 1, animate)
+        rb3.setChecked(form == 2, animate)
+        rb4.setChecked(form == 3, animate)
     }
 
     private fun updateCheckboxes(residence: Boolean, freeFeed: Boolean) {
