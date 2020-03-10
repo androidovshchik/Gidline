@@ -11,7 +11,7 @@ interface IView : View.OnClickListener {
 
     fun setTouchable(enable: Boolean)
 
-    fun <T : IView> getNestedFragment(id: Int): T?
+    fun <T : IView> findFragment(id: Int): T?
 
     fun showFragment(id: Int)
 

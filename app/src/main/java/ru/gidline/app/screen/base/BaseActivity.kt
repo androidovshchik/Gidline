@@ -58,7 +58,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IView> getNestedFragment(id: Int): T? {
+    override fun <T : IView> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
             val fragment = supportFragmentManager.findFragmentById(id)
             if (fragment is BaseFragment<*>) {

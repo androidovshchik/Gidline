@@ -29,7 +29,7 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
 
     private val searchFilter: SearchFilter?
         get() {
-            parentCallback<SearchContract.View> {
+            parentCallback<SearchContract.View>(true) {
                 return searchFilter
             }
             return null

@@ -47,7 +47,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IView> getNestedFragment(id: Int): T? {
+    override fun <T : IView> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
             val fragment = childFragmentManager.findFragmentById(id)
             if (fragment is BaseFragment<*>) {
@@ -95,9 +95,9 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
         context?.activityCallback(action)
     }
 
-    inline fun <reified T> parentCallback(action: T.() -> Unit) {
+    inline fun <reified T> parentCallback(nullableView: Boolean = false, action: T.() -> Unit) {
         parentFragment?.let {
-            if (it is T && it.view != null) {
+            if (it is T && (nullableView || it.view != null)) {
                 action(it)
             }
         }

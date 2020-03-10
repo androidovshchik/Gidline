@@ -77,7 +77,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     override fun refreshData() {
         hideFragment(R.id.f_vacancies)
         popFragment(null, true)
-        getNestedFragment<VacanciesContract.View>(R.id.f_vacancies)?.let {
+        findFragment<VacanciesContract.View>(R.id.f_vacancies)?.let {
             if (it.refreshData()) {
                 showFragment(R.id.f_vacancies)
             } else {
@@ -97,7 +97,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     }
 
     override fun closeFilter(): Boolean {
-        if (getNestedFragment<FilterContract.View>(R.id.f_filter)?.isVisible() == true) {
+        if (findFragment<FilterContract.View>(R.id.f_filter)?.isVisible() == true) {
             hideFragment(R.id.f_filter)
             return true
         }
