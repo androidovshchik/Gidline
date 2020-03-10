@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.item_card.view.*
 import ru.gidline.app.R
-import ru.gidline.app.local.dto.Vacancy
+import ru.gidline.app.local.model.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
 import ru.gidline.app.screen.base.BaseHolder
 import ru.gidline.app.screen.search.vacancies.VacanciesContract

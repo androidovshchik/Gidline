@@ -16,6 +16,7 @@ import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.filter.FilterFragment
+import ru.gidline.app.screen.search.model.SearchFilter
 import ru.gidline.app.screen.search.vacancies.VacanciesFragment
 
 class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.View {

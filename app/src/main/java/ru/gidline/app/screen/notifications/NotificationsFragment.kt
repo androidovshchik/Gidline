@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_notifications.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.BellRepository
-import ru.gidline.app.local.dto.Bell
+import ru.gidline.app.local.model.Bell
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.notifications.adapter.NotificationsAdapter

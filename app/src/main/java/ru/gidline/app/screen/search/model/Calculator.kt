@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.search.filter
+package ru.gidline.app.screen.search.model
 
 @Suppress("MemberVisibilityCanBePrivate")
 class Calculator {

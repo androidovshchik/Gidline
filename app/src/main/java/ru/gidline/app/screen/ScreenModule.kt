@@ -8,8 +8,8 @@ import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MenuPopup
 import ru.gidline.app.screen.search.ChipsPopup
-import ru.gidline.app.screen.search.SearchFilter
 import ru.gidline.app.screen.search.SearchFragment
+import ru.gidline.app.screen.search.model.SearchFilter
 
 val screenModule = Kodein.Module("screen") {
 

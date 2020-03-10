@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import kotlinx.android.synthetic.main.item_notification.view.*
 import ru.gidline.app.R
-import ru.gidline.app.local.dto.Bell
+import ru.gidline.app.local.model.Bell
 import ru.gidline.app.screen.base.BaseAdapter
 import ru.gidline.app.screen.base.BaseHolder
 import ru.gidline.app.screen.notifications.NotificationsContract

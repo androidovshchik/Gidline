@@ -14,7 +14,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.use
-import ru.gidline.app.local.dto.Vacancy
+import ru.gidline.app.local.model.Vacancy
 
 class ExpansionLayout : LinearLayout, KodeinAware {
 

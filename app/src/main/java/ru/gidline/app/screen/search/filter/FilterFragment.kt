@@ -14,9 +14,10 @@ import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.SearchContract
-import ru.gidline.app.screen.search.SearchFilter
 import ru.gidline.app.screen.search.filter.view.RadioButton
 import ru.gidline.app.screen.search.filter.view.ToggleButton
+import ru.gidline.app.screen.search.model.Calculator
+import ru.gidline.app.screen.search.model.SearchFilter
 import kotlin.math.round
 
 class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.View {

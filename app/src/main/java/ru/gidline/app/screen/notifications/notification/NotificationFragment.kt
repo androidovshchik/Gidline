@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_notification.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.BellRepository
-import ru.gidline.app.local.dto.BellType
+import ru.gidline.app.local.model.BellType
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.main.MainContract
 

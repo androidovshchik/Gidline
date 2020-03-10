@@ -1,7 +1,7 @@
 package ru.gidline.app.local
 
-import ru.gidline.app.local.dto.Bell
-import ru.gidline.app.local.dto.BellType
+import ru.gidline.app.local.model.Bell
+import ru.gidline.app.local.model.BellType
 import java.util.concurrent.CopyOnWriteArrayList
 
 class BellRepository {

@@ -1,4 +1,4 @@
-package ru.gidline.app.local.dto
+package ru.gidline.app.local.model
 
 enum class BellType(val caption: String) {
     INVITATION("ПРИГЛАШЕНИЕ"),

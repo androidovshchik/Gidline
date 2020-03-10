@@ -1,10 +1,10 @@
-package ru.gidline.app.local.dto
+package ru.gidline.app.local.model
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import ru.gidline.app.screen.search.SearchFilter
+import ru.gidline.app.screen.search.model.SearchFilter
 import timber.log.Timber
 
 @Suppress("unused")
