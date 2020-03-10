@@ -2,7 +2,6 @@ package ru.gidline.app.local
 
 import android.content.Context
 import com.chibatching.kotpref.KotprefModel
-import ru.gidline.app.R
 
 class Preferences(context: Context) : KotprefModel(context) {
 
@@ -27,7 +26,4 @@ class Preferences(context: Context) : KotprefModel(context) {
     var dateEntryRussia by nullableStringPref("10.10.2019", "date_entry_russia")
 
     var dateFirstPatent by nullableStringPref("01.12.2019", "date_first_patent")
-
-    val genderDrawable: Int
-        get() = if (isMan) R.drawable.avatar_man else R.drawable.avatar_woman
 }

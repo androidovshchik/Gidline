@@ -100,8 +100,10 @@ class HeaderLayout : RelativeLayout, KodeinAware {
             toggleViews(false, tv_before_border, tv_border_days)
             toggleViews(false, tv_before_patent, tv_patent_days)
         }
+        val genderDrawable =
+            if (preferences.isMan) R.drawable.avatar_man else R.drawable.avatar_woman
         iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
-            error(resources.getDrawable(preferences.genderDrawable).mutate().apply {
+            error(resources.getDrawable(genderDrawable).mutate().apply {
                 setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
             })
             transformations(CircleCropTransformation())

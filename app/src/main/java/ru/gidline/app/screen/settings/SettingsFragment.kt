@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -35,12 +36,13 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     private val languageAdapter: ArrayAdapter<String> by instance(arg = R.layout.item_spinner_caps)
 
+    private var alertDialog: AlertDialog? = null
+
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onPhotoPath(preferences.avatarPath)
         tv_name.text = "Хуршед"
         tv_surname.text = "Хасанов"
         iv_camera.setOnClickListener(this)
@@ -59,8 +61,12 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             it.onItemSelectedListener = this
         }
         tv_save.setOnClickListener(this)
-        if (preferences.phone == null) {
-            requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
+        preferences.run {
+            onPhotoPath(avatarPath)
+            updateGender(isMan)
+            if (phone == null) {
+                requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
+            }
         }
     }
 
@@ -74,7 +80,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     )
                     return
                 }
-                AlertDialog.Builder(context)
+                alertDialog = AlertDialog.Builder(context)
                     .setItems(arrayOf("Сделать снимок", "Открыть галерею")) { _, which ->
                         val requestCode = if (which == 0) REQUEST_CAMERA else REQUEST_GALLERY
                         startActivityForResult(Intent.createChooser(Intent().apply {
@@ -90,13 +96,14 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                         }, "Выберите приложение"), requestCode)
                     }
                     .create()
-                    .show()
+                alertDialog?.show()
             }
             R.id.ib_man, R.id.ib_woman -> {
                 updateGender(!ib_man.isChecked)
             }
             R.id.tv_save -> {
-                makeCallback<IView> {
+
+                activityCallback<IView> {
                     popFragment(null, false)
                 }
             }
@@ -108,7 +115,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent?.id) {
             R.id.s_citizenship -> {
-
+                updateMigration(position)
             }
         }
     }
@@ -116,10 +123,12 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onPhotoPath(path: String?) {
         Timber.d("Photo path: $path")
         if (!path.isNullOrBlank()) {
-            preferences.avatarPath = path
+            //preferences.avatarPath = path
         }
+        val genderDrawable =
+            if (ib_man.isChecked) R.drawable.avatar_man else R.drawable.avatar_woman
         iv_avatar.load(Uri.parse("file://$path")) {
-            error(preferences.genderDrawable)
+            error(genderDrawable)
             transformations(CircleCropTransformation())
         }
     }
@@ -127,8 +136,15 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     private fun updateGender(isMan: Boolean) {
         ib_man.isChecked = isMan
         ib_woman.isChecked = !isMan
-        preferences.isMan = isMan
-        onPhotoPath("")
+        if (preferences.avatarPath == null) {
+            //preferences.isMan = isMan
+            onPhotoPath("")
+        }
+    }
+
+    private fun updateMigration(index: Int) {
+        preferences.hasMigrationData
+        mcv_migration.isVisible = index in 2..3
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
@@ -160,6 +176,11 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        alertDialog?.dismiss()
+        super.onDestroyView()
     }
 
     companion object {
