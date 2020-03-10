@@ -7,6 +7,10 @@ interface IView : View.OnClickListener {
 
     val topFragment: BaseFragment<*>?
 
+    val isTouchable: Boolean
+
+    fun setTouchable(enable: Boolean)
+
     fun showFragment(id: Int)
 
     fun hideFragment(id: Int)

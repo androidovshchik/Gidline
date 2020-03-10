@@ -2,6 +2,7 @@ package ru.gidline.app.screen.base
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -27,6 +28,18 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
 
     override val topFragment: BaseFragment<*>?
         get() = childFragmentManager.topFragment as? BaseFragment<*>
+
+    override val isTouchable: Boolean
+        get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
+
+    override fun setTouchable(enable: Boolean) {
+        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        if (enable) {
+            activity?.window?.clearFlags(flag)
+        } else {
+            activity?.window?.setFlags(flag, flag)
+        }
+    }
 
     override fun showFragment(id: Int) {
         childFragmentManager.showFragment(id)

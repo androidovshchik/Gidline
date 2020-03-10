@@ -3,6 +3,7 @@ package ru.gidline.app.screen.base
 import android.content.Context
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.jetbrains.anko.longToast
@@ -35,6 +36,18 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     override val topFragment: BaseFragment<*>?
         get() = supportFragmentManager.topFragment as? BaseFragment<*>
+
+    override val isTouchable: Boolean
+        get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
+
+    override fun setTouchable(enable: Boolean) {
+        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        if (enable) {
+            window.clearFlags(flag)
+        } else {
+            window.setFlags(flag, flag)
+        }
+    }
 
     override fun showFragment(id: Int) {
         supportFragmentManager.showFragment(id)
