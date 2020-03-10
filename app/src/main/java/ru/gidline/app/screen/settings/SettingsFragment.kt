@@ -182,7 +182,9 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 if (areGranted(Manifest.permission.READ_PHONE_STATE)) {
                     val phone = telephonyManager.line1Number
                     Timber.d("User phone: $phone")
-                    et_phone?.setText(phone)
+                    if (!phone.isNullOrBlank()) {
+                        et_phone?.setText(phone)
+                    }
                 }
             }
             REQUEST_STORAGE -> iv_camera?.performClick()
