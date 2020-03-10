@@ -13,6 +13,8 @@ interface SearchContract {
 
         fun refreshData()
 
+        fun changeSearch(text: String)
+
         fun hideSuggestion()
 
         fun closeFilter(): Boolean

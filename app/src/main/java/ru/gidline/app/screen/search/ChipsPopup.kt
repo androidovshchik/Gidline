@@ -8,12 +8,10 @@ import androidx.core.view.children
 import androidx.core.view.isVisible
 import coil.api.load
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.popup_chips.view.*
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.windowManager
 import ru.gidline.app.R
-import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BasePopup
@@ -57,10 +55,10 @@ class ChipsPopup(context: Context) : BasePopup(context) {
     }
 
     override fun onClick(v: View) {
-        makeCallback<IView> {
+        activityCallback<IView> {
             when (val topFragment = topFragment) {
-                is SearchFragment -> {
-                    topFragment.et_search?.setTextSelection((v as Chip).text)
+                is SearchContract.View -> {
+                    topFragment.changeSearch((v as Chip).text.toString())
                 }
             }
         }

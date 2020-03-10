@@ -12,6 +12,7 @@ import org.jetbrains.anko.inputMethodManager
 import org.jetbrains.anko.sdk19.listeners.textChangedListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.search.f04.F04Fragment
 import ru.gidline.app.screen.search.filter.FilterFragment
@@ -21,7 +22,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
 
     override val presenter: SearchPresenter by instance()
 
-    val searchFilter: SearchFilter by instance()
+    override val searchFilter: SearchFilter by instance()
 
     private val chipsPopup: ChipsPopup by instance()
 
@@ -87,6 +88,10 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         } else {
             addFragment(F04Fragment.newInstance())
         }
+    }
+
+    override fun changeSearch(text: String) {
+        et_search.setTextSelection(text)
     }
 
     override fun hideSuggestion() {
