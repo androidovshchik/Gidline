@@ -9,6 +9,10 @@ class Preferences(context: Context) : KotprefModel(context) {
 
     var avatarPath by nullableStringPref(null, "avatar_path")
 
+    var username by nullableStringPref(null, "username")
+
+    var surname by nullableStringPref(null, "surname")
+
     var isMan by booleanPref(true, "is_man")
 
     var citizenship by intPref(0, "citizenship")
@@ -23,7 +27,7 @@ class Preferences(context: Context) : KotprefModel(context) {
 
     var hasMigrationData by booleanPref(false, "hasMigrationData")
 
-    var dateEntryRussia by nullableStringPref("10.10.2019", "date_entry_russia")
+    var dateEntryRussia by nullableStringPref(null, "date_entry_russia")
 
-    var dateFirstPatent by nullableStringPref("01.12.2019", "date_first_patent")
+    var dateFirstPatent by nullableStringPref(null, "date_first_patent")
 }
