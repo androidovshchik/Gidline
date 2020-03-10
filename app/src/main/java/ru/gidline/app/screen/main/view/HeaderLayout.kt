@@ -72,6 +72,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
             val now = LocalDate.now()
             val formatter = DateTimeFormatterBuilder()
                 .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yy"))
                 .toFormatter()
             val entryRussia = it.dateEntryRussia
             if (entryRussia != null) {

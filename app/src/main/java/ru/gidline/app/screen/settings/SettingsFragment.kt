@@ -47,6 +47,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        ll_settings.requestFocus()
         iv_camera.setOnClickListener(this)
         ib_man.setOnClickListener(this)
         ib_woman.setOnClickListener(this)
