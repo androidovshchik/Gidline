@@ -16,10 +16,12 @@ import ru.gidline.app.extension.windowSize
 import ru.gidline.app.local.BellRepository
 import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.common.ToastPopup
+import ru.gidline.app.screen.main.categories.CategoriesContract
 import ru.gidline.app.screen.main.categories.CategoriesFragment
+import ru.gidline.app.screen.notifications.NotificationsContract
 import ru.gidline.app.screen.notifications.NotificationsFragment
-import ru.gidline.app.screen.search.SearchFragment
-import ru.gidline.app.screen.settings.SettingsFragment
+import ru.gidline.app.screen.search.SearchContract
+import ru.gidline.app.screen.settings.SettingsContract
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
@@ -49,22 +51,22 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
         supportFragmentManager.addOnBackStackChangedListener {
             when (val topFragment = topFragment) {
-                is CategoriesFragment -> {
+                is CategoriesContract.View -> {
                     updateHome(R.drawable.hamburger)
                     setTitle(getString(R.string.app_name))
                     notifyBell(bellRepository.allCount, bellRepository.unreadCount)
                 }
-                is NotificationsFragment -> {
+                is NotificationsContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("УВЕДОМЛЕНИЕ")
                     topFragment.refreshData()
                 }
-                is SearchFragment -> {
+                is SearchContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("ПОИСК РАБОТЫ")
                     notifyBell(-1)
                 }
-                is SettingsFragment -> {
+                is SettingsContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("НАСТРОЙКА")
                 }
@@ -78,7 +80,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
             R.id.ib_home -> {
                 if (v.tag == R.drawable.arrow_left) {
                     when (val topFragment = topFragment) {
-                        is SearchFragment -> {
+                        is SearchContract.View -> {
                             if (topFragment.hasPopup) {
                                 topFragment.hideSuggestion()
                                 return
@@ -122,7 +124,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     override fun onBackPressed() {
         when {
             menuPopup.isShowing -> menuPopup.dismiss()
-            (topFragment as? SearchFragment)?.closeFilter() == true -> return
+            (topFragment as? SearchContract.View)?.closeFilter() == true -> return
             else -> super.onBackPressed()
         }
     }

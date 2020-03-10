@@ -9,6 +9,8 @@ interface SearchContract {
 
         val hasPopup: Boolean
 
+        val searchFilter: SearchFilter
+
         fun refreshData()
 
         fun hideSuggestion()
