@@ -34,9 +34,6 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     protected abstract val presenter: P
 
-    override val topFragment: BaseFragment<*>?
-        get() = supportFragmentManager.topFragment as? BaseFragment<*>
-
     override val isTouchable: Boolean
         get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
 
@@ -68,8 +65,6 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     override fun popFragment(name: String?, immediate: Boolean) =
         supportFragmentManager.popFragment(name, immediate)
 
-    override fun onClick(v: View) {}
-
     override fun showMessage(text: String) {
         toast(text)
     }
@@ -77,6 +72,16 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     override fun showError(e: Throwable) {
         longToast(e.localizedMessage ?: e.toString())
     }
+
+    inline fun <reified T> stackCallback(action: T.() -> Unit) {
+        supportFragmentManager.topFragment?.let {
+            if (it is T && it.view != null) {
+                action(it)
+            }
+        }
+    }
+
+    override fun onClick(v: View) {}
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(context))

@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.PopupWindow
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import ru.gidline.app.extension.makeCallback
+import ru.gidline.app.extension.activityCallback
 
 @Suppress("LeakingThis")
 abstract class BasePopup(context: Context) : PopupWindow(context), KodeinAware,
@@ -19,7 +19,7 @@ abstract class BasePopup(context: Context) : PopupWindow(context), KodeinAware,
 
     override fun onClick(v: View) {}
 
-    inline fun <reified T> makeCallback(action: T.() -> Unit) {
-        contentView.context.makeCallback(action)
+    inline fun <reified T> activityCallback(action: T.() -> Unit) {
+        contentView.context.activityCallback(action)
     }
 }

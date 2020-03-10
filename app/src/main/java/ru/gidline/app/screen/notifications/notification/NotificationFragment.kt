@@ -26,7 +26,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
         val bell = bellRepository.getById(args.getInt("id"))?.also {
             it.unread = false
         }
-        makeCallback<MainContract.View> {
+        activityCallback<MainContract.View> {
             if (bell != null) {
                 setTitle(bell.type.caption)
             } else {

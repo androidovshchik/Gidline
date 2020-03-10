@@ -53,14 +53,14 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     override fun onItemDeleted(id: Int) {
         bellRepository.deleteById(id)
         if (bellRepository.allCount <= 0) {
-            makeCallback<IView> {
+            activityCallback<IView> {
                 popFragment(null, false)
             }
         }
     }
 
     override fun onItemSelected(position: Int, item: Bell) {
-        makeCallback<IView> {
+        activityCallback<IView> {
             addFragment(NotificationFragment.newInstance(item.id))
         }
     }

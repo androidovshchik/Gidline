@@ -23,12 +23,6 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
-    protected val parentFragment: BaseFragment<*>?
-        get() = getParentFragment() as? BaseFragment<*>
-
-    override val topFragment: BaseFragment<*>?
-        get() = childFragmentManager.topFragment as? BaseFragment<*>
-
     override val isTouchable: Boolean
         get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
 
@@ -70,8 +64,24 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
         context?.longToast(e.localizedMessage ?: e.toString())
     }
 
-    inline fun <reified T> makeCallback(action: T.() -> Unit) {
-        context?.makeCallback(action)
+    inline fun <reified T> activityCallback(action: T.() -> Unit) {
+        context?.activityCallback(action)
+    }
+
+    inline fun <reified T> stackCallback(action: T.() -> Unit) {
+        childFragmentManager.topFragment?.let {
+            if (it is T && it.view != null) {
+                action(it)
+            }
+        }
+    }
+
+    inline fun <reified T> parentCallback(action: T.() -> Unit) {
+        parentFragment?.let {
+            if (it is T && it.view != null) {
+                action(it)
+            }
+        }
     }
 
     override fun onDestroy() {

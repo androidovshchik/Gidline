@@ -19,7 +19,7 @@ val Context.statusBarHeight: Int
         } else 0
     }
 
-inline fun <reified T> Context.makeCallback(action: T.() -> Unit) {
+inline fun <reified T> Context.activityCallback(action: T.() -> Unit) {
     activity()?.let {
         if (it is T && !it.isFinishing) {
             action(it)

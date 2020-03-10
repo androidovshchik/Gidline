@@ -5,8 +5,6 @@ import ru.gidline.app.screen.base.BaseFragment
 
 interface IView : View.OnClickListener {
 
-    val topFragment: BaseFragment<*>?
-
     val isTouchable: Boolean
 
     fun setTouchable(enable: Boolean)
