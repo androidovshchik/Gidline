@@ -47,8 +47,6 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tv_name.text = "Хуршед"
-        tv_surname.text = "Хасанов"
         iv_camera.setOnClickListener(this)
         ib_man.setOnClickListener(this)
         ib_woman.setOnClickListener(this)
@@ -59,14 +57,17 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             }
             it.onItemSelectedListener = this
         }
-        val primaryFormat = "+7([000]) [000]-[00]-[00]"
+        val phoneFormat = "+7([000]) [000]-[00]-[00]"
         val affineFormats = listOf(
             "+992 [000]-[00]-[00]",
             "+998 [000]-[00]-[00]",
             "+996 [000]-[00]-[00]"
         )
-        MaskedTextChangedListener.installOn(et_phone, primaryFormat, affineFormats)
-        MaskedTextChangedListener.installOn(et_whatsapp, primaryFormat, affineFormats)
+        MaskedTextChangedListener.installOn(et_phone, phoneFormat, affineFormats)
+        MaskedTextChangedListener.installOn(et_whatsapp, phoneFormat, affineFormats)
+        val dateFormat = "[00]{.}[00]{.}[00]"
+        MaskedTextChangedListener.installOn(et_date1, dateFormat)
+        MaskedTextChangedListener.installOn(et_date2, dateFormat)
         s_language.also {
             it.adapter = languageAdapter.apply {
                 addAll(*resources.getStringArray(R.array.languages))
@@ -77,6 +78,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         preferences.run {
             avatar = avatarPath
             updateGender(isMan)
+            et_name.setText(username)
+            et_surname.setText(surname)
             s_citizenship.setSelection(citizenship, false)
             phone?.let {
                 et_phone.setText(it)
@@ -86,8 +89,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             }
             et_email.setText(email)
             s_language.setSelection(language, false)
-            tv_date1.text = dateEntryRussia
-            tv_date2.text = dateFirstPatent
+            et_date1.setText(dateEntryRussia)
+            et_date2.setText(dateFirstPatent)
             if (phone == null) {
                 requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
             }
@@ -128,6 +131,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             R.id.tv_save -> {
                 preferences.bulk {
                     avatarPath = avatar
+                    username = et_name.text.toString()
+                    surname = et_surname.text.toString()
                     isMan = ib_man.isChecked
                     val country = s_citizenship.selectedItemPosition
                     citizenship = country
@@ -136,6 +141,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     email = et_email.text.toString()
                     language = s_language.selectedItemPosition
                     hasMigrationData = country in 2..3
+                    dateEntryRussia = et_date1.text.toString()
+                    dateFirstPatent = et_date2.text.toString()
                 }
                 activityCallback<IView> {
                     popFragment(null, false)

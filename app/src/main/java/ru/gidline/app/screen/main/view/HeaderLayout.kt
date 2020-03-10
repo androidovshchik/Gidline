@@ -55,18 +55,25 @@ class HeaderLayout : RelativeLayout, KodeinAware {
     private fun init(attrs: AttributeSet?) {
         setBackgroundResource(R.drawable.header_background)
         View.inflate(context, R.layout.merge_header, this)
-        tv_name.text = "Хуршед"
-        tv_surname.text = "Хасанов"
     }
 
     @Suppress("DEPRECATION")
-    fun updateData() {
-        if (preferences.hasMigrationData) {
+    fun updateData() = preferences.also {
+        val genderDrawable = if (it.isMan) R.drawable.avatar_man else R.drawable.avatar_woman
+        iv_avatar.load(Uri.parse("file://${it.avatarPath}")) {
+            error(resources.getDrawable(genderDrawable).mutate().apply {
+                setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+            })
+            transformations(CircleCropTransformation())
+        }
+        tv_name.text = it.username
+        tv_surname.text = it.surname
+        if (it.hasMigrationData) {
             val now = LocalDate.now()
             val formatter = DateTimeFormatterBuilder()
                 .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
                 .toFormatter()
-            val entryRussia = preferences.dateEntryRussia
+            val entryRussia = it.dateEntryRussia
             if (entryRussia != null) {
                 try {
                     val date = LocalDate.parse(entryRussia, formatter)
@@ -81,7 +88,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
             } else {
                 toggleViews(false, tv_before_border, tv_border_days)
             }
-            val firstPatent = preferences.dateFirstPatent
+            val firstPatent = it.dateFirstPatent
             if (firstPatent != null) {
                 try {
                     val date = LocalDate.parse(firstPatent, formatter)
@@ -99,14 +106,6 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         } else {
             toggleViews(false, tv_before_border, tv_border_days)
             toggleViews(false, tv_before_patent, tv_patent_days)
-        }
-        val genderDrawable =
-            if (preferences.isMan) R.drawable.avatar_man else R.drawable.avatar_woman
-        iv_avatar.load(Uri.parse("file://${preferences.avatarPath}")) {
-            error(resources.getDrawable(genderDrawable).mutate().apply {
-                setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
-            })
-            transformations(CircleCropTransformation())
         }
     }
 
