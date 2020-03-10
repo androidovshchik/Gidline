@@ -3,6 +3,7 @@ package ru.gidline.app.screen.base
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.collection.SimpleArrayMap
 import androidx.fragment.app.Fragment
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -19,6 +20,8 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     override val kodein by closestKodein()
 
     protected abstract val presenter: P
+
+    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
 
     protected val args: Bundle
         get() = arguments ?: Bundle()
@@ -40,6 +43,22 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
             activity?.window?.clearFlags(flag)
         } else {
             activity?.window?.setFlags(flag, flag)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IView> getNestedFragment(id: Int): T? {
+        if (!nestedFragments.containsKey(id)) {
+            val fragment = childFragmentManager.findFragmentById(id)
+            if (fragment is BaseFragment<*>) {
+                nestedFragments.put(id, fragment)
+            }
+        }
+        return nestedFragments.get(id)?.let {
+            if (it.view != null) {
+                return it as? T
+            }
+            null
         }
     }
 
@@ -85,6 +104,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     }
 
     override fun onDestroy() {
+        nestedFragments.clear()
         presenter.detachView()
         super.onDestroy()
     }

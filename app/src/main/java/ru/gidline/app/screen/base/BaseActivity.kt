@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.SimpleArrayMap
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -34,6 +35,8 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     protected abstract val presenter: P
 
+    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+
     override val topFragment: IView?
         get() = supportFragmentManager.topFragment?.let {
             if (it is IView && it.view != null) {
@@ -51,6 +54,22 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
             window.clearFlags(flag)
         } else {
             window.setFlags(flag, flag)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IView> getNestedFragment(id: Int): T? {
+        if (!nestedFragments.containsKey(id)) {
+            val fragment = supportFragmentManager.findFragmentById(id)
+            if (fragment is BaseFragment<*>) {
+                nestedFragments.put(id, fragment)
+            }
+        }
+        return nestedFragments.get(id)?.let {
+            if (it.view != null) {
+                return it as? T
+            }
+            null
         }
     }
 
@@ -106,6 +125,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     }
 
     override fun onDestroy() {
+        nestedFragments.clear()
         presenter.detachView()
         super.onDestroy()
     }
