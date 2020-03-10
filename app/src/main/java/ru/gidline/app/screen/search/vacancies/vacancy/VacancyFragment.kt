@@ -43,7 +43,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
     override fun onClick(v: View) {
         when (v.id) {
             R.id.mb_respond -> {
-                makeCallback<IView> {
+                activityCallback<IView> {
                     popFragment(null, false)
                 }
             }

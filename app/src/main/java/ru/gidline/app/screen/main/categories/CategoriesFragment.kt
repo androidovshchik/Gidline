@@ -29,12 +29,12 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cl_search -> {
-                makeCallback<IView> {
+                activityCallback<IView> {
                     addFragment(SearchFragment.newInstance())
                 }
             }
             R.id.ib_settings -> {
-                makeCallback<IView> {
+                activityCallback<IView> {
                     putFragment(SettingsFragment.newInstance())
                 }
             }
