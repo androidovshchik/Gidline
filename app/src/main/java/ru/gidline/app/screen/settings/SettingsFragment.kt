@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.CircleCropTransformation
+import com.chibatching.kotpref.bulk
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.jetbrains.anko.telephonyManager
 import org.kodein.di.generic.instance
@@ -38,6 +39,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     private var alertDialog: AlertDialog? = null
 
+    private var avatar: String? = null
+
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, root, false)
     }
@@ -50,6 +53,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         ib_woman.setOnClickListener(this)
         s_citizenship.also {
             it.adapter = countryAdapter.apply {
+                add("")
                 addAll(*resources.getStringArray(R.array.countries))
             }
             it.onItemSelectedListener = this
@@ -62,8 +66,14 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         }
         tv_save.setOnClickListener(this)
         preferences.run {
+            avatar = avatarPath
             onPhotoPath(avatarPath)
             updateGender(isMan)
+            s_citizenship.setSelection(citizenship, false)
+            et_phone.setText(phone)
+            et_whatsapp.setText(whatsapp)
+            et_email.setText(email)
+            s_language.setSelection(language, false)
             if (phone == null) {
                 requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
             }
@@ -102,7 +112,17 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 updateGender(!ib_man.isChecked)
             }
             R.id.tv_save -> {
-
+                preferences.bulk {
+                    avatarPath = avatar
+                    isMan = ib_man.isChecked
+                    val country = s_citizenship.selectedItemPosition
+                    citizenship = country
+                    phone = et_phone.text.toString()
+                    whatsapp = et_whatsapp.text.toString()
+                    email = et_email.text.toString()
+                    language = s_language.selectedItemPosition
+                    hasMigrationData = country in 2..3
+                }
                 activityCallback<IView> {
                     popFragment(null, false)
                 }
@@ -115,7 +135,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent?.id) {
             R.id.s_citizenship -> {
-                updateMigration(position)
+                mcv_migration.isVisible = position in 2..3
             }
         }
     }
@@ -140,11 +160,6 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             //preferences.isMan = isMan
             onPhotoPath("")
         }
-    }
-
-    private fun updateMigration(index: Int) {
-        preferences.hasMigrationData
-        mcv_migration.isVisible = index in 2..3
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
