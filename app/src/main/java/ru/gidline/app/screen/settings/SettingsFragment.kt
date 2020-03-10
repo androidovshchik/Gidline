@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.chibatching.kotpref.bulk
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.jetbrains.anko.telephonyManager
 import org.kodein.di.generic.instance
@@ -58,6 +59,14 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             }
             it.onItemSelectedListener = this
         }
+        val primaryFormat = "+7([000]) [000]-[00]-[00]"
+        val affineFormats = listOf(
+            "+992 [000]-[00]-[00]",
+            "+998 [000]-[00]-[00]",
+            "+996 [000]-[00]-[00]"
+        )
+        MaskedTextChangedListener.installOn(et_phone, primaryFormat, affineFormats)
+        MaskedTextChangedListener.installOn(et_whatsapp, primaryFormat, affineFormats)
         s_language.also {
             it.adapter = languageAdapter.apply {
                 addAll(*resources.getStringArray(R.array.languages))
@@ -74,6 +83,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             et_whatsapp.setText(whatsapp)
             et_email.setText(email)
             s_language.setSelection(language, false)
+            tv_date1.text = dateEntryRussia
+            tv_date2.text = dateFirstPatent
             if (phone == null) {
                 requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
             }
