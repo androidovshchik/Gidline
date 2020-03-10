@@ -2,6 +2,7 @@ package ru.gidline.app.screen.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -38,6 +39,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
             when (f) {
                 is CategoriesContract.View -> notifyBell(-1)
+                is SettingsContract.View -> window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
             }
         }
     }
@@ -65,6 +67,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 is SettingsContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("НАСТРОЙКА")
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
                 }
             }
         }

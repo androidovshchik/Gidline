@@ -133,6 +133,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     citizenship = country
                     phone = et_phone.text.toString().ifEmpty { null }
                     whatsapp = et_whatsapp.text.toString().ifEmpty { null }
+                    email = et_email.text.toString()
                     language = s_language.selectedItemPosition
                     hasMigrationData = country in 2..3
                 }
@@ -181,7 +182,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                 if (areGranted(Manifest.permission.READ_PHONE_STATE)) {
                     val phone = telephonyManager.line1Number
                     Timber.d("User phone: $phone")
-                    preferences.phone = phone
+                    et_phone?.setText(phone)
                 }
             }
             REQUEST_STORAGE -> iv_camera?.performClick()
