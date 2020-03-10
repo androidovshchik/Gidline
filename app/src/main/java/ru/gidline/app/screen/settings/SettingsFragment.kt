@@ -66,7 +66,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         )
         MaskedTextChangedListener.installOn(et_phone, phoneFormat, affineFormats)
         MaskedTextChangedListener.installOn(et_whatsapp, phoneFormat, affineFormats)
-        val dateFormat = "[00]{.}[00]{.}[00]"
+        val dateFormat = "[00]{.}[00]{.}[0000]"
         MaskedTextChangedListener.installOn(et_date1, dateFormat)
         MaskedTextChangedListener.installOn(et_date2, dateFormat)
         s_language.also {
