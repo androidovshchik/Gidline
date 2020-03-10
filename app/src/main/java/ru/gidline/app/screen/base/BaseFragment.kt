@@ -23,6 +23,14 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
+    override val topFragment: IView?
+        get() = childFragmentManager.topFragment?.let {
+            if (it is IView && it.view != null) {
+                return it
+            }
+            null
+        }
+
     override val isTouchable: Boolean
         get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
 
@@ -66,14 +74,6 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
 
     inline fun <reified T> activityCallback(action: T.() -> Unit) {
         context?.activityCallback(action)
-    }
-
-    inline fun <reified T> stackCallback(action: T.() -> Unit) {
-        childFragmentManager.topFragment?.let {
-            if (it is T && it.view != null) {
-                action(it)
-            }
-        }
     }
 
     inline fun <reified T> parentCallback(action: T.() -> Unit) {

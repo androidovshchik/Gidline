@@ -34,6 +34,14 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     protected abstract val presenter: P
 
+    override val topFragment: IView?
+        get() = supportFragmentManager.topFragment?.let {
+            if (it is IView && it.view != null) {
+                return it
+            }
+            null
+        }
+
     override val isTouchable: Boolean
         get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
 
@@ -71,14 +79,6 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     override fun showError(e: Throwable) {
         longToast(e.localizedMessage ?: e.toString())
-    }
-
-    inline fun <reified T> stackCallback(action: T.() -> Unit) {
-        supportFragmentManager.topFragment?.let {
-            if (it is T && it.view != null) {
-                action(it)
-            }
-        }
     }
 
     override fun onClick(v: View) {}
