@@ -76,11 +76,14 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         tv_save.setOnClickListener(this)
         preferences.run {
             avatar = avatarPath
-            onPhotoPath(avatarPath)
             updateGender(isMan)
             s_citizenship.setSelection(citizenship, false)
-            et_phone.setText(phone)
-            et_whatsapp.setText(whatsapp)
+            phone?.let {
+                et_phone.setText(it)
+            }
+            whatsapp?.let {
+                et_whatsapp.setText(it)
+            }
             et_email.setText(email)
             s_language.setSelection(language, false)
             tv_date1.text = dateEntryRussia
@@ -128,9 +131,8 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     isMan = ib_man.isChecked
                     val country = s_citizenship.selectedItemPosition
                     citizenship = country
-                    phone = et_phone.text.toString()
-                    whatsapp = et_whatsapp.text.toString()
-                    email = et_email.text.toString()
+                    phone = et_phone.text.toString().ifEmpty { null }
+                    whatsapp = et_whatsapp.text.toString().ifEmpty { null }
                     language = s_language.selectedItemPosition
                     hasMigrationData = country in 2..3
                 }
@@ -154,12 +156,10 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     override fun onPhotoPath(path: String?) {
         Timber.d("Photo path: $path")
         if (!path.isNullOrBlank()) {
-            //preferences.avatarPath = path
+            avatar = path
         }
-        val genderDrawable =
-            if (ib_man.isChecked) R.drawable.avatar_man else R.drawable.avatar_woman
-        iv_avatar.load(Uri.parse("file://$path")) {
-            error(genderDrawable)
+        iv_avatar.load(Uri.parse("file://$avatar")) {
+            error(if (ib_man.isChecked) R.drawable.avatar_man else R.drawable.avatar_woman)
             transformations(CircleCropTransformation())
         }
     }
@@ -167,10 +167,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
     private fun updateGender(isMan: Boolean) {
         ib_man.isChecked = isMan
         ib_woman.isChecked = !isMan
-        if (preferences.avatarPath == null) {
-            //preferences.isMan = isMan
-            onPhotoPath("")
-        }
+        onPhotoPath("")
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
