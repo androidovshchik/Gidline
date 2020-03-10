@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mcv_vacancy"
+    style="@style/MatCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="0dp"
-    app:cardMaxElevation="0dp"
-    app:strokeColor="#f9d5e9"
-    app:strokeWidth="1.5dp"
     tools:cardBackgroundColor="@color/colorCardFire"
     tools:ignore="MissingPrefix">
 
@@ -44,7 +39,7 @@
 
         <TextView
             android:id="@+id/tv_vacancy"
-            fontPath="Arial-Bold.ttf"
+            fontPath="font/Arial-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="10dp"
@@ -61,7 +56,7 @@
 
         <TextView
             android:id="@+id/tv_payment_time"
-            fontPath="Arial-Bold.ttf"
+            fontPath="font/Arial-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_vacancy"

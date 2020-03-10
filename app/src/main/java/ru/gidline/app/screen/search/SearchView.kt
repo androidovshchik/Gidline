@@ -1,15 +1,16 @@
 package ru.gidline.app.screen.search
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.widget.EditText
-import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
-import ru.gidline.app.screen.main.MainContract
+import ru.gidline.app.extension.activityCallback
+import ru.gidline.app.screen.base.listener.IView
 
+@SuppressLint("AppCompatCustomView")
 class SearchView : EditText {
 
     @JvmOverloads
@@ -34,11 +35,10 @@ class SearchView : EditText {
 
     override fun onKeyPreIme(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            context.makeCallback<MainContract.View> {
-                updateHome(R.drawable.hamburger)
-                topFragment.let {
-                    if (it is SearchFragment) {
-                        it.chipsPopup.dismiss()
+            context.activityCallback<IView> {
+                when (val topFragment = topFragment) {
+                    is SearchContract.View -> {
+                        topFragment.closePopup()
                     }
                 }
             }

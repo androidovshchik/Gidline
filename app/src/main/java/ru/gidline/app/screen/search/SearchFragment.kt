@@ -1,42 +1,47 @@
 package ru.gidline.app.screen.search
 
+import android.graphics.Matrix
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import coil.api.load
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.jetbrains.anko.inputMethodManager
 import org.jetbrains.anko.sdk19.listeners.textChangedListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
+import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.main.MainContract
 import ru.gidline.app.screen.search.f04.F04Fragment
-import ru.gidline.app.screen.search.vacancies.VacanciesFragment
+import ru.gidline.app.screen.search.filter.FilterContract
+import ru.gidline.app.screen.search.model.SearchFilter
+import ru.gidline.app.screen.search.vacancies.VacanciesContract
 
 class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.View {
 
     override val presenter: SearchPresenter by instance()
 
-    private val searchFilter: SearchFilter by instance()
+    override val searchFilter: SearchFilter by instance()
 
-    private lateinit var vacanciesFragment: VacanciesFragment
+    private val chipsPopup: ChipsPopup by instance()
 
-    val chipsPopup: ChipsPopup by instance()
+    override val hasPopup: Boolean
+        get() = chipsPopup.isShowing
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_search, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        vacanciesFragment =
-            childFragmentManager.findFragmentById(R.id.f_vacancies) as VacanciesFragment
-        et_search.setOnTouchListener { v, _ ->
-            context?.makeCallback<MainContract.View> {
-                updateHome(R.drawable.arrow_left)
+        iv_background.apply {
+            load(R.drawable.background)
+            imageMatrix = Matrix().apply {
+                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
             }
+        }
+        et_search.setOnTouchListener { v, _ ->
             chipsPopup.show(v)
             false
         }
@@ -47,24 +52,24 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
                 chipsPopup.filter(text)
             }
         }
-        ib_filter.setOnClickListener {
-            hideSuggestion()
-            et_search.clearFocus()
-            context?.makeCallback<MainContract.View> {
-                updateHome(R.drawable.hamburger)
-                showFragment(R.id.f_filter)
-            }
-        }
-        et_search.setOnEditorActionListener { v, actionId, _ ->
+        ib_filter.setOnClickListener(this)
+        et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSuggestion()
-                context?.makeCallback<MainContract.View> {
-                    updateHome(R.drawable.hamburger)
-                }
                 refreshData()
                 true
             } else {
                 false
+            }
+        }
+        closeFilter()
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.ib_filter -> {
+                hideSuggestion()
+                showFragment(R.id.f_filter)
             }
         }
     }
@@ -72,21 +77,39 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     override fun refreshData() {
         hideFragment(R.id.f_vacancies)
         popFragment(null, true)
-        if (vacanciesFragment.refreshData()) {
-            showFragment(R.id.f_vacancies)
-        } else {
-            addFragment(F04Fragment.newInstance())
+        findFragment<VacanciesContract.View>(R.id.f_vacancies)?.let {
+            if (it.refreshData()) {
+                showFragment(R.id.f_vacancies)
+            } else {
+                addFragment(F04Fragment.newInstance())
+            }
         }
+    }
+
+    override fun changeSearch(text: String) {
+        et_search.setTextSelection(text)
     }
 
     override fun hideSuggestion() {
         context?.inputMethodManager?.hideSoftInputFromWindow(et_search.windowToken, 0)
         et_search.clearFocus()
+        closePopup()
+    }
+
+    override fun closeFilter(): Boolean {
+        if (findFragment<FilterContract.View>(R.id.f_filter)?.isVisible() == true) {
+            hideFragment(R.id.f_filter)
+            return true
+        }
+        return false
+    }
+
+    override fun closePopup() {
         chipsPopup.dismiss()
     }
 
     override fun onDestroyView() {
-        chipsPopup.dismiss()
+        closePopup()
         super.onDestroyView()
     }
 

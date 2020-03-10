@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import org.jetbrains.anko.layoutInflater
-import ru.gidline.app.screen.base.listeners.IRecycler
+import ru.gidline.app.screen.base.listener.IRecycler
 import java.lang.ref.WeakReference
 
 abstract class BaseHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,26 +20,26 @@ abstract class BaseHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseHolder<T>> {
+abstract class BaseAdapter<T : IRecycler<E>, E> : RecyclerView.Adapter<BaseHolder<E>> {
 
-    val items = mutableListOf<T>()
+    val items = mutableListOf<E>()
 
-    protected var reference: WeakReference<IRecycler<T>>? = null
+    protected var reference: WeakReference<T>? = null
 
     constructor()
 
-    constructor(listener: IRecycler<T>) {
+    constructor(listener: T) {
         setListener(listener)
     }
 
     /**
      * It is assumed that this will be called one time or never
      */
-    fun setListener(listener: IRecycler<T>) {
+    fun setListener(listener: T) {
         reference = WeakReference(listener)
     }
 
-    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) {
+    override fun onBindViewHolder(holder: BaseHolder<E>, position: Int) {
         holder.onBindItem(position, items[position])
     }
 

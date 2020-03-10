@@ -4,22 +4,20 @@ import android.content.Context
 import android.graphics.Matrix
 import android.view.Gravity
 import android.view.View
-import android.widget.PopupWindow
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import coil.api.load
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.popup_chips.view.*
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.windowManager
 import ru.gidline.app.R
-import ru.gidline.app.extension.makeCallback
-import ru.gidline.app.extension.setTextSelection
+import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.BasePopup
+import ru.gidline.app.screen.base.listener.IView
 
-class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener {
+class ChipsPopup(context: Context) : BasePopup(context) {
 
     private val topOffset = context.statusBarHeight + context.resources.let {
         it.getDimension(R.dimen.toolbar_height) + it.getDimension(R.dimen.search_bar_height)
@@ -44,7 +42,7 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
         }
     }
 
-    fun show(anchor: View) {
+    override fun show(anchor: View) {
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }
 
@@ -57,20 +55,12 @@ class ChipsPopup(context: Context) : PopupWindow(context), View.OnClickListener 
     }
 
     override fun onClick(v: View) {
-        v.context.makeCallback<IView> {
-            topFragment.let {
-                if (it is SearchFragment) {
-                    it.et_search?.setTextSelection((v as Chip).text)
+        activityCallback<IView> {
+            when (val topFragment = topFragment) {
+                is SearchContract.View -> {
+                    topFragment.changeSearch((v as Chip).text.toString())
                 }
             }
         }
     }
-
-    private val Context.statusBarHeight: Int
-        get() {
-            val id = resources.getIdentifier("status_bar_height", "dimen", "android")
-            return if (id > 0) {
-                resources.getDimensionPixelSize(id)
-            } else 0
-        }
 }

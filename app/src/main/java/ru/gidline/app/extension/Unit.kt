@@ -18,6 +18,10 @@ val localTime
 val isUiThread: Boolean
     get() = Looper.myLooper() == Looper.getMainLooper()
 
+fun isKitkat() = Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT
+
+fun isKitkatWatch() = Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT_WATCH
+
 fun isLollipop() = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP
 
 fun isLollipopMR1() = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1
@@ -33,6 +37,10 @@ fun isOreo() = Build.VERSION.SDK_INT == Build.VERSION_CODES.O
 fun isOreoMR1() = Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1
 
 fun isPie() = Build.VERSION.SDK_INT == Build.VERSION_CODES.P
+
+fun isKitkatPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+
+fun isKitkatWatchPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH
 
 fun isLollipopPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "logo": "images/company.png",
+    "logo": "image/company.png",
     "organization": "ООО СКЛАД СЕРВИС",
     "vacancy": "КОМПЛЕКТОВЩИК",
     "date": "21.01.2020",
@@ -19,7 +19,7 @@
   },
   {
     "id": 2,
-    "logo": "images/company.png",
+    "logo": "image/company.png",
     "organization": "ООО СКЛАД СЕРВИС",
     "vacancy": "СБОРЩИК МЕБЕЛИ",
     "date": "20.01.2020",
@@ -37,7 +37,7 @@
   },
   {
     "id": 3,
-    "logo": "images/company.png",
+    "logo": "image/company.png",
     "organization": "ООО СКЛАД СЕРВИС",
     "vacancy": "КОМПЛЕКТОВЩИК",
     "date": "19.01.2020",
@@ -55,7 +55,7 @@
   },
   {
     "id": 4,
-    "logo": "images/company.png",
+    "logo": "image/company.png",
     "organization": "ООО СКЛАД СЕРВИС",
     "vacancy": "КОМПЛЕКТОВЩИК",
     "date": "18.01.2020",

@@ -2,15 +2,17 @@ package ru.gidline.app.screen.base
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import androidx.collection.SimpleArrayMap
 import androidx.fragment.app.Fragment
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.*
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IView
 
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware {
@@ -19,14 +21,46 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
 
     protected abstract val presenter: P
 
+    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
-    protected val parent: BaseFragment<*>?
-        get() = parentFragment as? BaseFragment<*>
+    override val topFragment: IView?
+        get() = childFragmentManager.topFragment?.let {
+            if (it is IView && it.view != null) {
+                return it
+            }
+            null
+        }
 
-    override val topFragment: BaseFragment<*>?
-        get() = childFragmentManager.topFragment as? BaseFragment<*>
+    override val isTouchable: Boolean
+        get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
+
+    override fun setTouchable(enable: Boolean) {
+        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        if (enable) {
+            activity?.window?.clearFlags(flag)
+        } else {
+            activity?.window?.setFlags(flag, flag)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IView> findFragment(id: Int): T? {
+        if (!nestedFragments.containsKey(id)) {
+            val fragment = childFragmentManager.findFragmentById(id)
+            if (fragment is BaseFragment<*>) {
+                nestedFragments.put(id, fragment)
+            }
+        }
+        return nestedFragments.get(id)?.let {
+            if (it.view != null) {
+                return it as? T
+            }
+            null
+        }
+    }
 
     override fun showFragment(id: Int) {
         childFragmentManager.showFragment(id)
@@ -50,14 +84,27 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     override fun onClick(v: View) {}
 
     override fun showMessage(text: String) {
-        view?.snackbar(text)
+        context?.toast(text)
     }
 
     override fun showError(e: Throwable) {
         context?.longToast(e.localizedMessage ?: e.toString())
     }
 
+    inline fun <reified T> activityCallback(action: T.() -> Unit) {
+        context?.activityCallback(action)
+    }
+
+    inline fun <reified T> parentCallback(nullableView: Boolean = false, action: T.() -> Unit) {
+        parentFragment?.let {
+            if (it is T && (nullableView || it.view != null)) {
+                action(it)
+            }
+        }
+    }
+
     override fun onDestroy() {
+        nestedFragments.clear()
         presenter.detachView()
         super.onDestroy()
     }

@@ -3,7 +3,7 @@ package ru.gidline.app.local
 import android.content.Context
 import com.google.gson.Gson
 import ru.gidline.app.extension.fromJson
-import ru.gidline.app.local.dto.Vacancy
+import ru.gidline.app.local.model.Vacancy
 import java.io.BufferedReader
 
 class VacancyRepository(context: Context, gson: Gson) {

@@ -3,18 +3,20 @@ package ru.gidline.app.screen.base
 import android.content.Context
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.SimpleArrayMap
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.*
-import ru.gidline.app.screen.base.listeners.IPresenter
-import ru.gidline.app.screen.base.listeners.IView
+import ru.gidline.app.screen.base.listener.IPresenter
+import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.presenterModule
 import ru.gidline.app.screen.screenModule
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -26,13 +28,50 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
         extend(parentKodein)
 
+        import(presenterModule)
+
         import(screenModule)
     }
 
     protected abstract val presenter: P
 
-    override val topFragment: BaseFragment<*>?
-        get() = supportFragmentManager.topFragment as? BaseFragment<*>
+    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+
+    override val topFragment: IView?
+        get() = supportFragmentManager.topFragment?.let {
+            if (it is IView && it.view != null) {
+                return it
+            }
+            null
+        }
+
+    override val isTouchable: Boolean
+        get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
+
+    override fun setTouchable(enable: Boolean) {
+        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        if (enable) {
+            window.clearFlags(flag)
+        } else {
+            window.setFlags(flag, flag)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : IView> findFragment(id: Int): T? {
+        if (!nestedFragments.containsKey(id)) {
+            val fragment = supportFragmentManager.findFragmentById(id)
+            if (fragment is BaseFragment<*>) {
+                nestedFragments.put(id, fragment)
+            }
+        }
+        return nestedFragments.get(id)?.let {
+            if (it.view != null) {
+                return it as? T
+            }
+            null
+        }
+    }
 
     override fun showFragment(id: Int) {
         supportFragmentManager.showFragment(id)
@@ -53,15 +92,15 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     override fun popFragment(name: String?, immediate: Boolean) =
         supportFragmentManager.popFragment(name, immediate)
 
-    override fun onClick(v: View) {}
-
     override fun showMessage(text: String) {
-        contentView?.snackbar(text)
+        toast(text)
     }
 
     override fun showError(e: Throwable) {
         longToast(e.localizedMessage ?: e.toString())
     }
+
+    override fun onClick(v: View) {}
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(context))
@@ -86,6 +125,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
     }
 
     override fun onDestroy() {
+        nestedFragments.clear()
         presenter.detachView()
         super.onDestroy()
     }

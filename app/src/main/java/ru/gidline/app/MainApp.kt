@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import coil.Coil
 import coil.ImageLoader
+import com.jakewharton.threetenabp.AndroidThreeTen
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -44,6 +45,7 @@ class MainApp : Application(), KodeinAware {
                 NotificationChannel("main", "Фоновое", NotificationManager.IMPORTANCE_LOW)
             )
         }
+        AndroidThreeTen.init(this)
         Coil.setDefaultImageLoader(ImageLoader(applicationContext) {
             availableMemoryPercentage(0.5)
             bitmapPoolPercentage(0.5)
@@ -60,7 +62,7 @@ class MainApp : Application(), KodeinAware {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("Arial.ttf")
+                            .setDefaultFontPath("font/Arial.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )
