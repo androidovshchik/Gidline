@@ -23,6 +23,7 @@
         <item>Таджикистан</item>
         <item>Узбекистан</item>
         <item>Кыргызстан</item>
+        <item>Другое</item>
     </string-array>
 
     <string-array name="languages">

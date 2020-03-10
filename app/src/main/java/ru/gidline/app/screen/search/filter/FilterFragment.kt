@@ -12,8 +12,9 @@ import org.jetbrains.anko.sdk19.listeners.onSeekBarChangeListener
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
+import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.search.SearchContract
 import ru.gidline.app.screen.search.SearchFilter
-import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.search.filter.view.RadioButton
 import ru.gidline.app.screen.search.filter.view.ToggleButton
 import kotlin.math.round
@@ -29,7 +30,12 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
     private val calculator = Calculator()
 
     private val searchFilter: SearchFilter?
-        get() = (parentFragment as? SearchFragment)?.searchFilter
+        get() {
+            parentCallback<SearchContract.View> {
+                return searchFilter
+            }
+            return null
+        }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_filter, root, false)
@@ -83,7 +89,11 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ib_close -> parentFragment?.hideFragment(R.id.f_filter)
+            R.id.ib_close -> {
+                parentCallback<IView> {
+                    hideFragment(R.id.f_filter)
+                }
+            }
             R.id.tv_per_month, R.id.tv_per_item, R.id.tv_per_hour -> {
                 calculator.perTime =
                     if ((v as ToggleButton).isChecked) null else v.tag.toString().toInt()
@@ -113,7 +123,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
                     it.residence = ib_checkbox1.isChecked
                     it.freeFeed = ib_checkbox2.isChecked
                 }
-                (parentFragment as? SearchFragment)?.apply {
+                parentCallback<SearchContract.View> {
                     refreshData()
                     hideFragment(R.id.f_filter)
                 }
