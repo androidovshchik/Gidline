@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
         override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
             when (f) {
-                is CategoriesFragment -> notifyBell(-1)
+                is CategoriesContract.View -> notifyBell(-1)
             }
         }
     }
@@ -51,11 +51,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
         supportFragmentManager.addOnBackStackChangedListener {
             when (val topFragment = topFragment) {
-                is CategoriesContract.View -> {
-                    updateHome(R.drawable.hamburger)
-                    setTitle(getString(R.string.app_name))
-                    notifyBell(bellRepository.allCount, bellRepository.unreadCount)
-                }
+                is CategoriesContract.View -> onCategoriesEntry()
                 is NotificationsContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("УВЕДОМЛЕНИЕ")
@@ -73,6 +69,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
             }
         }
         addFragment(CategoriesFragment.newInstance())
+        onCategoriesEntry()
     }
 
     override fun onClick(v: View) {
@@ -119,6 +116,12 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     private fun notifyBell(all: Int, unread: Int = 0) {
         ib_bell.isVisible = all >= 0
         iv_bell_daw.isVisible = unread > 0
+    }
+
+    private fun onCategoriesEntry() {
+        updateHome(R.drawable.hamburger)
+        setTitle(getString(R.string.app_name))
+        notifyBell(bellRepository.allCount, bellRepository.unreadCount)
     }
 
     override fun onBackPressed() {

@@ -15,9 +15,9 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.setTextSelection
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.search.f04.F04Fragment
-import ru.gidline.app.screen.search.filter.FilterFragment
+import ru.gidline.app.screen.search.filter.FilterContract
 import ru.gidline.app.screen.search.model.SearchFilter
-import ru.gidline.app.screen.search.vacancies.VacanciesFragment
+import ru.gidline.app.screen.search.vacancies.VacanciesContract
 
 class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.View {
 
@@ -27,10 +27,6 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
 
     private val chipsPopup: ChipsPopup by instance()
 
-    private lateinit var filterFragment: FilterFragment
-
-    private lateinit var vacanciesFragment: VacanciesFragment
-
     override val hasPopup: Boolean
         get() = chipsPopup.isShowing
 
@@ -39,9 +35,6 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        vacanciesFragment =
-            childFragmentManager.findFragmentById(R.id.f_vacancies) as VacanciesFragment
-        filterFragment = childFragmentManager.findFragmentById(R.id.f_filter) as FilterFragment
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
@@ -84,10 +77,12 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     override fun refreshData() {
         hideFragment(R.id.f_vacancies)
         popFragment(null, true)
-        if (vacanciesFragment.refreshData()) {
-            showFragment(R.id.f_vacancies)
-        } else {
-            addFragment(F04Fragment.newInstance())
+        getNestedFragment<VacanciesContract.View>(R.id.f_vacancies)?.let {
+            if (it.refreshData()) {
+                showFragment(R.id.f_vacancies)
+            } else {
+                addFragment(F04Fragment.newInstance())
+            }
         }
     }
 
@@ -102,7 +97,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     }
 
     override fun closeFilter(): Boolean {
-        if (filterFragment.isVisible) {
+        if (getNestedFragment<FilterContract.View>(R.id.f_filter)?.isVisible() == true) {
             hideFragment(R.id.f_filter)
             return true
         }

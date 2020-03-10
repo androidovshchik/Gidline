@@ -6,7 +6,10 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface FilterContract {
 
-    interface View : IView, AdapterView.OnItemSelectedListener
+    interface View : IView, AdapterView.OnItemSelectedListener {
+
+        fun isVisible(): Boolean
+    }
 
     interface Presenter : IPresenter<View>
 }
