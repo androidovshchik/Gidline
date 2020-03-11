@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import kotlinx.android.synthetic.main.popup_menu.view.*
 import org.jetbrains.anko.dip
@@ -24,7 +25,7 @@ class MenuPopup(context: Context) : BasePopup(context) {
         width = context.dip(280)
         isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
-        setBackgroundDrawable(null)
+        setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.menu_background))
         contentView = View.inflate(context, R.layout.popup_menu, null).also {
             it.ll_menu.children.forEach { child ->
                 if (child is MenuLayout) {
