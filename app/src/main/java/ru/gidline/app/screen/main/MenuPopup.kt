@@ -10,14 +10,11 @@ import org.jetbrains.anko.dip
 import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.screen.base.BasePopup
-import ru.gidline.app.screen.main.view.HeaderLayout
 import ru.gidline.app.screen.main.view.MenuLayout
 
 class MenuPopup(context: Context) : BasePopup(context) {
 
     private val topOffset = context.statusBarHeight
-
-    private val headerLayout: HeaderLayout
 
     init {
         width = context.dip(280)
@@ -25,27 +22,32 @@ class MenuPopup(context: Context) : BasePopup(context) {
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
         setBackgroundDrawable(null)
         contentView = View.inflate(context, R.layout.popup_menu, null).also {
-            headerLayout = it.hl_menu
-            (it as ViewGroup).children.forEach { child ->
+            it.ll_menu.children.forEach { child ->
                 if (child is MenuLayout) {
                     child.setOnClickListener(this)
                 }
             }
+            it.measureSize(width)
+            height = it.measuredHeight
         }
     }
 
     override fun show(anchor: View) {
-        headerLayout.updateData()
-        (contentView as ViewGroup).children.forEach { child ->
-            if (child is MenuLayout) {
-                child.toggle(-1)
+        contentView.also {
+            it.hl_menu.updateData()
+            it.ll_menu.children.forEach { child ->
+                if (child is MenuLayout) {
+                    child.toggle(-1)
+                }
             }
+            it.measureSize(width)
+            height = it.measuredHeight
         }
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }
 
     override fun onClick(v: View) {
-        (contentView as ViewGroup).also {
+        (v.parent as ViewGroup).also {
             it.children.forEach { child ->
                 if (child is MenuLayout) {
                     child.toggle(it.indexOfChild(v))
