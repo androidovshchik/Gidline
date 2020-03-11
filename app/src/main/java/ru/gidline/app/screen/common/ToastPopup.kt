@@ -15,6 +15,9 @@ class ToastPopup(text: String, context: Context) : BasePopup(context) {
         setBackgroundDrawable(null)
         contentView = View.inflate(context, R.layout.popup_toast, null).also {
             (it as TextView).text = text
+            it.measureSize()
+            width = it.measuredWidth
+            height = it.measuredHeight
         }
     }
 

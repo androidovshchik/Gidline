@@ -60,9 +60,7 @@
         android:maxLines="1"
         android:text="до пересечения границы"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_border_days"
@@ -76,9 +74,7 @@
         android:minWidth="80dp"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:visibility="gone"
-        tools:text="Text Text"
-        tools:visibility="visible" />
+        tools:text="Text Text" />
 
     <TextView
         android:id="@+id/tv_before_patent"
@@ -92,9 +88,7 @@
         android:maxLines="1"
         android:text="до окончания патента"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_patent_days"
@@ -109,8 +103,6 @@
         android:minWidth="80dp"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:visibility="gone"
-        tools:text="Text Text"
-        tools:visibility="visible" />
+        tools:text="Text Text" />
 
 </merge>

@@ -52,6 +52,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
 
     override fun onItemDeleted(id: Int) {
         bellRepository.deleteById(id)
+        refreshData()
         if (bellRepository.allCount <= 0) {
             activityCallback<IView> {
                 popFragment(null, false)

@@ -42,7 +42,6 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
             delete.setOnClickListener {
                 val position = adapterPosition
                 val item = items.removeAt(position)
-                notifyDataSetChanged()
                 reference?.get()?.onItemDeleted(item.id)
             }
             card.setOnClickListener {
