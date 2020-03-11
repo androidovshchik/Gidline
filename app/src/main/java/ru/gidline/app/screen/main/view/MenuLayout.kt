@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -43,6 +44,8 @@ class MenuLayout : LinearLayout, KodeinAware {
 
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
+        orientation = HORIZONTAL
+        gravity = Gravity.CENTER_VERTICAL
         View.inflate(context, R.layout.merge_menu, this)
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.MenuLayout).use {

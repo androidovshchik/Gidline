@@ -13,7 +13,6 @@ import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BasePopup
 import ru.gidline.app.screen.main.view.MenuLayout
-import kotlin.math.min
 
 class MenuPopup(context: Context) : BasePopup(context) {
 
@@ -32,8 +31,13 @@ class MenuPopup(context: Context) : BasePopup(context) {
                     child.setOnClickListener(this)
                 }
             }
-            it.measureSize(width)
-            height = min(maxHeight, it.measuredHeight)
+            it.measureSize(
+                width = width,
+                wMode = View.MeasureSpec.EXACTLY,
+                height = maxHeight,
+                hMode = View.MeasureSpec.AT_MOST
+            )
+            height = it.measuredHeight
         }
     }
 
@@ -45,8 +49,13 @@ class MenuPopup(context: Context) : BasePopup(context) {
                 }
             }
             it.hl_menu.updateData()
-            it.measureSize(width)
-            height = min(maxHeight, it.measuredHeight)
+            it.measureSize(
+                width = width,
+                wMode = View.MeasureSpec.EXACTLY,
+                height = maxHeight,
+                hMode = View.MeasureSpec.AT_MOST
+            )
+            height = it.measuredHeight
         }
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }

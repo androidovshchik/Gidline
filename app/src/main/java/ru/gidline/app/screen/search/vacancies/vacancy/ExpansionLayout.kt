@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.merge_accordion.view.*
+import kotlinx.android.synthetic.main.merge_expansion.view.*
 import org.jetbrains.anko.dip
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -43,8 +43,8 @@ class ExpansionLayout : LinearLayout, KodeinAware {
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
         orientation = VERTICAL
-        setPadding(dip(10), dip(10), dip(10), 0)
-        View.inflate(context, R.layout.merge_accordion, this)
+        setPadding(dip(10), dip(12), dip(10), 0)
+        View.inflate(context, R.layout.merge_expansion, this)
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.ExpansionLayout).use {
                 getString(R.styleable.ExpansionLayout_text)?.let {
