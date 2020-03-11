@@ -16,7 +16,8 @@ import ru.gidline.app.screen.notifications.adapter.NotificationsAdapter
 import ru.gidline.app.screen.notifications.adapter.NotificationsDecoration
 import ru.gidline.app.screen.notifications.notification.NotificationFragment
 
-class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), NotificationsContract.View {
+class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
+    NotificationsContract.View {
 
     override val presenter: NotificationsPresenter by instance()
 

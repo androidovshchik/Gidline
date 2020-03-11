@@ -5,6 +5,10 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.contexted
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
+import ru.gidline.app.screen.browser.BrowserFragment
+import ru.gidline.app.screen.browser.BrowserPresenter
+import ru.gidline.app.screen.documents.DocumentsFragment
+import ru.gidline.app.screen.documents.DocumentsPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
 import ru.gidline.app.screen.main.categories.CategoriesFragment
@@ -30,6 +34,12 @@ import ru.gidline.app.screen.splash.SplashPresenter
 
 val presenterModule = Kodein.Module("presenter") {
 
+    bind<BrowserPresenter>() with contexted<BrowserFragment>().provider {
+        BrowserPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<SplashPresenter>() with contexted<SplashActivity>().provider {
         SplashPresenter(instance()).apply {
             attachView(context)
@@ -38,18 +48,6 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<MainPresenter>() with contexted<MainActivity>().provider {
         MainPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
-    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
-        SettingsPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
-    bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {
-        CategoriesPresenter(instance()).apply {
             attachView(context)
         }
     }
@@ -66,6 +64,12 @@ val presenterModule = Kodein.Module("presenter") {
         }
     }
 
+    bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {
+        CategoriesPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<SearchPresenter>() with contexted<SearchFragment>().provider {
         SearchPresenter(instance()).apply {
             attachView(context)
@@ -78,20 +82,32 @@ val presenterModule = Kodein.Module("presenter") {
         }
     }
 
-    bind<F04Presenter>() with contexted<F04Fragment>().provider {
-        F04Presenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
     bind<VacanciesPresenter>() with contexted<VacanciesFragment>().provider {
         VacanciesPresenter(instance()).apply {
             attachView(context)
         }
     }
 
+    bind<F04Presenter>() with contexted<F04Fragment>().provider {
+        F04Presenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<VacancyPresenter>() with contexted<VacancyFragment>().provider {
         VacancyPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<DocumentsPresenter>() with contexted<DocumentsFragment>().provider {
+        DocumentsPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
+        SettingsPresenter(instance()).apply {
             attachView(context)
         }
     }

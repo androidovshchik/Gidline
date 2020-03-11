@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/hand_patent"
+            app:text="Проверка патента" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/doc_home"
+            app:text="Готовность вида\nна жительство" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/daw_home"
+            app:text="Готовность РВП" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/globe_pas"
+            app:text="Действительность\nна въезд в РФ" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/ban"
+            app:text="Запрет на въезд" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/inn"
+            app:text="Проверка ИНН" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:icon="@drawable/sheriff"
+            app:text="Задолженность\nпо штрафам" />
+
+    </LinearLayout>
+
+</ScrollView>

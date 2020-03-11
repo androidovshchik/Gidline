@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ru.gidline.app.screen.main.categories.CategoryLayout
+            <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_search"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
@@ -28,9 +28,9 @@
                 app:icon="@drawable/people"
                 app:text="Поиск работы" />
 
-            <ru.gidline.app.screen.main.categories.CategoryLayout
+            <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
@@ -38,9 +38,10 @@
                 app:icon="@drawable/airplane"
                 app:text="Покупка билетов" />
 
-            <ru.gidline.app.screen.main.categories.CategoryLayout
+            <ru.gidline.app.screen.common.view.CategoryLayout
+                android:id="@+id/cl_documents"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
@@ -48,9 +49,9 @@
                 app:icon="@drawable/globe"
                 app:text="Проверка документов" />
 
-            <ru.gidline.app.screen.main.categories.CategoryLayout
+            <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
@@ -58,9 +59,9 @@
                 app:icon="@drawable/certificate"
                 app:text="Сертификаты" />
 
-            <ru.gidline.app.screen.main.categories.CategoryLayout
+            <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"

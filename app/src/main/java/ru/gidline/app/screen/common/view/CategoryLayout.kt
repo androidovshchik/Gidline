@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.main.categories
+package ru.gidline.app.screen.common.view
 
 import android.annotation.SuppressLint
 import android.content.Context

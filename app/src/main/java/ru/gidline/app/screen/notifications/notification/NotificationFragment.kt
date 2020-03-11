@@ -16,7 +16,8 @@ import ru.gidline.app.local.model.BellType
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.main.MainContract
 
-class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), NotificationContract.View {
+class NotificationFragment : BaseFragment<NotificationContract.Presenter>(),
+    NotificationContract.View {
 
     override val presenter: NotificationPresenter by instance()
 

@@ -100,7 +100,7 @@
                     android:orientation="horizontal"
                     android:padding="8dp">
 
-                    <ru.gidline.app.screen.common.ImageBox
+                    <ru.gidline.app.screen.common.view.ImageBox
                         android:id="@+id/ib_man"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -123,7 +123,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
 
-                    <ru.gidline.app.screen.common.ImageBox
+                    <ru.gidline.app.screen.common.view.ImageBox
                         android:id="@+id/ib_woman"
                         android:layout_width="24dp"
                         android:layout_height="24dp"

@@ -9,6 +9,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.documents.DocumentsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.settings.SettingsFragment
 
@@ -22,19 +23,21 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         cl_search.setOnClickListener(this)
+        cl_documents.setOnClickListener(this)
         ib_settings.setOnClickListener(this)
         ib_map.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
-        when (v.id) {
-            R.id.cl_search -> {
-                activityCallback<IView> {
+        activityCallback<IView> {
+            when (v.id) {
+                R.id.cl_search -> {
                     addFragment(SearchFragment.newInstance())
                 }
-            }
-            R.id.ib_settings -> {
-                activityCallback<IView> {
+                R.id.cl_documents -> {
+                    putFragment(DocumentsFragment.newInstance())
+                }
+                R.id.ib_settings -> {
                     putFragment(SettingsFragment.newInstance())
                 }
             }
