@@ -7,14 +7,19 @@ import android.view.ViewGroup
 import androidx.core.view.children
 import kotlinx.android.synthetic.main.popup_menu.view.*
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.windowManager
 import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
+import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BasePopup
 import ru.gidline.app.screen.main.view.MenuLayout
+import kotlin.math.min
 
 class MenuPopup(context: Context) : BasePopup(context) {
 
     private val topOffset = context.statusBarHeight
+
+    private val maxHeight = context.windowManager.windowSize.y
 
     init {
         width = context.dip(280)
@@ -28,20 +33,20 @@ class MenuPopup(context: Context) : BasePopup(context) {
                 }
             }
             it.measureSize(width)
-            height = it.measuredHeight
+            height = min(maxHeight, it.measuredHeight)
         }
     }
 
     override fun show(anchor: View) {
         contentView.also {
-            it.hl_menu.updateData()
             it.ll_menu.children.forEach { child ->
                 if (child is MenuLayout) {
                     child.toggle(-1)
                 }
             }
+            it.hl_menu.updateData()
             it.measureSize(width)
-            height = it.measuredHeight
+            height = min(maxHeight, it.measuredHeight)
         }
         showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
     }
