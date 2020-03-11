@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_hand_patent"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -24,6 +25,7 @@
             app:text="Проверка патента" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_doc_home"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -36,6 +38,7 @@
             app:text="Готовность вида\nна жительство" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_daw_home"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -48,6 +51,7 @@
             app:text="Готовность РВП" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_globe_pas"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -60,6 +64,7 @@
             app:text="Действительность\nна въезд в РФ" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_ban"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -72,6 +77,7 @@
             app:text="Запрет на въезд" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_inn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -84,6 +90,7 @@
             app:text="Проверка ИНН" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_sheriff"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"

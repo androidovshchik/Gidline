@@ -26,8 +26,8 @@
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/people"
-                app:text="Поиск работы"
-                app:offset="96dp" />
+                app:offset="96dp"
+                app:text="Поиск работы" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
@@ -37,8 +37,8 @@
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/airplane"
-                app:text="Покупка билетов"
-                app:offset="96dp" />
+                app:offset="96dp"
+                app:text="Покупка билетов" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_documents"
@@ -49,8 +49,8 @@
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/globe"
-                app:text="Проверка документов"
-                app:offset="96dp" />
+                app:offset="96dp"
+                app:text="Проверка документов" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
@@ -60,8 +60,8 @@
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/certificate"
-                app:text="Сертификаты"
-                app:offset="96dp" />
+                app:offset="96dp"
+                app:text="Сертификаты" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
@@ -72,8 +72,8 @@
                 android:layout_marginBottom="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/law"
-                app:text="Помощь юриста"
-                app:offset="96dp" />
+                app:offset="96dp"
+                app:text="Помощь юриста" />
 
         </LinearLayout>
 
