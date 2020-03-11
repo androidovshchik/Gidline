@@ -12,6 +12,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.use
+import kotlin.math.roundToInt
 
 class CategoryLayout @JvmOverloads constructor(
     context: Context,
@@ -35,6 +36,9 @@ class CategoryLayout @JvmOverloads constructor(
                 iv_icon.setImageDrawable(getDrawable(R.styleable.CategoryLayout_icon))
                 getString(R.styleable.CategoryLayout_text)?.let {
                     tv_name.text = it
+                }
+                getDimension(R.styleable.CategoryLayout_offset, 0f).let {
+                    (tv_name.layoutParams as MarginLayoutParams).marginStart = it.roundToInt()
                 }
             }
         }

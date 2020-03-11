@@ -20,55 +20,60 @@
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_search"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/people"
-                app:text="Поиск работы" />
+                app:text="Поиск работы"
+                app:offset="96dp" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/airplane"
-                app:text="Покупка билетов" />
+                app:text="Покупка билетов"
+                app:offset="96dp" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_documents"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/globe"
-                app:text="Проверка документов" />
+                app:text="Проверка документов"
+                app:offset="96dp" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/certificate"
-                app:text="Сертификаты" />
+                app:text="Сертификаты"
+                app:offset="96dp" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:icon="@drawable/law"
-                app:text="Помощь юриста" />
+                app:text="Помощь юриста"
+                app:offset="96dp" />
 
         </LinearLayout>
 

@@ -13,75 +13,87 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/hand_patent"
+            app:offset="68dp"
             app:text="Проверка патента" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/doc_home"
+            app:offset="68dp"
             app:text="Готовность вида\nна жительство" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/daw_home"
+            app:offset="68dp"
             app:text="Готовность РВП" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/globe_pas"
+            app:offset="68dp"
             app:text="Действительность\nна въезд в РФ" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/ban"
+            app:offset="68dp"
             app:text="Запрет на въезд" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/inn"
+            app:offset="68dp"
             app:text="Проверка ИНН" />
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
             app:icon="@drawable/sheriff"
+            app:offset="68dp"
             app:text="Задолженность\nпо штрафам" />
 
     </LinearLayout>
