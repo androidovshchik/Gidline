@@ -5,7 +5,10 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface BrowserContract {
 
-    interface View : IView
+    interface View : IView {
+
+        fun onProgress(progress: Int)
+    }
 
     interface Presenter : IPresenter<View>
 }
