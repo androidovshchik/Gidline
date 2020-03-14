@@ -14,7 +14,7 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
     override val presenter: PlacesPresenter by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_list, root, false)
+        return inflater.inflate(R.layout.fragment_places, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

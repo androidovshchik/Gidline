@@ -13,7 +13,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     override val presenter: MapPresenter by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_404, root, false)
+        return inflater.inflate(R.layout.fragment_map, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {}

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 import org.jetbrains.anko.dip
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
