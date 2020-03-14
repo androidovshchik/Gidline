@@ -25,7 +25,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:icon="@drawable/people"
+                app:icon="@drawable/ic_people"
                 app:offset="96dp"
                 app:text="Поиск работы" />
 
@@ -36,7 +36,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:icon="@drawable/airplane"
+                app:icon="@drawable/ic_airplane"
                 app:offset="96dp"
                 app:text="Покупка билетов" />
 
@@ -48,7 +48,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:icon="@drawable/globe"
+                app:icon="@drawable/ic_globe_loupe"
                 app:offset="96dp"
                 app:text="Проверка документов" />
 
@@ -59,7 +59,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:icon="@drawable/certificate"
+                app:icon="@drawable/ic_certificate"
                 app:offset="96dp"
                 app:text="Сертификаты" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:icon="@drawable/law"
+                app:icon="@drawable/ic_law"
                 app:offset="96dp"
                 app:text="Помощь юриста" />
 
@@ -83,7 +83,7 @@
         android:id="@+id/ll_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/header_background"
+        android:background="@drawable/background_header"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -100,7 +100,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/settings" />
+            android:src="@drawable/ic_settings" />
 
         <Space
             android:layout_width="0dp"
@@ -115,7 +115,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/map" />
+            android:src="@drawable/ic_map" />
 
         <Space
             android:layout_width="0dp"

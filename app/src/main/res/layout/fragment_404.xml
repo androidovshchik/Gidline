@@ -28,7 +28,7 @@
                 android:layout_marginBottom="20dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/smile" />
+                android:src="@drawable/ic_smile" />
 
             <TextView
                 fontPath="font/Arial-Italic.ttf"

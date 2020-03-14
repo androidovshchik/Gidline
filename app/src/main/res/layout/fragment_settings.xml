@@ -34,7 +34,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="26dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/avatar_background"
+                    android:background="@drawable/background_avatar"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/avatar_man" />
 
@@ -47,10 +47,10 @@
                     android:layout_marginEnd="-12dp"
                     android:layout_marginBottom="-12dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/daw_camera"
+                    android:background="@drawable/background_camera"
                     android:padding="11dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/camera" />
+                    android:src="@drawable/ic_camera" />
 
                 <EditText
                     android:id="@+id/et_name"

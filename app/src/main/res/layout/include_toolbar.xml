@@ -20,7 +20,7 @@
         android:scaleType="fitCenter"
         android:scaleX="1.1"
         android:scaleY="0.9"
-        android:src="@drawable/hamburger" />
+        android:src="@drawable/ic_hamburger" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -51,7 +51,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/bell" />
+        android:src="@drawable/ic_bell" />
 
     <ImageView
         android:id="@+id/iv_bell_daw"
@@ -61,7 +61,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="6dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/daw_bell"
+        android:background="@drawable/background_bell"
         android:padding="6dp"
         android:scaleType="fitCenter"
         android:src="@drawable/daw_light"

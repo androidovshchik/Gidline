@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            tools:src="@drawable/certificate" />
+            tools:src="@drawable/ic_certificate" />
 
         <TextView
             android:id="@+id/tv_name"
