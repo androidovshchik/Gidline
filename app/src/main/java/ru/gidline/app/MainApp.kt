@@ -1,9 +1,9 @@
 package ru.gidline.app
 
-import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 import coil.Coil
 import coil.ImageLoader
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -21,7 +21,7 @@ import ru.gidline.app.local.localModule
 import timber.log.Timber
 
 @Suppress("unused")
-class MainApp : Application(), KodeinAware {
+class MainApp : MultiDexApplication(), KodeinAware {
 
     override val kodein by Kodein.lazy {
 

@@ -14,12 +14,12 @@ class SettingsPresenter(context: Context) : BasePresenter<SettingsContract.View>
     override fun getGalleryPath(context: Context, uri: Uri) {
         val contextRef = WeakReference(context)
         launch {
-            withContext(Dispatchers.IO) {
-                contextRef.get()?.apply {
-                    val path = PathCompat.getFilePath(applicationContext, uri)
-                    reference.get()?.onPhotoPath(path)
+            val path = withContext(Dispatchers.IO) {
+                contextRef.get()?.run {
+                    PathCompat.getFilePath(applicationContext, uri)
                 }
             }
+            reference.get()?.onPhotoPath(path)
         }
     }
 }
