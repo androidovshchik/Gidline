@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.item_card.view.*
+import kotlinx.android.synthetic.main.item_vacancy.view.*
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
@@ -25,7 +25,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
     override fun getItemCount() = filteredItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_card))
+        return ViewHolder(parent.inflate(R.layout.item_vacancy))
     }
 
     inner class ViewHolder(itemView: View) : BaseHolder<Vacancy>(itemView) {
