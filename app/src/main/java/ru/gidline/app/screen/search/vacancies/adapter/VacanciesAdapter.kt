@@ -60,7 +60,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
             card.setCardBackgroundColor(
                 ContextCompat.getColor(
                     appContext,
-                    if (item.quickly) R.color.colorCardFire else R.color.colorCardNormal
+                    if (item.quickly) R.color.colorVacancyFire else R.color.colorVacancyNormal
                 )
             )
             date.text = item.date

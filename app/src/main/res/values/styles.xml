@@ -23,7 +23,7 @@
         <item name="cardCornerRadius">5dp</item>
         <item name="cardElevation">0dp</item>
         <item name="cardMaxElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/colorCardNormal</item>
+        <item name="cardBackgroundColor">@color/colorVacancyNormal</item>
     </style>
 
 </resources>
