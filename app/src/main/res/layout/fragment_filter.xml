@@ -46,8 +46,9 @@
                     android:layout_height="36dp"
                     android:adjustViewBounds="true"
                     android:background="?android:attr/selectableItemBackground"
+                    android:padding="6dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_close_36dp" />
+                    android:src="@drawable/ic_close" />
 
             </LinearLayout>
 

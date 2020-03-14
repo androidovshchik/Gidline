@@ -29,7 +29,7 @@
             android:textColor="@color/colorGrayText"
             android:textSize="16sp"
             android:visibility="gone"
-            tools:text="@string/notifications"
+            tools:text="Text Text Text Text "
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView

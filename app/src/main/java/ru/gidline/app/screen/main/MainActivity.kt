@@ -127,7 +127,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
     }
 
     private fun onCategoriesEntry() {
-        updateHome(R.drawable.hamburger)
+        updateHome(R.drawable.ic_hamburger)
         setTitle(getString(R.string.app_name))
         notifyBell(bellRepository.allCount, bellRepository.unreadCount)
     }

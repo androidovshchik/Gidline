@@ -384,8 +384,7 @@
                             android:maxLines="1"
                             android:minWidth="90dp"
                             android:textColor="@color/colorGrayText"
-                            android:textSize="15sp"
-                            tools:text="Text " />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -420,8 +419,7 @@
                             android:maxLines="1"
                             android:minWidth="90dp"
                             android:textColor="@color/colorGrayText"
-                            android:textSize="15sp"
-                            tools:text="Text" />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 

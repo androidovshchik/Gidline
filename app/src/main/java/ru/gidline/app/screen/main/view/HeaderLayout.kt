@@ -53,7 +53,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
 
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
-        setBackgroundResource(R.drawable.header_background)
+        setBackgroundResource(R.drawable.background_header)
         View.inflate(context, R.layout.merge_header, this)
     }
 
