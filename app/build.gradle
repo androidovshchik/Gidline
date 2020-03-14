@@ -56,11 +56,12 @@ android {
 // ./gradlew resguard[BuildType | Flavor]
 andResGuard {
     mappingFile = null
-    use7zip = true
+    use7zip = false
     useSign = true
     // it will keep the origin path of your resources when it's true
     keepRoot = false
-    whiteList = []
+    whiteList = [
+    ]
     compressFilePattern = [
         "*.png",
         "*.jpg",
