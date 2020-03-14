@@ -13,6 +13,10 @@ import ru.gidline.app.screen.search.model.SearchFilter
 
 val screenModule = Kodein.Module("screen") {
 
+    bind<SearchFilter>() with provider {
+        SearchFilter()
+    }
+
     bind<ArrayAdapter<String>>() with factory { layout: Int ->
         ArrayAdapter(instance(), layout, mutableListOf<String>())
     }
@@ -27,9 +31,5 @@ val screenModule = Kodein.Module("screen") {
 
     bind<ChipsPopup>() with contexted<SearchFragment>().provider {
         ChipsPopup(context.requireContext())
-    }
-
-    bind<SearchFilter>() with provider {
-        SearchFilter()
     }
 }

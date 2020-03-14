@@ -7,6 +7,12 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import ru.gidline.app.screen.browser.BrowserFragment
 import ru.gidline.app.screen.browser.BrowserPresenter
+import ru.gidline.app.screen.catalog.CatalogFragment
+import ru.gidline.app.screen.catalog.CatalogPresenter
+import ru.gidline.app.screen.catalog.map.MapFragment
+import ru.gidline.app.screen.catalog.map.MapPresenter
+import ru.gidline.app.screen.catalog.places.PlacesFragment
+import ru.gidline.app.screen.catalog.places.PlacesPresenter
 import ru.gidline.app.screen.documents.DocumentsFragment
 import ru.gidline.app.screen.documents.DocumentsPresenter
 import ru.gidline.app.screen.main.MainActivity
@@ -96,6 +102,24 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<VacancyPresenter>() with contexted<VacancyFragment>().provider {
         VacancyPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<CatalogPresenter>() with contexted<CatalogFragment>().provider {
+        CatalogPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<PlacesPresenter>() with contexted<PlacesFragment>().provider {
+        PlacesPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<MapPresenter>() with contexted<MapFragment>().provider {
+        MapPresenter(instance()).apply {
             attachView(context)
         }
     }
