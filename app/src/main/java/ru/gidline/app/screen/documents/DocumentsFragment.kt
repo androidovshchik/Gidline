@@ -10,7 +10,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
-import ru.gidline.app.screen.browser.BrowserFragment
+import ru.gidline.app.screen.documents.browser.BrowserFragment
 
 class DocumentsFragment : BaseFragment<DocumentsContract.Presenter>(),
     DocumentsContract.View {

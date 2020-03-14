@@ -9,6 +9,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.catalog.CatalogFragment
 import ru.gidline.app.screen.documents.DocumentsFragment
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.settings.SettingsFragment
@@ -39,6 +40,9 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
                 }
                 R.id.ib_settings -> {
                     putFragment(SettingsFragment.newInstance())
+                }
+                R.id.ib_map -> {
+                    addFragment(CatalogFragment.newInstance())
                 }
             }
         }

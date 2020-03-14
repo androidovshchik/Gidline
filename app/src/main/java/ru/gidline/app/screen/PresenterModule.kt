@@ -5,8 +5,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.contexted
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
-import ru.gidline.app.screen.browser.BrowserFragment
-import ru.gidline.app.screen.browser.BrowserPresenter
 import ru.gidline.app.screen.catalog.CatalogFragment
 import ru.gidline.app.screen.catalog.CatalogPresenter
 import ru.gidline.app.screen.catalog.map.MapFragment
@@ -15,6 +13,8 @@ import ru.gidline.app.screen.catalog.places.PlacesFragment
 import ru.gidline.app.screen.catalog.places.PlacesPresenter
 import ru.gidline.app.screen.documents.DocumentsFragment
 import ru.gidline.app.screen.documents.DocumentsPresenter
+import ru.gidline.app.screen.documents.browser.BrowserFragment
+import ru.gidline.app.screen.documents.browser.BrowserPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
 import ru.gidline.app.screen.main.categories.CategoriesFragment
@@ -39,12 +39,6 @@ import ru.gidline.app.screen.splash.SplashActivity
 import ru.gidline.app.screen.splash.SplashPresenter
 
 val presenterModule = Kodein.Module("presenter") {
-
-    bind<BrowserPresenter>() with contexted<BrowserFragment>().provider {
-        BrowserPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
 
     bind<SplashPresenter>() with contexted<SplashActivity>().provider {
         SplashPresenter(instance()).apply {
@@ -106,6 +100,24 @@ val presenterModule = Kodein.Module("presenter") {
         }
     }
 
+    bind<DocumentsPresenter>() with contexted<DocumentsFragment>().provider {
+        DocumentsPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<BrowserPresenter>() with contexted<BrowserFragment>().provider {
+        BrowserPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
+        SettingsPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<CatalogPresenter>() with contexted<CatalogFragment>().provider {
         CatalogPresenter(instance()).apply {
             attachView(context)
@@ -120,18 +132,6 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<MapPresenter>() with contexted<MapFragment>().provider {
         MapPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
-    bind<DocumentsPresenter>() with contexted<DocumentsFragment>().provider {
-        DocumentsPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
-    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
-        SettingsPresenter(instance()).apply {
             attachView(context)
         }
     }

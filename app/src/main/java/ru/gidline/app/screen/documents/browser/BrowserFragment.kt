@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.browser
+package ru.gidline.app.screen.documents.browser
 
 import android.graphics.PorterDuff
 import android.os.Bundle

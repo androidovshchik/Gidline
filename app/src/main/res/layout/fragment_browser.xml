@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ru.gidline.app.screen.browser.BrowserView
+        <ru.gidline.app.screen.documents.browser.BrowserView
             android:id="@+id/wv_web"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
