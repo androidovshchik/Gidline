@@ -7,6 +7,9 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import ru.gidline.app.local.repository.BellRepository
+import ru.gidline.app.local.repository.PlaceRepository
+import ru.gidline.app.local.repository.VacancyRepository
 
 val localModule = Kodein.Module("local") {
 
@@ -21,11 +24,15 @@ val localModule = Kodein.Module("local") {
         Preferences(instance())
     }
 
-    bind<VacancyRepository>() with singleton {
-        VacancyRepository(instance(), instance())
-    }
-
     bind<BellRepository>() with singleton {
         BellRepository()
+    }
+
+    bind<VacancyRepository>() with singleton {
+        VacancyRepository(instance())
+    }
+
+    bind<PlaceRepository>() with singleton {
+        PlaceRepository()
     }
 }
