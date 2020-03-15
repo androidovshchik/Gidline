@@ -2,6 +2,7 @@ package ru.gidline.app.local
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import de.siegmar.fastcsv.reader.CsvReader
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -20,6 +21,12 @@ val localModule = Kodein.Module("local") {
             .create()
     }
 
+    bind<CsvReader>() with provider {
+        CsvReader().apply {
+            setFieldSeparator(';')
+        }
+    }
+
     bind<Preferences>() with provider {
         Preferences(instance())
     }
@@ -33,6 +40,6 @@ val localModule = Kodein.Module("local") {
     }
 
     bind<PlaceRepository>() with singleton {
-        PlaceRepository()
+        PlaceRepository(instance())
     }
 }

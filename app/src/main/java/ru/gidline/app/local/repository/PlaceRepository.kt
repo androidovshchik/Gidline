@@ -4,7 +4,7 @@ import android.content.Context
 import de.siegmar.fastcsv.reader.CsvReader
 import ru.gidline.app.local.model.Place
 
-class PlaceRepository : BaseRepository<Place>() {
+class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>() {
 
     private val places = mutableListOf<Place>()
 
@@ -15,7 +15,7 @@ class PlaceRepository : BaseRepository<Place>() {
         context.assets.open("places.csv")
             .bufferedReader()
             .use { reader ->
-                CsvReader().parse(reader).use { parser ->
+                csvReader.parse(reader).use { parser ->
                     var i = 0
                     do {
                         parser.nextRow()?.let {
