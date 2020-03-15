@@ -22,9 +22,7 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
-            window?.apply {
-                clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            }
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
     }
 

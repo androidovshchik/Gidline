@@ -13,7 +13,7 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
-import ru.gidline.app.local.BellRepository
+import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.screen.base.BaseActivity
 import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.documents.DocumentsContract
