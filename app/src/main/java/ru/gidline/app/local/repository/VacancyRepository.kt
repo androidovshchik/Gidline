@@ -10,11 +10,12 @@ class VacancyRepository(private val gson: Gson) : BaseRepository<Vacancy>() {
 
     private val vacancies = mutableListOf<Vacancy>()
 
-    override fun getAll(): List<Vacancy> = vacancies
+    override fun getAll() = vacancies
 
     fun getById(id: Int) = vacancies.first { it.id == id }
 
     override fun initData(context: Context) {
+        vacancies.clear()
         vacancies.addAll(
             gson.fromJson<List<Vacancy>>(
                 context.assets.open("vacancies.json")

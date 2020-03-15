@@ -1,10 +1,11 @@
-package ru.gidline.app.local
+package ru.gidline.app.local.repository
 
+import android.content.Context
 import ru.gidline.app.local.model.Bell
 import ru.gidline.app.local.model.BellType
 import java.util.concurrent.CopyOnWriteArrayList
 
-class BellRepository {
+class BellRepository : BaseRepository<Bell>() {
 
     private val bells = CopyOnWriteArrayList<Bell>()
 
@@ -14,13 +15,13 @@ class BellRepository {
     val unreadCount: Int
         get() = bells.count { it.unread }
 
-    fun getAll() = bells
+    override fun getAll() = bells
 
     fun getById(id: Int) = bells.firstOrNull { it.id == id }
 
     fun deleteById(id: Int) = bells.removeAll { it.id == id }
 
-    fun setDummyData() {
+    override fun initData(context: Context) {
         bells.clear()
         bells.addAll(listOf(
             Bell().apply {
