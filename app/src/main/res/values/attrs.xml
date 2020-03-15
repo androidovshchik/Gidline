@@ -2,15 +2,15 @@
 <resources>
     <attr name="matCardStyle" format="reference" />
     <declare-styleable name="MenuLayout">
-        <attr name="text" format="string|reference"/>
+        <attr name="text" format="string|reference" />
     </declare-styleable>
     <declare-styleable name="CategoryLayout">
         <attr name="icon" />
-        <attr name="text"/>
+        <attr name="text" />
         <attr name="offset" format="dimension|reference" />
     </declare-styleable>
     <declare-styleable name="ExpansionLayout">
-        <attr name="text"/>
+        <attr name="text" />
     </declare-styleable>
     <declare-styleable name="PhoneLayout">
         <attr name="text" />
