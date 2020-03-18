@@ -11,8 +11,12 @@
         android:id="@+id/tl_catalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabBackground="@drawable/tabs"
         app:tabGravity="fill"
-        app:tabMode="fixed" />
+        app:tabIndicator="@null"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="#595959" />
 
     <fragment
         android:id="@+id/f_map"
@@ -31,5 +35,11 @@
         android:layout_below="@+id/tl_catalog"
         android:layout_alignParentBottom="true"
         tools:alpha="0.5" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_below="@+id/tl_catalog"
+        android:background="@drawable/shadow_bottom" />
 
 </RelativeLayout>
