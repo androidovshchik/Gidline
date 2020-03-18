@@ -15,6 +15,7 @@ import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.screen.base.BaseActivity
+import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.common.ToastPopup
 import ru.gidline.app.screen.documents.DocumentsContract
 import ru.gidline.app.screen.main.categories.CategoriesContract
@@ -72,6 +73,11 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                     updateHome(R.drawable.arrow_left)
                     setTitle("Настройка")
                     window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+                }
+                is CatalogContract.View -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle("Карта справочник")
+                    notifyBell(-1)
                 }
             }
         }

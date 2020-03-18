@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.browser
+package ru.gidline.app.screen.documents.browser
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
