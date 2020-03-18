@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.fragment_vacancies.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Vacancy
@@ -36,11 +36,11 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
         }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_list, root, false)
+        return inflater.inflate(R.layout.fragment_vacancies, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rv_list.also {
+        rv_vacancies.also {
             it.setHasFixedSize(true)
             it.addItemDecoration(VacanciesDecoration(requireContext()))
             it.adapter = adapter
@@ -50,7 +50,7 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
     }
 
     override fun refreshData(): Boolean {
-        (rv_list.layoutManager as LinearLayoutManager).scrollToPosition(0)
+        (rv_vacancies.layoutManager as LinearLayoutManager).scrollToPosition(0)
         return adapter.run {
             filteredItems.clear()
             searchFilter?.let { filter ->
