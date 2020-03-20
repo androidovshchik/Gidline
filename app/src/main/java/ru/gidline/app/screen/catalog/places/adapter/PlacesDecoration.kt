@@ -8,11 +8,7 @@ import org.jetbrains.anko.dip
 
 class PlacesDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
-    private val vMinSpace = context.dip(2)
-
-    private val vSpace = context.dip(12)
-
-    private val hSpace = context.dip(14)
+    private val bottomSpace = context.dip(6)
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -20,11 +16,7 @@ class PlacesDecoration(context: Context) : RecyclerView.ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.apply {
-            left = hSpace
-            right = hSpace
-            bottom = vSpace
-            top = if (parent.getChildAdapterPosition(view) == 0) vMinSpace else 0
-        }
+        outRect.bottom =
+            if (parent.getChildAdapterPosition(view) == state.itemCount - 1) bottomSpace else 0
     }
 }

@@ -14,6 +14,7 @@ import ru.gidline.app.extension.use
 import ru.gidline.app.local.model.Place
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.catalog.places.adapter.PlacesAdapter
+import ru.gidline.app.screen.catalog.places.adapter.PlacesDecoration
 
 class PlacesLayout @JvmOverloads constructor(
     context: Context,
@@ -38,11 +39,19 @@ class PlacesLayout @JvmOverloads constructor(
             context.obtainStyledAttributes(set, R.styleable.PlacesLayout).use {
                 getString(R.styleable.PlacesLayout_text)?.let {
                     tv_name.text = it
-                    adapter.items.addAll(placeRepository.getByType(it))
+                    val type = when (it) {
+                        resources.getString(R.string.places_consulate) -> "Посольства и консульства"
+                        resources.getString(R.string.places_migration) -> "Миграционный центр"
+                        else -> null
+                    }
+                    if (type != null) {
+                        adapter.items.addAll(placeRepository.getByType(type))
+                    }
                 }
             }
         }
         rv_places.also {
+            it.addItemDecoration(PlacesDecoration(context))
             it.adapter = adapter
         }
     }

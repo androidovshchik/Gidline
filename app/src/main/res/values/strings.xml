@@ -16,8 +16,8 @@
     <string name="expansion_responsibility">В чем заключается работа:</string>
     <string name="expansion_requirement">О вас:</string>
 
-    <string name="places_consulate">ПОСОЛЬСТВО И КОНСУЛЬСТВА</string>
-    <string name="places_migration">МИГРАЦИОННЫЕ ЦЕНТРЫ</string>
+    <string name="places_consulate">Посольство и консульства</string>
+    <string name="places_migration">Миграционные центры</string>
 
     <plurals name="days">
         <item quantity="zero">%1$d дней</item>

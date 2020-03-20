@@ -12,7 +12,7 @@ class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>(
 
     fun getById(id: Int) = places.first { it.id == id }
 
-    fun getByType(type: String) = places.filter { it.type == type }
+    fun getByType(type: String) = places.filter { type.equals(it.type, true) }
 
     override fun initData(context: Context) {
         places.clear()
