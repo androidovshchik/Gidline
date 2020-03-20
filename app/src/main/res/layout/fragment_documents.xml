@@ -13,6 +13,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_hand_patent"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -26,6 +27,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_doc_home"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -39,6 +41,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_daw_home"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -52,6 +55,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_globe_pas"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -65,6 +69,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_ban"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -78,6 +83,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_inn"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -91,6 +97,7 @@
 
         <ru.gidline.app.screen.common.view.CategoryLayout
             android:id="@+id/cl_sheriff"
+            style="@style/MatCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"

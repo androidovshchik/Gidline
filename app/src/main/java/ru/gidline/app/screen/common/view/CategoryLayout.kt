@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 class CategoryLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = R.attr.matCardStyle
+    defStyleAttr: Int = 0
 ) : MaterialCardView(context, attrs, defStyleAttr), KodeinAware {
 
     override val kodein by closestKodein()
