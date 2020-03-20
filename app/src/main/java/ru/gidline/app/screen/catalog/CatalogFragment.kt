@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_catalog.*
 import org.kodein.di.generic.instance
@@ -26,7 +27,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         .setFastestInterval(5000L)
         .setInterval(5000L)
 
-    private val locationCallback = object : LocationCallback() {
+    private val locationCallback = object : LocationCallback(), OnFailureListener {
 
         override fun onLocationAvailability(availability: LocationAvailability) {
             Timber.d("onLocationAvailability $availability")
@@ -38,23 +39,25 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
                             .setAlwaysShow(true)
                             .build()
                     )
-                    .addOnFailureListener {
-                        if (it is ResolvableApiException) {
-                            try {
-                                it.startResolutionForResult(requireActivity(), REQUEST_DIALOG)
-                            } catch (e: Throwable) {
-                                Timber.e(e)
-                            }
-                        } else {
-                            Timber.e(it)
-                        }
-                    }
+                    .addOnFailureListener(this)
             }
         }
 
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
                 Timber.d("Last location is $it")
+            }
+        }
+
+        override fun onFailure(e: Exception) {
+            if (e is ResolvableApiException) {
+                try {
+                    e.startResolutionForResult(requireActivity(), REQUEST_DIALOG)
+                } catch (e: Throwable) {
+                    Timber.e(e)
+                }
+            } else {
+                Timber.e(e)
             }
         }
     }
