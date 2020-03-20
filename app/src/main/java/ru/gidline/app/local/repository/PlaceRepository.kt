@@ -12,6 +12,8 @@ class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>(
 
     fun getById(id: Int) = places.first { it.id == id }
 
+    fun getByType(type: String) = places.filter { it.type == type }
+
     override fun initData(context: Context) {
         places.clear()
         context.assets.open("places.csv")
