@@ -19,7 +19,6 @@ import coil.transform.CircleCropTransformation
 import com.chibatching.kotpref.bulk
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.android.synthetic.main.fragment_settings.*
-import org.jetbrains.anko.telephonyManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
@@ -92,9 +91,6 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
             s_language.setSelection(language, false)
             et_date1.setText(dateEntryRussia)
             et_date2.setText(dateFirstPatent)
-            if (phone == null) {
-                requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), REQUEST_PHONE)
-            }
         }
     }
 
@@ -186,15 +182,6 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         grantResults: IntArray
     ) {
         when (requestCode) {
-            REQUEST_PHONE -> context?.run {
-                if (areGranted(Manifest.permission.READ_PHONE_STATE)) {
-                    val phone = telephonyManager.line1Number
-                    Timber.d("User phone: $phone")
-                    if (!phone.isNullOrBlank()) {
-                        et_phone?.setText(phone)
-                    }
-                }
-            }
             REQUEST_STORAGE -> iv_camera?.performClick()
         }
     }
@@ -219,9 +206,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     companion object {
 
-        private const val REQUEST_PHONE = 98
-
-        private const val REQUEST_STORAGE = 99
+        private const val REQUEST_STORAGE = 1000
 
         private const val REQUEST_CAMERA = 100
 

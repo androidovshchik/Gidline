@@ -25,7 +25,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
 
     override val presenter: SearchPresenter by instance()
 
-    override val searchFilter: SearchFilter by instance()
+    override val searchFilter = SearchFilter()
 
     private val chipsPopup: ChipsPopup by instance()
 
