@@ -23,6 +23,11 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     private val locationClient: FusedLocationProviderClient by instance()
 
+    private val locationRequest = LocationRequest.create()
+        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        .setFastestInterval(5000L)
+        .setInterval(5000L)
+
     private val locationCallback = object : LocationCallback() {
 
         override fun onLocationAvailability(availability: LocationAvailability) {
@@ -32,9 +37,6 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
                 Timber.i("Last location is $it")
-                onLocationResult(SimpleLocation(it))
-            } ?: run {
-                Timber.w("Last location is null")
             }
         }
     }
@@ -50,8 +52,12 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
             it.addOnTabSelectedListener(this)
         }
         hideFragment(R.id.f_map)
-        if (context.areGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (context?.areGranted(Manifest.permission.ACCESS_FINE_LOCATION) == true) {
             locationClient.requestLocationUpdates(locationRequest, locationCallback, null)
+        } else {
+            requestPermissions(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION
+            )
         }
     }
 
@@ -74,30 +80,22 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     private fun checkLocation() {
         val locationSettingsRequest = LocationSettingsRequest.Builder()
-            .addLocationRequest(LocationRequest.create().apply {
-                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            })
+            .addLocationRequest(locationRequest)
             .setAlwaysShow(true)
             .build()
-        if (!isGpsAvailable) {
-            LocationServices.getSettingsClient(requireActivity())
-                .checkLocationSettings(locationSettingsRequest)
-                .addOnSuccessListener {
-                    onLocationState(it.locationSettingsStates)
-                }
-                .addOnFailureListener {
-                    onLocationState(null)
-                    if (it is ResolvableApiException) {
-                        try {
-                            it.startResolutionForResult(this, REQUEST_LOCATION)
-                        } catch (e: Throwable) {
-                            Timber.e(e)
-                        }
-                    } else {
-                        Timber.e(it)
+        LocationServices.getSettingsClient(activity ?: return)
+            .checkLocationSettings(locationSettingsRequest)
+            .addOnFailureListener {
+                if (it is ResolvableApiException) {
+                    try {
+                        it.startResolutionForResult(requireActivity(), REQUEST_DIALOG)
+                    } catch (e: Throwable) {
+                        Timber.e(e)
                     }
+                } else {
+                    Timber.e(it)
                 }
-        }
+            }
     }
 
     override fun onDestroyView() {
@@ -106,13 +104,20 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         super.onDestroyView()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onRequestPermissionsResult(requestCode: Int, p: Array<out String>, r: IntArray) {
         when (requestCode) {
             REQUEST_LOCATION -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    onLocationState(LocationSettingsStates.fromIntent(data))
-                } else {
+                if (context?.areGranted(Manifest.permission.ACCESS_FINE_LOCATION) == true) {
+                    locationClient.requestLocationUpdates(locationRequest, locationCallback, null)
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQUEST_DIALOG -> {
+                if (resultCode != Activity.RESULT_OK) {
                     checkLocation()
                 }
             }
@@ -120,6 +125,10 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     }
 
     companion object {
+
+        private const val REQUEST_DIALOG = 200
+
+        private const val REQUEST_LOCATION = 2000
 
         fun newInstance(): CatalogFragment {
             return CatalogFragment().apply {

@@ -1,7 +1,6 @@
 package ru.gidline.app.screen.settings
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -175,12 +174,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
         onPhotoPath("")
     }
 
-    @SuppressLint("MissingPermission", "HardwareIds")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, p: Array<out String>, r: IntArray) {
         when (requestCode) {
             REQUEST_STORAGE -> iv_camera?.performClick()
         }
@@ -206,11 +200,11 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     companion object {
 
-        private const val REQUEST_STORAGE = 1000
-
         private const val REQUEST_CAMERA = 100
 
         private const val REQUEST_GALLERY = 101
+
+        private const val REQUEST_STORAGE = 1000
 
         fun newInstance(): SettingsFragment {
             return SettingsFragment().apply {
