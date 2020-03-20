@@ -45,17 +45,17 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
             null
         }
 
-    override val isTouchable: Boolean
+    override var isTouchable = true
         get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
-
-    override fun setTouchable(enable: Boolean) {
-        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        if (enable) {
-            window.clearFlags(flag)
-        } else {
-            window.setFlags(flag, flag)
+        set(value) {
+            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            if (value) {
+                window.clearFlags(flag)
+            } else {
+                window.setFlags(flag, flag)
+            }
+            field = value
         }
-    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : IView> findFragment(id: Int): T? {

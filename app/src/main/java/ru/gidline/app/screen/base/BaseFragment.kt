@@ -34,17 +34,17 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
             null
         }
 
-    override val isTouchable: Boolean
+    override var isTouchable = true
         get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
-
-    override fun setTouchable(enable: Boolean) {
-        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        if (enable) {
-            activity?.window?.clearFlags(flag)
-        } else {
-            activity?.window?.setFlags(flag, flag)
+        set(value) {
+            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            if (value) {
+                activity?.window?.clearFlags(flag)
+            } else {
+                activity?.window?.setFlags(flag, flag)
+            }
+            field = value
         }
-    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : IView> findFragment(id: Int): T? {
