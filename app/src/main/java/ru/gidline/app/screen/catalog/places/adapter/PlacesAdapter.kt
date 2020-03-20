@@ -15,13 +15,13 @@ import kotlin.math.min
 class PlacesAdapter(listener: PlacesContract.Recycler) :
     BaseAdapter<PlacesContract.Recycler, Place>(listener) {
 
-    var limit = true
+    var limited = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.item_place))
     }
 
-    override fun getItemCount() = if (limit) min(2, items.size) else items.size
+    override fun getItemCount() = if (limited) min(2, items.size) else items.size
 
     inner class ViewHolder(itemView: View) : BaseHolder<Place>(itemView) {
 

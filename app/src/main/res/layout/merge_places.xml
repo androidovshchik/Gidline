@@ -21,7 +21,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="6dp"
             android:layout_toStartOf="@+id/c_toggle"
+            android:minLines="2"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
@@ -35,19 +37,23 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
-            android:textColor="#ac226f"
-            app:chipBackgroundColor="#f3f3f3"
+            android:textColor="#7f7f7f"
+            android:visibility="gone"
+            app:chipBackgroundColor="#cce8e8e8"
             app:chipCornerRadius="20dp"
             app:chipEndPadding="16dp"
             app:chipMinHeight="36dp"
             app:chipStartPadding="16dp"
-            tools:text="Text Text Text Text Text " />
+            app:chipStrokeColor="@color/colorGrayBackground"
+            app:chipStrokeWidth="1.5dp"
+            tools:text="Text Text Text Text Text "
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_places"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/c_toggle"
+            android:layout_below="@+id/tv_name"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_place" />
 

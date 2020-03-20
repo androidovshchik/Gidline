@@ -32,6 +32,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
+            it.setHasFixedSize(true)
             it.addItemDecoration(NotificationsDecoration(requireContext()))
             it.adapter = adapter
         }

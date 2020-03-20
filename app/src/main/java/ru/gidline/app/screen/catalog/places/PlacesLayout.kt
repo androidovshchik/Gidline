@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.merge_places.view.*
 import org.kodein.di.KodeinAware
@@ -32,7 +33,7 @@ class PlacesLayout @JvmOverloads constructor(
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.merge_places, this)
         attrs?.let { set ->
@@ -47,6 +48,19 @@ class PlacesLayout @JvmOverloads constructor(
                     if (type != null) {
                         adapter.items.addAll(placeRepository.getByType(type))
                     }
+                }
+            }
+        }
+        if (adapter.items.size > 2) {
+            c_toggle.apply {
+                isVisible = true
+                text = "смотреть все ${adapter.items.size}"
+            }
+            c_toggle.setOnClickListener {
+                adapter.apply {
+                    limited = !limited
+                    notifyDataSetChanged()
+                    c_toggle.text = if (limited) "смотреть все ${items.size}" else "СВЕРНУТЬ"
                 }
             }
         }
