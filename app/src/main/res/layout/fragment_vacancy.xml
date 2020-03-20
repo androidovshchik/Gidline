@@ -116,19 +116,19 @@
                 android:id="@+id/al_offer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_offer" />
+                app:text="@string/expansion_offer" />
 
             <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_responsibility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_responsibility" />
+                app:text="@string/expansion_responsibility" />
 
             <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_requirement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_requirement" />
+                app:text="@string/expansion_requirement" />
 
             <TextView
                 fontPath="font/Arial-Bold.ttf"

@@ -65,9 +65,9 @@ class ExpansionLayout : LinearLayout, KodeinAware {
 
     fun updateText(vacancy: Vacancy) = context.run {
         tv_text.text = when (tv_name.text) {
-            getString(R.string.accordion_offer) -> vacancy.offer
-            getString(R.string.accordion_responsibility) -> vacancy.responsibility
-            getString(R.string.accordion_requirement) -> vacancy.requirement
+            getString(R.string.expansion_offer) -> vacancy.offer
+            getString(R.string.expansion_responsibility) -> vacancy.responsibility
+            getString(R.string.expansion_requirement) -> vacancy.requirement
             else -> ""
         }
     }

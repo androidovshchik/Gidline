@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Gidline</string>
-    <string name="google_maps_key">AIzaSyDeDQJ0lKbol1NUqHmiDbUD1abCFTLawek</string>
+    <string name="google_maps_key">AIzaSyAyYDnYNfv30yEs5ve4Gcz0Op-3BdQ-Zaw</string>
 
     <string name="menu_summary">Моё резюме</string>
     <string name="menu_subscriptions">Мои подписки</string>
@@ -10,26 +10,14 @@
     <string name="menu_questions">Вопросы о Gidline</string>
     <string name="menu_exit">Выход</string>
 
-    <string name="accordion_offer">Мы предлагаем:</string>
-    <string name="accordion_responsibility">В чем заключается работа:</string>
-    <string name="accordion_requirement">О вас:</string>
-
-    <string name="settings_phone">ТЕЛЕФОН</string>
-    <string name="settings_whatsapp">WhatsApp</string>
-
     <string name="not_found">К сожалению,\nна данный момент по вашему\nзапросу нет ни одной активной\nвакансии.\nПопробуйте поменять запрос.</string>
 
-    <string-array name="countries">
-        <item>Россия</item>
-        <item>Таджикистан</item>
-        <item>Узбекистан</item>
-        <item>Кыргызстан</item>
-        <item>Другое</item>
-    </string-array>
+    <string name="expansion_offer">Мы предлагаем:</string>
+    <string name="expansion_responsibility">В чем заключается работа:</string>
+    <string name="expansion_requirement">О вас:</string>
 
-    <string-array name="languages">
-        <item>Русский</item>
-    </string-array>
+    <string name="places_consulate">ПОСОЛЬСТВО И КОНСУЛЬСТВА</string>
+    <string name="places_migration">МИГРАЦИОННЫЕ ЦЕНТРЫ</string>
 
     <plurals name="days">
         <item quantity="zero">%1$d дней</item>
@@ -48,4 +36,16 @@
         <item quantity="many">%1$d уведомлений</item>
         <item quantity="other">%1$d уведомлений</item>
     </plurals>
+
+    <string-array name="countries">
+        <item>Россия</item>
+        <item>Таджикистан</item>
+        <item>Узбекистан</item>
+        <item>Кыргызстан</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Русский</item>
+    </string-array>
 </resources>

@@ -12,7 +12,7 @@
     <declare-styleable name="ExpansionLayout">
         <attr name="text" />
     </declare-styleable>
-    <declare-styleable name="PhoneLayout">
+    <declare-styleable name="PlacesLayout">
         <attr name="text" />
     </declare-styleable>
     <declare-styleable name="ImageBox">
