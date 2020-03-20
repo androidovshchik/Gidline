@@ -14,8 +14,12 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.tencent.mm:AndResGuard-gradle-plugin:$andresguard_version"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.28.0"
     }
 }
+
+// ./gradlew dependencyUpdates
+apply plugin: "com.github.ben-manes.versions"
 
 allprojects {
     repositories {
