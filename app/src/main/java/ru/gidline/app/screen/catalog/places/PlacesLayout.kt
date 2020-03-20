@@ -7,9 +7,11 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import kotlinx.android.synthetic.main.merge_places.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
+import ru.gidline.app.extension.use
 
 class PlacesLayout : RelativeLayout, KodeinAware {
 
@@ -38,6 +40,13 @@ class PlacesLayout : RelativeLayout, KodeinAware {
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.merge_places, this)
+        attrs?.let { set ->
+            context.obtainStyledAttributes(set, R.styleable.PlacesLayout).use {
+                getString(R.styleable.PlacesLayout_text)?.let {
+                    tv_name.text = it
+                }
+            }
+        }
     }
 
     override fun hasOverlappingRendering() = false

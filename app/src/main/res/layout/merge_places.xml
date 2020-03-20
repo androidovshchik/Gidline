@@ -10,43 +10,44 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_name"
+            fontPath="font/Arial-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="12dp"
-            android:layout_toEndOf="@+id/iv_avatar"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/c_toggle"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-            tools:maxLines="1"
-            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text" />
+            tools:text="Text Text Text Text Text Text Text Text"
+            tools:textAllCaps="true"
+            tools:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_toggle"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/c_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name"
-            android:layout_marginTop="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
-            android:layout_toEndOf="@+id/iv_avatar"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            tools:maxLines="1"
-            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text" />
+            android:textColor="#ac226f"
+            app:chipBackgroundColor="#f3f3f3"
+            app:chipCornerRadius="20dp"
+            app:chipEndPadding="16dp"
+            app:chipMinHeight="36dp"
+            app:chipStartPadding="16dp"
+            tools:text="Text Text Text Text Text " />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_places"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_toggle"
+            android:layout_below="@+id/c_toggle"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_place" />
 
