@@ -1,8 +1,6 @@
 package ru.gidline.app.screen.catalog
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,11 +30,31 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
         override fun onLocationAvailability(availability: LocationAvailability) {
             Timber.d("onLocationAvailability $availability")
+            if (!availability.isLocationAvailable) {
+                LocationServices.getSettingsClient(activity ?: return)
+                    .checkLocationSettings(
+                        LocationSettingsRequest.Builder()
+                            .addLocationRequest(locationRequest)
+                            .setAlwaysShow(true)
+                            .build()
+                    )
+                    .addOnFailureListener {
+                        if (it is ResolvableApiException) {
+                            try {
+                                it.startResolutionForResult(requireActivity(), REQUEST_DIALOG)
+                            } catch (e: Throwable) {
+                                Timber.e(e)
+                            }
+                        } else {
+                            Timber.e(it)
+                        }
+                    }
+            }
         }
 
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
-                Timber.i("Last location is $it")
+                Timber.d("Last location is $it")
             }
         }
     }
@@ -78,26 +96,6 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
-    private fun checkLocation() {
-        val locationSettingsRequest = LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequest)
-            .setAlwaysShow(true)
-            .build()
-        LocationServices.getSettingsClient(activity ?: return)
-            .checkLocationSettings(locationSettingsRequest)
-            .addOnFailureListener {
-                if (it is ResolvableApiException) {
-                    try {
-                        it.startResolutionForResult(requireActivity(), REQUEST_DIALOG)
-                    } catch (e: Throwable) {
-                        Timber.e(e)
-                    }
-                } else {
-                    Timber.e(it)
-                }
-            }
-    }
-
     override fun onDestroyView() {
         locationClient.removeLocationUpdates(locationCallback)
         tl_catalog.removeOnTabSelectedListener(this)
@@ -109,16 +107,6 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
             REQUEST_LOCATION -> {
                 if (context?.areGranted(Manifest.permission.ACCESS_FINE_LOCATION) == true) {
                     locationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-                }
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_DIALOG -> {
-                if (resultCode != Activity.RESULT_OK) {
-                    checkLocation()
                 }
             }
         }
