@@ -111,7 +111,6 @@
                         android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
-                        tools:background="@drawable/checkbox_pink"
                         tools:src="@drawable/daw_pink" />
 
                     <TextView
@@ -134,7 +133,6 @@
                         android:padding="4dp"
                         app:background="@drawable/checkbox_pink"
                         app:icon="@drawable/daw_pink"
-                        tools:background="@drawable/checkbox_pink"
                         tools:src="@drawable/daw_pink" />
 
                     <TextView

@@ -389,7 +389,6 @@
                     android:padding="5dp"
                     app:background="@drawable/checkbox_violet"
                     app:icon="@drawable/daw_violet"
-                    tools:background="@drawable/checkbox_violet"
                     tools:src="@drawable/daw_violet" />
 
                 <TextView
@@ -424,7 +423,6 @@
                     android:padding="5dp"
                     app:background="@drawable/checkbox_violet"
                     app:icon="@drawable/daw_violet"
-                    tools:background="@drawable/checkbox_violet"
                     tools:src="@drawable/daw_violet" />
 
                 <TextView
