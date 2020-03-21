@@ -4,11 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorGrayBackground">
+    android:background="@color/colorGrayBackground"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="20dp">
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ib_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:adjustViewBounds="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_close" />
 
     <TextView
@@ -16,19 +24,18 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ib_all"
         android:layout_toStartOf="@+id/ib_all"
-        android:text="все"
+        android:text="Все"
         android:textColor="#872687"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox
         android:id="@+id/ib_all"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
         android:padding="4dp"
         app:background="@drawable/checkbox_filter"
         app:icon="@drawable/daw_pink"
@@ -41,7 +48,7 @@
         android:layout_toStartOf="@+id/ib_consulate"
         android:text="@string/places_consulate"
         android:textColor="#872687"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox
         android:id="@+id/ib_consulate"
@@ -49,10 +56,8 @@
         android:layout_height="24dp"
         android:layout_below="@+id/ib_all"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
         android:padding="4dp"
         app:background="@drawable/checkbox_filter"
         app:icon="@drawable/daw_pink"
@@ -65,7 +70,7 @@
         android:layout_toStartOf="@+id/ib_migration"
         android:text="@string/places_migration"
         android:textColor="#872687"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox
         android:id="@+id/ib_migration"
@@ -73,10 +78,8 @@
         android:layout_height="24dp"
         android:layout_below="@+id/ib_consulate"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
         android:padding="4dp"
         app:background="@drawable/checkbox_filter"
         app:icon="@drawable/daw_pink"
