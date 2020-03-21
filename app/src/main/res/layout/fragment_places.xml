@@ -25,8 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             app:text="@string/places_migration" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
 
     </LinearLayout>
 
