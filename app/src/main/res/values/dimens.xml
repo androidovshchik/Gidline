@@ -2,4 +2,5 @@
 <resources>
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="search_bar_height">76dp</dimen>
+    <dimen name="tabs_height">48dp</dimen>
 </resources>
