@@ -15,6 +15,8 @@ import kotlin.math.min
 class PlacesAdapter(listener: PlacesContract.Recycler) :
     BaseAdapter<PlacesContract.Recycler, Place>(listener) {
 
+    var iconId = 0
+
     var limited = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +35,7 @@ class PlacesAdapter(listener: PlacesContract.Recycler) :
 
         @SuppressLint("SetTextI18n")
         override fun onBindItem(position: Int, item: Place) {
-            icon.setImageResource(R.drawable.ic_consulate)
+            icon.setImageResource(iconId)
             name.text = item.name
             address.text = item.address
         }

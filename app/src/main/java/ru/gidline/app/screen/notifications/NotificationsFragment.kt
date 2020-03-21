@@ -33,6 +33,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
             it.setHasFixedSize(true)
+            it.isNestedScrollingEnabled = false
             it.addItemDecoration(NotificationsDecoration(requireContext()))
             it.adapter = adapter
         }
