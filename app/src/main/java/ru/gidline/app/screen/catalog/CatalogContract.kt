@@ -6,7 +6,10 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface CatalogContract {
 
-    interface View : IView, TabLayout.OnTabSelectedListener
+    interface View : IView, TabLayout.OnTabSelectedListener {
+
+        fun showFilter()
+    }
 
     interface Presenter : IPresenter<View>
 }

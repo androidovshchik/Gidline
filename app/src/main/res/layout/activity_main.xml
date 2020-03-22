@@ -51,6 +51,23 @@
             tools:textStyle="bold" />
 
         <ImageButton
+            android:id="@+id/ib_filter"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="2dp"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_filter"
+            android:visibility="gone"
+            tools:layout_alignParentEnd="false"
+            tools:layout_toStartOf="@+id/ib_bell"
+            tools:visibility="visible" />
+
+        <ImageButton
             android:id="@+id/ib_bell"
             android:layout_width="42dp"
             android:layout_height="match_parent"

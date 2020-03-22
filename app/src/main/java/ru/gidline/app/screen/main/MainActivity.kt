@@ -41,6 +41,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
             when (f) {
                 is CategoriesContract.View -> notifyBell(-1)
                 is SettingsContract.View -> window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+                is CatalogContract.View -> ib_filter.isVisible = false
             }
         }
     }
@@ -51,6 +52,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
         iv_background.load(R.drawable.background)
         ib_home.setOnClickListener(this)
         ib_bell.setOnClickListener(this)
+        ib_filter.setOnClickListener(this)
         supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
         supportFragmentManager.addOnBackStackChangedListener {
             when (val topFragment = topFragment) {
@@ -78,6 +80,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                     updateHome(R.drawable.arrow_left)
                     setTitle("Карта справочник")
                     notifyBell(-1)
+                    ib_filter.isVisible = true
                 }
             }
         }
@@ -110,6 +113,13 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                         .toInt() - dip(5)
                     val start = windowManager.windowSize.x - dip(180)
                     toastPopup.show(v, top, start)
+                }
+            }
+            R.id.ib_filter -> {
+                when (val topFragment = topFragment) {
+                    is CatalogContract.View -> {
+                        topFragment.showFilter()
+                    }
                 }
             }
         }
