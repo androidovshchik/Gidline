@@ -9,6 +9,8 @@ interface CatalogContract {
     interface View : IView, TabLayout.OnTabSelectedListener {
 
         fun showFilter()
+
+        fun updateFilter(id: Int)
     }
 
     interface Presenter : IPresenter<View>

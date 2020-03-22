@@ -10,7 +10,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BasePopup
-import java.lang.ref.WeakReference
+import ru.gidline.app.screen.base.listener.IView
 
 class FilterPopup(context: Context) : BasePopup(context) {
 
@@ -19,8 +19,6 @@ class FilterPopup(context: Context) : BasePopup(context) {
     }.toInt() + context.dip(6)
 
     private val hOffset = context.dip(4)
-
-    private var reference: WeakReference<CatalogFilter>? = null
 
     init {
         width = context.windowManager.windowSize.x - 2 * hOffset
@@ -38,8 +36,6 @@ class FilterPopup(context: Context) : BasePopup(context) {
 
     fun show(anchor: View, catalogFilter: CatalogFilter) {
         if (!isShowing) {
-            reference?.clear()
-            reference = WeakReference(catalogFilter)
             updateBoxes(catalogFilter.typeId)
             showAtLocation(anchor, Gravity.NO_GRAVITY, hOffset, topOffset)
         }
@@ -50,7 +46,23 @@ class FilterPopup(context: Context) : BasePopup(context) {
             R.id.ib_close -> dismiss()
             R.id.ib_all, R.id.ib_consulate, R.id.ib_migration -> updateBoxes(v.id)
             R.id.mb_apply -> {
-                reference?.get()?.typeId
+                activityCallback<IView> {
+                    when (val topFragment = topFragment) {
+                        is CatalogContract.View -> {
+                            contentView.also {
+                                topFragment.updateFilter(
+                                    when {
+                                        it.ib_all.isChecked -> R.id.ib_all
+                                        it.ib_consulate.isChecked -> R.id.ib_consulate
+                                        it.ib_migration.isChecked -> R.id.ib_migration
+                                        else -> return
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+                dismiss()
             }
         }
     }
