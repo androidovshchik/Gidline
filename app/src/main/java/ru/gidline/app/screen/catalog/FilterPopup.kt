@@ -24,7 +24,6 @@ class FilterPopup(context: Context) : BasePopup(context) {
 
     init {
         width = context.windowManager.windowSize.x - 2 * hOffset
-        isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
         contentView = View.inflate(context, R.layout.popup_filter, null).also {
             it.ib_close.setOnClickListener(this)
@@ -38,28 +37,29 @@ class FilterPopup(context: Context) : BasePopup(context) {
     }
 
     fun show(anchor: View, catalogFilter: CatalogFilter) {
-        reference?.clear()
-        reference = WeakReference(catalogFilter)
-        showAtLocation(anchor, Gravity.NO_GRAVITY, hOffset, topOffset)
+        if (!isShowing) {
+            reference?.clear()
+            reference = WeakReference(catalogFilter)
+            updateBoxes(catalogFilter.typeId)
+            showAtLocation(anchor, Gravity.NO_GRAVITY, hOffset, topOffset)
+        }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ib_close -> {
-                dismiss()
-            }
-            R.id.ib_all -> {
-
-            }
-            R.id.ib_consulate -> {
-
-            }
-            R.id.ib_migration -> {
-
-            }
+            R.id.ib_close -> dismiss()
+            R.id.ib_all, R.id.ib_consulate, R.id.ib_migration -> updateBoxes(v.id)
             R.id.mb_apply -> {
-
+                reference?.get()?.typeId
             }
+        }
+    }
+
+    private fun updateBoxes(id: Int) {
+        contentView.also {
+            it.ib_all.isChecked = id == R.id.ib_all
+            it.ib_consulate.isChecked = id == R.id.ib_consulate
+            it.ib_migration.isChecked = id == R.id.ib_migration
         }
     }
 }

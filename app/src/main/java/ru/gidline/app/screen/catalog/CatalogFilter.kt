@@ -1,7 +1,9 @@
 package ru.gidline.app.screen.catalog
 
+import ru.gidline.app.R
+
 @Suppress("MemberVisibilityCanBePrivate")
 class CatalogFilter {
 
-    var type = -1
+    var typeId = R.id.ib_all
 }
