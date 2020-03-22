@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import kotlinx.android.synthetic.main.fragment_catalog.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
@@ -34,7 +35,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-
+        catalogFilter?.let {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
+        }
+        //val zoom = CameraUpdateFactory.zoomTo(15f)
+        //map.animateCamera(zoom)
     }
 
     companion object {

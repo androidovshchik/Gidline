@@ -20,6 +20,10 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     override val presenter: CatalogPresenter by instance()
 
+    private val filterPopup: FilterPopup by instance()
+
+    override val catalogFilter = CatalogFilter()
+
     private val locationClient: FusedLocationProviderClient by instance()
 
     private val locationRequest = LocationRequest.create()
@@ -82,6 +86,14 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
+    override fun showFilter() {
+        filterPopup.show(tl_catalog, catalogFilter)
+    }
+
+    override fun updateFilter(id: Int) {
+        catalogFilter.typeId = id
+    }
+
     override fun onTabReselected(tab: TabLayout.Tab?) {}
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -100,6 +112,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     }
 
     override fun onDestroyView() {
+        filterPopup.dismiss()
         locationClient.removeLocationUpdates(locationCallback)
         tl_catalog.removeOnTabSelectedListener(this)
         super.onDestroyView()
