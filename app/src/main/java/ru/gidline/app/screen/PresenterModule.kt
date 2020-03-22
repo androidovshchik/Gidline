@@ -7,6 +7,8 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import ru.gidline.app.screen.catalog.CatalogFragment
 import ru.gidline.app.screen.catalog.CatalogPresenter
+import ru.gidline.app.screen.catalog.map.MapFragment
+import ru.gidline.app.screen.catalog.map.MapPresenter
 import ru.gidline.app.screen.catalog.places.PlacesFragment
 import ru.gidline.app.screen.catalog.places.PlacesPresenter
 import ru.gidline.app.screen.documents.DocumentsFragment
@@ -124,6 +126,12 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<PlacesPresenter>() with contexted<PlacesFragment>().provider {
         PlacesPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<MapPresenter>() with contexted<MapFragment>().provider {
+        MapPresenter(instance()).apply {
             attachView(context)
         }
     }
