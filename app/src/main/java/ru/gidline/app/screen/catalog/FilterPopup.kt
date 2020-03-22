@@ -10,6 +10,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.statusBarHeight
 import ru.gidline.app.extension.windowSize
 import ru.gidline.app.screen.base.BasePopup
+import java.lang.ref.WeakReference
 
 class FilterPopup(context: Context) : BasePopup(context) {
 
@@ -17,8 +18,12 @@ class FilterPopup(context: Context) : BasePopup(context) {
         it.getDimension(R.dimen.toolbar_height) + it.getDimension(R.dimen.tabs_height)
     }.toInt() + context.dip(6)
 
+    private val hOffset = context.dip(4)
+
+    private var reference: WeakReference<CatalogFilter>? = null
+
     init {
-        width = context.windowManager.windowSize.x
+        width = context.windowManager.windowSize.x - 2 * hOffset
         isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
         contentView = View.inflate(context, R.layout.popup_filter, null).also {
@@ -32,8 +37,10 @@ class FilterPopup(context: Context) : BasePopup(context) {
         }
     }
 
-    override fun show(anchor: View) {
-        showAtLocation(anchor, Gravity.NO_GRAVITY, 0, topOffset)
+    fun show(anchor: View, catalogFilter: CatalogFilter) {
+        reference?.clear()
+        reference = WeakReference(catalogFilter)
+        showAtLocation(anchor, Gravity.NO_GRAVITY, hOffset, topOffset)
     }
 
     override fun onClick(v: View) {

@@ -7,7 +7,7 @@ import ru.gidline.app.screen.base.listener.IView
 
 interface PlacesContract {
 
-    interface View : IView
+    interface View : IView, Recycler
 
     interface Recycler : IRecycler<Place>
 
