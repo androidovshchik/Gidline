@@ -8,6 +8,8 @@ interface CatalogContract {
 
     interface View : IView, TabLayout.OnTabSelectedListener {
 
+        val catalogFilter: CatalogFilter
+
         fun showFilter()
 
         fun updateFilter(id: Int)
