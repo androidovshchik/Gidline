@@ -25,6 +25,8 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
 
     val schedule: String = row.getField(8)
 
+    var isActive = false
+
     val icon: Int
         get() = when (type) {
             CONSULATE -> R.drawable.ic_consulate
@@ -32,17 +34,10 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
             else -> 0
         }
 
-    val markerOn: String?
+    val marker: String?
         get() = when (type) {
-            CONSULATE -> "marker/consulate_on.png"
-            MIGRATION -> "marker/migration_on.png"
-            else -> null
-        }
-
-    val markerOff: String?
-        get() = when (type) {
-            CONSULATE -> "marker/consulate_off.png"
-            MIGRATION -> "marker/migration_off.png"
+            CONSULATE -> "marker/consulate_${if (isActive) "on" else "off"}.png"
+            MIGRATION -> "marker/migration_${if (isActive) "on" else "off"}.png"
             else -> null
         }
 

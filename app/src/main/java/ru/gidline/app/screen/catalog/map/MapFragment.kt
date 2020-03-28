@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.clustering.ClusterManager
-import com.google.maps.android.collections.MarkerManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
@@ -23,11 +24,13 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private val placeRepository: PlaceRepository by instance()
 
-    private var markerManager: MarkerManager? = null
-
     private var clusterManager: ClusterManager<Place>? = null
 
     private var clusterRenderer: ClusterRenderer? = null
+
+    private var lastPlace: Place? = null
+
+    private var lastMarker: Marker? = null
 
     private val catalogFilter: CatalogFilter?
         get() {
@@ -47,13 +50,17 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onMapReady(map: GoogleMap) {
         val context = context ?: return
-        markerManager = MarkerManager(map)
-        clusterManager = ClusterManager(context, map, markerManager)
+        clusterManager = ClusterManager(context, map)
         clusterRenderer = ClusterRenderer(context, map, clusterManager)
         clusterManager?.setOnClusterItemClickListener {
-            clusterRenderer?.getMarker(it)
-            //Timber.e(it.id.toString())
-            false
+            val marker = clusterRenderer?.getMarker(it)
+            lastPlace?.notify(lastMarker)
+            it.notify(marker)
+            lastPlace = it
+            lastMarker = marker
+            PlaceFragment.newInstance(it.id)
+                .show(childFragmentManager, PlaceFragment::class.java.name)
+            true
         }
         map.setOnCameraIdleListener(clusterManager)
 
@@ -65,6 +72,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             addItems(placeRepository.getAll())
             cluster()
         }
+    }
+
+    private fun Place.notify(marker: Marker?) {
+        isActive = !isActive
+        marker?.setIcon(BitmapDescriptorFactory.fromAsset(this.marker))
     }
 
     companion object {
