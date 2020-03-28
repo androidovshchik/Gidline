@@ -30,4 +30,8 @@ class Preferences(context: Context) : KotprefModel(context) {
     var dateEntryRussia by nullableStringPref(null, "date_entry_russia")
 
     var dateFirstPatent by nullableStringPref(null, "date_first_patent")
+
+    var latitude by floatPref(55.751694f, "latitude")
+
+    var longitude by floatPref(37.617218f, "longitude")
 }

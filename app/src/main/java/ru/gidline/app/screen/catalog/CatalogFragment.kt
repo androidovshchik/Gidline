@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.chibatching.kotpref.bulk
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnFailureListener
@@ -13,12 +14,15 @@ import kotlinx.android.synthetic.main.fragment_catalog.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
+import ru.gidline.app.local.Preferences
 import ru.gidline.app.screen.base.BaseFragment
 import timber.log.Timber
 
 class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContract.View {
 
     override val presenter: CatalogPresenter by instance()
+
+    private val preferences: Preferences by instance()
 
     private val filterPopup: FilterPopup by instance()
 
@@ -50,8 +54,16 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
                 Timber.d("Last location is $it")
-                findFragment<CatalogContract.Radar>(R.id.f_map)?.onLocation(it)
-                findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocation(it)
+                catalogFilter.apply {
+                    latitude = it.latitude
+                    longitude = it.longitude
+                }
+                preferences.bulk {
+                    latitude = it.latitude.toFloat()
+                    longitude = it.longitude.toFloat()
+                }
+                findFragment<CatalogContract.Radar>(R.id.f_map)?.onNewLocation()
+                findFragment<CatalogContract.Radar>(R.id.f_places)?.onNewLocation()
             }
         }
 
@@ -69,6 +81,10 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+        catalogFilter.apply {
+            latitude = preferences.latitude.toDouble()
+            longitude = preferences.longitude.toDouble()
+        }
         return inflater.inflate(R.layout.fragment_catalog, root, false)
     }
 
