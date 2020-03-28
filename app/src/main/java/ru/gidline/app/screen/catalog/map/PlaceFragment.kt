@@ -1,13 +1,16 @@
 package ru.gidline.app.screen.catalog.map
 
-import android.app.Dialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableStringBuilder
+import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_place.*
@@ -23,15 +26,11 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
 
     private val placeRepository: PlaceRepository by instance()
 
+    private var alertDialog: AlertDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.BottomSheetDialogTheme);
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
-            window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        }
+        setStyle(STYLE_NO_TITLE, R.style.PlaceSheetTheme)
     }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
@@ -43,17 +42,46 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
         iv_icon.setImageResource(place.icon)
         tv_name.text = place.name
         tv_address.text = place.address
-        tv_schedule1.text = place.schedule
-        tv_schedule2.text = place.schedule
-        val phone = place.phones.split("\n").firstOrNull()
-        if (!phone.isNullOrBlank()) {
-            fab_phone.isVisible = true
-            fab_phone.setOnClickListener {
-                startActivity(Intent(Intent.ACTION_DIAL).apply {
-                    data = Uri.fromParts("tel", phone, null)
-                })
+        val schedule = place.schedule.substringBefore("\n").let {
+            SpannableStringBuilder(it).apply {
+                setSpan(StyleSpan(Typeface.BOLD), 0, it.indexOf('с'), SPAN_EXCLUSIVE_EXCLUSIVE)
             }
         }
+        tv_schedule1.text = schedule
+        tv_schedule2.text = schedule
+        val phones = place.phones.split("\n").filter { it.isNotBlank() }
+        if (phones.isNotEmpty()) {
+            fab_phone.isVisible = true
+            fab_phone.setOnClickListener {
+                if (phones.size > 1) {
+                    var position = 0
+                    alertDialog = AlertDialog.Builder(requireContext())
+                        .setTitle("Выберите номер")
+                        .setSingleChoiceItems(phones.toTypedArray(), position) { _, which ->
+                            position = which
+                        }
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                            dialPhone(phones[position])
+                        }
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .create()
+                    alertDialog?.show()
+                } else {
+                    dialPhone(phones[0])
+                }
+            }
+        }
+    }
+
+    private fun dialPhone(phone: String) {
+        startActivity(Intent.createChooser(Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.fromParts("tel", phone.trim(), null)
+        }, "Выберите приложение"))
+    }
+
+    override fun onDestroyView() {
+        alertDialog?.dismiss()
+        super.onDestroyView()
     }
 
     companion object {

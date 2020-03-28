@@ -27,6 +27,7 @@
 
     <style name="PlaceSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/PlaceSheet</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
     <style name="PlaceSheet">

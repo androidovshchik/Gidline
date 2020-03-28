@@ -7,23 +7,23 @@ import ru.gidline.app.R
 
 class Place(val id: Int, row: CsvRow) : ClusterItem {
 
-    val type: String = row.getField(0)
+    val type: String = row.getField(0).trim()
 
-    val country: String = row.getField(1)
+    val country: String = row.getField(1).trim()
 
-    val locality: String = row.getField(2)
+    val locality: String = row.getField(2).trim()
 
-    val name: String = row.getField(3)
+    val name: String = row.getField(3).trim()
 
-    val address: String = row.getField(4)
+    val address: String = row.getField(4).trim()
 
     val latitude = row.getField(5).toDouble()
 
     val longitude = row.getField(6).toDouble()
 
-    val phones: String = row.getField(7)
+    val phones: String = row.getField(7).trim()
 
-    val schedule: String = row.getField(8)
+    val schedule: String = row.getField(8).trim()
 
     var isActive = false
 
