@@ -9,7 +9,7 @@ interface IView : View.OnClickListener {
 
     var isTouchable: Boolean
 
-    fun <T : IView> findFragment(id: Int): T?
+    fun <T> findFragment(id: Int): T?
 
     fun showFragment(id: Int)
 

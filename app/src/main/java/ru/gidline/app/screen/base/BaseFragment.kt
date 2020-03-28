@@ -47,7 +47,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
         }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IView> findFragment(id: Int): T? {
+    override fun <T> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
             val fragment = childFragmentManager.findFragmentById(id)
             if (fragment is BaseFragment<*>) {

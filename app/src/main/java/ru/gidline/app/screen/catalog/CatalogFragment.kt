@@ -50,6 +50,8 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
                 Timber.d("Last location is $it")
+                findFragment<CatalogContract.Radar>(R.id.f_map)?.onLocation(it)
+                findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocation(it)
             }
         }
 
