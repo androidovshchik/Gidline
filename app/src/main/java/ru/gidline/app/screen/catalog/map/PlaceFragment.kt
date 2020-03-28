@@ -49,7 +49,9 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
         }
         tv_schedule1.text = schedule
         tv_schedule2.text = schedule
-        val phones = place.phones.split("\n").filter { it.isNotBlank() }
+        val phones = place.phones.split("\n")
+            .filter { it.isNotBlank() }
+            .map { it.trim() }
         if (phones.isNotEmpty()) {
             fab_phone.isVisible = true
             fab_phone.setOnClickListener {
@@ -75,7 +77,7 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
 
     private fun dialPhone(phone: String) {
         startActivity(Intent.createChooser(Intent(Intent.ACTION_DIAL).apply {
-            data = Uri.fromParts("tel", phone.trim(), null)
+            data = Uri.fromParts("tel", phone, null)
         }, "Выберите приложение"))
     }
 

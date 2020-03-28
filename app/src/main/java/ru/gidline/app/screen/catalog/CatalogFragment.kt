@@ -80,11 +80,15 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         catalogFilter.apply {
             latitude = preferences.latitude.toDouble()
             longitude = preferences.longitude.toDouble()
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
         return inflater.inflate(R.layout.fragment_catalog, root, false)
     }
 
