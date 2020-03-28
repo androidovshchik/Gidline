@@ -16,7 +16,7 @@
         <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="MatCard">
+    <style name="AppCard">
         <item name="strokeColor">#f9d5e9</item>
         <item name="strokeWidth">1.5dp</item>
         <item name="cardCornerRadius">5dp</item>
@@ -25,11 +25,11 @@
         <item name="cardBackgroundColor">@color/colorVacancyNormal</item>
     </style>
 
-    <style name="BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    <style name="PlaceSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/PlaceSheet</item>
     </style>
 
-    <style name="BottomSheet">
+    <style name="PlaceSheet">
         <item name="android:background">@android:color/transparent</item>
     </style>
 

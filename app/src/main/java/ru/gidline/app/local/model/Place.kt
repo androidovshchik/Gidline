@@ -28,7 +28,7 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
     val icon: Int
         get() = when (type) {
             CONSULATE -> R.drawable.ic_consulate
-            MIGRATION -> R.drawable.ic_migration_center
+            MIGRATION -> R.drawable.ic_migration
             else -> 0
         }
 

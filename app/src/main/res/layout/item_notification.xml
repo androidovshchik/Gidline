@@ -30,7 +30,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_notification"
-        style="@style/MatCard"
+        style="@style/AppCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="#5cffffff"

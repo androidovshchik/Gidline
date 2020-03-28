@@ -19,7 +19,7 @@
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_search"
-                style="@style/MatCard"
+                style="@style/AppCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
                 app:text="Поиск работы" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
-                style="@style/MatCard"
+                style="@style/AppCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -44,7 +44,7 @@
 
             <ru.gidline.app.screen.common.view.CategoryLayout
                 android:id="@+id/cl_documents"
-                style="@style/MatCard"
+                style="@style/AppCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
                 app:text="Проверка документов" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
-                style="@style/MatCard"
+                style="@style/AppCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -68,7 +68,7 @@
                 app:text="Сертификаты" />
 
             <ru.gidline.app.screen.common.view.CategoryLayout
-                style="@style/MatCard"
+                style="@style/AppCard"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
