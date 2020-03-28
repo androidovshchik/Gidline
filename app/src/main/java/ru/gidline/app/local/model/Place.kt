@@ -32,18 +32,18 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
             else -> 0
         }
 
-    val markerOn: Int
+    val markerOn: String?
         get() = when (type) {
-            CONSULATE -> R.drawable.mark_consulate_on
-            MIGRATION -> R.drawable.mark_migration_on
-            else -> 0
+            CONSULATE -> "marker/consulate_on.png"
+            MIGRATION -> "marker/migration_on.png"
+            else -> null
         }
 
-    val markerOff: Int
+    val markerOff: String?
         get() = when (type) {
-            CONSULATE -> R.drawable.mark_consulate_off
-            MIGRATION -> R.drawable.mark_migration_off
-            else -> 0
+            CONSULATE -> "marker/consulate_off.png"
+            MIGRATION -> "marker/migration_off.png"
+            else -> null
         }
 
     val cluster: Int
