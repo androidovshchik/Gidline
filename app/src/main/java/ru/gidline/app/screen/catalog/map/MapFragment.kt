@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import kotlinx.android.synthetic.main.fragment_map.*
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.collections.MarkerManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.local.model.Place
+import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
@@ -17,6 +20,14 @@ import ru.gidline.app.screen.catalog.CatalogFilter
 class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override val presenter: MapPresenter by instance()
+
+    private val placeRepository: PlaceRepository by instance()
+
+    private var markerManager: MarkerManager? = null
+
+    private var clusterManager: ClusterManager<Place>? = null
+
+    private var clusterRenderer: ClusterRenderer? = null
 
     private val catalogFilter: CatalogFilter?
         get() {
@@ -31,15 +42,29 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (f_map as SupportMapFragment).getMapAsync(this)
+        (childFragmentManager.findFragmentById(R.id.f_map) as SupportMapFragment).getMapAsync(this)
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        catalogFilter?.let {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
+    override fun onMapReady(map: GoogleMap) {
+        val context = context ?: return
+        markerManager = MarkerManager(map)
+        clusterManager = ClusterManager(context, map, markerManager)
+        clusterRenderer = ClusterRenderer(context, map, clusterManager)
+        clusterManager?.setOnClusterItemClickListener {
+            clusterRenderer?.getMarker(it)
+            //Timber.e(it.id.toString())
+            false
         }
-        //val zoom = CameraUpdateFactory.zoomTo(15f)
-        //map.animateCamera(zoom)
+        map.setOnCameraIdleListener(clusterManager)
+
+        catalogFilter?.let {
+            map.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
+        }
+        map.animateCamera(CameraUpdateFactory.zoomTo(11f))
+        clusterManager?.apply {
+            addItems(placeRepository.getAll())
+            cluster()
+        }
     }
 
     companion object {
