@@ -82,9 +82,11 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        catalogFilter.apply {
-            latitude = preferences.latitude.toDouble()
-            longitude = preferences.longitude.toDouble()
+        preferences.coordinates?.let {
+            catalogFilter.apply {
+                latitude = it.first
+                longitude = it.second
+            }
         }
     }
 

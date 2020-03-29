@@ -31,7 +31,19 @@ class Preferences(context: Context) : KotprefModel(context) {
 
     var dateFirstPatent by nullableStringPref(null, "date_first_patent")
 
-    var latitude by floatPref(55.751694f, "latitude")
+    var latitude by floatPref(360f, "latitude")
 
-    var longitude by floatPref(37.617218f, "longitude")
+    var longitude by floatPref(360f, "longitude")
+
+    @Suppress("DEPRECATION")
+    val coordinates: Pair<Double, Double>?
+        get() {
+            val latitude = latitude
+            val longitude = longitude
+            if (latitude in -90..90 && longitude in -180..180) {
+                return latitude.toDouble() to longitude.toDouble()
+            } else {
+                return null
+            }
+        }
 }
