@@ -66,6 +66,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 clusterManagerMigration?.onCameraIdle()
             }
         }
+        clusterManagerConsulate?.init(Place.CONSULATE, clusterRendererConsulate)
+        clusterManagerMigration?.init(Place.MIGRATION, clusterRendererMigration)
         catalogFilter?.let {
             locationMarker = map.addMarker(
                 MarkerOptions()
@@ -74,8 +76,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             )
             map.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
         }
-        clusterManagerConsulate?.init(Place.CONSULATE, clusterRendererConsulate)
-        clusterManagerMigration?.init(Place.MIGRATION, clusterRendererMigration)
     }
 
     override fun onNewLocation() {
@@ -87,18 +87,29 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     private fun ClusterManager<Place>.init(type: String, renderer: ClusterRenderer) {
         setOnClusterItemClickListener { place ->
             val marker = renderer.getMarker(place)
-            lastPlace?.notify(lastMarker)
-            place.notify(marker)
+            try {
+                lastPlace?.notify(lastMarker)
+                place.notify(marker)
+            } catch (e: Throwable) {
+                clusterManagerConsulate?.notify(Place.CONSULATE)
+                clusterManagerMigration?.notify(Place.MIGRATION)
+            }
             lastPlace = place
             lastMarker = marker
             PlaceFragment.newInstance(place.id)
                 .show(childFragmentManager, PlaceFragment::class.java.name)
             true
         }
+        notify(type)
+    }
+
+    private fun ClusterManager<Place>.notify(type: String) {
+        clearItems()
         addItems(placeRepository.getByType(type))
         cluster()
     }
 
+    @Throws(Throwable::class)
     private fun Place.notify(marker: Marker?) {
         isActive = !isActive
         marker?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
