@@ -5,18 +5,19 @@ import android.graphics.drawable.Drawable
 import ru.gidline.app.local.model.Place
 import kotlin.math.min
 
-class ClusterDrawable(type: String, strokeSize: Float) : Drawable() {
+class ClusterDrawable(type: String, private val strokeSize: Float) : Drawable() {
 
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         strokeWidth = strokeSize
-        color = when (type) {
-            Place.CONSULATE -> Color.parseColor("#d18bc9")
-            Place.MIGRATION -> Color.parseColor("#e1619e")
-            else -> Color.TRANSPARENT
-        }
     }
 
-    private var radius = 0f
+    private val color = when (type) {
+        Place.CONSULATE -> Color.parseColor("#d18bc9")
+        Place.MIGRATION -> Color.parseColor("#e1619e")
+        else -> Color.TRANSPARENT
+    }
+
+    private var radius = -1f
 
     override fun onBoundsChange(bounds: Rect) {
         radius = min(bounds.width(), bounds.height()) / 2f
@@ -24,9 +25,18 @@ class ClusterDrawable(type: String, strokeSize: Float) : Drawable() {
     }
 
     override fun draw(canvas: Canvas) {
-        canvas.drawCircle(bounds.centerX().toFloat(), bounds.centerY().toFloat(), radius, paint)
-        paint.style = Paint.Style.STROKE
-        canvas.drawCircle(bounds.centerX().toFloat(), bounds.centerY().toFloat(), radius, paint)
+        if (radius > 0) {
+            paint.color = Color.WHITE
+            canvas.drawCircle(bounds.centerX().toFloat(), bounds.centerY().toFloat(), radius, paint)
+            paint.color = color
+            paint.style = Paint.Style.STROKE
+            canvas.drawCircle(
+                bounds.centerX().toFloat(),
+                bounds.centerY().toFloat(),
+                radius - strokeSize / 2,
+                paint
+            )
+        }
     }
 
     override fun setAlpha(alpha: Int) {

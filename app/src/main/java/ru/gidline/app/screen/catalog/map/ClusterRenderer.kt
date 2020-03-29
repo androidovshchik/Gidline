@@ -27,6 +27,8 @@ class ClusterRenderer(
         else -> 0
     }
 
+    private val padding = context.dip(10)
+
     private val strokeSize = context.dip(2).toFloat()
 
     init {
@@ -41,9 +43,8 @@ class ClusterRenderer(
         iconGenerator.apply {
             setBackground(ClusterDrawable(type, strokeSize))
             setTextAppearance(textStyle)
-            setContentPadding(40, 40, 40, 40)
+            setContentPadding(padding, padding, padding, padding)
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(makeIcon(cluster.size.toString())))
         }
-        val icon = iconGenerator.makeIcon(cluster.size.toString())
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
     }
 }
