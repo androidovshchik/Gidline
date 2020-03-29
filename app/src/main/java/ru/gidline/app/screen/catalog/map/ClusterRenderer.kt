@@ -12,42 +12,42 @@ import com.google.maps.android.ui.IconGenerator
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
 
-class ClusterRenderer(context: Context, map: GoogleMap, clusterManager: ClusterManager<Place>?) :
-    DefaultClusterRenderer<Place>(context, map, clusterManager) {
+class ClusterRenderer(
+    type: String,
+    context: Context,
+    map: GoogleMap,
+    clusterManager: ClusterManager<Place>?
+) : DefaultClusterRenderer<Place>(context, map, clusterManager) {
 
     private val iconGenerator = IconGenerator(context)
 
-    private val consulate = ContextCompat.getDrawable(context, R.drawable.background_consulate)
+    private val backgroundDrawable = ContextCompat.getDrawable(
+        context, when (type) {
+            Place.CONSULATE -> R.drawable.background_consulate
+            Place.MIGRATION -> R.drawable.background_migration
+            else -> 0
+        }
+    )
 
-    private val migration = ContextCompat.getDrawable(context, R.drawable.background_migration)
+    private val textStyle = when (type) {
+        Place.CONSULATE -> R.style.ClusterConsulate
+        Place.MIGRATION -> R.style.ClusterMigration
+        else -> 0
+    }
 
     init {
         clusterManager?.renderer = this
     }
 
     override fun onBeforeClusterItemRendered(markerItem: Place, markerOptions: MarkerOptions) {
-        markerOptions.icon(BitmapDescriptorFactory.fromAsset(markerItem.marker))
+        markerOptions.icon(BitmapDescriptorFactory.fromAsset(markerItem.markerIcon))
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<Place>, markerOptions: MarkerOptions) {
-        var consulates = 0
-        var migrations = 0
-        cluster.items.forEach {
-            when (it.type) {
-                Place.CONSULATE -> consulates++
-                Place.MIGRATION -> migrations++
-                else -> {
-                }
-            }
+        iconGenerator.apply {
+            setBackground(backgroundDrawable)
+            setTextAppearance(textStyle)
         }
-        iconGenerator.setBackground(if (consulates >= migrations) consulate else migration)
-        iconGenerator.setTextAppearance(
-            if (consulates >= migrations) {
-                R.style.ClusterConsulate
-            } else {
-                R.style.ClusterMigration
-            }
-        )
         val icon = iconGenerator.makeIcon(cluster.size.toString())
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
     }

@@ -29,10 +29,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var clusterManagerMigration: ClusterManager<Place>? = null
 
-    private var clusterRendererConsulate: ClusterRenderer? = null
-
-    private var clusterRendererMigration: ClusterRenderer? = null
-
     private var locationMarker: Marker? = null
 
     private var lastPlace: Place? = null
@@ -59,11 +55,16 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         val context = context ?: return
         clusterManagerConsulate = ClusterManager(context, map)
         clusterManagerMigration = ClusterManager(context, map)
-        clusterRendererConsulate = ClusterRenderer(context, map, clusterManagerConsulate)
-        clusterRendererMigration = ClusterRenderer(context, map, clusterManagerMigration)
+        val clusterRendererConsulate =
+            ClusterRenderer(Place.CONSULATE, context, map, clusterManagerConsulate)
+        val clusterRendererMigration =
+            ClusterRenderer(Place.MIGRATION, context, map, clusterManagerMigration)
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
-            it.setOnCameraIdleListener(clusterManagerConsulate)
+            it.setOnCameraIdleListener {
+                clusterManagerConsulate?.onCameraIdle()
+                clusterManagerMigration?.onCameraIdle()
+            }
         }
         catalogFilter?.let {
             locationMarker = map.addMarker(
@@ -73,20 +74,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             )
             map.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
         }
-        clusterManagerConsulate?.apply {
-            setOnClusterItemClickListener {
-                val marker = clusterRendererConsulate?.getMarker(it)
-                lastPlace?.notify(lastMarker)
-                it.notify(marker)
-                lastPlace = it
-                lastMarker = marker
-                PlaceFragment.newInstance(it.id)
-                    .show(childFragmentManager, PlaceFragment::class.java.name)
-                true
-            }
-            addItems(placeRepository.getAll())
-            cluster()
-        }
+        clusterManagerConsulate?.init(Place.CONSULATE, clusterRendererConsulate)
+        clusterManagerMigration?.init(Place.MIGRATION, clusterRendererMigration)
     }
 
     override fun onNewLocation() {
@@ -95,9 +84,24 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         }
     }
 
+    private fun ClusterManager<Place>.init(type: String, renderer: ClusterRenderer) {
+        setOnClusterItemClickListener { place ->
+            val marker = renderer.getMarker(place)
+            lastPlace?.notify(lastMarker)
+            place.notify(marker)
+            lastPlace = place
+            lastMarker = marker
+            PlaceFragment.newInstance(place.id)
+                .show(childFragmentManager, PlaceFragment::class.java.name)
+            true
+        }
+        addItems(placeRepository.getByType(type))
+        cluster()
+    }
+
     private fun Place.notify(marker: Marker?) {
         isActive = !isActive
-        marker?.setIcon(BitmapDescriptorFactory.fromAsset(this.marker))
+        marker?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
     }
 
     companion object {
