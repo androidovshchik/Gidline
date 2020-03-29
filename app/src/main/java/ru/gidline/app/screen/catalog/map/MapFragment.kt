@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
@@ -24,9 +25,15 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private val placeRepository: PlaceRepository by instance()
 
-    private var clusterManager: ClusterManager<Place>? = null
+    private var clusterManagerConsulate: ClusterManager<Place>? = null
 
-    private var clusterRenderer: ClusterRenderer? = null
+    private var clusterManagerMigration: ClusterManager<Place>? = null
+
+    private var clusterRendererConsulate: ClusterRenderer? = null
+
+    private var clusterRendererMigration: ClusterRenderer? = null
+
+    private var locationMarker: Marker? = null
 
     private var lastPlace: Place? = null
 
@@ -50,27 +57,41 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onMapReady(map: GoogleMap) {
         val context = context ?: return
-        clusterManager = ClusterManager(context, map)
-        clusterRenderer = ClusterRenderer(context, map, clusterManager)
-        clusterManager?.setOnClusterItemClickListener {
-            val marker = clusterRenderer?.getMarker(it)
-            lastPlace?.notify(lastMarker)
-            it.notify(marker)
-            lastPlace = it
-            lastMarker = marker
-            PlaceFragment.newInstance(it.id)
-                .show(childFragmentManager, PlaceFragment::class.java.name)
-            true
+        clusterManagerConsulate = ClusterManager(context, map)
+        clusterManagerMigration = ClusterManager(context, map)
+        clusterRendererConsulate = ClusterRenderer(context, map, clusterManagerConsulate)
+        clusterRendererMigration = ClusterRenderer(context, map, clusterManagerMigration)
+        map.also {
+            it.uiSettings.isRotateGesturesEnabled = false
+            it.setOnCameraIdleListener(clusterManagerConsulate)
         }
-        map.setOnCameraIdleListener(clusterManager)
-
         catalogFilter?.let {
+            locationMarker = map.addMarker(
+                MarkerOptions()
+                    .position(it.toLatLng())
+                    .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
+            )
             map.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
         }
-        map.animateCamera(CameraUpdateFactory.zoomTo(11f))
-        clusterManager?.apply {
+        clusterManagerConsulate?.apply {
+            setOnClusterItemClickListener {
+                val marker = clusterRendererConsulate?.getMarker(it)
+                lastPlace?.notify(lastMarker)
+                it.notify(marker)
+                lastPlace = it
+                lastMarker = marker
+                PlaceFragment.newInstance(it.id)
+                    .show(childFragmentManager, PlaceFragment::class.java.name)
+                true
+            }
             addItems(placeRepository.getAll())
             cluster()
+        }
+    }
+
+    override fun onNewLocation() {
+        catalogFilter?.let {
+            locationMarker?.position = it.toLatLng()
         }
     }
 

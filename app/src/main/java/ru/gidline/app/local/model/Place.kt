@@ -58,8 +58,8 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
 
     companion object {
 
-        private const val CONSULATE = "Посольства и консульства"
+        const val CONSULATE = "Посольства и консульства"
 
-        private const val MIGRATION = "Миграционный центр"
+        const val MIGRATION = "Миграционный центр"
     }
 }

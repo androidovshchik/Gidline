@@ -34,4 +34,16 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="ClusterConsulate">
+        <item name="android:textColor">#d18bc9</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ClusterMigration">
+        <item name="android:textColor">#e1619e</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
