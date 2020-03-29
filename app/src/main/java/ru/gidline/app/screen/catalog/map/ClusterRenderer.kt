@@ -8,28 +8,19 @@ import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.google.maps.android.ui.IconGenerator
-import org.jetbrains.anko.dip
-import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
 
 class ClusterRenderer(
-    private val type: String,
+    type: String,
     context: Context,
     map: GoogleMap,
     clusterManager: ClusterManager<Place>?
 ) : DefaultClusterRenderer<Place>(context, map, clusterManager) {
 
-    private val iconGenerator = IconGenerator(context)
-
-    private val textStyle = when (type) {
-        Place.CONSULATE -> R.style.ClusterConsulate
-        Place.MIGRATION -> R.style.ClusterMigration
-        else -> 0
+    private val iconGenerator = IconGenerator(context).apply {
+        setContentView(ClusterView(context))
+        setBackground(null)
     }
-
-    private val padding = context.dip(10)
-
-    private val strokeSize = context.dip(2).toFloat()
 
     init {
         clusterManager?.renderer = this
@@ -40,11 +31,7 @@ class ClusterRenderer(
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<Place>, markerOptions: MarkerOptions) {
-        iconGenerator.apply {
-            setBackground(ClusterDrawable(type, strokeSize))
-            setTextAppearance(textStyle)
-            setContentPadding(padding, padding, padding, padding)
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(makeIcon(cluster.size.toString())))
-        }
+        val icon = iconGenerator.makeIcon(cluster.size.toString())
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
     }
 }
