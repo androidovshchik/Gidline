@@ -23,7 +23,7 @@ class PlacesAdapter(listener: PlacesContract.Recycler) :
         return ViewHolder(parent.inflate(R.layout.item_place))
     }
 
-    override fun getItemCount() = if (limited) min(2, items.size) else items.size
+    override fun getItemCount() = if (limited) min(3, items.size) else items.size
 
     inner class ViewHolder(itemView: View) : BaseHolder<Place>(itemView) {
 

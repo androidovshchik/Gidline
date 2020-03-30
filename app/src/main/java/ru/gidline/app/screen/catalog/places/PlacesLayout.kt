@@ -42,39 +42,32 @@ class PlacesLayout @JvmOverloads constructor(
             context.obtainStyledAttributes(set, R.styleable.PlacesLayout).use {
                 getString(R.styleable.PlacesLayout_text)?.let {
                     tv_name.text = it
-                    var icon = 0
                     val type = when (it) {
-                        resources.getString(R.string.places_consulate) -> {
-                            icon = R.drawable.ic_consulate
-                            "Посольства и консульства"
-                        }
-                        resources.getString(R.string.places_migration) -> {
-                            icon = R.drawable.ic_migration_center
-                            "Миграционный центр"
-                        }
+                        resources.getString(R.string.places_consulate) -> Place.CONSULATE
+                        resources.getString(R.string.places_migration) -> Place.MIGRATION
                         else -> null
                     }
-                    if (type != null) {
-                        adapter.apply {
-                            iconId = icon
-                            items.addAll(placeRepository.getByType(type))
+                    adapter.apply {
+                        iconId = when (type) {
+                            Place.CONSULATE -> R.drawable.ic_consulate
+                            Place.MIGRATION -> R.drawable.ic_migration
+                            else -> 0
                         }
+                        items.addAll(placeRepository.getByType(type))
                     }
                 }
             }
         }
-        if (adapter.items.size > 2) {
-            c_toggle.apply {
-                isVisible = true
-                text = "смотреть все ${adapter.items.size}"
-            }
+        if (adapter.items.size > 3) {
+            updateToggle()
+            c_toggle.isVisible = true
             c_toggle.setOnClickListener {
                 context.activityCallback<IView> {
                     adapter.apply {
                         limited = !limited
                         notifyDataSetChanged()
-                        c_toggle.text = if (limited) "смотреть все ${items.size}" else "СВЕРНУТЬ"
                     }
+                    updateToggle()
                 }
             }
         }
@@ -86,7 +79,17 @@ class PlacesLayout @JvmOverloads constructor(
     }
 
     override fun onItemSelected(position: Int, item: Place) {
+        context.activityCallback<IView> {
+            when (val topFragment = topFragment) {
+                is PlacesContract.View -> {
+                    topFragment.onItemSelected(position, item)
+                }
+            }
+        }
+    }
 
+    private fun updateToggle() {
+        c_toggle.text = if (adapter.limited) "смотреть все ${adapter.items.size}" else "СВЕРНУТЬ"
     }
 
     override fun hasOverlappingRendering() = false
