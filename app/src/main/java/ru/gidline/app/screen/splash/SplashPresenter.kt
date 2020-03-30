@@ -32,11 +32,14 @@ class SplashPresenter(context: Context) : BasePresenter<SplashContract.View>(con
                 vacancyRepository.initData(context)
                 placeRepository.initData(context)
                 val (lat, lon) = preferences.location ?: CatalogFilter.LAT to CatalogFilter.LON
-                placeRepository.getAll().forEach {
-                    it.setDistanceTo(lat, lon)
+                placeRepository.getAll().apply {
+                    forEach {
+                        it.setDistanceTo(lat, lon)
+                    }
+                    sortBy { it.distance }
                 }
             }
-            delay(if (BuildConfig.DEBUG) 200L else 2000L)
+            delay(if (BuildConfig.DEBUG) 150L else 1500L)
             reference.get()?.closeSplash()
         }
     }
