@@ -2,7 +2,6 @@ package ru.gidline.app.local.repository
 
 import android.content.Context
 import ru.gidline.app.local.model.Bell
-import ru.gidline.app.local.model.BellType
 import java.util.concurrent.CopyOnWriteArrayList
 
 class BellRepository : BaseRepository<Bell>() {
@@ -26,7 +25,7 @@ class BellRepository : BaseRepository<Bell>() {
         bells.addAll(listOf(
             Bell().apply {
                 id = 1
-                type = BellType.INVITATION
+                type = Bell.INVITATION
                 title = "ПРИГЛАШЕНИЕ НА СОБЕСЕДОВАНИЕ"
                 subtitle = "В ООО Колокольчик"
                 date = "14.08.2020"
@@ -44,7 +43,7 @@ class BellRepository : BaseRepository<Bell>() {
             },
             Bell().apply {
                 id = 2
-                type = BellType.REJECTION
+                type = Bell.REJECTION
                 title = "ОТКАЗ НА ОТКЛИК ПО ВАКАНСИИ"
                 subtitle = "В ООО Колокольчик"
                 date = "12.08.2020"
@@ -61,7 +60,7 @@ class BellRepository : BaseRepository<Bell>() {
             },
             Bell().apply {
                 id = 3
-                type = BellType.SUBSCRIPTION
+                type = Bell.SUBSCRIPTION
                 title = "ПОДКЛЮЧЕНА ПОДПИСКА\n«МОЙ ПОМОЩНИК»"
                 subtitle = "ДО 24.08.2020"
                 date = "10.08.2020"
