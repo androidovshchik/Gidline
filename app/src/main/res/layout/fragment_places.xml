@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
         <ru.gidline.app.screen.catalog.places.PlacesLayout
+            android:id="@+id/pl_consulate"
             style="@style/AppCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
             app:text="@string/places_consulate" />
 
         <ru.gidline.app.screen.catalog.places.PlacesLayout
+            android:id="@+id/pl_migration"
             style="@style/AppCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
