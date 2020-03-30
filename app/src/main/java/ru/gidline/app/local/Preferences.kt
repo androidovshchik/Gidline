@@ -36,7 +36,7 @@ class Preferences(context: Context) : KotprefModel(context) {
     var longitude by floatPref(360f, "longitude")
 
     @Suppress("DEPRECATION")
-    val coordinates: Pair<Double, Double>?
+    val location: Pair<Double, Double>?
         get() {
             val latitude = latitude
             val longitude = longitude

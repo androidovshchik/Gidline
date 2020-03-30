@@ -8,9 +8,16 @@ class CatalogFilter {
 
     var typeId = R.id.ib_all
 
-    var latitude = 55.751694
+    var latitude = LAT
 
-    var longitude = 37.617218
+    var longitude = LON
 
     fun toLatLng() = LatLng(latitude, longitude)
+
+    companion object {
+
+        const val LAT = 55.751694
+
+        const val LON = 37.617218
+    }
 }

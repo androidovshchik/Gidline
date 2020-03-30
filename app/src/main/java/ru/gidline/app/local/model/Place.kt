@@ -58,7 +58,7 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
     /**
      * Spherical law of cosinuses
      * angle = arccos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(dlon))
-     * distance = radius * angle
+     * distance (in meters) = radius of Earth * angle
      */
     fun setDistanceTo(lat: Double, lon: Double) {
         val lat1 = latitude * PI / 180
