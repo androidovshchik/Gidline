@@ -33,6 +33,13 @@ class PlacesAdapter(listener: PlacesContract.Recycler) :
 
         private val address = itemView.tv_address
 
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                reference?.get()?.onItemSelected(position, items[position])
+            }
+        }
+
         @SuppressLint("SetTextI18n")
         override fun onBindItem(position: Int, item: Place) {
             icon.setImageResource(iconId)
