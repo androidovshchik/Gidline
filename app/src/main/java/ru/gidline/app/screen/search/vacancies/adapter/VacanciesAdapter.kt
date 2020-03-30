@@ -49,10 +49,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
         private val form = itemView.tv_form
 
         init {
-            card.setOnClickListener {
-                val position = adapterPosition
-                reference?.get()?.onItemSelected(position, filteredItems[position])
-            }
+            card.setOnClickListener(this)
         }
 
         @SuppressLint("SetTextI18n")
@@ -73,6 +70,15 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
             form.apply {
                 setBackgroundColor(item.color)
                 text = item.form
+            }
+        }
+
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.mcv_vacancy -> {
+                    val position = adapterPosition
+                    reference?.get()?.onItemSelected(position, filteredItems[position])
+                }
             }
         }
     }

@@ -11,9 +11,12 @@ import org.jetbrains.anko.layoutInflater
 import ru.gidline.app.screen.base.listener.IRecycler
 import java.lang.ref.WeakReference
 
-abstract class BaseHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {
+abstract class BaseHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView),
+    View.OnClickListener {
 
     abstract fun onBindItem(position: Int, item: T)
+
+    override fun onClick(v: View) {}
 
     val appContext: Context
         get() = itemView.context.applicationContext
