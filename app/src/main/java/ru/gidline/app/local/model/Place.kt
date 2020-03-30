@@ -4,6 +4,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import de.siegmar.fastcsv.reader.CsvRow
 import ru.gidline.app.R
+import kotlin.math.PI
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
 
 class Place(val id: Int, row: CsvRow) : ClusterItem {
 
@@ -24,6 +28,8 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
     val phones: String = row.getField(7).trim()
 
     val schedule: String = row.getField(8).trim()
+
+    var distance: Double? = null
 
     var isActive = false
 
@@ -47,6 +53,18 @@ class Place(val id: Int, row: CsvRow) : ClusterItem {
 
     override fun getPosition(): LatLng {
         return LatLng(latitude, longitude)
+    }
+
+    /**
+     * Spherical law of cosinuses
+     * angle = arccos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(dlon))
+     * distance = radius * angle
+     */
+    fun setDistanceTo(lat: Double, lon: Double) {
+        val lat1 = latitude * PI / 180
+        val lat2 = lat * PI / 180
+        val dLon = (lon - longitude) * PI / 180
+        distance = 6378137 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(dLon))
     }
 
     companion object {
