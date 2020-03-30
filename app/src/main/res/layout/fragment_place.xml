@@ -120,6 +120,7 @@
         android:src="@drawable/ic_phone"
         android:visibility="gone"
         app:backgroundTint="#ebecec"
+        app:tint="#872285"
         tools:visibility="visible" />
 
 </RelativeLayout>

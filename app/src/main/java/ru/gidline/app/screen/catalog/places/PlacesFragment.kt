@@ -30,6 +30,8 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fab_up.setOnClickListener(this)
+        nsv_places.addOnLayoutChangeListener(this)
     }
 
     override fun onFilterUpdate() {
@@ -42,6 +44,35 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
     override fun onLocationUpdate() {
         pl_consulate.updateData()
         pl_migration.updateData()
+    }
+
+    override fun onLayoutChange(
+        v: View,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        oldLeft: Int,
+        oldTop: Int,
+        oldRight: Int,
+        oldBottom: Int
+    ) {
+        fab_up.isVisible
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.fab_up -> {
+                val scrollTo: Int = (childView.getParent()
+                    .getParent() as View).top + childView.getTop()
+                nsv_places.smoothScrollTo(0, scrollTo)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        nsv_places.removeOnLayoutChangeListener(this)
+        super.onDestroyView()
     }
 
     companion object {
