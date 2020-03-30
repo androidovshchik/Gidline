@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_places.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.local.model.Place
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
@@ -17,8 +16,6 @@ import ru.gidline.app.screen.catalog.CatalogFilter
 class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.View {
 
     override val presenter: PlacesPresenter by instance()
-
-    private var hasUpdatedList = false
 
     private val catalogFilter: CatalogFilter?
         get() {
@@ -42,16 +39,9 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
         }
     }
 
-    override fun onNewLocation() {
-        if (!hasUpdatedList) {
-            hasUpdatedList = true
-            pl_consulate.updateData()
-            pl_migration.updateData()
-        }
-    }
-
-    override fun onItemSelected(position: Int, item: Place) {
-
+    override fun onLocationUpdate() {
+        pl_consulate.updateData()
+        pl_migration.updateData()
     }
 
     companion object {

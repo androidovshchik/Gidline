@@ -18,6 +18,7 @@ import ru.gidline.app.extension.use
 import ru.gidline.app.local.model.Place
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.places.adapter.PlacesAdapter
 import ru.gidline.app.screen.catalog.places.adapter.PlacesDecoration
 
@@ -81,7 +82,7 @@ class PlacesLayout @JvmOverloads constructor(
     override fun onItemSelected(position: Int, item: Place) {
         context.activityCallback<IView> {
             when (val topFragment = topFragment) {
-                is PlacesContract.View -> {
+                is CatalogContract.View -> {
                     topFragment.onItemSelected(position, item)
                 }
             }
@@ -93,7 +94,7 @@ class PlacesLayout @JvmOverloads constructor(
             items.clear()
             items.addAll(placeRepository.getByType(type))
             notifyDataSetChanged()
-            if (adapter.items.size > 3) {
+            if (items.size > 3) {
                 updateToggle()
             }
         }

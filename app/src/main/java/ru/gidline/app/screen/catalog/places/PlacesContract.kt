@@ -8,7 +8,7 @@ import ru.gidline.app.screen.catalog.CatalogContract
 
 interface PlacesContract {
 
-    interface View : IView, Recycler, CatalogContract.Radar
+    interface View : IView, CatalogContract.Radar
 
     interface Recycler : IRecycler<Place>
 
