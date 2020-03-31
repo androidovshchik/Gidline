@@ -3,6 +3,7 @@ package ru.gidline.app.screen.catalog
 import android.Manifest
 import android.graphics.Matrix
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         .setFastestInterval(5000L)
         .setInterval(5000L)
 
-    private var locationCounter = 0
+    private var lastListTime = -LIST_UPDATE_TIME
 
     private val locationCallback = object : LocationCallback(), OnFailureListener {
 
@@ -67,8 +68,9 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
                     latitude = it.latitude
                     longitude = it.longitude
                 }
-                locationCounter++
-                if (locationCounter % 2 != 0) {
+                val uptime = SystemClock.elapsedRealtime()
+                if (uptime - lastListTime >= LIST_UPDATE_TIME) {
+                    lastListTime = uptime
                     findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocationUpdate()
                 }
                 findFragment<CatalogContract.Radar>(R.id.f_map)?.onLocationUpdate()
@@ -106,7 +108,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
-                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+                setTranslate(0f, -resources.getDimension(R.dimen.toolbar_height))
             }
         }
         tl_catalog.also {
@@ -149,11 +151,8 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     }
 
     override fun onItemSelected(position: Int, item: Place) {
-        if (tl_catalog.selectedTabPosition == 0) {
-            hideFragment(R.id.f_places)
-            showFragment(R.id.f_map)
-        }
-        findFragment<MapContract.View>(R.id.f_map)
+        tl_catalog.getTabAt(1)?.select()
+        findFragment<MapContract.View>(R.id.f_map)?.pointPlace(item.id)
     }
 
     override fun onDestroyView() {
@@ -178,6 +177,8 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         private const val REQUEST_DIALOG = 200
 
         private const val REQUEST_LOCATION = 2000
+
+        private const val LIST_UPDATE_TIME = 60_000L
 
         fun newInstance(): CatalogFragment {
             return CatalogFragment().apply {

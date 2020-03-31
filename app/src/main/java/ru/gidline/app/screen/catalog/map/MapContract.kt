@@ -7,7 +7,10 @@ import ru.gidline.app.screen.catalog.CatalogContract
 
 interface MapContract {
 
-    interface View : IView, OnMapReadyCallback, CatalogContract.Radar
+    interface View : IView, OnMapReadyCallback, CatalogContract.Radar {
+
+        fun pointPlace(id: Int)
+    }
 
     interface Presenter : IPresenter<View>
 }

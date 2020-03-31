@@ -33,7 +33,7 @@ class ChipsPopup(context: Context) : BasePopup(context) {
             it.iv_background.apply {
                 load(R.drawable.background)
                 imageMatrix = Matrix().apply {
-                    setTranslate(0f, 0f - topOffset + context.statusBarHeight)
+                    setTranslate(0f, context.statusBarHeight.toFloat() - topOffset)
                 }
             }
             it.cg_chips.children.forEach { child ->

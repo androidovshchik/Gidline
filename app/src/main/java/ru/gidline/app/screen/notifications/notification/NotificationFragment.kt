@@ -41,7 +41,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(),
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
-                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+                setTranslate(0f, -resources.getDimension(R.dimen.toolbar_height))
             }
         }
         bellRepository.getById(args.getInt("id"))?.let {

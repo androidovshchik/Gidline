@@ -41,7 +41,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
-                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+                setTranslate(0f, -resources.getDimension(R.dimen.toolbar_height))
             }
         }
         et_search.setOnTouchListener { v, _ ->
