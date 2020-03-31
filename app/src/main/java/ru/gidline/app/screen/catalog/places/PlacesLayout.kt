@@ -65,6 +65,7 @@ class PlacesLayout @JvmOverloads constructor(
                 }
             }
         }
+        updateToggle()
         c_toggle.setOnClickListener {
             adapter.apply {
                 limited = !limited
@@ -91,20 +92,20 @@ class PlacesLayout @JvmOverloads constructor(
 
     fun updateData() {
         adapter.apply {
-            limited = true
             items.clear()
             items.addAll(placeRepository.getByType(type))
             notifyDataSetChanged()
-            if (items.size > 3) {
-                updateToggle()
-            }
+            updateToggle()
         }
     }
 
     private fun updateToggle() {
-        c_toggle.apply {
-            isVisible = true
-            text = if (adapter.limited) "смотреть все ${adapter.items.size}" else "СВЕРНУТЬ"
+        val count = adapter.items.size
+        if (count > 3) {
+            c_toggle.apply {
+                isVisible = true
+                text = if (adapter.limited) "смотреть все $count" else "СВЕРНУТЬ"
+            }
         }
     }
 

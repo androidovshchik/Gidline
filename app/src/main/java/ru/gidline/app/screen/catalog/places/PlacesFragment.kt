@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import kotlinx.android.synthetic.main.fragment_places.*
+import org.jetbrains.anko.dip
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
@@ -30,8 +32,10 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fab_up.setOnClickListener(this)
-        nsv_places.addOnLayoutChangeListener(this)
+        iv_up.setOnClickListener(this)
+        nsv_places.setOnScrollChangeListener { _: NestedScrollView, _: Int, scrollY: Int, _: Int, _: Int ->
+            iv_up.isVisible = scrollY > 0
+        }
     }
 
     override fun onFilterUpdate() {
@@ -46,33 +50,18 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
         pl_migration.updateData()
     }
 
-    override fun onLayoutChange(
-        v: View,
-        left: Int,
-        top: Int,
-        right: Int,
-        bottom: Int,
-        oldLeft: Int,
-        oldTop: Int,
-        oldRight: Int,
-        oldBottom: Int
-    ) {
-        fab_up.isVisible
-    }
-
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.fab_up -> {
-                val scrollTo: Int = (childView.getParent()
-                    .getParent() as View).top + childView.getTop()
-                nsv_places.smoothScrollTo(0, scrollTo)
+            R.id.iv_up -> {
+                val scrollY = nsv_places.scrollY
+                val migrationY = pl_migration.y.toInt()
+                when {
+                    scrollY > migrationY ->
+                        nsv_places.smoothScrollTo(0, migrationY - requireContext().dip(6))
+                    else -> nsv_places.smoothScrollTo(0, 0)
+                }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        nsv_places.removeOnLayoutChangeListener(this)
-        super.onDestroyView()
     }
 
     companion object {

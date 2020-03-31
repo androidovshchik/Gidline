@@ -24,7 +24,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
                 app:text="@string/places_consulate" />
 
             <ru.gidline.app.screen.catalog.places.PlacesLayout
@@ -33,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="10dp"
                 app:text="@string/places_migration" />
 
