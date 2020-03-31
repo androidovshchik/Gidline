@@ -8,7 +8,7 @@ import ru.gidline.app.screen.catalog.CatalogContract
 
 interface PlacesContract {
 
-    interface View : IView, CatalogContract.Radar, android.view.View.OnLayoutChangeListener
+    interface View : IView, CatalogContract.Radar
 
     interface Recycler : IRecycler<Place>
 

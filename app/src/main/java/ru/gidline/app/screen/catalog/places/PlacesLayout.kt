@@ -91,6 +91,7 @@ class PlacesLayout @JvmOverloads constructor(
 
     fun updateData() {
         adapter.apply {
+            limited = true
             items.clear()
             items.addAll(placeRepository.getByType(type))
             notifyDataSetChanged()

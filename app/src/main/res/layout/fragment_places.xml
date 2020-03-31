@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ll_places"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -43,18 +44,19 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_up"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/background_fab_up"
+        android:scaleType="centerInside"
         android:src="@drawable/arrow_up"
-        app:backgroundTint="@android:color/white"
-        app:borderWidth="2dp"
-        app:tint="#7e1481"
+        android:visibility="gone"
         tools:visibility="visible" />
 
 </RelativeLayout>
