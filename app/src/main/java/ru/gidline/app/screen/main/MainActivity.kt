@@ -74,7 +74,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 is SettingsContract.View -> {
                     updateHome(R.drawable.arrow_left)
                     setTitle("Настройка")
-                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
                 }
                 is CatalogContract.View -> {
                     updateHome(R.drawable.arrow_left)
