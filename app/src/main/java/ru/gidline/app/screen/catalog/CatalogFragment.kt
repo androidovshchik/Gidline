@@ -45,7 +45,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     private val locationCallback = object : LocationCallback(), OnFailureListener {
 
         override fun onLocationAvailability(availability: LocationAvailability) {
-            Timber.d("onLocationAvailability $availability")
+            Timber.i("onLocationAvailability $availability")
             if (!availability.isLocationAvailable) {
                 LocationServices.getSettingsClient(activity ?: return)
                     .checkLocationSettings(
@@ -71,7 +71,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
                 val uptime = SystemClock.elapsedRealtime()
                 if (uptime - lastListTime >= LIST_UPDATE_TIME) {
                     lastListTime = uptime
-                    findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocationUpdate()
+                    presenter.countDistances()
                 }
                 findFragment<CatalogContract.Radar>(R.id.f_map)?.onLocationUpdate()
             }
@@ -126,16 +126,6 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
-    override fun showFilter() {
-        filterPopup.show(tl_catalog, catalogFilter)
-    }
-
-    override fun updateFilter(id: Int) {
-        catalogFilter.typeId = id
-        findFragment<CatalogContract.Radar>(R.id.f_places)?.onFilterUpdate()
-        findFragment<CatalogContract.Radar>(R.id.f_map)?.onFilterUpdate()
-    }
-
     override fun onTabReselected(tab: TabLayout.Tab?) {}
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -150,9 +140,23 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
+    override fun showFilter() {
+        filterPopup.show(tl_catalog, catalogFilter)
+    }
+
+    override fun updateFilter(id: Int) {
+        catalogFilter.typeId = id
+        findFragment<CatalogContract.Radar>(R.id.f_places)?.onFilterUpdate()
+        findFragment<CatalogContract.Radar>(R.id.f_map)?.onFilterUpdate()
+    }
+
     override fun onItemSelected(position: Int, item: Place) {
         tl_catalog.getTabAt(1)?.select()
         findFragment<MapContract.View>(R.id.f_map)?.pointPlace(item.id)
+    }
+
+    override fun onFinishCount() {
+        findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocationUpdate()
     }
 
     override fun onDestroyView() {

@@ -14,6 +14,8 @@ interface CatalogContract {
         fun showFilter()
 
         fun updateFilter(id: Int)
+
+        fun onFinishCount()
     }
 
     interface Presenter : IPresenter<View> {

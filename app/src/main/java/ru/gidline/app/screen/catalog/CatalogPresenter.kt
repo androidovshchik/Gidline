@@ -26,6 +26,7 @@ class CatalogPresenter(context: Context) : BasePresenter<CatalogContract.View>(c
                     sortBy { it.distance }
                 }
             }
+            reference.get()?.onFinishCount()
         }
     }
 }
