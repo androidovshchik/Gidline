@@ -3,6 +3,7 @@ package ru.gidline.app.screen.catalog.map
 import android.content.Context
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
@@ -18,8 +19,8 @@ class ClusterRenderer(
 ) : DefaultClusterRenderer<Place>(context, map, clusterManager) {
 
     private val iconGenerator = IconGenerator(context).apply {
-        setContentView(ClusterView(context))
         setBackground(null)
+        setContentView(ClusterView(context, type))
     }
 
     init {
@@ -34,4 +35,9 @@ class ClusterRenderer(
         val icon = iconGenerator.makeIcon(cluster.size.toString())
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
     }
+
+    /**
+     * https://github.com/googlemaps/android-maps-utils/issues/655#issuecomment-604391630
+     */
+    override fun onClusterUpdated(cluster: Cluster<Place>?, marker: Marker?) {}
 }
