@@ -1,10 +1,12 @@
 package ru.gidline.app.screen.catalog
 
 import android.Manifest
+import android.graphics.Matrix
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.api.load
 import com.chibatching.kotpref.bulk
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -15,7 +17,9 @@ import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
 import ru.gidline.app.local.Preferences
+import ru.gidline.app.local.model.Place
 import ru.gidline.app.screen.base.BaseFragment
+import ru.gidline.app.screen.catalog.map.MapContract
 import timber.log.Timber
 
 class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContract.View {
@@ -35,6 +39,8 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         .setFastestInterval(5000L)
         .setInterval(5000L)
 
+    private var locationCounter = 0
+
     private val locationCallback = object : LocationCallback(), OnFailureListener {
 
         override fun onLocationAvailability(availability: LocationAvailability) {
@@ -53,17 +59,19 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
         override fun onLocationResult(result: LocationResult?) {
             result?.lastLocation?.let {
-                Timber.d("Last location is $it")
-                catalogFilter.apply {
-                    latitude = it.latitude
-                    longitude = it.longitude
-                }
                 preferences.bulk {
                     latitude = it.latitude.toFloat()
                     longitude = it.longitude.toFloat()
                 }
-                findFragment<CatalogContract.Radar>(R.id.f_map)?.onNewLocation()
-                findFragment<CatalogContract.Radar>(R.id.f_places)?.onNewLocation()
+                catalogFilter.apply {
+                    latitude = it.latitude
+                    longitude = it.longitude
+                }
+                locationCounter++
+                if (locationCounter % 2 != 0) {
+                    findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocationUpdate()
+                }
+                findFragment<CatalogContract.Radar>(R.id.f_map)?.onLocationUpdate()
             }
         }
 
@@ -82,7 +90,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        preferences.coordinates?.let {
+        preferences.location?.let {
             catalogFilter.apply {
                 latitude = it.first
                 longitude = it.second
@@ -95,6 +103,12 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        iv_background.apply {
+            load(R.drawable.background)
+            imageMatrix = Matrix().apply {
+                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+            }
+        }
         tl_catalog.also {
             it.addTab(it.newTab().setText("СПИСОК"))
             it.addTab(it.newTab().setText("КАРТА"))
@@ -116,6 +130,8 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     override fun updateFilter(id: Int) {
         catalogFilter.typeId = id
+        findFragment<CatalogContract.Radar>(R.id.f_places)?.onFilterUpdate()
+        findFragment<CatalogContract.Radar>(R.id.f_map)?.onFilterUpdate()
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -123,16 +139,21 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
     override fun onTabSelected(tab: TabLayout.Tab) {
-        when (tl_catalog.selectedTabPosition) {
-            0 -> {
-                hideFragment(R.id.f_map)
-                showFragment(R.id.f_places)
-            }
-            else -> {
-                hideFragment(R.id.f_places)
-                showFragment(R.id.f_map)
-            }
+        if (tl_catalog.selectedTabPosition == 0) {
+            hideFragment(R.id.f_map)
+            showFragment(R.id.f_places)
+        } else {
+            hideFragment(R.id.f_places)
+            showFragment(R.id.f_map)
         }
+    }
+
+    override fun onItemSelected(position: Int, item: Place) {
+        if (tl_catalog.selectedTabPosition == 0) {
+            hideFragment(R.id.f_places)
+            showFragment(R.id.f_map)
+        }
+        findFragment<MapContract.View>(R.id.f_map)
     }
 
     override fun onDestroyView() {
