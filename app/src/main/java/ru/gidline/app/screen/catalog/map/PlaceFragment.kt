@@ -44,7 +44,10 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
         tv_address.text = place.address
         val schedule = place.schedule.substringBefore("\n").let {
             SpannableStringBuilder(it).apply {
-                setSpan(StyleSpan(Typeface.BOLD), 0, it.indexOf('с'), SPAN_EXCLUSIVE_EXCLUSIVE)
+                val index = it.indexOf("с ")
+                if (index > 0) {
+                    setSpan(StyleSpan(Typeface.BOLD), 0, index, SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
             }
         }
         tv_schedule1.text = schedule

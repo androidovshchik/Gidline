@@ -25,6 +25,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private val placeRepository: PlaceRepository by instance()
 
+    private var googleMap: GoogleMap? = null
+
     private var clusterManagerConsulate: ClusterManager<Place>? = null
 
     private var clusterManagerMigration: ClusterManager<Place>? = null
@@ -52,6 +54,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onMapReady(map: GoogleMap) {
+        googleMap = map
         val context = context ?: return
         clusterManagerConsulate = ClusterManager(context, map)
         clusterManagerMigration = ClusterManager(context, map)
@@ -78,17 +81,35 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         }
     }
 
-    override fun onNewLocation() {
+    override fun onFilterUpdate() {
+        catalogFilter?.let {
+
+        }
+        clusterManagerConsulate
+    }
+
+    override fun onLocationUpdate() {
         catalogFilter?.let {
             locationMarker?.position = it.toLatLng()
         }
+    }
+
+    override fun pointPlace(id: Int) {
+        val place = placeRepository.getById(id)
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(place.position, 13f))
+        showPlace(id)
+    }
+
+    private fun showPlace(id: Int) {
+        PlaceFragment.newInstance(id)
+            .show(childFragmentManager, PlaceFragment::class.java.name)
     }
 
     private fun ClusterManager<Place>.init(type: String, renderer: ClusterRenderer) {
         setOnClusterItemClickListener { place ->
             val marker = renderer.getMarker(place)
             try {
-                lastPlace?.notify(lastMarker)
+                lastPlace?.notify(lastMarker)//isActive
                 place.notify(marker)
             } catch (e: Throwable) {
                 clusterManagerConsulate?.notify(Place.CONSULATE)
@@ -96,8 +117,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             }
             lastPlace = place
             lastMarker = marker
-            PlaceFragment.newInstance(place.id)
-                .show(childFragmentManager, PlaceFragment::class.java.name)
+            showPlace(place.id)
             true
         }
         notify(type)

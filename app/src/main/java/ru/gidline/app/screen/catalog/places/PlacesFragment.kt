@@ -13,6 +13,7 @@ import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
+import timber.log.Timber
 import kotlin.math.max
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -36,6 +37,16 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
         iv_up.setOnClickListener(this)
         nsv_places.setOnScrollChangeListener { _: NestedScrollView, _: Int, scrollY: Int, _: Int, _: Int ->
             iv_up.isVisible = scrollY > 0
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden) {
+            val scrollY = nsv_places.scrollY
+            if (scrollY < context?.dip(100) ?: 0) {
+                Timber.e("scrollY $scrollY")
+                nsv_places.scrollTo(0, 0)
+            }
         }
     }
 

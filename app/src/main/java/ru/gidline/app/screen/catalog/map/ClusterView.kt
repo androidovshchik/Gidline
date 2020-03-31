@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
+import io.github.inflationx.calligraphy3.CalligraphyUtils
 import org.jetbrains.anko.dip
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
@@ -58,6 +60,10 @@ class ClusterView : TextView {
         gravity = Gravity.CENTER
         val padding = dip(8)
         setPadding(padding, padding, padding, padding)
+        CalligraphyUtils.applyFontToTextView(
+            this,
+            Typeface.createFromAsset(context.assets, "font/Arial-Bold.ttf")
+        )
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
