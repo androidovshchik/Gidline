@@ -13,6 +13,7 @@ import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
+import kotlin.math.max
 
 @Suppress("MemberVisibilityCanBePrivate")
 class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.View {
@@ -40,7 +41,13 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
 
     override fun onFilterUpdate() {
         catalogFilter?.let {
+            if (!pl_consulate.isVisible) {
+                pl_consulate.updateData(true)
+            }
             pl_consulate.isVisible = it.typeId == R.id.ib_all || it.typeId == R.id.ib_consulate
+            if (!pl_migration.isVisible) {
+                pl_migration.updateData(true)
+            }
             pl_migration.isVisible = it.typeId == R.id.ib_all || it.typeId == R.id.ib_migration
         }
     }
@@ -55,11 +62,14 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
             R.id.iv_up -> {
                 val scrollY = nsv_places.scrollY
                 val migrationY = pl_migration.y.toInt()
-                when {
-                    scrollY > migrationY ->
-                        nsv_places.smoothScrollTo(0, migrationY - requireContext().dip(6))
-                    else -> nsv_places.smoothScrollTo(0, 0)
-                }
+                nsv_places.smoothScrollTo(
+                    0, max(
+                        0, when {
+                            scrollY > migrationY -> migrationY
+                            else -> 0
+                        } - requireContext().dip(10)
+                    )
+                )
             }
         }
     }

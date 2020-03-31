@@ -90,8 +90,11 @@ class PlacesLayout @JvmOverloads constructor(
         }
     }
 
-    fun updateData() {
+    fun updateData(limit: Boolean = false) {
         adapter.apply {
+            if (limit) {
+                limited = true
+            }
             items.clear()
             items.addAll(placeRepository.getByType(type))
             notifyDataSetChanged()
