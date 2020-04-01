@@ -9,9 +9,9 @@ rm -rf drawable-xxhdpi
 mkdir -p drawable-xxhdpi
 rm -rf drawable-xxxhdpi
 for file in *.png; do
-     convert "$file[x50]" drawable-mdpi/ic_$file
-     convert "$file[x75]" drawable-hdpi/ic_$file
-     convert "$file[x100]" drawable-xhdpi/ic_$file
-     convert "$file[x150]" drawable-xxhdpi/ic_$file
-     # convert "$file[x]" drawable-xxxhdpi/ic_$file
+     convert "$file[x100]" drawable-mdpi/$file
+     convert "$file[x150]" drawable-hdpi/$file
+     convert "$file[x200]" drawable-xhdpi/$file
+     convert "$file[x300]" drawable-xxhdpi/$file
+     # convert "$file[x]" drawable-xxxhdpi/$file
 done
