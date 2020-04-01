@@ -9,23 +9,28 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import kotlinx.android.synthetic.main.fragment_map.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
+import ru.gidline.app.local.Preferences
 import ru.gidline.app.local.model.Place
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
+import kotlin.math.min
 
 class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override val presenter: MapPresenter by instance()
 
     private val placeRepository: PlaceRepository by instance()
+
+    private val preferences: Preferences by instance()
 
     private var googleMap: GoogleMap? = null
 
@@ -69,12 +74,10 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             it.setOnCameraIdleListener(clusterManager)
         }
         onFilterUpdate()
+        preferences.location?.let {
+            updateMyLocation(it.first, it.second)
+        }
         catalogFilter?.let {
-            locationMarker = map.addMarker(
-                MarkerOptions()
-                    .position(it.toLatLng())
-                    .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
-            )
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(it.toLatLng(), 8f))
         }
     }
@@ -83,7 +86,10 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         when (v.id) {
             R.id.fab_location -> {
                 locationMarker?.let {
-                    googleMap?.animateCamera(CameraUpdateFactory.newLatLng(it.position))
+                    googleMap?.let { map ->
+                        val zoom = min(12f, map.cameraPosition.zoom)
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(it.position, zoom))
+                    }
                 }
             }
         }
@@ -105,8 +111,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onLocationUpdate() {
         catalogFilter?.let {
-            locationMarker?.position = it.toLatLng()
-            fab_location.isVisible = true
+            updateMyLocation(it.toLatLng())
         }
     }
 
@@ -129,6 +134,27 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         isActive = !isActive
         clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
         return this
+    }
+
+    private fun updateMyLocation(lat: Double, lon: Double) {
+        updateMyLocation(LatLng(lat, lon))
+    }
+
+    private fun updateMyLocation(position: LatLng) {
+        val marker = locationMarker
+        if (marker == null) {
+            googleMap?.let { map ->
+                locationMarker = map.addMarker(
+                    MarkerOptions()
+                        .position(position)
+                        .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
+                )
+                fab_location.isVisible = true
+            }
+        } else {
+            marker.position = position
+            fab_location.isVisible = true
+        }
     }
 
     companion object {
