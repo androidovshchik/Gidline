@@ -53,7 +53,7 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
         tv_schedule1.text = schedule
         tv_schedule2.text = schedule
         val phones = place.phones.split("\n")
-            .filter { it.isNotBlank() }
+            .filter { numberRegex.matches(it) }
             .map { it.trim() }
         if (phones.isNotEmpty()) {
             fab_phone.isVisible = true
@@ -90,6 +90,8 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
     }
 
     companion object {
+
+        private val numberRegex = Regex(".*\\d.*")
 
         fun newInstance(id: Int): PlaceFragment {
             return PlaceFragment().apply {
