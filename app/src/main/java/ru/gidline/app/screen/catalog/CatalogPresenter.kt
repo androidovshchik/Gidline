@@ -6,6 +6,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.kodein.di.generic.instance
+import ru.gidline.app.extension.sortBy
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BasePresenter
 

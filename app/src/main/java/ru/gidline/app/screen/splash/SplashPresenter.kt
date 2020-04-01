@@ -4,6 +4,7 @@ import android.content.Context
 import kotlinx.coroutines.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.BuildConfig
+import ru.gidline.app.extension.sortBy
 import ru.gidline.app.local.Preferences
 import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.local.repository.PlaceRepository
