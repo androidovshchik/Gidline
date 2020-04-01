@@ -59,9 +59,17 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         clusterManagerConsulate = ClusterManager(context, map)
         clusterManagerMigration = ClusterManager(context, map)
         val clusterRendererConsulate =
-            ClusterRenderer(Place.CONSULATE, context, map, clusterManagerConsulate)
+            ClusterRenderer(Place.CONSULATE, context, map, clusterManagerConsulate!!)
         val clusterRendererMigration =
-            ClusterRenderer(Place.MIGRATION, context, map, clusterManagerMigration)
+            ClusterRenderer(Place.MIGRATION, context, map, clusterManagerMigration!!)
+        clusterManagerConsulate!!.setOnClusterItemClickListener { place ->
+
+            true
+        }
+        clusterManagerMigration!!.setOnClusterItemClickListener { place ->
+
+            true
+        }
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
             it.setOnCameraIdleListener {
@@ -69,8 +77,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 clusterManagerMigration?.onCameraIdle()
             }
         }
-        clusterManagerConsulate?.init(Place.CONSULATE, clusterRendererConsulate)
-        clusterManagerMigration?.init(Place.MIGRATION, clusterRendererMigration)
+        onFilterUpdate()
         catalogFilter?.let {
             locationMarker = map.addMarker(
                 MarkerOptions()
@@ -83,11 +90,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onFilterUpdate() {
         catalogFilter?.let {
-            clusterManagerConsulate?.notify(
+            clusterManagerConsulate?.notifyItems(
                 Place.CONSULATE,
                 it.typeId == R.id.ib_all || it.typeId == R.id.ib_consulate
             )
-            clusterManagerMigration?.notify(
+            clusterManagerMigration?.notifyItems(
                 Place.MIGRATION,
                 it.typeId == R.id.ib_all || it.typeId == R.id.ib_migration
             )
@@ -118,18 +125,18 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 lastPlace?.notify(lastMarker)//isActive
                 place.notify(marker)
             } catch (e: Throwable) {
-                clusterManagerConsulate?.notify(Place.CONSULATE)
-                clusterManagerMigration?.notify(Place.MIGRATION)
+                clusterManagerConsulate?.notifyItems(Place.CONSULATE)
+                clusterManagerMigration?.notifyItems(Place.MIGRATION)
             }
             lastPlace = place
             lastMarker = marker
             showPlace(place.id)
             true
         }
-        notify(type)
+        notifyItems(type)
     }
 
-    private fun ClusterManager<Place>.notify(type: String, fill: Boolean = true) {
+    private fun ClusterManager<Place>.notifyItems(type: String, fill: Boolean = true) {
         clearItems()
         if (fill) {
             addItems(placeRepository.getByType(type))
