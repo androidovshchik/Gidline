@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
+import kotlinx.android.synthetic.main.fragment_map.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
@@ -49,6 +51,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (childFragmentManager.findFragmentById(R.id.f_map) as SupportMapFragment).getMapAsync(this)
+        fab_location.setOnClickListener(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -76,6 +79,16 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         }
     }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.fab_location -> {
+                locationMarker?.let {
+                    googleMap?.animateCamera(CameraUpdateFactory.newLatLng(it.position))
+                }
+            }
+        }
+    }
+
     override fun onFilterUpdate() {
         clusterManager?.apply {
             clearItems()
@@ -93,6 +106,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     override fun onLocationUpdate() {
         catalogFilter?.let {
             locationMarker?.position = it.toLatLng()
+            fab_location.isVisible = true
         }
     }
 
