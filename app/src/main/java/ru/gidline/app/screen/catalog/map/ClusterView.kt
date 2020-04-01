@@ -3,12 +3,12 @@ package ru.gidline.app.screen.catalog.map
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import io.github.inflationx.calligraphy3.CalligraphyUtils
 import org.jetbrains.anko.dip
 import ru.gidline.app.R
@@ -21,11 +21,11 @@ class ClusterView : TextView {
     constructor(context: Context, type: String) : this(context) {
         when (type) {
             Place.CONSULATE -> {
-                setTextColor(Color.parseColor("#d18bc9"))
+                setTextColor(ContextCompat.getColor(context, R.color.colorConsulate))
                 setBackgroundResource(R.drawable.background_consulate)
             }
             Place.MIGRATION -> {
-                setTextColor(Color.parseColor("#e1619e"))
+                setTextColor(ContextCompat.getColor(context, R.color.colorMigration))
                 setBackgroundResource(R.drawable.background_migration)
             }
             else -> {

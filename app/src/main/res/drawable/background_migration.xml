@@ -4,5 +4,5 @@
     <solid android:color="@color/colorBackground" />
     <stroke
         android:width="2dp"
-        android:color="#e1619e" />
+        android:color="@color/colorMigration" />
 </shape>

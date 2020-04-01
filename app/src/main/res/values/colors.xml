@@ -9,4 +9,6 @@
     <color name="colorVacancyNormal">#89ffffff</color>
     <color name="colorSeekBar">#813678</color>
     <color name="colorGrayText">#676a73</color>
+    <color name="colorConsulate">#d18bc9</color>
+    <color name="colorMigration">#e1619e</color>
 </resources>
