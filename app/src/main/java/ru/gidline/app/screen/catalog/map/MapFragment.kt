@@ -27,9 +27,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var googleMap: GoogleMap? = null
 
-    private var clusterManagerConsulate: ClusterManager<Place>? = null
-
-    private var clusterManagerMigration: ClusterManager<Place>? = null
+    private var clusterManager: ClusterManager<Place>? = null
 
     private var locationMarker: Marker? = null
 
@@ -56,24 +54,15 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
         val context = context ?: return
-        clusterManagerConsulate = ClusterManager(context, map)
-        clusterManagerMigration = ClusterManager(context, map)
-        val clusterRendererConsulate =
-            ClusterRenderer(Place.CONSULATE, context, map, clusterManagerConsulate!!)
-        val clusterRendererMigration =
-            ClusterRenderer(Place.MIGRATION, context, map, clusterManagerMigration!!)
+        clusterManager = ClusterManager(context, map)
+        val clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
+        clusterManager!!.setOnClusterItemClickListener { place ->
+            showPlace(place.id)
+            true
+        }
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
-            it.setOnMarkerClickListener { marker ->
-                val place = clusterRendererConsulate.getClusterItem(marker)
-                    ?: clusterRendererMigration.getClusterItem(marker)
-                showPlace(place.id)
-                true
-            }
-            it.setOnCameraIdleListener {
-                clusterManagerConsulate?.onCameraIdle()
-                clusterManagerMigration?.onCameraIdle()
-            }
+            it.setOnCameraIdleListener(clusterManager)
         }
         onFilterUpdate()
         catalogFilter?.let {
@@ -88,6 +77,13 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun onFilterUpdate() {
         catalogFilter?.let {
+            clusterManager?.apply {
+                clearItems()
+                if (fill) {
+                    addItems(placeRepository.getByType(type))
+                }
+                cluster()
+            }
             clusterManagerConsulate?.notifyItems(
                 Place.CONSULATE,
                 it.typeId == R.id.ib_all || it.typeId == R.id.ib_consulate
@@ -130,14 +126,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         lastPlace = place
         lastMarker = marker*/
         showPlace(place.id)
-    }
-
-    private fun ClusterManager<Place>.notifyItems(type: String, fill: Boolean = true) {
-        clearItems()
-        if (fill) {
-            addItems(placeRepository.getByType(type))
-        }
-        cluster()
     }
 
     companion object {

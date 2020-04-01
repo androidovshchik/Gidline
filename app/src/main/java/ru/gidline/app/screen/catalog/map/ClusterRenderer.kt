@@ -12,15 +12,19 @@ import com.google.maps.android.ui.IconGenerator
 import ru.gidline.app.local.model.Place
 
 class ClusterRenderer(
-    type: String,
     context: Context,
     map: GoogleMap,
     clusterManager: ClusterManager<Place>
 ) : DefaultClusterRenderer<Place>(context, map, clusterManager) {
 
-    private val iconGenerator = IconGenerator(context).apply {
+    private val consulateGenerator = IconGenerator(context).apply {
         setBackground(null)
-        setContentView(ClusterView(context, type))
+        setContentView(ClusterView(context, Place.CONSULATE))
+    }
+
+    private val migrationGenerator = IconGenerator(context).apply {
+        setBackground(null)
+        setContentView(ClusterView(context, Place.MIGRATION))
     }
 
     init {
@@ -33,7 +37,12 @@ class ClusterRenderer(
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<Place>, markerOptions: MarkerOptions) {
-        val icon = iconGenerator.makeIcon(cluster.size.toString())
+        val icon =
+            if (cluster.items.count { it.type == Place.CONSULATE } > cluster.items.size / 2) {
+                consulateGenerator.makeIcon(cluster.size.toString())
+            } else {
+                migrationGenerator.makeIcon(cluster.size.toString())
+            }
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
             .zIndex(1f)
     }
