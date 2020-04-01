@@ -62,16 +62,14 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             ClusterRenderer(Place.CONSULATE, context, map, clusterManagerConsulate!!)
         val clusterRendererMigration =
             ClusterRenderer(Place.MIGRATION, context, map, clusterManagerMigration!!)
-        clusterManagerConsulate!!.setOnClusterItemClickListener { place ->
-
-            true
-        }
-        clusterManagerMigration!!.setOnClusterItemClickListener { place ->
-
-            true
-        }
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
+            it.setOnMarkerClickListener { marker ->
+                val place = clusterRendererConsulate.getClusterItem(marker)
+                    ?: clusterRendererMigration.getClusterItem(marker)
+                showPlace(place.id)
+                true
+            }
             it.setOnCameraIdleListener {
                 clusterManagerConsulate?.onCameraIdle()
                 clusterManagerMigration?.onCameraIdle()
@@ -118,22 +116,20 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             .show(childFragmentManager, PlaceFragment::class.java.name)
     }
 
-    private fun ClusterManager<Place>.init(type: String, renderer: ClusterRenderer) {
-        setOnClusterItemClickListener { place ->
-            val marker = renderer.getMarker(place)
-            try {
-                lastPlace?.notify(lastMarker)//isActive
-                place.notify(marker)
-            } catch (e: Throwable) {
-                clusterManagerConsulate?.notifyItems(Place.CONSULATE)
-                clusterManagerMigration?.notifyItems(Place.MIGRATION)
-            }
-            lastPlace = place
-            lastMarker = marker
-            showPlace(place.id)
-            true
+    private fun ClusterRenderer.onClusterItemClick(place: Place) {
+        /*val marker = getMarker(place)
+        try {
+        isActive = !isActive
+        marker?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
+            lastPlace?.notify(lastMarker)//isActive
+            place.notify(marker)
+        } catch (e: Throwable) {
+            clusterManagerConsulate?.notifyItems(Place.CONSULATE)
+            clusterManagerMigration?.notifyItems(Place.MIGRATION)
         }
-        notifyItems(type)
+        lastPlace = place
+        lastMarker = marker*/
+        showPlace(place.id)
     }
 
     private fun ClusterManager<Place>.notifyItems(type: String, fill: Boolean = true) {
@@ -142,12 +138,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             addItems(placeRepository.getByType(type))
         }
         cluster()
-    }
-
-    @Throws(Throwable::class)
-    private fun Place.notify(marker: Marker?) {
-        isActive = !isActive
-        marker?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
     }
 
     companion object {

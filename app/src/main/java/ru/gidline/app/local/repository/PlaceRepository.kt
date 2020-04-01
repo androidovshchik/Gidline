@@ -22,7 +22,7 @@ class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>(
             .use { reader ->
                 csvReader.parse(reader).use { parser ->
                     var i = 0
-                    var z = 1f
+                    var z = 10f
                     do {
                         parser.nextRow()?.let {
                             places.add(Place(++i, it, z))

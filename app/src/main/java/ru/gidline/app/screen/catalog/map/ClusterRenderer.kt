@@ -35,6 +35,7 @@ class ClusterRenderer(
     override fun onBeforeClusterRendered(cluster: Cluster<Place>, markerOptions: MarkerOptions) {
         val icon = iconGenerator.makeIcon(cluster.size.toString())
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
+            .zIndex(1f)
     }
 
     /**
