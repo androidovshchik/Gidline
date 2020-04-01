@@ -143,6 +143,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                     MarkerOptions()
                         .position(position)
                         .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
+                        .zIndex(100f)
                 )
                 fab_location.isVisible = true
             }
