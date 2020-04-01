@@ -74,6 +74,9 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             it.uiSettings.isRotateGesturesEnabled = false
             it.setOnCameraIdleListener(clusterManager)
         }
+        placeRepository.getAll().forEach {
+            it.isActive = false
+        }
         onFilterUpdate()
         preferences.location?.let {
             updateMyLocation(it.first, it.second)
@@ -129,12 +132,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             .show(childFragmentManager, PlaceFragment::class.java.name)
     }
 
-    private fun Place.highlightMarker(active: Boolean = true): Place {
-        isActive = active
-        clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
-        return this
-    }
-
     private fun updateMyLocation(lat: Double, lon: Double) {
         updateMyLocation(LatLng(lat, lon))
     }
@@ -153,6 +150,12 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             locationMarker?.position = position
             fab_location.isVisible = true
         }
+    }
+
+    private fun Place.highlightMarker(active: Boolean = true): Place {
+        isActive = active
+        clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
+        return this
     }
 
     companion object {
