@@ -8,9 +8,15 @@ import ru.gidline.app.screen.catalog.CatalogContract
 
 interface PlacesContract {
 
-    interface View : IView, CatalogContract.Radar
+    interface View : IView, CatalogContract.Radar {
+
+        fun updateDelayed()
+    }
 
     interface Recycler : IRecycler<Place>
 
-    interface Presenter : IPresenter<View>
+    interface Presenter : IPresenter<View> {
+
+        fun awaitDelay()
+    }
 }

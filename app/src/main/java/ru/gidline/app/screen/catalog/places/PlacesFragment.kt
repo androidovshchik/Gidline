@@ -13,7 +13,6 @@ import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
-import timber.log.Timber
 import kotlin.math.max
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -44,7 +43,6 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
         if (!hidden) {
             val scrollY = nsv_places.scrollY
             if (scrollY < context?.dip(100) ?: 0) {
-                Timber.e("scrollY $scrollY")
                 nsv_places.scrollTo(0, 0)
             }
         }
@@ -65,6 +63,9 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
 
     override fun onLocationUpdate() {
         pl_consulate.updateData()
+    }
+
+    override fun updateDelayed() {
         pl_migration.updateData()
     }
 

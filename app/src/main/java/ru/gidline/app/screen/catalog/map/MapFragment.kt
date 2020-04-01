@@ -77,15 +77,21 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                     .position(it.toLatLng())
                     .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
             )
-            map.moveCamera(CameraUpdateFactory.newLatLng(it.toLatLng()))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(it.toLatLng(), 8f))
         }
     }
 
     override fun onFilterUpdate() {
         catalogFilter?.let {
-
+            clusterManagerConsulate?.notify(
+                Place.CONSULATE,
+                it.typeId == R.id.ib_all || it.typeId == R.id.ib_consulate
+            )
+            clusterManagerMigration?.notify(
+                Place.MIGRATION,
+                it.typeId == R.id.ib_all || it.typeId == R.id.ib_migration
+            )
         }
-        clusterManagerConsulate
     }
 
     override fun onLocationUpdate() {
@@ -96,7 +102,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun pointPlace(id: Int) {
         val place = placeRepository.getById(id)
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(place.position, 13f))
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(place.position, 15f))
         showPlace(id)
     }
 
@@ -123,9 +129,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         notify(type)
     }
 
-    private fun ClusterManager<Place>.notify(type: String) {
+    private fun ClusterManager<Place>.notify(type: String, fill: Boolean = true) {
         clearItems()
-        addItems(placeRepository.getByType(type))
+        if (fill) {
+            addItems(placeRepository.getByType(type))
+        }
         cluster()
     }
 

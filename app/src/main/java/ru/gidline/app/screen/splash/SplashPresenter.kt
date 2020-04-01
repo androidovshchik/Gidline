@@ -1,10 +1,7 @@
 package ru.gidline.app.screen.splash
 
 import android.content.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.BuildConfig
 import ru.gidline.app.local.Preferences
@@ -26,6 +23,7 @@ class SplashPresenter(context: Context) : BasePresenter<SplashContract.View>(con
     private val placeRepository: PlaceRepository by instance()
 
     override fun initRepos(context: Context) {
+        job.cancelChildren()
         launch {
             withContext(Dispatchers.IO) {
                 bellRepository.initData(context)
