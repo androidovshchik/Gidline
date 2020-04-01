@@ -29,11 +29,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var clusterManager: ClusterManager<Place>? = null
 
+    private var clusterRenderer: ClusterRenderer? = null
+
     private var locationMarker: Marker? = null
 
     private var lastPlace: Place? = null
-
-    private var lastMarker: Marker? = null
 
     private val catalogFilter: CatalogFilter?
         get() {
@@ -55,8 +55,9 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         googleMap = map
         val context = context ?: return
         clusterManager = ClusterManager(context, map)
-        val clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
+        clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
         clusterManager!!.setOnClusterItemClickListener { place ->
+            lastPlace = place.highlightMarker()
             showPlace(place.id)
             true
         }
@@ -76,22 +77,16 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onFilterUpdate() {
-        catalogFilter?.let {
-            clusterManager?.apply {
-                clearItems()
-                if (fill) {
-                    addItems(placeRepository.getByType(type))
+        clusterManager?.apply {
+            clearItems()
+            addItems(
+                when (catalogFilter?.typeId) {
+                    R.id.ib_consulate -> placeRepository.getByType(Place.CONSULATE)
+                    R.id.ib_migration -> placeRepository.getByType(Place.MIGRATION)
+                    else -> placeRepository.getAll()
                 }
-                cluster()
-            }
-            clusterManagerConsulate?.notifyItems(
-                Place.CONSULATE,
-                it.typeId == R.id.ib_all || it.typeId == R.id.ib_consulate
             )
-            clusterManagerMigration?.notifyItems(
-                Place.MIGRATION,
-                it.typeId == R.id.ib_all || it.typeId == R.id.ib_migration
-            )
+            cluster()
         }
     }
 
@@ -103,6 +98,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun pointPlace(id: Int) {
         val place = placeRepository.getById(id)
+        lastPlace = place.highlightMarker()
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(place.position, 15f))
         showPlace(id)
     }
@@ -112,20 +108,13 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             .show(childFragmentManager, PlaceFragment::class.java.name)
     }
 
-    private fun ClusterRenderer.onClusterItemClick(place: Place) {
-        /*val marker = getMarker(place)
-        try {
-        isActive = !isActive
-        marker?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
-            lastPlace?.notify(lastMarker)//isActive
-            place.notify(marker)
-        } catch (e: Throwable) {
-            clusterManagerConsulate?.notifyItems(Place.CONSULATE)
-            clusterManagerMigration?.notifyItems(Place.MIGRATION)
+    private fun Place.highlightMarker(): Place {
+        if (this != lastPlace) {
+            lastPlace?.highlightMarker()
         }
-        lastPlace = place
-        lastMarker = marker*/
-        showPlace(place.id)
+        isActive = !isActive
+        clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
+        return this
     }
 
     companion object {
