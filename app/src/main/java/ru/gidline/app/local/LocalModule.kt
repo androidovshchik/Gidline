@@ -24,6 +24,7 @@ val localModule = Kodein.Module("local") {
     bind<CsvReader>() with provider {
         CsvReader().apply {
             setFieldSeparator(';')
+            setContainsHeader(false)
         }
     }
 

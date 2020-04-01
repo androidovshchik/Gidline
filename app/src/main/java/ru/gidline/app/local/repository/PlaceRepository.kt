@@ -11,7 +11,7 @@ class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>(
 
     override fun getAll() = places
 
-    fun getById(id: Int) = places.first { it.id == id }
+    fun getById(id: Int): Place = places.first { it.id == id }
 
     fun getByType(type: String?) = places.filter { type.equals(it.type, true) }
 
@@ -22,9 +22,11 @@ class PlaceRepository(private val csvReader: CsvReader) : BaseRepository<Place>(
             .use { reader ->
                 csvReader.parse(reader).use { parser ->
                     var i = 0
+                    var z = 1f
                     do {
                         parser.nextRow()?.let {
-                            places.add(Place(++i, it))
+                            places.add(Place(++i, it, z))
+                            z += 0.001f
                         } ?: break
                     } while (true)
                 }

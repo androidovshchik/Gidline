@@ -9,7 +9,7 @@ import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin
 
-class Place(val id: Int, row: CsvRow) : ClusterItem {
+class Place(val id: Int, row: CsvRow, val zIndex: Float) : ClusterItem {
 
     val type: String = row.getField(0).trim()
 

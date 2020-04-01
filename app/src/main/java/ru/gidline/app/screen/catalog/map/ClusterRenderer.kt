@@ -15,7 +15,7 @@ class ClusterRenderer(
     type: String,
     context: Context,
     map: GoogleMap,
-    clusterManager: ClusterManager<Place>?
+    clusterManager: ClusterManager<Place>
 ) : DefaultClusterRenderer<Place>(context, map, clusterManager) {
 
     private val iconGenerator = IconGenerator(context).apply {
@@ -24,11 +24,12 @@ class ClusterRenderer(
     }
 
     init {
-        clusterManager?.renderer = this
+        clusterManager.renderer = this
     }
 
     override fun onBeforeClusterItemRendered(markerItem: Place, markerOptions: MarkerOptions) {
         markerOptions.icon(BitmapDescriptorFactory.fromAsset(markerItem.markerIcon))
+            .zIndex(markerItem.zIndex)
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<Place>, markerOptions: MarkerOptions) {
