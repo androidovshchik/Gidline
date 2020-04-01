@@ -22,7 +22,7 @@ import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.CatalogFilter
-import kotlin.math.min
+import kotlin.math.max
 
 class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
@@ -65,6 +65,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         clusterManager = ClusterManager(context, map)
         clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
         clusterManager!!.setOnClusterItemClickListener { place ->
+            lastPlace?.highlightMarker(false)
             lastPlace = place.highlightMarker()
             showPlace(place.id)
             true
@@ -87,7 +88,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             R.id.fab_location -> {
                 locationMarker?.let {
                     googleMap?.let { map ->
-                        val zoom = min(12f, map.cameraPosition.zoom)
+                        val zoom = max(11f, map.cameraPosition.zoom)
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(it.position, zoom))
                     }
                 }
@@ -117,6 +118,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     override fun pointPlace(id: Int) {
         val place = placeRepository.getById(id)
+        lastPlace?.highlightMarker(false)
         lastPlace = place.highlightMarker()
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(place.position, 15f))
         showPlace(id)
@@ -127,11 +129,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             .show(childFragmentManager, PlaceFragment::class.java.name)
     }
 
-    private fun Place.highlightMarker(): Place {
-        if (this != lastPlace) {
-            lastPlace?.highlightMarker()
-        }
-        isActive = !isActive
+    private fun Place.highlightMarker(active: Boolean = true): Place {
+        isActive = active
         clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
         return this
     }
@@ -141,8 +140,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     private fun updateMyLocation(position: LatLng) {
-        val marker = locationMarker
-        if (marker == null) {
+        if (locationMarker == null) {
             googleMap?.let { map ->
                 locationMarker = map.addMarker(
                     MarkerOptions()
@@ -152,7 +150,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 fab_location.isVisible = true
             }
         } else {
-            marker.position = position
+            locationMarker?.position = position
             fab_location.isVisible = true
         }
     }
