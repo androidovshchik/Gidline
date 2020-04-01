@@ -6,7 +6,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.kodein.di.generic.instance
-import ru.gidline.app.extension.sortBy
+import ru.gidline.app.extension.sortListBy
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BasePresenter
 
@@ -24,7 +24,7 @@ class CatalogPresenter(context: Context) : BasePresenter<CatalogContract.View>(c
                     forEach {
                         it.setDistanceTo(catalogFilter.latitude, catalogFilter.longitude)
                     }
-                    sortBy { it.distance }
+                    sortListBy { it.distance }
                 }
             }
             reference.get()?.onFinishCount()

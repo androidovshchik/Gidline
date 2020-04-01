@@ -4,7 +4,7 @@ import android.content.Context
 import kotlinx.coroutines.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.BuildConfig
-import ru.gidline.app.extension.sortBy
+import ru.gidline.app.extension.sortListBy
 import ru.gidline.app.local.Preferences
 import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.local.repository.PlaceRepository
@@ -35,7 +35,7 @@ class SplashPresenter(context: Context) : BasePresenter<SplashContract.View>(con
                     forEach {
                         it.setDistanceTo(lat, lon)
                     }
-                    sortBy { it.distance }
+                    sortListBy { it.distance }
                 }
             }
             delay(if (BuildConfig.DEBUG) 150L else 1500L)
