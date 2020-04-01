@@ -32,7 +32,7 @@ class ClusterRenderer(
     }
 
     override fun onBeforeClusterItemRendered(markerItem: Place, markerOptions: MarkerOptions) {
-        markerOptions.icon(BitmapDescriptorFactory.fromAsset(markerItem.markerIcon))
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(markerItem.markerIcon))
             .zIndex(markerItem.zIndex)
     }
 

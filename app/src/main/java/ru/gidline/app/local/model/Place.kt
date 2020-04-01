@@ -40,11 +40,11 @@ class Place(val id: Int, row: CsvRow, val zIndex: Float) : ClusterItem {
             else -> 0
         }
 
-    val markerIcon: String?
+    val markerIcon: Int
         get() = when (type) {
-            CONSULATE -> "marker/consulate_${if (isActive) "on" else "off"}.png"
-            MIGRATION -> "marker/migration_${if (isActive) "on" else "off"}.png"
-            else -> null
+            CONSULATE -> if (isActive) R.drawable.ic_consulate_on else R.drawable.ic_consulate_off
+            MIGRATION -> if (isActive) R.drawable.ic_migration_on else R.drawable.ic_migration_off
+            else -> 0
         }
 
     override fun getSnippet() = null

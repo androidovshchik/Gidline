@@ -142,7 +142,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 locationMarker = map.addMarker(
                     MarkerOptions()
                         .position(position)
-                        .icon(BitmapDescriptorFactory.fromAsset("marker/man_shadow.png"))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_man))
                         .zIndex(100f)
                 )
                 fab_location.isVisible = true
@@ -155,7 +155,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private fun Place.highlightMarker(active: Boolean = true): Place {
         isActive = active
-        clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromAsset(markerIcon))
+        clusterRenderer?.getMarker(this)?.setIcon(BitmapDescriptorFactory.fromResource(markerIcon))
         return this
     }
 
