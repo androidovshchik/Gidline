@@ -8,12 +8,10 @@ import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.maps.android.clustering.ClusterManager
 import kotlinx.android.synthetic.main.fragment_map.*
+import org.jetbrains.anko.dip
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.Preferences
@@ -31,6 +29,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     private val placeRepository: PlaceRepository by instance()
 
     private val preferences: Preferences by instance()
+
+    private lateinit var mapFragment: SupportMapFragment
 
     private var googleMap: GoogleMap? = null
 
@@ -55,7 +55,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (childFragmentManager.findFragmentById(R.id.f_map) as SupportMapFragment).getMapAsync(this)
+        mapFragment = childFragmentManager.findFragmentById(R.id.f_map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
         fab_location.setOnClickListener(this)
     }
 
@@ -64,25 +65,40 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         val context = context ?: return
         clusterManager = ClusterManager(context, map)
         clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
-        clusterManager!!.setOnClusterItemClickListener { place ->
+        clusterManager!!.setOnClusterClickListener {
+
+            true
+        }
+        clusterManager!!.setOnClusterItemClickListener {
             lastPlace?.highlightMarker(false)
-            lastPlace = place.highlightMarker()
-            showPlace(place.id)
+            lastPlace = it.highlightMarker()
+            showPlace(it.id)
             true
         }
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
             it.setOnCameraIdleListener(clusterManager)
         }
-        placeRepository.getAll().forEach {
-            it.isActive = false
-        }
         onFilterUpdate()
         preferences.location?.let {
             updateMyLocation(it.first, it.second)
         }
-        catalogFilter?.let {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(it.toLatLng(), 8f))
+        mapFragment.view?.viewTreeObserver?.addOnGlobalLayoutListener(this)
+    }
+
+    override fun onGlobalLayout() {
+        mapFragment.view?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+        catalogFilter?.let { filter ->
+            val places = placeRepository.getAll()
+            if (places.isNotEmpty()) {
+                val bounds = LatLngBounds.Builder()
+                    .include(filter.toLatLng())
+                    .include(places[0].position)
+                    .build()
+                googleMap?.animateCamera(
+                    CameraUpdateFactory.newLatLngBounds(bounds, context?.dip(48) ?: 0)
+                )
+            }
         }
     }
 
@@ -100,6 +116,9 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onFilterUpdate() {
+        placeRepository.getAll().forEach {
+            it.isActive = false
+        }
         clusterManager?.apply {
             clearItems()
             addItems(
