@@ -41,8 +41,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var lastPlace: Place? = null
 
-    private var hasInitialMove = false
-
     private val catalogFilter: CatalogFilter?
         get() {
             parentCallback<CatalogContract.View>(true) {
@@ -65,8 +63,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         val context = context ?: return
         clusterManager = ClusterManager(context, map)
         clusterRenderer = ClusterRenderer(context, map, clusterManager!!)
-        clusterManager!!.setOnClusterClickListener {
-
+        clusterManager!!.setOnClusterClickListener { cluster ->
+            googleMap?.animateCamera(getCameraBounds(cluster.items.map { it.position }))
             true
         }
         clusterManager!!.setOnClusterItemClickListener {
@@ -79,6 +77,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         preferences.location?.let {
             updateMyLocation(it.first, it.second)
         }
+        var hasInitialMove = false
         map.also {
             it.uiSettings.isRotateGesturesEnabled = false
             it.setOnCameraIdleListener {
@@ -86,9 +85,11 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
                 if (!hasInitialMove) {
                     hasInitialMove = true
                     googleMap?.animateCamera(
-                        getCameraUpdate(
-                            catalogFilter?.toLatLng(),
-                            placeRepository.getAll().firstOrNull()?.position
+                        getCameraBounds(
+                            listOf(
+                                catalogFilter?.toLatLng(),
+                                placeRepository.getAll().firstOrNull()?.position
+                            )
                         )
                     )
                 }
@@ -163,7 +164,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         }
     }
 
-    private fun getCameraUpdate(vararg positions: LatLng?): CameraUpdate {
+    private fun getCameraBounds(positions: List<LatLng?>): CameraUpdate {
         val bounds = LatLngBounds.Builder()
         for (position in positions) {
             bounds.include(position ?: continue)
