@@ -19,6 +19,7 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
 import ru.gidline.app.local.Preferences
 import ru.gidline.app.local.model.Place
+import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.catalog.map.MapContract
 import timber.log.Timber
@@ -26,6 +27,8 @@ import timber.log.Timber
 class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContract.View {
 
     override val presenter: CatalogPresenter by instance()
+
+    private val placeRepository: PlaceRepository by instance()
 
     private val preferences: Preferences by instance()
 
@@ -150,6 +153,9 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
 
     override fun updateFilter(id: Int) {
         catalogFilter.typeId = id
+        placeRepository.getAll().forEach {
+            it.isActive = false
+        }
         findFragment<CatalogContract.Radar>(R.id.f_places)?.onFilterUpdate()
         findFragment<CatalogContract.Radar>(R.id.f_map)?.onFilterUpdate()
     }

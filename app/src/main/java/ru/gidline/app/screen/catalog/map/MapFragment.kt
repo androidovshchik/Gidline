@@ -111,9 +111,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onFilterUpdate() {
-        placeRepository.getAll().forEach {
-            it.isActive = false
-        }
         clusterManager?.apply {
             clearItems()
             addItems(

@@ -63,9 +63,6 @@ class PlacesFragment : BaseFragment<PlacesContract.Presenter>(), PlacesContract.
 
     override fun onLocationUpdate() {
         pl_consulate.updateData()
-    }
-
-    override fun updateDelayed() {
         pl_migration.updateData()
     }
 
