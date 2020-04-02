@@ -14,8 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="64dp">
+            android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -116,19 +115,19 @@
                 android:id="@+id/al_offer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_offer" />
+                app:text="@string/expansion_offer" />
 
             <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_responsibility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_responsibility" />
+                app:text="@string/expansion_responsibility" />
 
             <ru.gidline.app.screen.search.vacancies.vacancy.ExpansionLayout
                 android:id="@+id/al_requirement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="@string/accordion_requirement" />
+                app:text="@string/expansion_requirement" />
 
             <TextView
                 fontPath="font/Arial-Bold.ttf"
@@ -153,6 +152,10 @@
                 android:textColor="@color/colorSeekBar"
                 android:textSize="14sp"
                 tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="64dp" />
 
         </LinearLayout>
 

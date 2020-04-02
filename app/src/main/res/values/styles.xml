@@ -5,7 +5,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="matCardStyle">@style/MatCard</item>
     </style>
 
     <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -17,13 +16,22 @@
         <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="MatCard">
+    <style name="AppCard">
         <item name="strokeColor">#f9d5e9</item>
         <item name="strokeWidth">1.5dp</item>
         <item name="cardCornerRadius">5dp</item>
         <item name="cardElevation">0dp</item>
         <item name="cardMaxElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/colorCardNormal</item>
+        <item name="cardBackgroundColor">@color/colorVacancyNormal</item>
+    </style>
+
+    <style name="PlaceSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/PlaceSheet</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="PlaceSheet">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

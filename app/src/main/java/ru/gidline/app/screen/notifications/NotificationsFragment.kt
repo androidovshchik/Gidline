@@ -8,15 +8,16 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_notifications.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.local.BellRepository
 import ru.gidline.app.local.model.Bell
+import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.notifications.adapter.NotificationsAdapter
 import ru.gidline.app.screen.notifications.adapter.NotificationsDecoration
 import ru.gidline.app.screen.notifications.notification.NotificationFragment
 
-class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), NotificationsContract.View {
+class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
+    NotificationsContract.View {
 
     override val presenter: NotificationsPresenter by instance()
 
@@ -31,6 +32,8 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(), N
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter.items.addAll(bellRepository.getAll())
         rv_notifications.also {
+            it.setHasFixedSize(true)
+            it.isNestedScrollingEnabled = false
             it.addItemDecoration(NotificationsDecoration(requireContext()))
             it.adapter = adapter
         }

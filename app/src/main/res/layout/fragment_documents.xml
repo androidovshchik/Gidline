@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_hand_patent"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_hand_patent"
+            app:offset="68dp"
+            app:text="Проверка патента" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_doc_home"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_doc_home"
+            app:offset="68dp"
+            app:text="Готовность вида\nна жительство" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_daw_home"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_daw_home"
+            app:offset="68dp"
+            app:text="Готовность РВП" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_globe_pas"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_globe_pas"
+            app:offset="68dp"
+            app:text="Действительность\nна въезд в РФ" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_ban"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_ban_doc"
+            app:offset="68dp"
+            app:text="Запрет на въезд" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_inn"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_inn"
+            app:offset="68dp"
+            app:text="Проверка ИНН" />
+
+        <ru.gidline.app.screen.common.view.CategoryLayout
+            android:id="@+id/cl_sheriff"
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:contentPadding="4dp"
+            app:icon="@drawable/ic_sheriff"
+            app:offset="68dp"
+            app:text="Задолженность\nпо штрафам" />
+
+    </LinearLayout>
+
+</ScrollView>

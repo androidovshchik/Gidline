@@ -1,11 +1,13 @@
 package ru.gidline.app.screen.search
 
 import android.graphics.Matrix
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.jetbrains.anko.inputMethodManager
@@ -23,7 +25,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
 
     override val presenter: SearchPresenter by instance()
 
-    override val searchFilter: SearchFilter by instance()
+    override val searchFilter = SearchFilter()
 
     private val chipsPopup: ChipsPopup by instance()
 
@@ -34,11 +36,12 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
         return inflater.inflate(R.layout.fragment_search, root, false)
     }
 
+    @Suppress("DEPRECATION")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
-                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+                setTranslate(0f, -resources.getDimension(R.dimen.toolbar_height))
             }
         }
         et_search.setOnTouchListener { v, _ ->
@@ -52,6 +55,14 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
                 chipsPopup.filter(text)
             }
         }
+        ib_filter.setImageDrawable(
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)!!.mutate().apply {
+                setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+        )
         ib_filter.setOnClickListener(this)
         et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

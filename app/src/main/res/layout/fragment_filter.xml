@@ -15,8 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="64dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,8 +45,9 @@
                     android:layout_height="36dp"
                     android:adjustViewBounds="true"
                     android:background="?android:attr/selectableItemBackground"
+                    android:padding="6dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_close_36dp" />
+                    android:src="@drawable/ic_close" />
 
             </LinearLayout>
 
@@ -381,14 +381,13 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ru.gidline.app.screen.common.ImageBox
+                <ru.gidline.app.screen.common.view.ImageBox
                     android:id="@+id/ib_checkbox1"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:padding="5dp"
                     app:background="@drawable/checkbox_violet"
                     app:icon="@drawable/daw_violet"
-                    tools:background="@drawable/checkbox_violet"
                     tools:src="@drawable/daw_violet" />
 
                 <TextView
@@ -416,14 +415,13 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ru.gidline.app.screen.common.ImageBox
+                <ru.gidline.app.screen.common.view.ImageBox
                     android:id="@+id/ib_checkbox2"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:padding="5dp"
                     app:background="@drawable/checkbox_violet"
                     app:icon="@drawable/daw_violet"
-                    tools:background="@drawable/checkbox_violet"
                     tools:src="@drawable/daw_violet" />
 
                 <TextView
@@ -440,6 +438,10 @@
                     tools:textStyle="bold" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="64dp" />
 
         </LinearLayout>
 

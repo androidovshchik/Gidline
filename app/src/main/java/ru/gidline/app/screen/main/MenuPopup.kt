@@ -25,7 +25,7 @@ class MenuPopup(context: Context) : BasePopup(context) {
         width = context.dip(280)
         isOutsideTouchable = true
         inputMethodMode = INPUT_METHOD_NOT_NEEDED
-        setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.menu_background))
+        setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.background_menu))
         contentView = View.inflate(context, R.layout.popup_menu, null).also {
             it.ll_menu.children.forEach { child ->
                 if (child is MenuLayout) {

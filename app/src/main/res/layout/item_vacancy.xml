@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_vacancy"
+    style="@style/AppCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:cardBackgroundColor="@color/colorCardFire"
+    tools:ignore="MissingPrefix">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="#595959"
+            android:textSize="13sp"
+            tools:text="TEXT TEXT TEXT TEXT TEXT" />
+
+        <ImageView
+            android:id="@+id/iv_fire"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_fire"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_vacancy"
+            fontPath="font/Arial-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="6dp"
+            android:layout_toEndOf="@+id/iv_fire"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textColor="#a71e69"
+            android:textSize="16sp"
+            tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT "
+            tools:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_payment_time"
+            fontPath="font/Arial-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_vacancy"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT "
+            tools:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_payment_time"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/iv_patent"
+            android:ellipsize="end"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_city"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/iv_patent"
+            android:ellipsize="end"
+            android:textColor="#f19aca"
+            android:textSize="14sp"
+            tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+        <ImageView
+            android:id="@+id/iv_patent"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_below="@+id/tv_payment_time"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_patent"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_place"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            tools:background="@android:color/holo_purple"
+            tools:text="TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT " />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

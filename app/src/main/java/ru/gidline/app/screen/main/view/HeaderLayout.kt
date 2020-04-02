@@ -10,6 +10,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.CircleCropTransformation
@@ -53,7 +54,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
 
     @SuppressLint("Recycle")
     private fun init(attrs: AttributeSet?) {
-        setBackgroundResource(R.drawable.header_background)
+        setBackgroundResource(R.drawable.background_header)
         View.inflate(context, R.layout.merge_header, this)
     }
 
@@ -61,7 +62,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
     fun updateData() = preferences.also {
         val genderDrawable = if (it.isMan) R.drawable.avatar_man else R.drawable.avatar_woman
         iv_avatar.load(Uri.parse("file://${it.avatarPath}")) {
-            error(resources.getDrawable(genderDrawable).mutate().apply {
+            error(ContextCompat.getDrawable(context, genderDrawable)!!.mutate().apply {
                 setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
             })
             transformations(CircleCropTransformation())

@@ -39,15 +39,8 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
         private val date = itemView.tv_date
 
         init {
-            delete.setOnClickListener {
-                val position = adapterPosition
-                val item = items.removeAt(position)
-                reference?.get()?.onItemDeleted(item.id)
-            }
-            card.setOnClickListener {
-                val position = adapterPosition
-                reference?.get()?.onItemSelected(position, items[position])
-            }
+            delete.setOnClickListener(this)
+            card.setOnClickListener(this)
         }
 
         @SuppressLint("SetTextI18n")
@@ -57,6 +50,20 @@ class NotificationsAdapter(listener: NotificationsContract.Recycler) :
             text.text = item.title
             subtext.text = item.subtitle
             date.text = item.date
+        }
+
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.ib_delete -> {
+                    val position = adapterPosition
+                    val item = items.removeAt(position)
+                    reference?.get()?.onItemDeleted(item.id)
+                }
+                R.id.mcv_notification -> {
+                    val position = adapterPosition
+                    reference?.get()?.onItemSelected(position, items[position])
+                }
+            }
         }
     }
 }

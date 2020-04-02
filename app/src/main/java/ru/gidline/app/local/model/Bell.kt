@@ -1,16 +1,10 @@
 package ru.gidline.app.local.model
 
-enum class BellType(val caption: String) {
-    INVITATION("ПРИГЛАШЕНИЕ"),
-    REJECTION("ОТКАЗ"),
-    SUBSCRIPTION("ПОДПИСКА")
-}
-
 class Bell {
 
     var id = 0
 
-    lateinit var type: BellType
+    lateinit var type: String
 
     lateinit var title: String
 
@@ -23,4 +17,13 @@ class Bell {
     lateinit var html: String
 
     var unread = false
+
+    companion object {
+
+        const val INVITATION = "ПРИГЛАШЕНИЕ"
+
+        const val REJECTION = "ОТКАЗ"
+
+        const val SUBSCRIPTION = "ПОДПИСКА"
+    }
 }

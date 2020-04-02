@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingPrefix"
+    tools:parentTag="com.google.android.material.card.MaterialCardView">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            fontPath="font/Arial-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="6dp"
+            android:layout_toStartOf="@+id/c_toggle"
+            android:gravity="center_vertical"
+            android:minLines="2"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            tools:text="Text Text Text Text Text Text Text Text"
+            tools:textStyle="bold" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/c_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:textColor="#7f7f7f"
+            android:visibility="gone"
+            app:chipBackgroundColor="#cce8e8e8"
+            app:chipCornerRadius="20dp"
+            app:chipEndPadding="16dp"
+            app:chipMinHeight="36dp"
+            app:chipStartPadding="16dp"
+            app:chipStrokeColor="@color/colorGrayBackground"
+            app:chipStrokeWidth="1.5dp"
+            tools:text="Text Text Text Text Text "
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_places"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_place" />
+
+    </RelativeLayout>
+
+</merge>

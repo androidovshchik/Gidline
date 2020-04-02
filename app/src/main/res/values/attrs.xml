@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="matCardStyle" format="reference" />
+    <declare-styleable name="MenuLayout">
+        <attr name="text" format="string|reference" />
+    </declare-styleable>
+    <declare-styleable name="CategoryLayout">
+        <attr name="icon" />
+        <attr name="text" />
+        <attr name="offset" format="dimension|reference" />
+    </declare-styleable>
     <declare-styleable name="ExpansionLayout">
-        <attr name="text" format="string|reference"/>
+        <attr name="text" />
+    </declare-styleable>
+    <declare-styleable name="PlacesLayout">
+        <attr name="text" />
     </declare-styleable>
     <declare-styleable name="ImageBox">
         <attr name="icon" />
         <attr name="background" format="reference" />
-    </declare-styleable>
-    <declare-styleable name="CategoryLayout">
-        <attr name="icon" />
-        <attr name="text"/>
-    </declare-styleable>
-    <declare-styleable name="MenuLayout">
-        <attr name="text"/>
-    </declare-styleable>
-    <declare-styleable name="PhoneLayout">
-        <attr name="text" />
     </declare-styleable>
 </resources>

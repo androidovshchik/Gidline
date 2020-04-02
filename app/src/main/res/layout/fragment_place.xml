@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_place"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:ignore="MissingPrefix">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_consulate" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        fontPath="font/Arial-Bold.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/fab_phone"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:minLines="2"
+        android:textColor="#343539"
+        android:textSize="14sp"
+        tools:text="Text Text Text Text Text Text Text Text Text Text "
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/fab_phone"
+        android:textColor="#595959"
+        android:textSize="13sp"
+        tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+
+    <TextView
+        android:id="@+id/tv_schedule"
+        fontPath="font/Arial-Bold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_address"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="Режим работы"
+        android:textAllCaps="true"
+        android:textColor="#ca78c0"
+        android:textSize="13sp"
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_schedule1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_schedule"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/fab_phone"
+        android:textColor="#404040"
+        android:textSize="13sp"
+        tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+
+    <TextView
+        android:id="@+id/tv_questions"
+        fontPath="font/Arial-Bold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_schedule1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="Визовые вопросы:"
+        android:textColor="#ca78c0"
+        android:textSize="13sp"
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_schedule2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_questions"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/fab_phone"
+        android:textColor="#404040"
+        android:textSize="13sp"
+        tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text " />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_phone"
+        android:visibility="gone"
+        app:backgroundTint="#ebecec"
+        app:tint="#872285"
+        tools:visibility="visible" />
+
+</RelativeLayout>

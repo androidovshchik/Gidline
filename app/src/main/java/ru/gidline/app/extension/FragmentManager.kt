@@ -10,7 +10,7 @@ fun FragmentManager.showFragment(id: Int) {
     findFragmentById(id)?.let {
         beginTransaction()
             .show(it)
-            .commit()
+            .commitAllowingStateLoss()
         executePendingTransactions()
     }
 }
@@ -19,7 +19,7 @@ fun FragmentManager.hideFragment(id: Int) {
     findFragmentById(id)?.let {
         beginTransaction()
             .hide(it)
-            .commit()
+            .commitAllowingStateLoss()
         executePendingTransactions()
     }
 }
@@ -28,7 +28,7 @@ fun FragmentManager.addFragment(id: Int, fragment: Fragment) {
     beginTransaction()
         .add(id, fragment, backStackEntryCount.toString())
         .addToBackStack(fragment.javaClass.name)
-        .commit()
+        .commitAllowingStateLoss()
     executePendingTransactions()
 }
 
@@ -36,7 +36,7 @@ fun FragmentManager.putFragment(id: Int, fragment: Fragment) {
     beginTransaction()
         .replace(id, fragment, backStackEntryCount.toString())
         .addToBackStack(fragment.javaClass.name)
-        .commit()
+        .commitAllowingStateLoss()
     executePendingTransactions()
 }
 

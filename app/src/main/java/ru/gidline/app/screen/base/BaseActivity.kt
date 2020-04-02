@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.SimpleArrayMap
+import androidx.fragment.app.Fragment
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -35,7 +36,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     protected abstract val presenter: P
 
-    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+    private val nestedFragments = SimpleArrayMap<Int, Fragment>()
 
     override val topFragment: IView?
         get() = supportFragmentManager.topFragment?.let {
@@ -45,25 +46,22 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
             null
         }
 
-    override val isTouchable: Boolean
+    override var isTouchable = true
         get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
-
-    override fun setTouchable(enable: Boolean) {
-        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        if (enable) {
-            window.clearFlags(flag)
-        } else {
-            window.setFlags(flag, flag)
+        set(value) {
+            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            if (value) {
+                window.clearFlags(flag)
+            } else {
+                window.setFlags(flag, flag)
+            }
+            field = value
         }
-    }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IView> findFragment(id: Int): T? {
+    override fun <T> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
-            val fragment = supportFragmentManager.findFragmentById(id)
-            if (fragment is BaseFragment<*>) {
-                nestedFragments.put(id, fragment)
-            }
+            nestedFragments.put(id, supportFragmentManager.findFragmentById(id))
         }
         return nestedFragments.get(id)?.let {
             if (it.view != null) {

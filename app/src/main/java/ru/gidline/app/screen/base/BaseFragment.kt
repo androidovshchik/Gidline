@@ -21,7 +21,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
 
     protected abstract val presenter: P
 
-    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+    private val nestedFragments = SimpleArrayMap<Int, Fragment>()
 
     protected val args: Bundle
         get() = arguments ?: Bundle()
@@ -34,25 +34,22 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
             null
         }
 
-    override val isTouchable: Boolean
+    override var isTouchable = true
         get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
-
-    override fun setTouchable(enable: Boolean) {
-        val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        if (enable) {
-            activity?.window?.clearFlags(flag)
-        } else {
-            activity?.window?.setFlags(flag, flag)
+        set(value) {
+            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            if (value) {
+                activity?.window?.clearFlags(flag)
+            } else {
+                activity?.window?.setFlags(flag, flag)
+            }
+            field = value
         }
-    }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : IView> findFragment(id: Int): T? {
+    override fun <T> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
-            val fragment = childFragmentManager.findFragmentById(id)
-            if (fragment is BaseFragment<*>) {
-                nestedFragments.put(id, fragment)
-            }
+            nestedFragments.put(id, childFragmentManager.findFragmentById(id))
         }
         return nestedFragments.get(id)?.let {
             if (it.view != null) {

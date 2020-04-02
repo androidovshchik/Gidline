@@ -2,7 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
 
     <ImageView
         android:id="@+id/iv_background"
@@ -12,7 +13,89 @@
         android:scaleType="matrix"
         tools:src="@drawable/background" />
 
-    <include layout="@layout/include_toolbar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary">
+
+        <ImageButton
+            android:id="@+id/ib_home"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:scaleType="fitCenter"
+            android:scaleX="1.1"
+            android:scaleY="0.9"
+            android:src="@drawable/ic_hamburger" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            fontPath="font/Arial-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/ib_bell"
+            android:layout_toEndOf="@+id/ib_home"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Поиск работы"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ib_filter"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="2dp"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_filter"
+            android:visibility="gone"
+            tools:layout_alignParentEnd="false"
+            tools:layout_toStartOf="@+id/ib_bell"
+            tools:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/ib_bell"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="2dp"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_bell" />
+
+        <ImageView
+            android:id="@+id/iv_bell_daw"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/background_bell"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/daw_light"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@id/fl_container"

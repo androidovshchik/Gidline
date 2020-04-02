@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.item_card.view.*
+import kotlinx.android.synthetic.main.item_vacancy.view.*
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Vacancy
 import ru.gidline.app.screen.base.BaseAdapter
@@ -25,7 +25,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
     override fun getItemCount() = filteredItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_card))
+        return ViewHolder(parent.inflate(R.layout.item_vacancy))
     }
 
     inner class ViewHolder(itemView: View) : BaseHolder<Vacancy>(itemView) {
@@ -49,10 +49,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
         private val form = itemView.tv_form
 
         init {
-            card.setOnClickListener {
-                val position = adapterPosition
-                reference?.get()?.onItemSelected(position, filteredItems[position])
-            }
+            card.setOnClickListener(this)
         }
 
         @SuppressLint("SetTextI18n")
@@ -60,7 +57,7 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
             card.setCardBackgroundColor(
                 ContextCompat.getColor(
                     appContext,
-                    if (item.quickly) R.color.colorCardFire else R.color.colorCardNormal
+                    if (item.quickly) R.color.colorVacancyFire else R.color.colorVacancyNormal
                 )
             )
             date.text = item.date
@@ -73,6 +70,15 @@ class VacanciesAdapter(listener: VacanciesContract.Recycler) :
             form.apply {
                 setBackgroundColor(item.color)
                 text = item.form
+            }
+        }
+
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.mcv_vacancy -> {
+                    val position = adapterPosition
+                    reference?.get()?.onItemSelected(position, filteredItems[position])
+                }
             }
         }
     }

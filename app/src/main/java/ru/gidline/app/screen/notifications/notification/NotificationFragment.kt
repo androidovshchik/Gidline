@@ -11,12 +11,13 @@ import coil.api.load
 import kotlinx.android.synthetic.main.fragment_notification.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
-import ru.gidline.app.local.BellRepository
-import ru.gidline.app.local.model.BellType
+import ru.gidline.app.local.model.Bell
+import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
 import ru.gidline.app.screen.main.MainContract
 
-class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), NotificationContract.View {
+class NotificationFragment : BaseFragment<NotificationContract.Presenter>(),
+    NotificationContract.View {
 
     override val presenter: NotificationPresenter by instance()
 
@@ -28,7 +29,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
         }
         activityCallback<MainContract.View> {
             if (bell != null) {
-                setTitle(bell.type.caption)
+                setTitle(bell.type)
             } else {
                 popFragment(null, false)
             }
@@ -40,7 +41,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
         iv_background.apply {
             load(R.drawable.background)
             imageMatrix = Matrix().apply {
-                setTranslate(0f, 0f - resources.getDimension(R.dimen.toolbar_height))
+                setTranslate(0f, -resources.getDimension(R.dimen.toolbar_height))
             }
         }
         bellRepository.getById(args.getInt("id"))?.let {
@@ -53,7 +54,7 @@ class NotificationFragment : BaseFragment<NotificationContract.Presenter>(), Not
             }
             tv_subtext.text = it.subtitle
             tv_html.text = HtmlCompat.fromHtml(it.html, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            fab_phone.isVisible = it.type == BellType.INVITATION
+            fab_phone.isVisible = it.type == Bell.INVITATION
         }
     }
 

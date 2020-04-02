@@ -5,6 +5,16 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.contexted
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
+import ru.gidline.app.screen.catalog.CatalogFragment
+import ru.gidline.app.screen.catalog.CatalogPresenter
+import ru.gidline.app.screen.catalog.map.MapFragment
+import ru.gidline.app.screen.catalog.map.MapPresenter
+import ru.gidline.app.screen.catalog.places.PlacesFragment
+import ru.gidline.app.screen.catalog.places.PlacesPresenter
+import ru.gidline.app.screen.documents.DocumentsFragment
+import ru.gidline.app.screen.documents.DocumentsPresenter
+import ru.gidline.app.screen.documents.browser.BrowserFragment
+import ru.gidline.app.screen.documents.browser.BrowserPresenter
 import ru.gidline.app.screen.main.MainActivity
 import ru.gidline.app.screen.main.MainPresenter
 import ru.gidline.app.screen.main.categories.CategoriesFragment
@@ -42,18 +52,6 @@ val presenterModule = Kodein.Module("presenter") {
         }
     }
 
-    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
-        SettingsPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
-    bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {
-        CategoriesPresenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
     bind<NotificationsPresenter>() with contexted<NotificationsFragment>().provider {
         NotificationsPresenter(instance()).apply {
             attachView(context)
@@ -62,6 +60,12 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<NotificationPresenter>() with contexted<NotificationFragment>().provider {
         NotificationPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<CategoriesPresenter>() with contexted<CategoriesFragment>().provider {
+        CategoriesPresenter(instance()).apply {
             attachView(context)
         }
     }
@@ -78,20 +82,56 @@ val presenterModule = Kodein.Module("presenter") {
         }
     }
 
-    bind<F04Presenter>() with contexted<F04Fragment>().provider {
-        F04Presenter(instance()).apply {
-            attachView(context)
-        }
-    }
-
     bind<VacanciesPresenter>() with contexted<VacanciesFragment>().provider {
         VacanciesPresenter(instance()).apply {
             attachView(context)
         }
     }
 
+    bind<F04Presenter>() with contexted<F04Fragment>().provider {
+        F04Presenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
     bind<VacancyPresenter>() with contexted<VacancyFragment>().provider {
         VacancyPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<DocumentsPresenter>() with contexted<DocumentsFragment>().provider {
+        DocumentsPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<BrowserPresenter>() with contexted<BrowserFragment>().provider {
+        BrowserPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<SettingsPresenter>() with contexted<SettingsFragment>().provider {
+        SettingsPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<CatalogPresenter>() with contexted<CatalogFragment>().provider {
+        CatalogPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<PlacesPresenter>() with contexted<PlacesFragment>().provider {
+        PlacesPresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<MapPresenter>() with contexted<MapFragment>().provider {
+        MapPresenter(instance()).apply {
             attachView(context)
         }
     }

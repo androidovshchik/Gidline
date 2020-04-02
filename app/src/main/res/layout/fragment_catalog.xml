@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:background="@color/colorBackground"
+        android:scaleType="matrix"
+        tools:src="@drawable/background" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_catalog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabs_height"
+        app:tabBackground="@drawable/tabs"
+        app:tabGravity="fill"
+        app:tabIndicator="@null"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="#595959" />
+
+    <fragment
+        android:id="@+id/f_map"
+        android:name="ru.gidline.app.screen.catalog.map.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tl_catalog"
+        android:layout_alignParentBottom="true"
+        tools:alpha="0.5" />
+
+    <fragment
+        android:id="@+id/f_places"
+        android:name="ru.gidline.app.screen.catalog.places.PlacesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tl_catalog"
+        android:layout_alignParentBottom="true"
+        tools:alpha="0.5" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_below="@+id/tl_catalog"
+        android:background="@drawable/shadow_bottom" />
+
+</RelativeLayout>
