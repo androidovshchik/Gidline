@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -40,7 +41,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var lastPlace: Place? = null
 
-    private var hasInitMove = false
+    private var hasInitialMove = false
 
     private val catalogFilter: CatalogFilter?
         get() {
@@ -82,20 +83,14 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             it.uiSettings.isRotateGesturesEnabled = false
             it.setOnCameraIdleListener {
                 clusterManager?.onCameraIdle()
-                if (!hasInitMove) {
-                    hasInitMove = true
-                    catalogFilter?.let { filter ->
-                        val places = placeRepository.getAll()
-                        if (places.isNotEmpty()) {
-                            val bounds = LatLngBounds.Builder()
-                                .include(filter.toLatLng())
-                                .include(places[0].position)
-                                .build()
-                            googleMap?.animateCamera(
-                                CameraUpdateFactory.newLatLngBounds(bounds, context.dip(48))
-                            )
-                        }
-                    }
+                if (!hasInitialMove) {
+                    hasInitialMove = true
+                    googleMap?.animateCamera(
+                        getCameraUpdate(
+                            catalogFilter?.toLatLng(),
+                            placeRepository.getAll().firstOrNull()?.position
+                        )
+                    )
                 }
             }
         }
@@ -104,10 +99,10 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.fab_location -> {
-                locationMarker?.let {
+                catalogFilter?.let {
                     googleMap?.let { map ->
-                        val zoom = max(11f, map.cameraPosition.zoom)
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(it.position, zoom))
+                        val zoom = max(12f, map.cameraPosition.zoom)
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(it.toLatLng(), zoom))
                     }
                 }
             }
@@ -156,18 +151,24 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private fun updateMyLocation(position: LatLng) {
         if (locationMarker == null) {
-            googleMap?.let { map ->
-                locationMarker = map.addMarker(
-                    MarkerOptions()
-                        .position(position)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_man))
-                        .zIndex(100f)
-                )
-                fab_location.isVisible = true
-            }
+            locationMarker = googleMap?.addMarker(
+                MarkerOptions()
+                    .position(position)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_man))
+                    .zIndex(100f)
+            )
+            fab_location.isVisible = true
         } else {
             locationMarker?.position = position
         }
+    }
+
+    private fun getCameraUpdate(vararg positions: LatLng?): CameraUpdate {
+        val bounds = LatLngBounds.Builder()
+        for (position in positions) {
+            bounds.include(position ?: continue)
+        }
+        return CameraUpdateFactory.newLatLngBounds(bounds.build(), context?.dip(48) ?: 48)
     }
 
     private fun Place.highlightMarker(active: Boolean = true): Place {
