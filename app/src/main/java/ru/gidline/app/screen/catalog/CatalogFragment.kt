@@ -117,6 +117,10 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
             it.addOnTabSelectedListener(this)
         }
         hideFragment(R.id.f_map)
+    }
+
+    override fun onStart() {
+        super.onStart()
         if (context?.areGranted(Manifest.permission.ACCESS_FINE_LOCATION) == true) {
             locationClient.requestLocationUpdates(locationRequest, locationCallback, null)
         } else {
@@ -159,9 +163,13 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         findFragment<CatalogContract.Radar>(R.id.f_places)?.onLocationUpdate()
     }
 
+    override fun onStop() {
+        locationClient.removeLocationUpdates(locationCallback)
+        super.onStop()
+    }
+
     override fun onDestroyView() {
         filterPopup.dismiss()
-        locationClient.removeLocationUpdates(locationCallback)
         tl_catalog.removeOnTabSelectedListener(this)
         super.onDestroyView()
     }

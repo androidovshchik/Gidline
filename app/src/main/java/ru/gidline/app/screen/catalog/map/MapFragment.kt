@@ -102,7 +102,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             R.id.fab_location -> {
                 catalogFilter?.let {
                     googleMap?.let { map ->
-                        val zoom = max(12f, map.cameraPosition.zoom)
+                        val zoom = max(11f, map.cameraPosition.zoom)
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(it.toLatLng(), zoom))
                     }
                 }
