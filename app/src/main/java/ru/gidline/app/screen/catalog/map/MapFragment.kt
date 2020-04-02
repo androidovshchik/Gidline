@@ -30,8 +30,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private val preferences: Preferences by instance()
 
-    private lateinit var mapFragment: SupportMapFragment
-
     private var googleMap: GoogleMap? = null
 
     private var clusterManager: ClusterManager<Place>? = null
@@ -55,8 +53,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mapFragment = childFragmentManager.findFragmentById(R.id.f_map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        findFragment<SupportMapFragment>(R.id.f_map)?.getMapAsync(this)
         fab_location.setOnClickListener(this)
     }
 
@@ -83,11 +80,13 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
         preferences.location?.let {
             updateMyLocation(it.first, it.second)
         }
-        mapFragment.view?.viewTreeObserver?.addOnGlobalLayoutListener(this)
+        findFragment<SupportMapFragment>(R.id.f_map)?.view?.viewTreeObserver
+            ?.addOnGlobalLayoutListener(this)
     }
 
     override fun onGlobalLayout() {
-        mapFragment.view?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+        findFragment<SupportMapFragment>(R.id.f_map)?.view?.viewTreeObserver
+            ?.removeOnGlobalLayoutListener(this)
         catalogFilter?.let { filter ->
             val places = placeRepository.getAll()
             if (places.isNotEmpty()) {

@@ -21,7 +21,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
 
     protected abstract val presenter: P
 
-    private val nestedFragments = SimpleArrayMap<Int, BaseFragment<*>>()
+    private val nestedFragments = SimpleArrayMap<Int, Fragment>()
 
     protected val args: Bundle
         get() = arguments ?: Bundle()
@@ -49,10 +49,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     @Suppress("UNCHECKED_CAST")
     override fun <T> findFragment(id: Int): T? {
         if (!nestedFragments.containsKey(id)) {
-            val fragment = childFragmentManager.findFragmentById(id)
-            if (fragment is BaseFragment<*>) {
-                nestedFragments.put(id, fragment)
-            }
+            nestedFragments.put(id, childFragmentManager.findFragmentById(id))
         }
         return nestedFragments.get(id)?.let {
             if (it.view != null) {
