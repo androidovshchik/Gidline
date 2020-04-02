@@ -45,7 +45,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
     private val locationCallback = object : LocationCallback(), OnFailureListener {
 
         override fun onLocationAvailability(availability: LocationAvailability) {
-            Timber.i("onLocationAvailability $availability")
+            Timber.i(availability.toString())
             if (!availability.isLocationAvailable) {
                 LocationServices.getSettingsClient(activity ?: return)
                     .checkLocationSettings(

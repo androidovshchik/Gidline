@@ -40,6 +40,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
 
     private var lastPlace: Place? = null
 
+    private var hasInitMove = false
+
     private val catalogFilter: CatalogFilter?
         get() {
             parentCallback<CatalogContract.View>(true) {
@@ -72,31 +74,29 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             showPlace(it.id)
             true
         }
-        map.also {
-            it.uiSettings.isRotateGesturesEnabled = false
-            it.setOnCameraIdleListener(clusterManager)
-        }
         onFilterUpdate()
         preferences.location?.let {
             updateMyLocation(it.first, it.second)
         }
-        findFragment<SupportMapFragment>(R.id.f_map)?.view?.viewTreeObserver
-            ?.addOnGlobalLayoutListener(this)
-    }
-
-    override fun onGlobalLayout() {
-        findFragment<SupportMapFragment>(R.id.f_map)?.view?.viewTreeObserver
-            ?.removeOnGlobalLayoutListener(this)
-        catalogFilter?.let { filter ->
-            val places = placeRepository.getAll()
-            if (places.isNotEmpty()) {
-                val bounds = LatLngBounds.Builder()
-                    .include(filter.toLatLng())
-                    .include(places[0].position)
-                    .build()
-                googleMap?.animateCamera(
-                    CameraUpdateFactory.newLatLngBounds(bounds, context?.dip(48) ?: 0)
-                )
+        map.also {
+            it.uiSettings.isRotateGesturesEnabled = false
+            it.setOnCameraIdleListener {
+                clusterManager?.onCameraIdle()
+                if (!hasInitMove) {
+                    hasInitMove = true
+                    catalogFilter?.let { filter ->
+                        val places = placeRepository.getAll()
+                        if (places.isNotEmpty()) {
+                            val bounds = LatLngBounds.Builder()
+                                .include(filter.toLatLng())
+                                .include(places[0].position)
+                                .build()
+                            googleMap?.animateCamera(
+                                CameraUpdateFactory.newLatLngBounds(bounds, context.dip(48))
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -167,7 +167,6 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             }
         } else {
             locationMarker?.position = position
-            fab_location.isVisible = true
         }
     }
 
