@@ -5,9 +5,9 @@ import ru.gidline.app.screen.base.BaseFragment
 
 interface IView : View.OnClickListener {
 
-    val topFragment: IView?
-
     var isTouchable: Boolean
+
+    val topFragment: IFrame?
 
     fun <T> findFragment(id: Int): T?
 

@@ -38,14 +38,6 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     private val nestedFragments = SimpleArrayMap<Int, Fragment>()
 
-    override val topFragment: IView?
-        get() = supportFragmentManager.topFragment?.let {
-            if (it is IView && it.view != null) {
-                return it
-            }
-            null
-        }
-
     override var isTouchable = true
         get() = window.attributes.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE == 0
         set(value) {
@@ -56,6 +48,14 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
                 window.setFlags(flag, flag)
             }
             field = value
+        }
+
+    override val topFragment: IView?
+        get() = supportFragmentManager.topFragment?.let {
+            if (it is IView && it.view != null) {
+                return it
+            }
+            null
         }
 
     @Suppress("UNCHECKED_CAST")
