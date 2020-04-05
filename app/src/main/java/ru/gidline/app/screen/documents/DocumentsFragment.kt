@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.merge_category.view.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.documents.browser.BrowserFragment
 
 class DocumentsFragment : BaseFragment<DocumentsContract.Presenter>(),
@@ -32,20 +31,17 @@ class DocumentsFragment : BaseFragment<DocumentsContract.Presenter>(),
     }
 
     override fun onClick(v: View) {
-        activityCallback<IView> {
-            val name = v.tv_name.text.toString()
-            val url = when (v.id) {
-                R.id.cl_hand_patent -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2060"
-                R.id.cl_doc_home -> "https://xn--b1ab2a0a.xn--b1aew.xn--p1ai/services/residence"
-                R.id.cl_daw_home -> "https://xn--b1ab2a0a.xn--b1aew.xn--p1ai/services/trp"
-                R.id.cl_globe_pas -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2061"
-                R.id.cl_ban -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=3000"
-                R.id.cl_inn -> "https://service.nalog.ru/static/personal-data.html?svc=inn&from=%2Finn.do"
-                R.id.cl_sheriff -> "http://fssprus.ru/"
-                else -> return
-            }
-            putFragment(BrowserFragment.newInstance(name, url))
+        val url = when (v.id) {
+            R.id.cl_hand_patent -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2060"
+            R.id.cl_doc_home -> "https://xn--b1ab2a0a.xn--b1aew.xn--p1ai/services/residence"
+            R.id.cl_daw_home -> "https://xn--b1ab2a0a.xn--b1aew.xn--p1ai/services/trp"
+            R.id.cl_globe_pas -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2061"
+            R.id.cl_ban -> "http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=3000"
+            R.id.cl_inn -> "https://service.nalog.ru/static/personal-data.html?svc=inn&from=%2Finn.do"
+            R.id.cl_sheriff -> "http://fssprus.ru/"
+            else -> return
         }
+        activityPutFragment(BrowserFragment.newInstance(v.tv_name.text.toString(), url))
     }
 
     companion object {

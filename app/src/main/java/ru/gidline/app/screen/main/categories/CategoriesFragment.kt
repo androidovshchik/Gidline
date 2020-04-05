@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.fragment_categories.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.catalog.CatalogFragment
 import ru.gidline.app.screen.documents.DocumentsFragment
 import ru.gidline.app.screen.search.SearchFragment
@@ -30,21 +29,11 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
     }
 
     override fun onClick(v: View) {
-        activityCallback<IView> {
-            when (v.id) {
-                R.id.cl_search -> {
-                    addFragment(SearchFragment.newInstance())
-                }
-                R.id.cl_documents -> {
-                    putFragment(DocumentsFragment.newInstance())
-                }
-                R.id.ib_settings -> {
-                    putFragment(SettingsFragment.newInstance())
-                }
-                R.id.ib_map -> {
-                    addFragment(CatalogFragment.newInstance())
-                }
-            }
+        when (v.id) {
+            R.id.cl_search -> activityAddFragment(SearchFragment.newInstance())
+            R.id.cl_documents -> activityPutFragment(DocumentsFragment.newInstance())
+            R.id.ib_settings -> activityPutFragment(SettingsFragment.newInstance())
+            R.id.ib_map -> activityAddFragment(CatalogFragment.newInstance())
         }
     }
 

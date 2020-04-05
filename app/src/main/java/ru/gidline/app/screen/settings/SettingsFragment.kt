@@ -23,7 +23,6 @@ import ru.gidline.app.R
 import ru.gidline.app.extension.areGranted
 import ru.gidline.app.local.Preferences
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listener.IView
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsContract.View {
@@ -140,9 +139,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     dateEntryRussia = et_date1.text.toString()
                     dateFirstPatent = et_date2.text.toString()
                 }
-                activityCallback<IView> {
-                    popFragment(null, false)
-                }
+                activityPopFragment(null, false)
             }
         }
     }

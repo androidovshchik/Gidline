@@ -11,7 +11,6 @@ import ru.gidline.app.R
 import ru.gidline.app.local.model.Bell
 import ru.gidline.app.local.repository.BellRepository
 import ru.gidline.app.screen.base.BaseFragment
-import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.notifications.adapter.NotificationsAdapter
 import ru.gidline.app.screen.notifications.adapter.NotificationsDecoration
 import ru.gidline.app.screen.notifications.notification.NotificationFragment
@@ -57,16 +56,12 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
         bellRepository.deleteById(id)
         refreshData()
         if (bellRepository.allCount <= 0) {
-            activityCallback<IView> {
-                popFragment(null, false)
-            }
+            activityPopFragment(null, false)
         }
     }
 
     override fun onItemSelected(position: Int, item: Bell) {
-        activityCallback<IView> {
-            addFragment(NotificationFragment.newInstance(item.id))
-        }
+        activityAddFragment(NotificationFragment.newInstance(item.id))
     }
 
     companion object {
