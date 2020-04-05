@@ -15,6 +15,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.*
+import ru.gidline.app.screen.base.listener.IFrame
 import ru.gidline.app.screen.base.listener.IPresenter
 import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.presenterModule
@@ -50,9 +51,9 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
             field = value
         }
 
-    override val topFragment: IView?
+    override val topFragment: IFrame?
         get() = supportFragmentManager.topFragment?.let {
-            if (it is IView && it.view != null) {
+            if (it is IFrame && it.view != null) {
                 return it
             }
             null
