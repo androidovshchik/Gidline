@@ -42,7 +42,8 @@ class MenuLayout : LinearLayout, KodeinAware {
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL

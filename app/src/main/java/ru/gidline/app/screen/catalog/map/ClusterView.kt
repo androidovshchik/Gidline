@@ -53,7 +53,8 @@ class ClusterView : TextView {
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         id = R.id.amu_text
         textSize = 17f

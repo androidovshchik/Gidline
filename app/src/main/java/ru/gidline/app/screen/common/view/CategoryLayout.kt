@@ -26,7 +26,8 @@ class CategoryLayout @JvmOverloads constructor(
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         radius = dip(10).toFloat()
         setCardBackgroundColor(Color.parseColor("#5cffffff"))

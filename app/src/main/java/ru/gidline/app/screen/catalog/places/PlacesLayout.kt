@@ -40,6 +40,7 @@ class PlacesLayout @JvmOverloads constructor(
         init(attrs)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         radius = dip(10).toFloat()

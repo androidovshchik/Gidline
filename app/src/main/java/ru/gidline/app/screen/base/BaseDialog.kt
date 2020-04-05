@@ -7,7 +7,7 @@ import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.activityCallback
 
-open class BaseDialog(activity: Activity) : Dialog(activity, R.style.AppDialog), KodeinAware {
+open class BaseDialog(activity: Activity) : Dialog(activity, R.style.AppDialogTheme), KodeinAware {
 
     override val kodein by closestKodein()
 

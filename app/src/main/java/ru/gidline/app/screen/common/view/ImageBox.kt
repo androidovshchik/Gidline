@@ -41,7 +41,8 @@ class ImageBox : ImageView {
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         scaleType = ScaleType.FIT_CENTER
         adjustViewBounds = true

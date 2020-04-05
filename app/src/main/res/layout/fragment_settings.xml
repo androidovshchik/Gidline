@@ -86,7 +86,7 @@
             </RelativeLayout>
 
             <com.google.android.material.card.MaterialCardView
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -149,7 +149,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -291,7 +291,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -331,7 +331,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcv_migration"
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

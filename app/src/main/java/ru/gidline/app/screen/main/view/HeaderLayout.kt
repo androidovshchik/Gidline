@@ -52,7 +52,8 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         setBackgroundResource(R.drawable.background_header)
         View.inflate(context, R.layout.merge_header, this)

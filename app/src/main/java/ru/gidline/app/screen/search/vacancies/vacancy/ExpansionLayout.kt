@@ -40,7 +40,8 @@ class ExpansionLayout : LinearLayout, KodeinAware {
         init(attrs)
     }
 
-    @SuppressLint("Recycle")
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         orientation = VERTICAL
         setPadding(dip(10), dip(12), dip(10), 0)

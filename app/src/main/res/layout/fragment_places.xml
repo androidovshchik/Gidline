@@ -17,7 +17,7 @@
 
             <ru.gidline.app.screen.catalog.places.PlacesLayout
                 android:id="@+id/pl_consulate"
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -27,7 +27,7 @@
 
             <ru.gidline.app.screen.catalog.places.PlacesLayout
                 android:id="@+id/pl_migration"
-                style="@style/AppCard"
+                style="@style/AppCardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

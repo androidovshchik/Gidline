@@ -45,6 +45,8 @@ class ToggleButton : TextView {
         init(attrs)
     }
 
+    @Suppress("UNUSED_PARAMETER")
+    @SuppressLint("Recycle", "SetTextI18n")
     private fun init(attrs: AttributeSet?) {
         textSize = 13f
     }

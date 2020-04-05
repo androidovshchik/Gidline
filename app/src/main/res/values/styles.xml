@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppMainTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
-    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppSplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -16,11 +16,11 @@
         <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="AppDialog" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="AppDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppCard">
+    <style name="AppCardStyle">
         <item name="strokeColor">#f9d5e9</item>
         <item name="strokeWidth">1.5dp</item>
         <item name="cardCornerRadius">5dp</item>
@@ -30,11 +30,11 @@
     </style>
 
     <style name="PlaceSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/PlaceSheet</item>
+        <item name="bottomSheetStyle">@style/PlaceSheetStyle</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="PlaceSheet">
+    <style name="PlaceSheetStyle">
         <item name="android:background">@android:color/transparent</item>
     </style>
 
