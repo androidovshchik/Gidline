@@ -11,11 +11,11 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.*
+import ru.gidline.app.screen.base.listener.IFrame
 import ru.gidline.app.screen.base.listener.IPresenter
-import ru.gidline.app.screen.base.listener.IView
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware {
+abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -26,25 +26,58 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IView, KodeinAware 
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
-    override val topFragment: IView?
-        get() = childFragmentManager.topFragment?.let {
-            if (it is IView && it.view != null) {
+    override var isTouchable = true
+        get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
+        set(value) {
+            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            activity?.window?.apply {
+                if (value) {
+                    clearFlags(flag)
+                } else {
+                    setFlags(flag, flag)
+                }
+            }
+            field = value
+        }
+
+    override val activityTopFragment: IFrame?
+        get() = fragmentManager?.topFragment?.let {
+            if (it is IFrame && it.view != null) {
                 return it
             }
             null
         }
 
-    override var isTouchable = true
-        get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
-        set(value) {
-            val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-            if (value) {
-                activity?.window?.clearFlags(flag)
-            } else {
-                activity?.window?.setFlags(flag, flag)
+    override val topFragment: IFrame?
+        get() = childFragmentManager.topFragment?.let {
+            if (it is IFrame && it.view != null) {
+                return it
             }
-            field = value
+            null
         }
+
+    override fun <T> activityFindFragment(id: Int): T? {
+        TODO("Not yet implemented")
+    }
+
+    override fun activityShowFragment(id: Int) {
+        fragmentManager?.showFragment(id)
+    }
+
+    override fun activityHideFragment(id: Int) {
+        fragmentManager?.hideFragment(id)
+    }
+
+    override fun activityAddFragment(fragment: BaseFragment<*>) {
+        fragmentManager?.addFragment(R.id.fl_container, fragment)
+    }
+
+    override fun activityPutFragment(fragment: BaseFragment<*>) {
+        fragmentManager?.putFragment(R.id.fl_container, fragment)
+    }
+
+    override fun activityPopFragment(name: String?, immediate: Boolean) =
+        fragmentManager?.popFragment(name, immediate) ?: false
 
     @Suppress("UNCHECKED_CAST")
     override fun <T> findFragment(id: Int): T? {
