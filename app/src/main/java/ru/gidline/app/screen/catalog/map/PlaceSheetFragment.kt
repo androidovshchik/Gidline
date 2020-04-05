@@ -12,26 +12,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_place.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.repository.PlaceRepository
+import ru.gidline.app.screen.base.BaseSheetFragment
 
-class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
-
-    override val kodein by closestKodein()
+class PlaceSheetFragment : BaseSheetFragment() {
 
     private val placeRepository: PlaceRepository by instance()
 
     private var alertDialog: AlertDialog? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.PlaceSheetTheme)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_place, root, false)
@@ -93,8 +84,8 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
 
         private val numberRegex = Regex(".*\\d.*")
 
-        fun newInstance(id: Int): PlaceFragment {
-            return PlaceFragment().apply {
+        fun newInstance(id: Int): PlaceSheetFragment {
+            return PlaceSheetFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
                 }

@@ -139,8 +139,8 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
     }
 
     private fun showPlace(id: Int) {
-        PlaceFragment.newInstance(id)
-            .show(childFragmentManager, PlaceFragment::class.java.name)
+        PlaceSheetFragment.newInstance(id)
+            .show(childFragmentManager, PlaceSheetFragment::class.java.name)
     }
 
     private fun updateMyLocation(lat: Double, lon: Double) {
