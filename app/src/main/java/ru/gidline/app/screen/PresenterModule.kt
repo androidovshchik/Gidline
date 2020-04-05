@@ -25,6 +25,8 @@ import ru.gidline.app.screen.notifications.notification.NotificationFragment
 import ru.gidline.app.screen.notifications.notification.NotificationPresenter
 import ru.gidline.app.screen.resume.ResumeFragment
 import ru.gidline.app.screen.resume.ResumePresenter
+import ru.gidline.app.screen.resume.order.OrderFragment
+import ru.gidline.app.screen.resume.order.OrderPresenter
 import ru.gidline.app.screen.search.SearchFragment
 import ru.gidline.app.screen.search.SearchPresenter
 import ru.gidline.app.screen.search.f04.F04Fragment
@@ -68,6 +70,12 @@ val presenterModule = Kodein.Module("presenter") {
 
     bind<ResumePresenter>() with contexted<ResumeFragment>().provider {
         ResumePresenter(instance()).apply {
+            attachView(context)
+        }
+    }
+
+    bind<OrderPresenter>() with contexted<OrderFragment>().provider {
+        OrderPresenter(instance()).apply {
             attachView(context)
         }
     }
