@@ -30,12 +30,10 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
         get() = activity?.window?.attributes?.flags?.and(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE) == 0
         set(value) {
             val flag = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-            activity?.window?.apply {
-                if (value) {
-                    clearFlags(flag)
-                } else {
-                    setFlags(flag, flag)
-                }
+            if (value) {
+                activity?.window?.clearFlags(flag)
+            } else {
+                activity?.window?.setFlags(flag, flag)
             }
             field = value
         }
@@ -56,8 +54,17 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
             null
         }
 
-    override fun <T> activityFindFragment(id: Int): T? {
-        TODO("Not yet implemented")
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> findFragment(id: Int): T? {
+        if (!nestedFragments.containsKey(id)) {
+            nestedFragments.put(id, childFragmentManager.findFragmentById(id))
+        }
+        return nestedFragments.get(id)?.let {
+            if (it.view != null) {
+                return it as? T
+            }
+            null
+        }
     }
 
     override fun activityShowFragment(id: Int) {
@@ -78,19 +85,6 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
 
     override fun activityPopFragment(name: String?, immediate: Boolean) =
         fragmentManager?.popFragment(name, immediate) ?: false
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T> findFragment(id: Int): T? {
-        if (!nestedFragments.containsKey(id)) {
-            nestedFragments.put(id, childFragmentManager.findFragmentById(id))
-        }
-        return nestedFragments.get(id)?.let {
-            if (it.view != null) {
-                return it as? T
-            }
-            null
-        }
-    }
 
     override fun showFragment(id: Int) {
         childFragmentManager.showFragment(id)

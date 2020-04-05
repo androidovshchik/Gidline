@@ -6,8 +6,6 @@ interface IFrame : IView {
 
     val activityTopFragment: IFrame?
 
-    fun <T> activityFindFragment(id: Int): T?
-
     fun activityShowFragment(id: Int)
 
     fun activityHideFragment(id: Int)
