@@ -10,7 +10,7 @@ import ru.gidline.app.screen.base.BaseDialogFragment
 class IntroDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_resume, root, false)
+        return inflater.inflate(R.layout.fragment_dialog_intro, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

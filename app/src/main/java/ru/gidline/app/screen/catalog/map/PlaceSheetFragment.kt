@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.fragment_place.*
+import kotlinx.android.synthetic.main.fragment_sheet_place.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.local.repository.PlaceRepository
@@ -25,7 +25,7 @@ class PlaceSheetFragment : BaseSheetFragment() {
     private var alertDialog: AlertDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_place, root, false)
+        return inflater.inflate(R.layout.fragment_sheet_place, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

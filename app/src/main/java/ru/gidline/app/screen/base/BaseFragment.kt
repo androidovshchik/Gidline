@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.collection.SimpleArrayMap
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.kodein.di.KodeinAware
@@ -113,6 +114,14 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
 
     override fun showError(e: Throwable) {
         context?.longToast(e.localizedMessage ?: e.toString())
+    }
+
+    inline fun activityTransact(action: FragmentTransaction.() -> Unit) {
+        fragmentManager?.beginTransaction()?.apply(action)
+    }
+
+    inline fun transact(action: FragmentTransaction.() -> Unit) {
+        childFragmentManager.beginTransaction().apply(action)
     }
 
     inline fun <reified T> activityCallback(action: T.() -> Unit) {

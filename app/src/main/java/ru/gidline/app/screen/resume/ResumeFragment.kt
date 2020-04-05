@@ -12,11 +12,17 @@ class ResumeFragment : BaseFragment<ResumeContract.Presenter>(), ResumeContract.
 
     override val presenter: ResumePresenter by instance()
 
+    private val introDialogFragment = IntroDialogFragment()
+
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_resume, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        transact {
+            remove(introDialogFragment)
+            introDialogFragment.show(this, introDialogFragment.javaClass.simpleName)
+        }
     }
 
     companion object {

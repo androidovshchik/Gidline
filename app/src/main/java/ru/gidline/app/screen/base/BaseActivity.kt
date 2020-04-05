@@ -7,6 +7,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.SimpleArrayMap
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -90,6 +91,10 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
 
     override fun popFragment(name: String?, immediate: Boolean) =
         supportFragmentManager.popFragment(name, immediate)
+
+    inline fun transact(action: FragmentTransaction.() -> Unit) {
+        supportFragmentManager.beginTransaction().apply(action)
+    }
 
     override fun showMessage(text: String) {
         toast(text)
