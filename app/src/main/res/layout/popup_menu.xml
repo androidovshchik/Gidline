@@ -18,10 +18,11 @@
             android:layout_height="wrap_content" />
 
         <ru.gidline.app.screen.main.view.MenuLayout
+            android:id="@+id/ml_my_resume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:text="@string/menu_summary" />
+            app:text="@string/menu_resume" />
 
         <ru.gidline.app.screen.main.view.MenuLayout
             android:layout_width="match_parent"

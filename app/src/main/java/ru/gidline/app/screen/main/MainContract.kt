@@ -8,6 +8,8 @@ interface MainContract {
     interface View : IView {
 
         fun setTitle(text: String)
+
+        fun openResume()
     }
 
     interface Presenter : IPresenter<View>

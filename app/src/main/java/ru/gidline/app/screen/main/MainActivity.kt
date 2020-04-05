@@ -22,6 +22,8 @@ import ru.gidline.app.screen.main.categories.CategoriesContract
 import ru.gidline.app.screen.main.categories.CategoriesFragment
 import ru.gidline.app.screen.notifications.NotificationsContract
 import ru.gidline.app.screen.notifications.NotificationsFragment
+import ru.gidline.app.screen.resume.ResumeContract
+import ru.gidline.app.screen.resume.ResumeFragment
 import ru.gidline.app.screen.search.SearchContract
 import ru.gidline.app.screen.settings.SettingsContract
 
@@ -61,6 +63,10 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                     updateHome(R.drawable.arrow_left)
                     setTitle("Уведомление")
                     topFragment.refreshData()
+                }
+                is ResumeContract.View -> {
+                    updateHome(R.drawable.arrow_left)
+                    setTitle(getString(R.string.menu_resume))
                 }
                 is SearchContract.View -> {
                     updateHome(R.drawable.arrow_left)
@@ -123,6 +129,11 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 }
             }
         }
+    }
+
+    override fun openResume() {
+        menuPopup.dismiss()
+        putFragment(ResumeFragment.newInstance())
     }
 
     private fun updateHome(drawable: Int) {

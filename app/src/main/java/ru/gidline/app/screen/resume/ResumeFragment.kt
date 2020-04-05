@@ -13,7 +13,7 @@ class ResumeFragment : BaseFragment<ResumeContract.Presenter>(), ResumeContract.
     override val presenter: ResumePresenter by instance()
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_settings, root, false)
+        return inflater.inflate(R.layout.fragment_resume, root, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,7 +2,7 @@
     <string name="app_name">Gidline</string>
     <string name="google_maps_key">AIzaSyAyYDnYNfv30yEs5ve4Gcz0Op-3BdQ-Zaw</string>
 
-    <string name="menu_summary">Моё резюме</string>
+    <string name="menu_resume">Моё резюме</string>
     <string name="menu_subscriptions">Мои подписки</string>
     <string name="menu_documents">Мои документы</string>
     <string name="menu_money">Деньги в долг</string>

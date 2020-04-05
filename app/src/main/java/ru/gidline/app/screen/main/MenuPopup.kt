@@ -69,5 +69,12 @@ class MenuPopup(context: Context) : BasePopup(context) {
                 }
             }
         }
+        when (v.id) {
+            R.id.ml_my_resume -> {
+                activityCallback<MainContract.View> {
+                    openResume()
+                }
+            }
+        }
     }
 }
