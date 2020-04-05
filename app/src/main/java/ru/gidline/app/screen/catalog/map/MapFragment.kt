@@ -49,7 +49,7 @@ class MapFragment : BaseFragment<MapContract.Presenter>(), MapContract.View {
             return null
         }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_map, root, false)
     }
 

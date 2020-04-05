@@ -25,7 +25,7 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
 
     private val adapter = NotificationsAdapter(this)
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_notifications, root, false)
     }
 

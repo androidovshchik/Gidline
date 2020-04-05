@@ -33,6 +33,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".screen.splash.SplashActivity"
             android:launchMode="singleTask"
@@ -40,16 +41,15 @@
             android:theme="@style/AppTheme.Splash"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".screen.main.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="stateHidden|adjustNothing">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustNothing" />
     </application>
 
 </manifest>

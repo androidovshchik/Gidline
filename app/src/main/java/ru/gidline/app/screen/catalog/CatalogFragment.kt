@@ -103,7 +103,7 @@ class CatalogFragment : BaseFragment<CatalogContract.Presenter>(), CatalogContra
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_catalog, root, false)
     }
 

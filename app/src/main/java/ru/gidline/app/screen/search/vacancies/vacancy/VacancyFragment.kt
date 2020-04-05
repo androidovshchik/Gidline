@@ -18,7 +18,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
 
     private val vacancyRepository: VacancyRepository by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_vacancy, root, false)
     }
 

@@ -18,7 +18,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
 
     override val presenter: CategoriesPresenter by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_categories, root, false)
     }
 

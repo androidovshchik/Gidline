@@ -33,7 +33,7 @@ class PlaceFragment : BottomSheetDialogFragment(), KodeinAware {
         setStyle(STYLE_NO_TITLE, R.style.PlaceSheetTheme)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_place, root, false)
     }
 

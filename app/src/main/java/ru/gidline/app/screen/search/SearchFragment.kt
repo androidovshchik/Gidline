@@ -32,7 +32,7 @@ class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.
     override val hasPopup: Boolean
         get() = chipsPopup.isShowing
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search, root, false)
     }
 

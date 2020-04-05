@@ -40,7 +40,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
 
     private var avatar: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_settings, root, false)
     }
 

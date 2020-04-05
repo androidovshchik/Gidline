@@ -12,7 +12,7 @@ class F04Fragment : BaseFragment<F04Contract.Presenter>(), F04Contract.View {
 
     override val presenter: F04Presenter by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_404, root, false)
     }
 

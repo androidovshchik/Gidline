@@ -17,7 +17,7 @@ class DocumentsFragment : BaseFragment<DocumentsContract.Presenter>(),
 
     override val presenter: DocumentsPresenter by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_documents, root, false)
     }
 

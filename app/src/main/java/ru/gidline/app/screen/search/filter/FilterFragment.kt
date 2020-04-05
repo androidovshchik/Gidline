@@ -38,7 +38,7 @@ class FilterFragment : BaseFragment<FilterContract.Presenter>(), FilterContract.
             return null
         }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_filter, root, false)
     }
 

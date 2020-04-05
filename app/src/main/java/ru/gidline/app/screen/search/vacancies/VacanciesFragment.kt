@@ -35,7 +35,7 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
             return null
         }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_vacancies, root, false)
     }
 

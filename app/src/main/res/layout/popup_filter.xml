@@ -25,7 +25,7 @@
         android:layout_alignBottom="@+id/ib_all"
         android:layout_toStartOf="@+id/ib_all"
         android:text="Все"
-        android:textColor="#872687"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox
@@ -47,7 +47,7 @@
         android:layout_alignBottom="@+id/ib_consulate"
         android:layout_toStartOf="@+id/ib_consulate"
         android:text="@string/places_consulate"
-        android:textColor="#872687"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox
@@ -69,7 +69,7 @@
         android:layout_alignBottom="@+id/ib_migration"
         android:layout_toStartOf="@+id/ib_migration"
         android:text="@string/places_migration"
-        android:textColor="#872687"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
     <ru.gidline.app.screen.common.view.ImageBox

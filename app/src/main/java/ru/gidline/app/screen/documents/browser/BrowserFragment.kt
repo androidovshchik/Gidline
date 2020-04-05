@@ -23,7 +23,7 @@ class BrowserFragment : BaseFragment<BrowserContract.Presenter>(), BrowserContra
         srl_web.isEnabled = wv_web.scrollY == 0
     }
 
-    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
         activityCallback<MainContract.View> {
             setTitle(args.getString("name").orEmpty())
         }
