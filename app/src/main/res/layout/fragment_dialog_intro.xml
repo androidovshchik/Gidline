@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/holo_blue_light">
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/ib_close"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:adjustViewBounds="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_close" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:text="Для чего мне резюме?"
+        android:textAllCaps="true" />
+
+    <ru.gidline.app.screen.common.view.CategoryLayout
+        style="@style/AppCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:icon="@drawable/ic_people"
+        app:offset="96dp"
+        app:text="ВЫ ХОТИТЕ БЫСТРО\nНАЙТИ РАБОТУ?" />
+
+    <ru.gidline.app.screen.common.view.CategoryLayout
+        style="@style/AppCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:icon="@drawable/ic_people"
+        app:offset="96dp"
+        app:text="СЭКОНОМИТЬ ВРЕМЯ\nНА СОБЕСЕДОВАНИИ?" />
+
+    <ru.gidline.app.screen.common.view.CategoryLayout
+        style="@style/AppCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:icon="@drawable/ic_people"
+        app:offset="96dp"
+        app:text="ВАМ ТЯЖЕЛО РАССКАЗАТЬ\nО СЕБЕ НА РУССКОМ?" />
+
+    <ru.gidline.app.screen.common.view.CategoryLayout
+        style="@style/AppCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:icon="@drawable/ic_people"
+        app:offset="96dp"
+        app:text="В ОДИН КЛИК ОТПРАВИТЬ\nИНФОРМАЦИЮ О СЕБЕ?" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:text="Заполнить\nанкету"
+        app:cornerRadius="24dp" />
 
 </LinearLayout>
