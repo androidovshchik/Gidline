@@ -2,24 +2,25 @@
 
 package ru.gidline.app.screen.base
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.jetbrains.anko.inputMethodManager
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import ru.gidline.app.R
 import ru.gidline.app.extension.activityCallback
 
-abstract class BaseDialogFragment : DialogFragment(), KodeinAware {
+abstract class BaseSheetFragment : BottomSheetDialogFragment(), KodeinAware {
 
     override val kodein by closestKodein()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return BaseDialog(requireActivity())
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_TITLE, R.style.PlaceSheetTheme)
     }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
