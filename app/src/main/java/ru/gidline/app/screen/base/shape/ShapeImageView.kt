@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.shape
+package ru.gidline.app.screen.base.shape
 
 import android.content.Context
 import android.util.AttributeSet

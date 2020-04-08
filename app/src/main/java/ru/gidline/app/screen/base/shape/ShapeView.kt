@@ -1,11 +1,11 @@
-package ru.gidline.app.screen.shape
+package ru.gidline.app.screen.base.shape
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import org.jetbrains.anko.dip
 import ru.gidline.app.extension.use
 
 interface ShapeView {
@@ -62,10 +62,10 @@ interface ShapeView {
                                 cornerRadii = floatArrayOf(tl, tl, tr, tr, br, br, bl, bl)
                             }
                         }
-                        if (hasValue(styleableBorderSize)) {
+                        if (hasValue(styleableBorderColor)) {
                             setStroke(
-                                getDimensionPixelSize(styleableBorderSize, 0),
-                                getColor(styleableBorderColor, Color.TRANSPARENT)
+                                getDimensionPixelSize(styleableBorderSize, getContext().dip(1.5f)),
+                                getColor(styleableBorderColor, 0)
                             )
                         }
                     })

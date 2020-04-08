@@ -1,4 +1,4 @@
-package ru.gidline.app.screen.shape
+package ru.gidline.app.screen.base.shape
 
 import android.annotation.TargetApi
 import android.content.Context
