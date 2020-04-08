@@ -38,8 +38,8 @@ class IconTextLayout : ShapeRelativeLayout, KodeinAware {
     override fun init(attrs: AttributeSet?) {
         super.init(attrs)
         View.inflate(context, R.layout.merge_icon_text, this)
-        attrs?.let { set ->
-            context.obtainStyledAttributes(set, R.styleable.IconTextLayout).use {
+        if (attrs != null) {
+            context.obtainStyledAttributes(attrs, R.styleable.IconTextLayout).use {
                 iv_icon.setImageDrawable(getDrawable(R.styleable.IconTextLayout_icon))
                 getString(R.styleable.IconTextLayout_text)?.let {
                     tv_name.text = it

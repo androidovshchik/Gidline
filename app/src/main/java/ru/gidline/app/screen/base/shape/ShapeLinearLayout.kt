@@ -10,7 +10,7 @@ import ru.gidline.app.R
 @Suppress("LeakingThis")
 open class ShapeLinearLayout : LinearLayout, ShapeView {
 
-    override val attributes: IntArray get() = R.styleable.ShapeLinearLayout
+    override val shapeAttrs: IntArray get() = R.styleable.ShapeLinearLayout
 
     override val indexShape get() = R.styleable.ShapeLinearLayout_shape
 

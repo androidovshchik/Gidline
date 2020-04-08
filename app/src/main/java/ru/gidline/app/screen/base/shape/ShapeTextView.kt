@@ -12,7 +12,7 @@ open class ShapeTextView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr), ShapeView {
 
-    override val attributes: IntArray get() = R.styleable.ShapeTextView
+    override val shapeAttrs: IntArray get() = R.styleable.ShapeTextView
 
     override val indexShape get() = R.styleable.ShapeTextView_shape
 

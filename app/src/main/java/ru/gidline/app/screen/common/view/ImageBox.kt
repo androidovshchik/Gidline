@@ -28,8 +28,8 @@ class ImageBox @JvmOverloads constructor(
         super.init(attrs)
         scaleType = ScaleType.FIT_CENTER
         adjustViewBounds = true
-        attrs?.let { set ->
-            context.obtainStyledAttributes(set, R.styleable.ImageBox).use {
+        if (attrs != null) {
+            context.obtainStyledAttributes(attrs, R.styleable.ImageBox).use {
                 icon = getDrawable(R.styleable.ImageBox_icon)
             }
         }

@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.merge_menu.view.*
 import org.kodein.di.KodeinAware
@@ -17,8 +16,9 @@ import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.activity
 import ru.gidline.app.extension.use
+import ru.gidline.app.screen.base.shape.ShapeLinearLayout
 
-class MenuLayout : LinearLayout, KodeinAware {
+class MenuLayout : ShapeLinearLayout, KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -27,9 +27,7 @@ class MenuLayout : LinearLayout, KodeinAware {
         context,
         attrs,
         defStyleAttr
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("unused")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -38,18 +36,17 @@ class MenuLayout : LinearLayout, KodeinAware {
         attrs,
         defStyleAttr,
         defStyleRes
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    private fun init(attrs: AttributeSet?) {
+    override fun init(attrs: AttributeSet?) {
+        super.init(attrs)
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL
         View.inflate(context, R.layout.merge_menu, this)
-        attrs?.let { set ->
-            context.obtainStyledAttributes(set, R.styleable.MenuLayout).use {
+        if (attrs != null) {
+            context.obtainStyledAttributes(attrs, R.styleable.MenuLayout).use {
                 getString(R.styleable.MenuLayout_text)?.let {
                     tv_name.text = it
                     if (it == resources.getString(R.string.menu_exit)) {

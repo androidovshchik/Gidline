@@ -12,7 +12,7 @@ open class ShapeImageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr), ShapeView {
 
-    override val attributes: IntArray get() = R.styleable.ShapeImageView
+    override val shapeAttrs: IntArray get() = R.styleable.ShapeImageView
 
     override val indexShape get() = R.styleable.ShapeImageView_shape
 

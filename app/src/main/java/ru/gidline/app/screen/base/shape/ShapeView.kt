@@ -10,7 +10,7 @@ import ru.gidline.app.extension.use
 
 interface ShapeView {
 
-    val attributes: IntArray
+    val shapeAttrs: IntArray
 
     val indexShape: Int
 
@@ -37,7 +37,7 @@ interface ShapeView {
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n", "DefaultLocale")
     fun init(attrs: AttributeSet?) {
-        getContext().obtainStyledAttributes(attrs ?: return, attributes).use {
+        getContext().obtainStyledAttributes(attrs ?: return, shapeAttrs).use {
             getString(indexShape)?.toLowerCase()?.let {
                 setBackground(GradientDrawable().apply {
                     shape = when (it) {

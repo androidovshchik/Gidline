@@ -10,7 +10,7 @@ import ru.gidline.app.R
 @Suppress("LeakingThis")
 open class ShapeFrameLayout : FrameLayout, ShapeView {
 
-    override val attributes: IntArray get() = R.styleable.ShapeFrameLayout
+    override val shapeAttrs: IntArray get() = R.styleable.ShapeFrameLayout
 
     override val indexShape get() = R.styleable.ShapeFrameLayout_shape
 
