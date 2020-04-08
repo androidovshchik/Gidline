@@ -63,4 +63,26 @@
         <attr name="borderSize" />
         <attr name="borderColor" />
     </declare-styleable>
+    <declare-styleable name="ShapeImageView">
+        <attr name="shape" />
+        <attr name="solidColor" />
+        <attr name="cornerRadius" />
+        <attr name="cornerTopLeft" />
+        <attr name="cornerTopRight" />
+        <attr name="cornerBottomLeft" />
+        <attr name="cornerBottomRight" />
+        <attr name="borderSize" />
+        <attr name="borderColor" />
+    </declare-styleable>
+    <declare-styleable name="ShapeTextView">
+        <attr name="shape" />
+        <attr name="solidColor" />
+        <attr name="cornerRadius" />
+        <attr name="cornerTopLeft" />
+        <attr name="cornerTopRight" />
+        <attr name="cornerBottomLeft" />
+        <attr name="cornerBottomRight" />
+        <attr name="borderSize" />
+        <attr name="borderColor" />
+    </declare-styleable>
 </resources>

@@ -8,6 +8,26 @@ import ru.gidline.app.extension.use
 
 interface ShapeViewGroup {
 
+    val styleable: IntArray
+
+    val styleableShape: Int
+
+    val styleableSolidColor: Int
+
+    val styleableCornerRadius: Int
+
+    val styleableCornerTopLeft: Int
+
+    val styleableCornerTopRight: Int
+
+    val styleableCornerBottomLeft: Int
+
+    val styleableCornerBottomRight: Int
+
+    val styleableBorderSize: Int
+
+    val styleableBorderColor: Int
+
     fun getContext(): Context
 
     @Suppress("UNUSED_PARAMETER")
