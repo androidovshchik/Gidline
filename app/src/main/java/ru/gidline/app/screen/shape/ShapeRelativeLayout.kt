@@ -1,12 +1,12 @@
-package ru.gidline.app.screen.common.shape
+package ru.gidline.app.screen.shape
 
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
-class ShapeLinearLayout : LinearLayout, ShapeViewGroup {
+class ShapeRelativeLayout : RelativeLayout, ShapeViewGroup {
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
