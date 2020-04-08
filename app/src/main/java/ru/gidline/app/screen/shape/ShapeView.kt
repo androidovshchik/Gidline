@@ -6,12 +6,29 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.view.View
-import android.view.ViewGroup
-import ru.gidline.app.R
 import ru.gidline.app.extension.use
 
 interface ShapeView {
+
+    val styleable: IntArray
+
+    val styleableShape: Int
+
+    val styleableSolidColor: Int
+
+    val styleableCornerRadius: Int
+
+    val styleableCornerTopLeft: Int
+
+    val styleableCornerTopRight: Int
+
+    val styleableCornerBottomLeft: Int
+
+    val styleableCornerBottomRight: Int
+
+    val styleableBorderSize: Int
+
+    val styleableBorderColor: Int
 
     fun getContext(): Context
 
@@ -21,37 +38,34 @@ interface ShapeView {
     @SuppressLint("Recycle", "SetTextI18n", "DefaultLocale")
     fun init(attrs: AttributeSet?) {
         if (attrs != null) {
-            val instance = this
-            getContext().obtainStyledAttributes(attrs, R.styleable.ShapeView).use {
-                if (hasValue(R.styleable.ShapeView_layout) && instance is ViewGroup) {
-                    View.inflate(getContext(), getInt(R.styleable.ShapeView_layout, 0), instance)
-                }
-                getString(R.styleable.ShapeView_shape)?.toLowerCase()?.let {
+            getContext().obtainStyledAttributes(attrs, styleable).use {
+                getString(styleableShape)?.toLowerCase()?.let {
                     setBackground(GradientDrawable().apply {
                         shape = when (it) {
                             "rect", "rectangle" -> GradientDrawable.RECTANGLE
                             "oval" -> GradientDrawable.OVAL
                             "ring" -> GradientDrawable.RING
-                            else -> GradientDrawable.LINE
+                            "line" -> GradientDrawable.LINE
+                            else -> return
                         }
-                        if (hasValue(R.styleable.ShapeView_solidColor)) {
-                            setColor(getColor(R.styleable.ShapeView_solidColor, 0))
+                        if (hasValue(styleableSolidColor)) {
+                            setColor(getColor(styleableSolidColor, 0))
                         }
                         if (it == "rect" || it == "rectangle") {
-                            if (hasValue(R.styleable.ShapeView_cornerRadius)) {
-                                cornerRadius = getDimension(R.styleable.ShapeView_cornerRadius, 0f)
+                            if (hasValue(styleableCornerRadius)) {
+                                cornerRadius = getDimension(styleableCornerRadius, 0f)
                             } else {
-                                val tl = getDimension(R.styleable.ShapeView_cornerTopLeft, 0f)
-                                val tr = getDimension(R.styleable.ShapeView_cornerTopRight, 0f)
-                                val bl = getDimension(R.styleable.ShapeView_cornerBottomRight, 0f)
-                                val br = getDimension(R.styleable.ShapeView_cornerBottomLeft, 0f)
+                                val tl = getDimension(styleableCornerTopLeft, 0f)
+                                val tr = getDimension(styleableCornerTopRight, 0f)
+                                val br = getDimension(styleableCornerBottomRight, 0f)
+                                val bl = getDimension(styleableCornerBottomLeft, 0f)
                                 cornerRadii = floatArrayOf(tl, tl, tr, tr, br, br, bl, bl)
                             }
                         }
-                        if (hasValue(R.styleable.ShapeView_borderSize)) {
+                        if (hasValue(styleableBorderSize)) {
                             setStroke(
-                                getDimensionPixelSize(R.styleable.ShapeView_borderSize, 0),
-                                getColor(R.styleable.ShapeView_borderColor, Color.TRANSPARENT)
+                                getDimensionPixelSize(styleableBorderSize, 0),
+                                getColor(styleableBorderColor, Color.TRANSPARENT)
                             )
                         }
                     })
