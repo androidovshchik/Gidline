@@ -26,9 +26,9 @@ interface ShapeView {
                 if (hasValue(R.styleable.ShapeView_layout) && instance is ViewGroup) {
                     View.inflate(getContext(), getInt(R.styleable.ShapeView_layout, 0), instance)
                 }
-                getString(R.styleable.ShapeView_shape)?.let {
+                getString(R.styleable.ShapeView_shape)?.toLowerCase()?.let {
                     setBackground(GradientDrawable().apply {
-                        shape = when (it.toLowerCase()) {
+                        shape = when (it) {
                             "rect", "rectangle" -> GradientDrawable.RECTANGLE
                             "oval" -> GradientDrawable.OVAL
                             "ring" -> GradientDrawable.RING
@@ -37,15 +37,16 @@ interface ShapeView {
                         if (hasValue(R.styleable.ShapeView_solidColor)) {
                             setColor(getColor(R.styleable.ShapeView_solidColor, 0))
                         }
-                        if (hasValue(R.styleable.ShapeView_cornerRadius)) {
-                            cornerRadius = getDimension(R.styleable.ShapeView_cornerRadius, 0f)
-                        } else {
-                            cornerRadii = floatArrayOf(
-                                getDimension(R.styleable.ShapeView_cornerTopLeft, 0f),
-                                getDimension(R.styleable.ShapeView_cornerTopRight, 0f),
-                                getDimension(R.styleable.ShapeView_cornerBottomLeft, 0f),
-                                getDimension(R.styleable.ShapeView_cornerBottomRight, 0f)
-                            )
+                        if (it == "rect" || it == "rectangle") {
+                            if (hasValue(R.styleable.ShapeView_cornerRadius)) {
+                                cornerRadius = getDimension(R.styleable.ShapeView_cornerRadius, 0f)
+                            } else {
+                                val tl = getDimension(R.styleable.ShapeView_cornerTopLeft, 0f)
+                                val tr = getDimension(R.styleable.ShapeView_cornerTopRight, 0f)
+                                val bl = getDimension(R.styleable.ShapeView_cornerBottomRight, 0f)
+                                val br = getDimension(R.styleable.ShapeView_cornerBottomLeft, 0f)
+                                cornerRadii = floatArrayOf(tl, tl, tr, tr, br, br, bl, bl)
+                            }
                         }
                         if (hasValue(R.styleable.ShapeView_borderSize)) {
                             setStroke(
