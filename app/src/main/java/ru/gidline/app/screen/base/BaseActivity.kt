@@ -93,7 +93,7 @@ abstract class BaseActivity<P : IPresenter<*>> : AppCompatActivity(), IView, Kod
         supportFragmentManager.popFragment(name, immediate)
 
     inline fun transact(action: FragmentTransaction.() -> Unit) {
-        supportFragmentManager.beginTransaction().apply(action)
+        supportFragmentManager.transact(false, action)
     }
 
     override fun showMessage(text: String) {

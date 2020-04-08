@@ -2,42 +2,52 @@ package ru.gidline.app.extension
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 val FragmentManager.topFragment: Fragment?
     get() = findFragmentByTag((backStackEntryCount - 1).toString())
 
 fun FragmentManager.showFragment(id: Int) {
     findFragmentById(id)?.let {
-        beginTransaction()
-            .show(it)
-            .commitAllowingStateLoss()
-        executePendingTransactions()
+        transact(true) {
+            show(it)
+        }
     }
 }
 
 fun FragmentManager.hideFragment(id: Int) {
     findFragmentById(id)?.let {
-        beginTransaction()
-            .hide(it)
-            .commitAllowingStateLoss()
-        executePendingTransactions()
+        transact(true) {
+            hide(it)
+        }
     }
 }
 
 fun FragmentManager.addFragment(id: Int, fragment: Fragment) {
-    beginTransaction()
-        .add(id, fragment, backStackEntryCount.toString())
-        .addToBackStack(fragment.javaClass.name)
-        .commitAllowingStateLoss()
-    executePendingTransactions()
+    transact(true) {
+        add(id, fragment, backStackEntryCount.toString())
+        addToBackStack(fragment.javaClass.name)
+    }
 }
 
 fun FragmentManager.putFragment(id: Int, fragment: Fragment) {
-    beginTransaction()
-        .replace(id, fragment, backStackEntryCount.toString())
-        .addToBackStack(fragment.javaClass.name)
-        .commitAllowingStateLoss()
-    executePendingTransactions()
+    transact(true) {
+        replace(id, fragment, backStackEntryCount.toString())
+        addToBackStack(fragment.javaClass.name)
+    }
+}
+
+inline fun FragmentManager.transact(
+    commit: Boolean = false,
+    action: FragmentTransaction.() -> Unit
+) {
+    beginTransaction().apply {
+        action()
+        if (commit) {
+            commitAllowingStateLoss()
+            executePendingTransactions()
+        }
+    }
 }
 
 fun FragmentManager.popFragment(name: String?, immediate: Boolean): Boolean {

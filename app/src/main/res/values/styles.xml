@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppMainTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -16,8 +17,17 @@
         <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="AppDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="BaseDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="BaseSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BaseSheetStyle</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="BaseSheetStyle">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="AppCardStyle">
@@ -27,15 +37,6 @@
         <item name="cardElevation">0dp</item>
         <item name="cardMaxElevation">0dp</item>
         <item name="cardBackgroundColor">@color/colorVacancyNormal</item>
-    </style>
-
-    <style name="PlaceSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/PlaceSheetStyle</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <style name="PlaceSheetStyle">
-        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

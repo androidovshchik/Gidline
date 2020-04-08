@@ -117,11 +117,11 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
     }
 
     inline fun activityTransact(action: FragmentTransaction.() -> Unit) {
-        fragmentManager?.beginTransaction()?.apply(action)
+        fragmentManager?.transact(false, action)
     }
 
     inline fun transact(action: FragmentTransaction.() -> Unit) {
-        childFragmentManager.beginTransaction().apply(action)
+        childFragmentManager.transact(false, action)
     }
 
     inline fun <reified T> activityCallback(action: T.() -> Unit) {
