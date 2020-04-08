@@ -1,22 +1,23 @@
 package ru.gidline.app.screen.catalog.map
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Typeface
-import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.google.android.material.textview.MaterialTextView
 import io.github.inflationx.calligraphy3.CalligraphyUtils
 import org.jetbrains.anko.dip
 import ru.gidline.app.R
 import ru.gidline.app.local.model.Place
 import kotlin.math.max
 
-@SuppressLint("AppCompatCustomView")
-class ClusterView : TextView {
+class ClusterView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : MaterialTextView(context, attrs, defStyleAttr) {
 
     constructor(context: Context, type: String) : this(context) {
         when (type) {
@@ -33,23 +34,7 @@ class ClusterView : TextView {
         }
     }
 
-    @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init(attrs)
-    }
-
-    @Suppress("unused")
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
-        context,
-        attrs,
-        defStyleAttr,
-        defStyleRes
-    ) {
+    init {
         init(attrs)
     }
 

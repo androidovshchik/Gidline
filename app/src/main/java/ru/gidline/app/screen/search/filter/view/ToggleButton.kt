@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import com.google.android.material.textview.MaterialTextView
 import org.jetbrains.anko.textColor
 import ru.gidline.app.R
-import ru.gidline.app.screen.base.shape.ShapeTextView
 
 class ToggleButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ShapeTextView(context, attrs, defStyleAttr) {
+) : MaterialTextView(context, attrs, defStyleAttr) {
 
     var isChecked = false
         set(value) {
@@ -26,10 +26,13 @@ class ToggleButton @JvmOverloads constructor(
             }
         }
 
+    init {
+        init(attrs)
+    }
+
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    override fun init(attrs: AttributeSet?) {
-        super.init(attrs)
+    private fun init(attrs: AttributeSet?) {
         textSize = 13f
     }
 
