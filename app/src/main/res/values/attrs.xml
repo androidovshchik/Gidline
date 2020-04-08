@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ShapeFrameLayout">
-        <attr name="icon" />
-        <attr name="text" format="string|reference" />
         <attr name="shape" format="string|reference" />
         <attr name="solidColor" format="color|reference" />
         <attr name="cornerRadius" format="dimension|reference" />
@@ -14,8 +12,6 @@
         <attr name="borderColor" format="color|reference" />
     </declare-styleable>
     <declare-styleable name="ShapeLinearLayout">
-        <attr name="icon" />
-        <attr name="text" />
         <attr name="shape" />
         <attr name="solidColor" />
         <attr name="cornerRadius" />
@@ -27,8 +23,6 @@
         <attr name="borderColor" />
     </declare-styleable>
     <declare-styleable name="ShapeRelativeLayout">
-        <attr name="icon" />
-        <attr name="text" />
         <attr name="shape" />
         <attr name="solidColor" />
         <attr name="cornerRadius" />
@@ -60,6 +54,10 @@
         <attr name="cornerBottomLeft" />
         <attr name="borderSize" />
         <attr name="borderColor" />
+    </declare-styleable>
+    <declare-styleable name="IconTextLayout">
+        <attr name="icon" />
+        <attr name="text" format="string|reference" />
     </declare-styleable>
     <declare-styleable name="MenuLayout">
         <attr name="text" />

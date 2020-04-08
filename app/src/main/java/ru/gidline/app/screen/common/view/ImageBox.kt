@@ -1,17 +1,18 @@
 package ru.gidline.app.screen.common.view
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
-import android.widget.ImageView
 import ru.gidline.app.R
 import ru.gidline.app.extension.use
+import ru.gidline.app.screen.base.shape.ShapeImageView
 
-@SuppressLint("AppCompatCustomView")
-class ImageBox : ImageView {
+class ImageBox @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ShapeImageView(context, attrs, defStyleAttr) {
 
     private var icon: Drawable? = null
 
@@ -21,35 +22,15 @@ class ImageBox : ImageView {
             setImageDrawable(if (value) icon else null)
         }
 
-    @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init(attrs)
-    }
-
-    @Suppress("unused")
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
-        context,
-        attrs,
-        defStyleAttr,
-        defStyleRes
-    ) {
-        init(attrs)
-    }
-
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    private fun init(attrs: AttributeSet?) {
+    override fun init(attrs: AttributeSet?) {
+        super.init(attrs)
         scaleType = ScaleType.FIT_CENTER
         adjustViewBounds = true
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.ImageBox).use {
                 icon = getDrawable(R.styleable.ImageBox_icon)
-                background = getDrawable(R.styleable.ImageBox_background)
             }
         }
     }
