@@ -10,29 +10,25 @@ import ru.gidline.app.extension.use
 
 interface ShapeView {
 
-    val styleable: IntArray
+    val attributes: IntArray
 
-    val styleableIcon: Int?
+    val indexShape: Int
 
-    val styleableText: Int?
+    val indexSolidColor: Int
 
-    val styleableShape: Int
+    val indexCornerRadius: Int
 
-    val styleableSolidColor: Int
+    val indexCornerTopLeft: Int
 
-    val styleableCornerRadius: Int
+    val indexCornerTopRight: Int
 
-    val styleableCornerTopLeft: Int
+    val indexCornerBottomLeft: Int
 
-    val styleableCornerTopRight: Int
+    val indexCornerBottomRight: Int
 
-    val styleableCornerBottomLeft: Int
+    val indexBorderSize: Int
 
-    val styleableCornerBottomRight: Int
-
-    val styleableBorderSize: Int
-
-    val styleableBorderColor: Int
+    val indexBorderColor: Int
 
     fun getContext(): Context
 
@@ -41,39 +37,37 @@ interface ShapeView {
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n", "DefaultLocale")
     fun init(attrs: AttributeSet?) {
-        if (attrs != null) {
-            getContext().obtainStyledAttributes(attrs, styleable).use {
-                getString(styleableShape)?.toLowerCase()?.let {
-                    setBackground(GradientDrawable().apply {
-                        shape = when (it) {
-                            "rect", "rectangle" -> GradientDrawable.RECTANGLE
-                            "oval" -> GradientDrawable.OVAL
-                            "ring" -> GradientDrawable.RING
-                            "line" -> GradientDrawable.LINE
-                            else -> return
+        getContext().obtainStyledAttributes(attrs ?: return, attributes).use {
+            getString(indexShape)?.toLowerCase()?.let {
+                setBackground(GradientDrawable().apply {
+                    shape = when (it) {
+                        "rect", "rectangle" -> GradientDrawable.RECTANGLE
+                        "oval" -> GradientDrawable.OVAL
+                        "ring" -> GradientDrawable.RING
+                        "line" -> GradientDrawable.LINE
+                        else -> return
+                    }
+                    if (hasValue(indexSolidColor)) {
+                        setColor(getColor(indexSolidColor, 0))
+                    }
+                    if (it == "rect" || it == "rectangle") {
+                        if (hasValue(indexCornerRadius)) {
+                            cornerRadius = getDimension(indexCornerRadius, 0f)
+                        } else {
+                            val tl = getDimension(indexCornerTopLeft, 0f)
+                            val tr = getDimension(indexCornerTopRight, 0f)
+                            val br = getDimension(indexCornerBottomRight, 0f)
+                            val bl = getDimension(indexCornerBottomLeft, 0f)
+                            cornerRadii = floatArrayOf(tl, tl, tr, tr, br, br, bl, bl)
                         }
-                        if (hasValue(styleableSolidColor)) {
-                            setColor(getColor(styleableSolidColor, 0))
-                        }
-                        if (it == "rect" || it == "rectangle") {
-                            if (hasValue(styleableCornerRadius)) {
-                                cornerRadius = getDimension(styleableCornerRadius, 0f)
-                            } else {
-                                val tl = getDimension(styleableCornerTopLeft, 0f)
-                                val tr = getDimension(styleableCornerTopRight, 0f)
-                                val br = getDimension(styleableCornerBottomRight, 0f)
-                                val bl = getDimension(styleableCornerBottomLeft, 0f)
-                                cornerRadii = floatArrayOf(tl, tl, tr, tr, br, br, bl, bl)
-                            }
-                        }
-                        if (hasValue(styleableBorderColor)) {
-                            setStroke(
-                                getDimensionPixelSize(styleableBorderSize, getContext().dip(1.5f)),
-                                getColor(styleableBorderColor, 0)
-                            )
-                        }
-                    })
-                }
+                    }
+                    if (hasValue(indexBorderColor)) {
+                        setStroke(
+                            getDimensionPixelSize(indexBorderSize, getContext().dip(1.5f)),
+                            getColor(indexBorderColor, 0)
+                        )
+                    }
+                })
             }
         }
     }

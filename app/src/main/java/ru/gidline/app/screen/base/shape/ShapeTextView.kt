@@ -12,29 +12,25 @@ open class ShapeTextView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr), ShapeView {
 
-    override val styleable: IntArray get() = R.styleable.ShapeTextView
+    override val attributes: IntArray get() = R.styleable.ShapeTextView
 
-    override val styleableIcon: Int? get() = null
+    override val indexShape get() = R.styleable.ShapeTextView_shape
 
-    override val styleableText: Int? get() = null
+    override val indexSolidColor get() = R.styleable.ShapeTextView_solidColor
 
-    override val styleableShape get() = R.styleable.ShapeTextView_shape
+    override val indexCornerRadius get() = R.styleable.ShapeTextView_cornerRadius
 
-    override val styleableSolidColor get() = R.styleable.ShapeTextView_solidColor
+    override val indexCornerTopLeft get() = R.styleable.ShapeTextView_cornerTopLeft
 
-    override val styleableCornerRadius get() = R.styleable.ShapeTextView_cornerRadius
+    override val indexCornerTopRight get() = R.styleable.ShapeTextView_cornerTopRight
 
-    override val styleableCornerTopLeft get() = R.styleable.ShapeTextView_cornerTopLeft
+    override val indexCornerBottomLeft get() = R.styleable.ShapeTextView_cornerBottomLeft
 
-    override val styleableCornerTopRight get() = R.styleable.ShapeTextView_cornerTopRight
+    override val indexCornerBottomRight get() = R.styleable.ShapeTextView_cornerBottomRight
 
-    override val styleableCornerBottomLeft get() = R.styleable.ShapeTextView_cornerBottomLeft
+    override val indexBorderSize get() = R.styleable.ShapeTextView_borderSize
 
-    override val styleableCornerBottomRight get() = R.styleable.ShapeTextView_cornerBottomRight
-
-    override val styleableBorderSize get() = R.styleable.ShapeTextView_borderSize
-
-    override val styleableBorderColor get() = R.styleable.ShapeTextView_borderColor
+    override val indexBorderColor get() = R.styleable.ShapeTextView_borderColor
 
     init {
         init(attrs)

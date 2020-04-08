@@ -10,29 +10,25 @@ import ru.gidline.app.R
 @Suppress("LeakingThis")
 open class ShapeFrameLayout : FrameLayout, ShapeView {
 
-    override val styleable: IntArray get() = R.styleable.ShapeFrameLayout
+    override val attributes: IntArray get() = R.styleable.ShapeFrameLayout
 
-    override val styleableIcon get() = R.styleable.ShapeFrameLayout_icon
+    override val indexShape get() = R.styleable.ShapeFrameLayout_shape
 
-    override val styleableText get() = R.styleable.ShapeFrameLayout_text
+    override val indexSolidColor get() = R.styleable.ShapeFrameLayout_solidColor
 
-    override val styleableShape get() = R.styleable.ShapeFrameLayout_shape
+    override val indexCornerRadius get() = R.styleable.ShapeFrameLayout_cornerRadius
 
-    override val styleableSolidColor get() = R.styleable.ShapeFrameLayout_solidColor
+    override val indexCornerTopLeft get() = R.styleable.ShapeFrameLayout_cornerTopLeft
 
-    override val styleableCornerRadius get() = R.styleable.ShapeFrameLayout_cornerRadius
+    override val indexCornerTopRight get() = R.styleable.ShapeFrameLayout_cornerTopRight
 
-    override val styleableCornerTopLeft get() = R.styleable.ShapeFrameLayout_cornerTopLeft
+    override val indexCornerBottomLeft get() = R.styleable.ShapeFrameLayout_cornerBottomLeft
 
-    override val styleableCornerTopRight get() = R.styleable.ShapeFrameLayout_cornerTopRight
+    override val indexCornerBottomRight get() = R.styleable.ShapeFrameLayout_cornerBottomRight
 
-    override val styleableCornerBottomLeft get() = R.styleable.ShapeFrameLayout_cornerBottomLeft
+    override val indexBorderSize get() = R.styleable.ShapeFrameLayout_borderSize
 
-    override val styleableCornerBottomRight get() = R.styleable.ShapeFrameLayout_cornerBottomRight
-
-    override val styleableBorderSize get() = R.styleable.ShapeFrameLayout_borderSize
-
-    override val styleableBorderColor get() = R.styleable.ShapeFrameLayout_borderColor
+    override val indexBorderColor get() = R.styleable.ShapeFrameLayout_borderColor
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(

@@ -10,29 +10,25 @@ import ru.gidline.app.R
 @Suppress("LeakingThis")
 open class ShapeLinearLayout : LinearLayout, ShapeView {
 
-    override val styleable: IntArray get() = R.styleable.ShapeLinearLayout
+    override val attributes: IntArray get() = R.styleable.ShapeLinearLayout
 
-    override val styleableIcon get() = R.styleable.ShapeLinearLayout_icon
+    override val indexShape get() = R.styleable.ShapeLinearLayout_shape
 
-    override val styleableText get() = R.styleable.ShapeLinearLayout_text
+    override val indexSolidColor get() = R.styleable.ShapeLinearLayout_solidColor
 
-    override val styleableShape get() = R.styleable.ShapeLinearLayout_shape
+    override val indexCornerRadius get() = R.styleable.ShapeLinearLayout_cornerRadius
 
-    override val styleableSolidColor get() = R.styleable.ShapeLinearLayout_solidColor
+    override val indexCornerTopLeft get() = R.styleable.ShapeLinearLayout_cornerTopLeft
 
-    override val styleableCornerRadius get() = R.styleable.ShapeLinearLayout_cornerRadius
+    override val indexCornerTopRight get() = R.styleable.ShapeLinearLayout_cornerTopRight
 
-    override val styleableCornerTopLeft get() = R.styleable.ShapeLinearLayout_cornerTopLeft
+    override val indexCornerBottomLeft get() = R.styleable.ShapeLinearLayout_cornerBottomLeft
 
-    override val styleableCornerTopRight get() = R.styleable.ShapeLinearLayout_cornerTopRight
+    override val indexCornerBottomRight get() = R.styleable.ShapeLinearLayout_cornerBottomRight
 
-    override val styleableCornerBottomLeft get() = R.styleable.ShapeLinearLayout_cornerBottomLeft
+    override val indexBorderSize get() = R.styleable.ShapeLinearLayout_borderSize
 
-    override val styleableCornerBottomRight get() = R.styleable.ShapeLinearLayout_cornerBottomRight
-
-    override val styleableBorderSize get() = R.styleable.ShapeLinearLayout_borderSize
-
-    override val styleableBorderColor get() = R.styleable.ShapeLinearLayout_borderColor
+    override val indexBorderColor get() = R.styleable.ShapeLinearLayout_borderColor
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(

@@ -12,29 +12,25 @@ open class ShapeImageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr), ShapeView {
 
-    override val styleable: IntArray get() = R.styleable.ShapeImageView
+    override val attributes: IntArray get() = R.styleable.ShapeImageView
 
-    override val styleableIcon: Int? get() = null
+    override val indexShape get() = R.styleable.ShapeImageView_shape
 
-    override val styleableText: Int? get() = null
+    override val indexSolidColor get() = R.styleable.ShapeImageView_solidColor
 
-    override val styleableShape get() = R.styleable.ShapeImageView_shape
+    override val indexCornerRadius get() = R.styleable.ShapeImageView_cornerRadius
 
-    override val styleableSolidColor get() = R.styleable.ShapeImageView_solidColor
+    override val indexCornerTopLeft get() = R.styleable.ShapeImageView_cornerTopLeft
 
-    override val styleableCornerRadius get() = R.styleable.ShapeImageView_cornerRadius
+    override val indexCornerTopRight get() = R.styleable.ShapeImageView_cornerTopRight
 
-    override val styleableCornerTopLeft get() = R.styleable.ShapeImageView_cornerTopLeft
+    override val indexCornerBottomLeft get() = R.styleable.ShapeImageView_cornerBottomLeft
 
-    override val styleableCornerTopRight get() = R.styleable.ShapeImageView_cornerTopRight
+    override val indexCornerBottomRight get() = R.styleable.ShapeImageView_cornerBottomRight
 
-    override val styleableCornerBottomLeft get() = R.styleable.ShapeImageView_cornerBottomLeft
+    override val indexBorderSize get() = R.styleable.ShapeImageView_borderSize
 
-    override val styleableCornerBottomRight get() = R.styleable.ShapeImageView_cornerBottomRight
-
-    override val styleableBorderSize get() = R.styleable.ShapeImageView_borderSize
-
-    override val styleableBorderColor get() = R.styleable.ShapeImageView_borderColor
+    override val indexBorderColor get() = R.styleable.ShapeImageView_borderColor
 
     init {
         init(attrs)

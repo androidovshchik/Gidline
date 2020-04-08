@@ -10,29 +10,25 @@ import ru.gidline.app.R
 @Suppress("LeakingThis")
 open class ShapeRelativeLayout : RelativeLayout, ShapeView {
 
-    override val styleable: IntArray get() = R.styleable.ShapeRelativeLayout
+    override val attributes: IntArray get() = R.styleable.ShapeRelativeLayout
 
-    override val styleableIcon get() = R.styleable.ShapeRelativeLayout_icon
+    override val indexShape get() = R.styleable.ShapeRelativeLayout_shape
 
-    override val styleableText get() = R.styleable.ShapeRelativeLayout_text
+    override val indexSolidColor get() = R.styleable.ShapeRelativeLayout_solidColor
 
-    override val styleableShape get() = R.styleable.ShapeRelativeLayout_shape
+    override val indexCornerRadius get() = R.styleable.ShapeRelativeLayout_cornerRadius
 
-    override val styleableSolidColor get() = R.styleable.ShapeRelativeLayout_solidColor
+    override val indexCornerTopLeft get() = R.styleable.ShapeRelativeLayout_cornerTopLeft
 
-    override val styleableCornerRadius get() = R.styleable.ShapeRelativeLayout_cornerRadius
+    override val indexCornerTopRight get() = R.styleable.ShapeRelativeLayout_cornerTopRight
 
-    override val styleableCornerTopLeft get() = R.styleable.ShapeRelativeLayout_cornerTopLeft
+    override val indexCornerBottomLeft get() = R.styleable.ShapeRelativeLayout_cornerBottomLeft
 
-    override val styleableCornerTopRight get() = R.styleable.ShapeRelativeLayout_cornerTopRight
+    override val indexCornerBottomRight get() = R.styleable.ShapeRelativeLayout_cornerBottomRight
 
-    override val styleableCornerBottomLeft get() = R.styleable.ShapeRelativeLayout_cornerBottomLeft
+    override val indexBorderSize get() = R.styleable.ShapeRelativeLayout_borderSize
 
-    override val styleableCornerBottomRight get() = R.styleable.ShapeRelativeLayout_cornerBottomRight
-
-    override val styleableBorderSize get() = R.styleable.ShapeRelativeLayout_borderSize
-
-    override val styleableBorderColor get() = R.styleable.ShapeRelativeLayout_borderColor
+    override val indexBorderColor get() = R.styleable.ShapeRelativeLayout_borderColor
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
