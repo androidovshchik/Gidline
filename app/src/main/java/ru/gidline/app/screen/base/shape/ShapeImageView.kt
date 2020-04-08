@@ -14,6 +14,10 @@ open class ShapeImageView @JvmOverloads constructor(
 
     override val styleable: IntArray get() = R.styleable.ShapeImageView
 
+    override val styleableIcon: Int? get() = null
+
+    override val styleableText: Int? get() = null
+
     override val styleableShape get() = R.styleable.ShapeImageView_shape
 
     override val styleableSolidColor get() = R.styleable.ShapeImageView_solidColor

@@ -12,6 +12,10 @@ open class ShapeRelativeLayout : RelativeLayout, ShapeView {
 
     override val styleable: IntArray get() = R.styleable.ShapeRelativeLayout
 
+    override val styleableIcon get() = R.styleable.ShapeRelativeLayout_icon
+
+    override val styleableText get() = R.styleable.ShapeRelativeLayout_text
+
     override val styleableShape get() = R.styleable.ShapeRelativeLayout_shape
 
     override val styleableSolidColor get() = R.styleable.ShapeRelativeLayout_solidColor

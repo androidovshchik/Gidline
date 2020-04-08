@@ -14,6 +14,10 @@ open class ShapeTextView @JvmOverloads constructor(
 
     override val styleable: IntArray get() = R.styleable.ShapeTextView
 
+    override val styleableIcon: Int? get() = null
+
+    override val styleableText: Int? get() = null
+
     override val styleableShape get() = R.styleable.ShapeTextView_shape
 
     override val styleableSolidColor get() = R.styleable.ShapeTextView_solidColor

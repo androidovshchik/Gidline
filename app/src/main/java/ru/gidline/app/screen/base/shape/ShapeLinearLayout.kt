@@ -12,6 +12,10 @@ open class ShapeLinearLayout : LinearLayout, ShapeView {
 
     override val styleable: IntArray get() = R.styleable.ShapeLinearLayout
 
+    override val styleableIcon get() = R.styleable.ShapeLinearLayout_icon
+
+    override val styleableText get() = R.styleable.ShapeLinearLayout_text
+
     override val styleableShape get() = R.styleable.ShapeLinearLayout_shape
 
     override val styleableSolidColor get() = R.styleable.ShapeLinearLayout_solidColor

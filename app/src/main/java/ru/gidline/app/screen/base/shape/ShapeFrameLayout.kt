@@ -12,6 +12,10 @@ open class ShapeFrameLayout : FrameLayout, ShapeView {
 
     override val styleable: IntArray get() = R.styleable.ShapeFrameLayout
 
+    override val styleableIcon get() = R.styleable.ShapeFrameLayout_icon
+
+    override val styleableText get() = R.styleable.ShapeFrameLayout_text
+
     override val styleableShape get() = R.styleable.ShapeFrameLayout_shape
 
     override val styleableSolidColor get() = R.styleable.ShapeFrameLayout_solidColor

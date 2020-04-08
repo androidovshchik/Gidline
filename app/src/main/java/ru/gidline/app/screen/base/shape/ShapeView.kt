@@ -12,6 +12,10 @@ interface ShapeView {
 
     val styleable: IntArray
 
+    val styleableIcon: Int?
+
+    val styleableText: Int?
+
     val styleableShape: Int
 
     val styleableSolidColor: Int
