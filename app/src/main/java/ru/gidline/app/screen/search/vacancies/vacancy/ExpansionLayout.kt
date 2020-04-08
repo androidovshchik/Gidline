@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.merge_expansion.view.*
 import org.jetbrains.anko.dip
@@ -15,8 +14,9 @@ import org.kodein.di.android.closestKodein
 import ru.gidline.app.R
 import ru.gidline.app.extension.use
 import ru.gidline.app.local.model.Vacancy
+import ru.gidline.app.screen.base.shape.ShapeLinearLayout
 
-class ExpansionLayout : LinearLayout, KodeinAware {
+class ExpansionLayout : ShapeLinearLayout, KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -25,9 +25,7 @@ class ExpansionLayout : LinearLayout, KodeinAware {
         context,
         attrs,
         defStyleAttr
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("unused")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -36,18 +34,17 @@ class ExpansionLayout : LinearLayout, KodeinAware {
         attrs,
         defStyleAttr,
         defStyleRes
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    private fun init(attrs: AttributeSet?) {
+    override fun init(attrs: AttributeSet?) {
+        super.init(attrs)
         orientation = VERTICAL
         setPadding(dip(10), dip(12), dip(10), 0)
         View.inflate(context, R.layout.merge_expansion, this)
-        attrs?.let { set ->
-            context.obtainStyledAttributes(set, R.styleable.ExpansionLayout).use {
+        if (attrs != null) {
+            context.obtainStyledAttributes(attrs, R.styleable.ExpansionLayout).use {
                 getString(R.styleable.ExpansionLayout_text)?.let {
                     tv_name.text = it
                 }

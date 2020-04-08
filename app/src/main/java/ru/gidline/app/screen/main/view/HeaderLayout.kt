@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.api.load
@@ -24,9 +23,10 @@ import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.temporal.ChronoUnit
 import ru.gidline.app.R
 import ru.gidline.app.local.Preferences
+import ru.gidline.app.screen.base.shape.ShapeRelativeLayout
 import timber.log.Timber
 
-class HeaderLayout : RelativeLayout, KodeinAware {
+class HeaderLayout : ShapeRelativeLayout, KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -37,9 +37,7 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         context,
         attrs,
         defStyleAttr
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("unused")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -48,13 +46,12 @@ class HeaderLayout : RelativeLayout, KodeinAware {
         attrs,
         defStyleAttr,
         defStyleRes
-    ) {
-        init(attrs)
-    }
+    )
 
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    private fun init(attrs: AttributeSet?) {
+    override fun init(attrs: AttributeSet?) {
+        super.init(attrs)
         setBackgroundResource(R.drawable.background_header)
         View.inflate(context, R.layout.merge_header, this)
     }
