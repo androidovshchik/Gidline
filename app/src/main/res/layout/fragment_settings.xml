@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorGrayBackground">
 
-                <ImageView
+                <ru.gidline.app.screen.base.shape.ShapeImageView
                     android:id="@+id/iv_avatar"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
@@ -34,11 +34,12 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="26dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/background_avatar"
                     android:scaleType="centerCrop"
+                    app:borderColor="@color/colorPrimary"
+                    app:shape="oval"
                     tools:src="@drawable/avatar_man" />
 
-                <ImageView
+                <ru.gidline.app.screen.base.shape.ShapeImageView
                     android:id="@+id/iv_camera"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -47,10 +48,12 @@
                     android:layout_marginEnd="-12dp"
                     android:layout_marginBottom="-12dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/background_camera"
                     android:padding="11dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_camera" />
+                    android:src="@drawable/ic_camera"
+                    app:borderColor="@color/colorPrimary"
+                    app:shape="oval"
+                    app:solidColor="@color/colorBackground" />
 
                 <EditText
                     android:id="@+id/et_name"
@@ -109,8 +112,11 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="2dp"
                         android:padding="4dp"
-                        app:background="@drawable/checkbox_pink"
+                        app:borderColor="#af3377"
+                        app:borderSize="2dp"
+                        app:cornerRadius="5dp"
                         app:icon="@drawable/daw_pink"
+                        app:shape="rect"
                         tools:src="@drawable/daw_pink" />
 
                     <TextView
@@ -131,8 +137,11 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="2dp"
                         android:padding="4dp"
-                        app:background="@drawable/checkbox_pink"
+                        app:borderColor="#af3377"
+                        app:borderSize="2dp"
+                        app:cornerRadius="5dp"
                         app:icon="@drawable/daw_pink"
+                        app:shape="rect"
                         tools:src="@drawable/daw_pink" />
 
                     <TextView
