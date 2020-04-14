@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
+        <ru.gidline.app.screen.base.shape.ShapeTextView
             android:id="@+id/tv_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +20,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="6dp"
-            android:background="@drawable/background_notification"
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
@@ -29,6 +28,10 @@
             android:textColor="@color/colorGrayText"
             android:textSize="16sp"
             android:visibility="gone"
+            app:borderColor="#fae2ed"
+            app:cornerRadius="32dp"
+            app:shape="rect"
+            app:solidColor="@color/colorGrayBackground"
             tools:text="Text Text Text Text "
             tools:visibility="visible" />
 
