@@ -30,10 +30,10 @@ class CategoriesFragment : BaseFragment<CategoriesContract.Presenter>(), Categor
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.cl_search -> activityAddFragment(SearchFragment.newInstance())
-            R.id.cl_documents -> activityPutFragment(DocumentsFragment.newInstance())
-            R.id.ib_settings -> activityPutFragment(SettingsFragment.newInstance())
-            R.id.ib_map -> activityAddFragment(CatalogFragment.newInstance())
+            R.id.cl_search -> parentAddFragment(SearchFragment.newInstance())
+            R.id.cl_documents -> parentPutFragment(DocumentsFragment.newInstance())
+            R.id.ib_settings -> parentPutFragment(SettingsFragment.newInstance())
+            R.id.ib_map -> parentAddFragment(CatalogFragment.newInstance())
         }
     }
 

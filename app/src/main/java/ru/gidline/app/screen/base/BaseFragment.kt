@@ -39,7 +39,7 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
             field = value
         }
 
-    override val activityTopFragment: IFrame?
+    override val parentTopFragment: IFrame?
         get() = fragmentManager?.topFragment?.let {
             if (it is IFrame && it.view != null) {
                 return it
@@ -68,23 +68,23 @@ abstract class BaseFragment<P : IPresenter<*>> : Fragment(), IFrame, KodeinAware
         }
     }
 
-    override fun activityShowFragment(id: Int) {
+    override fun parentShowFragment(id: Int) {
         fragmentManager?.showFragment(id)
     }
 
-    override fun activityHideFragment(id: Int) {
+    override fun parentHideFragment(id: Int) {
         fragmentManager?.hideFragment(id)
     }
 
-    override fun activityAddFragment(fragment: BaseFragment<*>) {
+    override fun parentAddFragment(fragment: BaseFragment<*>) {
         fragmentManager?.addFragment(R.id.fl_container, fragment)
     }
 
-    override fun activityPutFragment(fragment: BaseFragment<*>) {
+    override fun parentPutFragment(fragment: BaseFragment<*>) {
         fragmentManager?.putFragment(R.id.fl_container, fragment)
     }
 
-    override fun activityPopFragment(name: String?, immediate: Boolean) =
+    override fun parentPopFragment(name: String?, immediate: Boolean) =
         fragmentManager?.popFragment(name, immediate) ?: false
 
     override fun showFragment(id: Int) {

@@ -4,15 +4,15 @@ import ru.gidline.app.screen.base.BaseFragment
 
 interface IFrame : IView {
 
-    val activityTopFragment: IFrame?
+    val parentTopFragment: IFrame?
 
-    fun activityShowFragment(id: Int)
+    fun parentShowFragment(id: Int)
 
-    fun activityHideFragment(id: Int)
+    fun parentHideFragment(id: Int)
 
-    fun activityAddFragment(fragment: BaseFragment<*>)
+    fun parentAddFragment(fragment: BaseFragment<*>)
 
-    fun activityPutFragment(fragment: BaseFragment<*>)
+    fun parentPutFragment(fragment: BaseFragment<*>)
 
-    fun activityPopFragment(name: String?, immediate: Boolean): Boolean
+    fun parentPopFragment(name: String?, immediate: Boolean): Boolean
 }

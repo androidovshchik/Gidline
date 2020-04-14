@@ -41,7 +41,7 @@ class DocumentsFragment : BaseFragment<DocumentsContract.Presenter>(),
             R.id.cl_sheriff -> "http://fssprus.ru/"
             else -> return
         }
-        activityPutFragment(BrowserFragment.newInstance(v.tv_name.text.toString(), url))
+        parentPutFragment(BrowserFragment.newInstance(v.tv_name.text.toString(), url))
     }
 
     companion object {

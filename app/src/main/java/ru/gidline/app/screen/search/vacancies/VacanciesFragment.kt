@@ -11,6 +11,7 @@ import ru.gidline.app.R
 import ru.gidline.app.local.model.Vacancy
 import ru.gidline.app.local.repository.VacancyRepository
 import ru.gidline.app.screen.base.BaseFragment
+import ru.gidline.app.screen.base.listener.IView
 import ru.gidline.app.screen.search.SearchContract
 import ru.gidline.app.screen.search.model.SearchFilter
 import ru.gidline.app.screen.search.vacancies.adapter.VacanciesAdapter
@@ -61,7 +62,9 @@ class VacanciesFragment : BaseFragment<VacanciesContract.Presenter>(), Vacancies
     }
 
     override fun onItemSelected(position: Int, item: Vacancy) {
-        activityAddFragment(VacancyFragment.newInstance(item.id))
+        activityCallback<IView> {
+            addFragment(VacancyFragment.newInstance(item.id))
+        }
     }
 
     companion object {

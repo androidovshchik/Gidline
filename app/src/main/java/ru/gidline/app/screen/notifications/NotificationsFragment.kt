@@ -56,12 +56,12 @@ class NotificationsFragment : BaseFragment<NotificationsContract.Presenter>(),
         bellRepository.deleteById(id)
         refreshData()
         if (bellRepository.allCount <= 0) {
-            activityPopFragment(null, false)
+            parentPopFragment(null, false)
         }
     }
 
     override fun onItemSelected(position: Int, item: Bell) {
-        activityAddFragment(NotificationFragment.newInstance(item.id))
+        parentAddFragment(NotificationFragment.newInstance(item.id))
     }
 
     companion object {

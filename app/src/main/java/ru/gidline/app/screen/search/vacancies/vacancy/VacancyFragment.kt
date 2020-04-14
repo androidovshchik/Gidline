@@ -41,7 +41,7 @@ class VacancyFragment : BaseFragment<VacancyContract.Presenter>(), VacancyContra
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.mb_respond -> activityPopFragment(null, false)
+            R.id.mb_respond -> parentPopFragment(null, false)
         }
     }
 

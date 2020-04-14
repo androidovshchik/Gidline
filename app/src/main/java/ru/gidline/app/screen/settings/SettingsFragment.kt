@@ -139,7 +139,7 @@ class SettingsFragment : BaseFragment<SettingsContract.Presenter>(), SettingsCon
                     dateEntryRussia = et_date1.text.toString()
                     dateFirstPatent = et_date2.text.toString()
                 }
-                activityPopFragment(null, false)
+                parentPopFragment(null, false)
             }
         }
     }
