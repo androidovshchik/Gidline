@@ -1,14 +1,13 @@
 package ru.gidline.app.screen.catalog.places
 
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.content.Context
-import android.graphics.Color
+import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.isVisible
-import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.merge_places.view.*
-import org.jetbrains.anko.dip
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
@@ -18,15 +17,12 @@ import ru.gidline.app.extension.use
 import ru.gidline.app.local.model.Place
 import ru.gidline.app.local.repository.PlaceRepository
 import ru.gidline.app.screen.base.listener.IView
+import ru.gidline.app.screen.base.shape.ShapeRelativeLayout
 import ru.gidline.app.screen.catalog.CatalogContract
 import ru.gidline.app.screen.catalog.places.adapter.PlacesAdapter
 import ru.gidline.app.screen.catalog.places.adapter.PlacesDecoration
 
-class PlacesLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : MaterialCardView(context, attrs, defStyleAttr), KodeinAware, PlacesContract.Recycler {
+class PlacesLayout : ShapeRelativeLayout, KodeinAware, PlacesContract.Recycler {
 
     override val kodein by closestKodein()
 
@@ -36,15 +32,30 @@ class PlacesLayout @JvmOverloads constructor(
 
     private var type: String? = null
 
-    init {
-        init(attrs)
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init2(attrs)
+    }
+
+    @Suppress("unused")
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        defStyleRes
+    ) {
+        init2(attrs)
     }
 
     @Suppress("UNUSED_PARAMETER")
     @SuppressLint("Recycle", "SetTextI18n")
-    private fun init(attrs: AttributeSet?) {
-        radius = dip(10).toFloat()
-        setCardBackgroundColor(Color.parseColor("#5cffffff"))
+    private fun init2(attrs: AttributeSet?) {
+        setBackgroundResource(R.drawable.background_place)
         View.inflate(context, R.layout.merge_places, this)
         attrs?.let { set ->
             context.obtainStyledAttributes(set, R.styleable.PlacesLayout).use {
