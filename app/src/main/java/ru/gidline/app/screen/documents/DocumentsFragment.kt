@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_documents.*
-import kotlinx.android.synthetic.main.merge_category.view.*
+import kotlinx.android.synthetic.main.merge_icon_text.view.*
 import org.kodein.di.generic.instance
 import ru.gidline.app.R
 import ru.gidline.app.screen.base.BaseFragment

@@ -20,7 +20,7 @@ abstract class BaseSheetFragment : BottomSheetDialogFragment(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.PlaceSheetTheme)
+        setStyle(STYLE_NO_TITLE, R.style.BaseSheetTheme)
     }
 
     override fun onCreateView(inflater: LayoutInflater, root: ViewGroup?, bundle: Bundle?): View? {
