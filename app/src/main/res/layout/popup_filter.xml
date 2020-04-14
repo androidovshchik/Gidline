@@ -37,8 +37,11 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
-        app:background="@drawable/checkbox_filter"
+        app:borderColor="#af3377"
+        app:borderSize="2dp"
+        app:cornerRadius="2dp"
         app:icon="@drawable/daw_pink"
+        app:shape="rect"
         tools:src="@drawable/daw_pink" />
 
     <TextView
@@ -59,8 +62,11 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
-        app:background="@drawable/checkbox_filter"
+        app:borderColor="#af3377"
+        app:borderSize="2dp"
+        app:cornerRadius="2dp"
         app:icon="@drawable/daw_pink"
+        app:shape="rect"
         tools:src="@drawable/daw_pink" />
 
     <TextView
@@ -81,8 +87,11 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
-        app:background="@drawable/checkbox_filter"
+        app:borderColor="#af3377"
+        app:borderSize="2dp"
+        app:cornerRadius="2dp"
         app:icon="@drawable/daw_pink"
+        app:shape="rect"
         tools:src="@drawable/daw_pink" />
 
     <com.google.android.material.button.MaterialButton
