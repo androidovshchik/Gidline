@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,7 +81,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_bell" />
 
-        <ImageView
+        <ru.gidline.app.screen.base.shape.ShapeImageView
             android:id="@+id/iv_bell_daw"
             android:layout_width="22dp"
             android:layout_height="22dp"
@@ -88,11 +89,13 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/background_bell"
             android:padding="6dp"
             android:scaleType="fitCenter"
             android:src="@drawable/daw_light"
             android:visibility="gone"
+            app:borderColor="@color/colorPrimary"
+            app:shape="oval"
+            app:solidColor="#d18bc9"
             tools:visibility="visible" />
 
     </RelativeLayout>

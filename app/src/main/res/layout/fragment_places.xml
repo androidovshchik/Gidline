@@ -43,7 +43,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <ImageView
+    <ru.gidline.app.screen.base.shape.ShapeImageView
         android:id="@+id/iv_up"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -52,11 +52,14 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/background_fab_up"
         android:padding="12dp"
         android:scaleType="centerInside"
         android:src="@drawable/arrow_up"
         android:visibility="gone"
+        app:borderColor="#7e1481"
+        app:borderSize="2dp"
+        app:shape="oval"
+        app:solidColor="@color/colorBackground"
         tools:visibility="visible" />
 
 </RelativeLayout>
